@@ -55,9 +55,9 @@
       <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
     
     
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
       <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
     
