@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-02-21T09:24:32.843Z</updated>
+  <updated>2018-03-13T03:29:51.437Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>“Google机器学习速成课程”概念浏览</title>
+    <link href="http://yoursite.com/2018/03/13/%E2%80%9CGoogle%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%80%9F%E6%88%90%E8%AF%BE%E7%A8%8B%E2%80%9D%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/03/13/“Google机器学习速成课程”概念总结/</id>
+    <published>2018-03-13T03:37:30.000Z</published>
+    <updated>2018-03-13T03:29:51.437Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>摘要</strong> ：简单总结几个最近发布的“机器学习速成课程”中的概念<br><a id="more"></a></p><p><strong>正文:</strong></p><p><strong>随机梯度下降法（SGD）</strong>：在梯度下降法中，批量指的是用于在单次迭代中计算梯度的样本总数。到目前为止，我们一直假定批量是指整个数据集。就 Google 的规模而言，数据集通常包含数十亿甚至数千亿个样本。此外，Google 数据集通常包含海量特征。因此，一个批量可能相当巨大。如果是超大批量，则单次迭代就可能要花费很长时间进行计算。</p><p>包含随机抽样样本的大型数据集可能包含冗余数据。实际上，批量大小越大，出现冗余的可能性就越高。一些冗余可能有助于消除杂乱的梯度，但超大批量所具备的预测价值往往并不比大型批量高。</p><p>如果我们可以通过更少的计算量得出正确的平均梯度，会怎么样？通过从我们的数据集中随机选择样本，我们可以通过小得多的数据集估算（尽管过程非常杂乱）出较大的平均值。 随机梯度下降法 (SGD) 将这种想法运用到极致，它每次迭代只使用一个样本（批量大小为 1）。如果进行足够的迭代，SGD 也可以发挥作用，但过程会非常杂乱。“随机”这一术语表示构成各个批量的一个样本都是随机选择的。</p><p>小批量随机梯度下降法（小批量 SGD）是介于全批量迭代与 SGD 之间的折衷方案。小批量通常包含 10-1000 个随机选择的样本。小批量 SGD 可以减少 SGD 中的杂乱样本数量，但仍然比全批量更高效。</p><p><strong>特征工程</strong>：从原始数据创建特征的过程。会花费实际工作中百分之70的时间。<br>良好特征具有下列特点：1.避免很少使用的离散特征值2.最好具有清晰明确的定义3.异常的数值不要和实际数据混为一谈4.考虑随着时间的不稳定性</p><p><strong>数据清洗</strong>：1.缩放特征值2.处理极端离群值3.分箱4.清查（遗漏值，重复样本，不良标签，不良特征值）5.了解数据</p><p><strong>特征组合</strong>:是指通过将两个或多个输入特征相乘来对特征空间中的非线性规律进行编码的合成特征。</p><ul><li>[A X B]：将两个特征的值相乘形成的特征组合。</li><li>[A x B x C x D x E]：将五个特征的值相乘形成的特征组合。</li><li>[A x A]：对单个特征的值求平方形成的特征组合。</li></ul><p><strong>机器学习训练过程问题</strong>：<br><em>梯度消失</em><br>较低层（更接近输入）的梯度可能会变得非常小。在深度网络中，计算这些梯度时，可能涉及许多小项的乘积。当较低层的梯度逐渐消失到 0时，这些层的训练速度会非常缓慢，甚至不再训练。<br>ReLU 激活函数有助于防止梯度消失。</p><p><em>梯度爆炸</em><br>如果网络中的权重过大，则较低层的梯度会涉及许多大项的乘积。在这种情况下，梯度就会爆炸：梯度过大导致难以收敛。<br>批标准化可以降低学习速率，因而有助于防止梯度爆炸。</p><p><em>ReLU 单元消失</em><br>一旦 ReLU 单元的加权和低于 0，ReLU 单元就可能会停滞。它会输出对网络输出没有任何贡献的 0 激活，而梯度在反向传播算法期间将无法再从中流过。由于梯度的来源被切断，ReLU 的输入可能无法作出足够的改变来使加权和恢复到 0 以上。<br>降低学习速率有助于防止 ReLU 单元消失。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt; ：简单总结几个最近发布的“机器学习速成课程”中的概念&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/categories/Machine-Learning/"/>
+    
+    
+      <category term="notes" scheme="http://yoursite.com/tags/notes/"/>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode15-3sum解题报告</title>
@@ -303,30 +327,6 @@
     
     
       <category term="notes" scheme="http://yoursite.com/tags/notes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>“Google机器学习速成课程”概念浏览</title>
-    <link href="http://yoursite.com/2017/10/25/%E2%80%9CGoogle%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%80%9F%E6%88%90%E8%AF%BE%E7%A8%8B%E2%80%9D%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2017/10/25/“Google机器学习速成课程”概念总结/</id>
-    <published>2017-10-25T07:37:30.000Z</published>
-    <updated>2018-03-13T03:26:42.096Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>摘要</strong> ：简单总结几个最近发布的“机器学习速成课程”中的概念<br><a id="more"></a></p><p><strong>正文:</strong></p><p><strong>随机梯度下降法（SGD）</strong>：在梯度下降法中，批量指的是用于在单次迭代中计算梯度的样本总数。到目前为止，我们一直假定批量是指整个数据集。就 Google 的规模而言，数据集通常包含数十亿甚至数千亿个样本。此外，Google 数据集通常包含海量特征。因此，一个批量可能相当巨大。如果是超大批量，则单次迭代就可能要花费很长时间进行计算。</p><p>包含随机抽样样本的大型数据集可能包含冗余数据。实际上，批量大小越大，出现冗余的可能性就越高。一些冗余可能有助于消除杂乱的梯度，但超大批量所具备的预测价值往往并不比大型批量高。</p><p>如果我们可以通过更少的计算量得出正确的平均梯度，会怎么样？通过从我们的数据集中随机选择样本，我们可以通过小得多的数据集估算（尽管过程非常杂乱）出较大的平均值。 随机梯度下降法 (SGD) 将这种想法运用到极致，它每次迭代只使用一个样本（批量大小为 1）。如果进行足够的迭代，SGD 也可以发挥作用，但过程会非常杂乱。“随机”这一术语表示构成各个批量的一个样本都是随机选择的。</p><p>小批量随机梯度下降法（小批量 SGD）是介于全批量迭代与 SGD 之间的折衷方案。小批量通常包含 10-1000 个随机选择的样本。小批量 SGD 可以减少 SGD 中的杂乱样本数量，但仍然比全批量更高效。</p><p><strong>特征工程</strong>：从原始数据创建特征的过程。会花费实际工作中百分之70的时间。<br>良好特征具有下列特点：1.避免很少使用的离散特征值2.最好具有清晰明确的定义3.异常的数值不要和实际数据混为一谈4.考虑随着时间的不稳定性</p><p><strong>数据清洗</strong>：1.缩放特征值2.处理极端离群值3.分箱4.清查（遗漏值，重复样本，不良标签，不良特征值）5.了解数据</p><p><strong>特征组合</strong>:是指通过将两个或多个输入特征相乘来对特征空间中的非线性规律进行编码的合成特征。</p><ul><li>[A X B]：将两个特征的值相乘形成的特征组合。</li><li>[A x B x C x D x E]：将五个特征的值相乘形成的特征组合。</li><li>[A x A]：对单个特征的值求平方形成的特征组合。</li></ul><p><strong>机器学习训练过程问题</strong>：<br><em>梯度消失</em><br>较低层（更接近输入）的梯度可能会变得非常小。在深度网络中，计算这些梯度时，可能涉及许多小项的乘积。当较低层的梯度逐渐消失到 0时，这些层的训练速度会非常缓慢，甚至不再训练。<br>ReLU 激活函数有助于防止梯度消失。</p><p><em>梯度爆炸</em><br>如果网络中的权重过大，则较低层的梯度会涉及许多大项的乘积。在这种情况下，梯度就会爆炸：梯度过大导致难以收敛。<br>批标准化可以降低学习速率，因而有助于防止梯度爆炸。</p><p><em>ReLU 单元消失</em><br>一旦 ReLU 单元的加权和低于 0，ReLU 单元就可能会停滞。它会输出对网络输出没有任何贡献的 0 激活，而梯度在反向传播算法期间将无法再从中流过。由于梯度的来源被切断，ReLU 的输入可能无法作出足够的改变来使加权和恢复到 0 以上。<br>降低学习速率有助于防止 ReLU 单元消失。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;摘要&lt;/strong&gt; ：简单总结几个最近发布的“机器学习速成课程”中的概念&lt;br&gt;
-    
-    </summary>
-    
-      <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
-    
-    
-      <category term="notes" scheme="http://yoursite.com/tags/notes/"/>
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   
