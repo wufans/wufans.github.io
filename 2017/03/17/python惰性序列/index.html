@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="secure,papernotes," />
+  <meta name="keywords" content="notes,python," />
 
 
 
@@ -81,21 +81,18 @@
 
 
 
-<meta name="description" content="citationLu J, Sibai H, Fabry E, et al. Standard detectors aren’t (currently) fooled by physical adversarial stop signs[J]. 2017.">
-<meta name="keywords" content="secure,papernotes">
+<meta name="description" content="python中的高级特性——惰性序列">
+<meta name="keywords" content="notes,python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《Standard detectors aren’t (currently) fooled by physical adversarial stop signs》论文笔记">
-<meta property="og:url" content="http://yoursite.com/2017/10/31/《Standard-detectors-aren’t-currently-fooled-by-physical-adversarial-stop-signs》论文笔记/index.html">
+<meta property="og:title" content="python惰性序列">
+<meta property="og:url" content="http://yoursite.com/2017/03/17/python惰性序列/index.html">
 <meta property="og:site_name" content="Fan Wu">
-<meta property="og:description" content="citationLu J, Sibai H, Fabry E, et al. Standard detectors aren’t (currently) fooled by physical adversarial stop signs[J]. 2017.">
+<meta property="og:description" content="python中的高级特性——惰性序列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060lm7Tly1fl1wcs2mi9j30n60llaru.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060lm7Tly1fl1w9z0qr9j30n10lrh3u.jpg">
-<meta property="og:updated_time" content="2017-11-03T04:25:12.777Z">
+<meta property="og:updated_time" content="2018-03-17T01:52:44.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《Standard detectors aren’t (currently) fooled by physical adversarial stop signs》论文笔记">
-<meta name="twitter:description" content="citationLu J, Sibai H, Fabry E, et al. Standard detectors aren’t (currently) fooled by physical adversarial stop signs[J]. 2017.">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0060lm7Tly1fl1wcs2mi9j30n60llaru.jpg">
+<meta name="twitter:title" content="python惰性序列">
+<meta name="twitter:description" content="python中的高级特性——惰性序列">
 
 
 
@@ -125,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/31/《Standard-detectors-aren’t-currently-fooled-by-physical-adversarial-stop-signs》论文笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/17/python惰性序列/"/>
 
 
 
 
 
-  <title>《Standard detectors aren’t (currently) fooled by physical adversarial stop signs》论文笔记 | Fan Wu</title>
+  <title>python惰性序列 | Fan Wu</title>
   
 
 
@@ -312,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/《Standard-detectors-aren’t-currently-fooled-by-physical-adversarial-stop-signs》论文笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/17/python惰性序列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wufan">
@@ -329,7 +326,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">《Standard detectors aren’t (currently) fooled by physical adversarial stop signs》论文笔记</h2>
+          <h2 class="post-title" itemprop="name headline">python惰性序列</h2>
         
 
         <div class="post-meta">
@@ -341,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T18:54:20+08:00">
-                2017-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T10:48:20+08:00">
+                2017-03-17
               </time>
             
 
@@ -364,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
                   </a>
                 </span>
 
@@ -400,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  747 字
+                  942 字
                 </span>
               
 
@@ -416,7 +413,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -437,22 +434,22 @@
       
 
       
-        <h2 id="citation"><a href="#citation" class="headerlink" title="citation"></a>citation</h2><p>Lu J, Sibai H, Fabry E, et al. Standard detectors aren’t (currently) fooled by physical adversarial stop signs[J]. 2017.</p>
-<a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Evtimov等人在《Robust Physical-World Attacks on Machine Learning Models》提出了RP2算法，可以构建对抗样本，通过添加精心设计的扰动，使交通标示探测器的结果错误，达到对抗攻击的目的。<br>但是本文的作者认为，Evtimov等人在构建对抗样本的实验过程中，对原始图片进行了两种处理：一是对原始图片进行了剪切，二是重新设定了图片的尺寸。本文的作者认为，这样的处理会让模型在训练时能有效的适应视觉角度和规模变化，但是处理之后就消除了这种训练结果。同时，增加的对抗扰动也会有这种视觉角度和规模的变化，因此是否有效需要通过实验验证。不止这种视觉角度和图片规模的改变，针对探测器的对抗攻击也要考虑到大量参数变化（scale; view angle; box shift inside the detector;illumination;等）。<br>另外，对一个classifier和detector进行的对抗攻击应该是有区别的，后者因为不能准确地估计探测边界，所以构造对抗样本也会更加困难。<br>最后，本文中用（YOLO and Faster RCNN）<br><em>[J. Redmon and A. Farhadi. Yolo9000: better, faster, stronger.arXiv preprint arXiv:1612.08242, 2016.]</em><br><em>[S. Ren, K. He, R. Girshick, and J. Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In Advances in neural information processing systems, pages 91–99, 2015.]</em><br>训练得到的探测器进行测试，发现不会受到对抗攻击的影响。</p>
-<h2 id="Difference-between-Classifiers-and-Detectors"><a href="#Difference-between-Classifiers-and-Detectors" class="headerlink" title="Difference between Classifiers and Detectors"></a>Difference between Classifiers and Detectors</h2><ol>
-<li>两者不会明显区分分类边界，因为对于探测器来说，确定物体边界十分困难。（The key feature of detection systems is that they tend not to get the boxes exactly right）</li>
-<li>原因分析：<ul>
-<li>Close cropping can remove scale and translation effects</li>
-<li>Low resolution boxes</li>
-<li>Cropping and variance</li>
-<li>Cropping and context</li>
-</ul>
-</li>
-</ol>
-<h2 id="experimental-results"><a href="#experimental-results" class="headerlink" title="experimental results"></a>experimental results</h2><p>Evtimov等人的实验主要是两个方面，一种是poster attacks (the stop sign is covered with a poster that looks like a faded stop sign) ，一种是 sticker attacks (the attacker makes stickers placed on particular locations on a stop sign)，因此本文的对照实验采用同样的攻击方式。</p>
-<p>首先是在YOLO探测模型上的探测对抗结果：<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fl1wcs2mi9j30n60llaru.jpg" alt="此处输入图片的描述"><br>然后是在Faster RCNN探测模型上的探测结果：<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fl1w9z0qr9j30n10lrh3u.jpg" alt="此处输入图片的描述"><br>从这两个结果上来看，原来的对抗攻击的成功率已经下降到0，说明了Evtimov等人提出的对抗样本构建方法失效了。</p>
-<h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><p>探测器并不能声称完全免疫物理对抗攻击，然而目前没有证据证明物理对抗样本能对detector产生效果。<br>这篇文章实验主要就是实验部分，通过实验证明了Evtimov的研究的不充分，说明了实际中，对探测器的攻击的存在性还待进一步研究。找到这种攻击的存在还有很大的挑战。</p>
+        <p>python中的高级特性——惰性序列<br><a id="more"></a></p>
+<h2 id="生成器generator"><a href="#生成器generator" class="headerlink" title="生成器generator"></a><font color="red">生成器generator</font></h2><p>一边计算一边循环的机制，称为<strong>生成器</strong>。<br>generator非常强大。相比于传统的for循环直接生成一个list，generator可以<strong>节省大量的空间</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = (x * x for x in range(10))</span><br><span class="line">&gt;&gt;&gt; for n in g:</span><br><span class="line">...     print(n)</span><br><span class="line">...</span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">9</span><br><span class="line">16</span><br><span class="line">25</span><br><span class="line">36</span><br><span class="line">49</span><br><span class="line">64</span><br><span class="line">81</span><br></pre></td></tr></table></figure></p>
+<p>如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。<br>著名的<strong>斐波拉契数列</strong>（Fibonacci）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b = 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        yield b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + 1</span><br><span class="line">    return &apos;done&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong>杨辉三角</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def yanghui(max):</span><br><span class="line">    line=[1]</span><br><span class="line">    while True:</span><br><span class="line">        yield line</span><br><span class="line">        nextline = line+[1]#注意这个表达</span><br><span class="line">        for i in range(len(line)):</span><br><span class="line">             if i != 0:</span><br><span class="line">                 nextline[i] = line[i-1] + line[i]</span><br><span class="line">        line = nextline</span><br><span class="line">    return &quot;done&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Iterable与Iterator，iter"><a href="#Iterable与Iterator，iter" class="headerlink" title="Iterable与Iterator，iter()"></a><font color="red">Iterable与Iterator，iter()</font></h2><h3 id="Iterable"><a href="#Iterable" class="headerlink" title="Iterable"></a>Iterable</h3><p>python中直接作用于<font color="blue">for循环</font>的对象统称为可迭代对象：<strong>Iterabale</strong>.<br>一类是<strong>集合数据类型</strong>，如list、tuple、dict、set、str等；<br>一类是<strong>generator</strong>，包括生成器和带yield的generator function。<br>判断一个对象是否是可迭代对象,可以使用collections模块的<strong>Iterable</strong>类型判断。</p>
+<h3 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h3><p>能够被<font color="blue">next()</font>函数调用并不断返回下一个值的对象称为迭代器：<strong>Iterator</strong>。</p>
+<h3 id="iter"><a href="#iter" class="headerlink" title="iter()"></a>iter()</h3><p>可以使用isinstance()判断一个对象是否是Iterator对象。<br>可以使用iter()函数把list，dict，str获得一个Iterator对象，用next()计算。</p>
+<h3 id="code-examples"><a href="#code-examples" class="headerlink" title="code examples"></a>code examples</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from collections import Iterable</span><br><span class="line">&gt;&gt;&gt;isinstance(&quot;abc&quot;,Iterable)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from collections import Iterator</span><br><span class="line">&gt;&gt;&gt;isinstance([],Iterator)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt;isinstance(iter([]),Iterator)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#注意下面的区别</span><br><span class="line">&gt;&gt;&gt;isinstance((x for x in range(10)),Iterator)</span><br><span class="line">#返回的是一个生成器对象，不是tuple</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt;isinstance((),Iterator)</span><br><span class="line">#tuple不是迭代器</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt;isinstance([x for x in range(10)],Iterator)</span><br><span class="line">#返回一个list</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+<pre><code>为什么list、dict、str等数据类型不是Iterator？
+这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。
+Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。
+</code></pre><h2 id="惰性序列"><a href="#惰性序列" class="headerlink" title="惰性序列"></a><font color="red">惰性序列</font></h2><h3 id="惰性计算"><a href="#惰性计算" class="headerlink" title="惰性计算"></a><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E6%B1%82%E5%80%BC" target="_blank" rel="noopener">惰性计算</a></h3><h3 id="惰性序列-1"><a href="#惰性序列-1" class="headerlink" title="惰性序列"></a>惰性序列</h3><p>python中的惰性序列多数指Iterator。对于存在巨大甚至无限多的元素的序列，迭代器仅仅在迭代至某个元素时才计算该元素，在此之前或者之后，元素可以不存在或者被销毁。</p>
+<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><p>一是这样我们就可以实现的无限序列的表示，比如全部的自然数(无穷尽)，而不需要真的在内存中计算出所有的自然数(那根本不可能，因为内存也不是无限的)，而是需要哪个数，计算到哪个数，或者需要哪些数，计算到那些数(比如前1000个)。<br>二是在大规模数据处理中起到延迟计算的作用。当你处理大规模数据时，一次性进行处理往往是不方便的。而惰性序列就可以解决这个问题，它把计算的步骤延迟到了要实际使用该数据的时候。<br>惰性序列可以看作是一个”流”，需要的时候从其中取一滴水。</p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a><font color="red">reference</font></h2><p><a href="http://blog.csdn.net/solo95/article/details/78834041" target="_blank" rel="noopener">博客</a><br><a href="http://blog.csdn.net/it_dream_er/article/details/50890201" target="_blank" rel="noopener">博客2</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014317852443934a86aa5bb5ea47fbbd5f35282b331335000" target="_blank" rel="noopener">教程</a></p>
 
       
     </div>
@@ -470,9 +467,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/secure/" rel="tag"># secure</a>
+            <a href="/tags/notes/" rel="tag"># notes</a>
           
-            <a href="/tags/papernotes/" rel="tag"># papernotes</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -485,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/31/搭建博客时候问题小记/" rel="next" title="搭建博客时候问题小记">
-                <i class="fa fa-chevron-left"></i> 搭建博客时候问题小记
+              <a href="/2017/01/05/Python匹配所有符号/" rel="next" title="python去掉文章中所有的符号">
+                <i class="fa fa-chevron-left"></i> python去掉文章中所有的符号
               </a>
             
           </div>
@@ -495,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/02/《NO-Need-to-Worry-about-Adversarial-Examples-in-Object-Detection-in-Autonomous-Vehicles》论文笔记/" rel="prev" title="《NO Need to Worry about Adversarial Examples in Object Detection in Autonomous Vehicles》论文笔记">
-                《NO Need to Worry about Adversarial Examples in Object Detection in Autonomous Vehicles》论文笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/18/My-Notes-Of-Adversarial-Attack/" rel="prev" title="My Notes Of Adversarial Attack">
+                My Notes Of Adversarial Attack <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -688,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#citation"><span class="nav-number">1.</span> <span class="nav-text">citation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference-between-Classifiers-and-Detectors"><span class="nav-number">3.</span> <span class="nav-text">Difference between Classifiers and Detectors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#experimental-results"><span class="nav-number">4.</span> <span class="nav-text">experimental results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-number">5.</span> <span class="nav-text">conclusion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器generator"><span class="nav-number">1.</span> <span class="nav-text">生成器generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterable与Iterator，iter"><span class="nav-number">2.</span> <span class="nav-text">Iterable与Iterator，iter()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterable"><span class="nav-number">2.1.</span> <span class="nav-text">Iterable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iterator"><span class="nav-number">2.2.</span> <span class="nav-text">Iterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iter"><span class="nav-number">2.3.</span> <span class="nav-text">iter()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-examples"><span class="nav-number">2.4.</span> <span class="nav-text">code examples</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#惰性序列"><span class="nav-number">3.</span> <span class="nav-text">惰性序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#惰性计算"><span class="nav-number">3.1.</span> <span class="nav-text">惰性计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#惰性序列-1"><span class="nav-number">3.2.</span> <span class="nav-text">惰性序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#意义"><span class="nav-number">3.3.</span> <span class="nav-text">意义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
             
 
           </div>
