@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python惰性序列]]></title>
+    <url>%2F2018%2F03%2F17%2Fpython%E6%83%B0%E6%80%A7%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[python中的高级特性——惰性序列 生成器generator一边计算一边循环的机制，称为生成器。generator非常强大。相比于传统的for循环直接生成一个list，generator可以节省大量的空间。1234567891011121314&gt;&gt;&gt; g = (x * x for x in range(10))&gt;&gt;&gt; for n in g:... print(n)...0149162536496481 如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。著名的斐波拉契数列（Fibonacci）1234567def fib(max): n, a, b = 0, 0, 1 while n &lt; max: yield b a, b = b, a + b n = n + 1 return &apos;done&apos; 杨辉三角：12345678910def yanghui(max): line=[1] while True: yield line nextline = line+[1]#注意这个表达 for i in range(len(line)): if i != 0: nextline[i] = line[i-1] + line[i] line = nextline return &quot;done&quot; Iterable与Iterator，iter()Iterablepython中直接作用于for循环的对象统称为可迭代对象：Iterabale.一类是集合数据类型，如list、tuple、dict、set、str等；一类是generator，包括生成器和带yield的generator function。判断一个对象是否是可迭代对象,可以使用collections模块的Iterable类型判断。 Iterator能够被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator。 iter()可以使用isinstance()判断一个对象是否是Iterator对象。可以使用iter()函数把list，dict，str获得一个Iterator对象，用next()计算。 code examples123&gt;&gt;&gt;from collections import Iterable&gt;&gt;&gt;isinstance(&quot;abc&quot;,Iterable)True 12345&gt;&gt;&gt;from collections import Iterator&gt;&gt;&gt;isinstance([],Iterator)False&gt;&gt;&gt;isinstance(iter([]),Iterator)True 12345678910#注意下面的区别&gt;&gt;&gt;isinstance((x for x in range(10)),Iterator)#返回的是一个生成器对象，不是tupleTrue&gt;&gt;&gt;isinstance((),Iterator)#tuple不是迭代器False&gt;&gt;&gt;isinstance([x for x in range(10)],Iterator)#返回一个listFalse 为什么list、dict、str等数据类型不是Iterator？ 这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。 Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。 惰性序列惰性计算惰性序列python中的惰性序列多数指Iterator。对于存在巨大甚至无限多的元素的序列，迭代器仅仅在迭代至某个元素时才计算该元素，在此之前或者之后，元素可以不存在或者被销毁。 意义一是这样我们就可以实现的无限序列的表示，比如全部的自然数(无穷尽)，而不需要真的在内存中计算出所有的自然数(那根本不可能，因为内存也不是无限的)，而是需要哪个数，计算到哪个数，或者需要哪些数，计算到那些数(比如前1000个)。二是在大规模数据处理中起到延迟计算的作用。当你处理大规模数据时，一次性进行处理往往是不方便的。而惰性序列就可以解决这个问题，它把计算的步骤延迟到了要实际使用该数据的时候。惰性序列可以看作是一个”流”，需要的时候从其中取一滴水。 reference博客博客2教程]]></content>
+      <categories>
+        <category>coding</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[“Google机器学习速成课程”概念浏览]]></title>
     <url>%2F2018%2F03%2F13%2F%E2%80%9CGoogle%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E9%80%9F%E6%88%90%E8%AF%BE%E7%A8%8B%E2%80%9D%E6%A6%82%E5%BF%B5%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[摘要 ：简单总结几个最近发布的“机器学习速成课程”中的概念 正文: 随机梯度下降法（SGD）：在梯度下降法中，批量指的是用于在单次迭代中计算梯度的样本总数。到目前为止，我们一直假定批量是指整个数据集。就 Google 的规模而言，数据集通常包含数十亿甚至数千亿个样本。此外，Google 数据集通常包含海量特征。因此，一个批量可能相当巨大。如果是超大批量，则单次迭代就可能要花费很长时间进行计算。 包含随机抽样样本的大型数据集可能包含冗余数据。实际上，批量大小越大，出现冗余的可能性就越高。一些冗余可能有助于消除杂乱的梯度，但超大批量所具备的预测价值往往并不比大型批量高。 如果我们可以通过更少的计算量得出正确的平均梯度，会怎么样？通过从我们的数据集中随机选择样本，我们可以通过小得多的数据集估算（尽管过程非常杂乱）出较大的平均值。 随机梯度下降法 (SGD) 将这种想法运用到极致，它每次迭代只使用一个样本（批量大小为 1）。如果进行足够的迭代，SGD 也可以发挥作用，但过程会非常杂乱。“随机”这一术语表示构成各个批量的一个样本都是随机选择的。 小批量随机梯度下降法（小批量 SGD）是介于全批量迭代与 SGD 之间的折衷方案。小批量通常包含 10-1000 个随机选择的样本。小批量 SGD 可以减少 SGD 中的杂乱样本数量，但仍然比全批量更高效。 特征工程：从原始数据创建特征的过程。会花费实际工作中百分之70的时间。良好特征具有下列特点：1.避免很少使用的离散特征值2.最好具有清晰明确的定义3.异常的数值不要和实际数据混为一谈4.考虑随着时间的不稳定性 数据清洗：1.缩放特征值2.处理极端离群值3.分箱4.清查（遗漏值，重复样本，不良标签，不良特征值）5.了解数据 特征组合:是指通过将两个或多个输入特征相乘来对特征空间中的非线性规律进行编码的合成特征。 [A X B]：将两个特征的值相乘形成的特征组合。 [A x B x C x D x E]：将五个特征的值相乘形成的特征组合。 [A x A]：对单个特征的值求平方形成的特征组合。 机器学习训练过程问题：梯度消失较低层（更接近输入）的梯度可能会变得非常小。在深度网络中，计算这些梯度时，可能涉及许多小项的乘积。当较低层的梯度逐渐消失到 0时，这些层的训练速度会非常缓慢，甚至不再训练。ReLU 激活函数有助于防止梯度消失。 梯度爆炸如果网络中的权重过大，则较低层的梯度会涉及许多大项的乘积。在这种情况下，梯度就会爆炸：梯度过大导致难以收敛。批标准化可以降低学习速率，因而有助于防止梯度爆炸。 ReLU 单元消失一旦 ReLU 单元的加权和低于 0，ReLU 单元就可能会停滞。它会输出对网络输出没有任何贡献的 0 激活，而梯度在反向传播算法期间将无法再从中流过。由于梯度的来源被切断，ReLU 的输入可能无法作出足够的改变来使加权和恢复到 0 以上。降低学习速率有助于防止 ReLU 单元消失。]]></content>
@@ -180,18 +192,6 @@
         <tag>notes</tag>
         <tag>adversarial attack</tag>
         <tag>secure</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[python惰性序列]]></title>
-    <url>%2F2017%2F03%2F17%2Fpython%E6%83%B0%E6%80%A7%E5%BA%8F%E5%88%97%2F</url>
-    <content type="text"><![CDATA[python中的高级特性——惰性序列 生成器generator一边计算一边循环的机制，称为生成器。generator非常强大。相比于传统的for循环直接生成一个list，generator可以节省大量的空间。1234567891011121314&gt;&gt;&gt; g = (x * x for x in range(10))&gt;&gt;&gt; for n in g:... print(n)...0149162536496481 如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。著名的斐波拉契数列（Fibonacci）1234567def fib(max): n, a, b = 0, 0, 1 while n &lt; max: yield b a, b = b, a + b n = n + 1 return &apos;done&apos; 杨辉三角：12345678910def yanghui(max): line=[1] while True: yield line nextline = line+[1]#注意这个表达 for i in range(len(line)): if i != 0: nextline[i] = line[i-1] + line[i] line = nextline return &quot;done&quot; Iterable与Iterator，iter()Iterablepython中直接作用于for循环的对象统称为可迭代对象：Iterabale.一类是集合数据类型，如list、tuple、dict、set、str等；一类是generator，包括生成器和带yield的generator function。判断一个对象是否是可迭代对象,可以使用collections模块的Iterable类型判断。 Iterator能够被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator。 iter()可以使用isinstance()判断一个对象是否是Iterator对象。可以使用iter()函数把list，dict，str获得一个Iterator对象，用next()计算。 code examples123&gt;&gt;&gt;from collections import Iterable&gt;&gt;&gt;isinstance(&quot;abc&quot;,Iterable)True 12345&gt;&gt;&gt;from collections import Iterator&gt;&gt;&gt;isinstance([],Iterator)False&gt;&gt;&gt;isinstance(iter([]),Iterator)True 12345678910#注意下面的区别&gt;&gt;&gt;isinstance((x for x in range(10)),Iterator)#返回的是一个生成器对象，不是tupleTrue&gt;&gt;&gt;isinstance((),Iterator)#tuple不是迭代器False&gt;&gt;&gt;isinstance([x for x in range(10)],Iterator)#返回一个listFalse 为什么list、dict、str等数据类型不是Iterator？ 这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。 Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。 惰性序列惰性计算惰性序列python中的惰性序列多数指Iterator。对于存在巨大甚至无限多的元素的序列，迭代器仅仅在迭代至某个元素时才计算该元素，在此之前或者之后，元素可以不存在或者被销毁。 意义一是这样我们就可以实现的无限序列的表示，比如全部的自然数(无穷尽)，而不需要真的在内存中计算出所有的自然数(那根本不可能，因为内存也不是无限的)，而是需要哪个数，计算到哪个数，或者需要哪些数，计算到那些数(比如前1000个)。二是在大规模数据处理中起到延迟计算的作用。当你处理大规模数据时，一次性进行处理往往是不方便的。而惰性序列就可以解决这个问题，它把计算的步骤延迟到了要实际使用该数据的时候。惰性序列可以看作是一个”流”，需要的时候从其中取一滴水。 reference博客博客2教程]]></content>
-      <categories>
-        <category>coding</category>
-      </categories>
-      <tags>
-        <tag>notes</tag>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
