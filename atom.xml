@@ -154,9 +154,9 @@
       <category term="coding" scheme="http://yoursite.com/categories/coding/"/>
     
     
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
       <category term="algorithms" scheme="http://yoursite.com/tags/algorithms/"/>
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
     
   </entry>
   
