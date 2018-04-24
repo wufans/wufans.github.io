@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-24T01:19:27.412Z</updated>
+  <updated>2018-04-24T07:45:40.023Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>对抗攻击防御策略一览</title>
-    <link href="http://yoursite.com/2018/04/23/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E7%AD%96%E7%95%A5%E4%B8%80%E8%A7%88/"/>
-    <id>http://yoursite.com/2018/04/23/对抗攻击防御策略一览/</id>
-    <published>2018-04-23T07:46:27.000Z</published>
-    <updated>2018-04-24T01:19:27.412Z</updated>
+    <link href="http://yoursite.com/2018/04/17/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E7%AD%96%E7%95%A5%E4%B8%80%E8%A7%88/"/>
+    <id>http://yoursite.com/2018/04/17/对抗攻击防御策略一览/</id>
+    <published>2018-04-17T07:46:27.000Z</published>
+    <updated>2018-04-24T07:45:40.023Z</updated>
     
     <content type="html"><![CDATA[<p><strong>摘要</strong>：根据最近的学习，按照自己的理解给不同对抗攻击的防御方法作简单总结。对抗防御从形式上看可以被分为三类：①对抗样本检测；②改变对抗样本；③增强模型。<br><a id="more"></a></p><hr><h2 id="①对抗样本检测："><a href="#①对抗样本检测：" class="headerlink" title="①对抗样本检测："></a>①对抗样本检测：</h2><p>指根据对抗样本与原始样本的分布差异，在模型Inference阶段将对抗样本区分出来。</p><p>检测对抗样本的方法有：</p><h3 id="1）-基于统计检验的检测（Sample-statistic）："><a href="#1）-基于统计检验的检测（Sample-statistic）：" class="headerlink" title="1）    基于统计检验的检测（Sample statistic）："></a>1）    基于统计检验的检测（Sample statistic）：</h3><p>这种方法比较直接，效果也比较差，并且因为是基于大量对抗样本的统计结论，因此需要大量对抗样本挖掘其统计规律，在检测的时候也不适于检测单个对抗样本。常见的统计检验方法如下：<br><strong>A．    Maximum mean discrepancy and energy distance.</strong><br>【Kathrin Grosse, Praveen Manoharan, Nicolas Papernot, Michael Backes, and Patrick McDaniel. On the (Statistical) Detection of Adversarial Examples. arXiv preprint arXiv:1702.06280, 2017.】<br>    但是这种方法不能对单个样本作出预测，只能揭示对抗样本与原始样本在平均偏差和距离的差异，不具有检测对抗样本的可行性。<br><strong>B．    Kernel density estimation</strong><br>【Reuben Feinman, Ryan R Curtin, Saurabh Shintre, and Andrew B Gardner. Detecting Adversarial Samples from Artifacts. arXiv preprint arXiv:1703.00410, 2017.】<br>这种方法即是在折叠的空间中计算一个测试样本和所有初始样本的距离，根据数据特征降维之后的差异区分对抗样本和真实样本。这种方法的缺陷是需要很大的计算资源，并且只能检测出对抗攻击时添加的对抗扰动比较大，让对抗样本和原始样本差异比较大的情况。<br><strong>C.    输入特征差异：</strong>包括JSMA攻击的论文中提到的，利用相邻像素间的平方差检测对抗样本。（这个方法前面的讨论中提到过，缺乏直观的合理性，所以也没什么价值）</p><h3 id="2）-训练检测器（Detector）："><a href="#2）-训练检测器（Detector）：" class="headerlink" title="2）    训练检测器（Detector）："></a>2）    训练检测器（Detector）：</h3><p>将对抗样本和原始样本作为训练集进行监督训练。<br>而检测器的训练包括两种：<br><strong>一种</strong>是直接将对抗样本和原始样本，打上label作为训练集训练一个分类器；<br><strong>另一种</strong>是将原始数据和对抗样本数据通过原始分类模型后，在输出层的值（或某一层神经网络层的输出值）打上label作为训练集训练一个分类器。</p><h3 id="3）-预测结果差异（Prediction-Inconsistency）"><a href="#3）-预测结果差异（Prediction-Inconsistency）" class="headerlink" title="3）    预测结果差异（Prediction Inconsistency）"></a>3）    预测结果差异（Prediction Inconsistency）</h3><p>根据预测结果差异来检测对抗样本主要有三种：<br><strong>(1)对抗样本和正常样本在原始模型的输出层差异。</strong><br>利用这种差异来检测对抗样本和原始样本，需要利用第2）点中构建一个检测器来实现；或者像我们前面的工作——根据模型输出层的统计差异来区分，但是这种方法不能对单个对抗样本做出判断。<br><strong>(2)对抗样本和原始样本经过特征处理之后，他们在输出层的变化不同。</strong><br>这种方法在前面的报告中提到了，这部分内容在后面的部分详细给出。<br><strong>(3)对抗样本在不同的模型下输出差异。</strong><br>这部分内容和前面和老师讨论的依据Byzantine Generals problem来设计系统相关联，让对抗样本经过多个分类模型，按照3t+1的原则，保证分类输出的正常。<br>其中，不同的模型获得方式有很多，一种是其他能应用于同一个任务的分类模型，比如在用VGG16分类时，用ResNet，WRN，DenseNet等同样能用作分类的网络模型作为参照，检测出对抗样本。另外一种就是基于原始模型的修改，包括结构的修改和训练过程的修改，不同的修改过程可以得到不同的子模型。比如在训练过程中，每次训练采用不同的dropout策略，可以得到几个类似功能的分类模型，只要测试样本在这几个分类模型上满足拜占庭问题的解，就可以判断为是原始样本。</p><hr><h2 id="②改变对抗样本："><a href="#②改变对抗样本：" class="headerlink" title="②改变对抗样本："></a>②改变对抗样本：</h2><p>1）用对抗攻击的方法处理对抗样本，让对抗样本重新被分类准确。<br>2）用特征处理的方法处理对抗样本，让对抗样本重新被分类准确。<br>3) Denoise the adversarial perturbation</p><hr><h2 id="③增强模型："><a href="#③增强模型：" class="headerlink" title="③增强模型："></a>③增强模型：</h2><p>1）    用更多数据训练，增强模型的泛化能力。包括对抗训练。<br>2）    修改模型的激活函数或者损失函数。<br>3）    使用network add-on，包括利用GAN，Defensive distillation。</p>]]></content>
     
