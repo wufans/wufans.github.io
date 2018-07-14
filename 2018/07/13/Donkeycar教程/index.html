@@ -89,13 +89,14 @@
 <meta property="og:site_name" content="Fan Wu">
 <meta property="og:description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg">
 <meta property="og:image" content="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg">
 <meta property="og:image" content="https://img.alicdn.com/imgextra/i3/13651274/TB2CqaihVXXXXbwXpXXXXXXXXXX_!!13651274.jpg">
-<meta property="og:updated_time" content="2018-07-14T09:08:57.061Z">
+<meta property="og:updated_time" content="2018-07-14T09:12:19.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Donkeycar教程">
 <meta name="twitter:description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现.">
-<meta name="twitter:image" content="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg">
+<meta name="twitter:image" content="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg">
 
 
 
@@ -437,8 +438,7 @@
       
 
       
-        <p><strong>摘要：</strong>本文档参考和整合<a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">Donkeycar文档</a>和<a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">创客智造</a>的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现.</p>
-<a id="more"></a>
+        <p><strong>摘要：</strong>本文档参考和整合<a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">Donkeycar文档</a>和<a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">创客智造</a>的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现.<br><img src="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg" alt="此处输入图片的描述"><br><a id="more"></a></p>
 <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.    简介"></a>1.    简介</h2><p>本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。<br>本文档参考和整合<a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">1</a>和<a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">2</a>中的中英文教程，及网上的开源博客和代码，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍如何实现Donkeycar智能小车。<br>智能小车的整体框架：</p>
 <p>1)    Vehicle - a container class to hold and manage all aspects of the vehicle.<br>2)    Parts - modular components of the vehicle that read/write to the memory. This includes sensors, actuators, remote controlers and a datastore.<br>3)    Memory - holds the state of the vehicle and is used to pass variables between parts.<br>4)    Drive loop - a function of the vehicle that runs ensures each part interacts with the memory.</p>
 <h2 id="2-硬件"><a href="#2-硬件" class="headerlink" title="2.    硬件"></a>2.    硬件</h2><h3 id="2-1-硬件清单"><a href="#2-1-硬件清单" class="headerlink" title="2.1    硬件清单"></a>2.1    硬件清单</h3><h4 id="2-1-1-配件明细"><a href="#2-1-1-配件明细" class="headerlink" title="2.1.1    配件明细"></a>2.1.1    配件明细</h4><h5 id="2-1-1-1-模型要求："><a href="#2-1-1-1-模型要求：" class="headerlink" title="2.1.1.1    模型要求："></a>2.1.1.1    模型要求：</h5><p>我们需要选择：<br>①独立ESC（电子调速器）和接收机的RC小车<br>②选择三线连接器，三线舵机<br>③选择速度更慢的有刷小车模型更容易实现。</p>
