@@ -81,21 +81,21 @@
 
 
 
-<meta name="description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。">
+<meta name="description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，以及安装可能碰到的问题，以“HSP无限94186 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。">
 <meta name="keywords" content="notes,donkeycar,Machine learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Donkeycar教程">
 <meta property="og:url" content="http://yoursite.com/2018/07/13/Donkeycar教程/index.html">
 <meta property="og:site_name" content="Fan Wu">
-<meta property="og:description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。">
+<meta property="og:description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，以及安装可能碰到的问题，以“HSP无限94186 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg">
 <meta property="og:image" content="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg">
 <meta property="og:image" content="https://img.alicdn.com/imgextra/i3/13651274/TB2CqaihVXXXXbwXpXXXXXXXXXX_!!13651274.jpg">
-<meta property="og:updated_time" content="2018-07-14T09:24:34.504Z">
+<meta property="og:updated_time" content="2018-07-14T11:44:10.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Donkeycar教程">
-<meta name="twitter:description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。">
+<meta name="twitter:description" content="摘要：本文档参考和整合Donkeycar文档和创客智造的中英文教程，以及安装可能碰到的问题，以“HSP无限94186 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。">
 <meta name="twitter:image" content="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg">
 
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,918 字
+                  5,912 字
                 </span>
               
 
@@ -438,7 +438,7 @@
       
 
       
-        <p><strong>摘要：</strong>本文档参考和整合<a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">Donkeycar文档</a>和<a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">创客智造</a>的中英文教程，及网上的开源博客和代码，根据个人心得，以“HSP无限94182 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。<br><img src="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg" alt="此处输入图片的描述"></p>
+        <p><strong>摘要：</strong>本文档参考和整合<a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">Donkeycar文档</a>和<a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">创客智造</a>的中英文教程，以及安装可能碰到的问题，以“HSP无限94186 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。<br><img src="http://www.donkeycar.com/uploads/7/8/1/7/7817903/donkey-car-graphic_orig.jpg" alt="此处输入图片的描述"></p>
 <a id="more"></a>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font color="red">简介</font></h2><p>本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。</p>
 <p>1)    Vehicle - a container class to hold and manage all aspects of the vehicle.<br>2)    Parts - modular components of the vehicle that read/write to the memory. This includes sensors, actuators, remote controlers and a datastore.<br>3)    Memory - holds the state of the vehicle and is used to pass variables between parts.<br>4)    Drive loop - a function of the vehicle that runs ensures each part interacts with the memory.</p>
