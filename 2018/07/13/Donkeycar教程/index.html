@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="notes,donkeycar,Machine learning," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Fan Wu" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="摘要：本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。">
+<meta name="keywords" content="notes,donkeycar,Machine learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Donkeycar教程">
+<meta property="og:url" content="http://yoursite.com/2018/07/13/Donkeycar教程/index.html">
+<meta property="og:site_name" content="Fan Wu">
+<meta property="og:description" content="摘要：本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=2559738123,4256387987&fm=85&s=752AB952CCB777A7958C48AE03007022">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHIqf.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMH7dS.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHHIg.png">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg">
+<meta property="og:image" content="https://img.alicdn.com/imgextra/i3/13651274/TB2CqaihVXXXXbwXpXXXXXXXXXX_!!13651274.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHqiQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHORs.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHXzn.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHvMq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHxs0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHzLV.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbpZT.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMHzLV.png">
+<meta property="og:image" content="http://images.ncnynl.com/ros/2018/hardware_ass_2a.png">
+<meta property="og:image" content="http://images.ncnynl.com/ros/2018/hardware_ass_2b.png">
+<meta property="og:image" content="http://images.ncnynl.com/ros/2018/hardware_ass_6a.png">
+<meta property="og:image" content="http://images.ncnynl.com/ros/2018/hardware_ass_6b.png">
+<meta property="og:image" content="http://images.ncnynl.com/ros/2018/donkey.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb9dU.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbCoF.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbFJJ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbudO.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbAzR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbZsx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbeL6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbkW9.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbVQ1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbneK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbYOP.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbwFg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb8SA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbJyt.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb0YQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbUw8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbBWj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbaTS.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbrSs.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbRTU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb2wT.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbfkF.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbhY4.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb4fJ.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbgmV.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb6O0.png">
+<meta property="og:updated_time" content="2018-07-15T09:15:24.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Donkeycar教程">
+<meta name="twitter:description" content="摘要：本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。">
+<meta name="twitter:image" content="https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=2559738123,4256387987&fm=85&s=752AB952CCB777A7958C48AE03007022">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/13/Donkeycar教程/"/>
+
+
+
+
+
+  <title>Donkeycar教程 | Fan Wu</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d881c1b60d86944588bad81878ee0a94";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fan Wu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Life is Now.</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/Donkeycar教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wufan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://static.byr.cn/uploadFace/X/XerxexXF.1498.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fan Wu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Donkeycar教程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T14:44:00+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/guidance/" itemprop="url" rel="index">
+                    <span itemprop="name">guidance</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,997 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  24 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>摘要：</strong>本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。</p>
+<p><img src="https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=2559738123,4256387987&amp;fm=85&amp;s=752AB952CCB777A7958C48AE03007022" alt="此处输入图片的描述"></p>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><font color="red">简介</font></h2><p>本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。<br>本文档参考和整合<a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">Donkeycar文档</a>和<a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">创客智造</a>的中英文教程，以及安装可能碰到的问题，以“HSP无限94186 ——1比16有刷无控车型”为模型作详细演示，从硬件，软件，系统整合，模型修改等方面介绍Donkeycar智能小车的实现。<br><strong>整体框架：</strong><br><img src="https://s1.ax1x.com/2018/07/15/PMHIqf.png" alt="此处输入图片的描述"><br>1)    Vehicle - a container class to hold and manage all aspects of the vehicle.<br>2)    Parts - modular components of the vehicle that read/write to the memory. This includes sensors, actuators, remote controlers and a datastore.<br>3)    Memory - holds the state of the vehicle and is used to pass variables between parts.<br>4)    Drive loop - a function of the vehicle that runs ensures each part interacts with the memory.</p>
+<h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a><font color="red">硬件</font></h2><h3 id="硬件清单"><a href="#硬件清单" class="headerlink" title="硬件清单"></a>硬件清单</h3><h4 id="配件明细"><a href="#配件明细" class="headerlink" title="配件明细"></a>配件明细</h4><h5 id="模型要求："><a href="#模型要求：" class="headerlink" title="模型要求："></a>模型要求：</h5><p>我们需要选择：<br>①独立ESC（电子调速器）和接收机的RC小车<br>②选择三线连接器，三线舵机<br>③选择速度更慢的有刷小车模型更容易实现。</p>
+<h5 id="推荐配置参考："><a href="#推荐配置参考：" class="headerlink" title="推荐配置参考："></a>推荐配置参考：</h5><p>1:16模型配置<br><img src="https://s1.ax1x.com/2018/07/15/PMH7dS.png" alt="此处输入图片的描述"></p>
+<p>1:10模型配置<br><img src="https://s1.ax1x.com/2018/07/15/PMHHIg.png" alt="此处输入图片的描述"><br>参数解释：<br>motor是电机的参数，2040就是表示定子外径是20mm，定子高度是40mm，定子的外径和高度越多，定子的铁芯越大，线圈绕的匝数也越多，表现出来就是电机的功率越大。<br>无刷电机KV值定义为转速/V，意思为输入电压增加1伏特(V)，无刷电机空转转速（转/分钟）增加的转速值。<br>ESC的25A是指持续电流25A，这个峰值电流是85A，BEC输出5V，1A。<br>Tcaction：四驱，双差速器。<br>Groung Clearance：小车底部离地面的距离。</p>
+<h5 id="购买配置清单（价格仅供参考，更新于2018-7-3）"><a href="#购买配置清单（价格仅供参考，更新于2018-7-3）" class="headerlink" title="购买配置清单（价格仅供参考，更新于2018-7-3）"></a>购买配置清单（价格仅供参考，更新于2018-7-3）</h5><table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">淘宝地址</th>
+<th style="text-align:center">价格（税点费+邮费）/元</th>
+<th style="text-align:right">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小车主体</td>
+<td style="text-align:center"><a href="https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-10687857697.2.14566a1aBpsYGj&amp;id=524795742343" target="_blank" rel="noopener">https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-10687857697.2.14566a1aBpsYGj&amp;id=524795742343</a></td>
+<td style="text-align:center">329.8(+20)</td>
+<td style="text-align:right">无限94182——1比16有刷无控车架（有刷不要遥控）电调（已包含）舵机（已包含）</td>
+</tr>
+<tr>
+<td>USB电池</td>
+<td style="text-align:center"><a href="https://detail.tmall.com/item.htm?spm=a230r.1.14.9.2c9e646ctC49zM&amp;id=564303977283&amp;cm_id=140105335569ed55e27b&amp;abbucket=13&amp;skuId=3563362700791" target="_blank" rel="noopener">https://detail.tmall.com/item.htm?spm=a230r.1.14.9.2c9e646ctC49zM&amp;id=564303977283&amp;cm_id=140105335569ed55e27b&amp;abbucket=13&amp;skuId=3563362700791</a></td>
+<td style="text-align:center">49(0.2)</td>
+<td style="text-align:right">2A 5V输出，小米充电宝</td>
+</tr>
+<tr>
+<td>树莓派3B+</td>
+<td style="text-align:center"><a href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-14802299686.14.485c40da2EhCk5&amp;id=527630316715" target="_blank" rel="noopener">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-14802299686.14.485c40da2EhCk5&amp;id=527630316715</a></td>
+<td style="text-align:center">354(21.64)</td>
+<td style="text-align:right">3B E14中国版  套餐16G，包括SD卡及配件</td>
+</tr>
+<tr>
+<td>广角摄像头</td>
+<td style="text-align:center"><a href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-14802299686.26.54ba6ae1HJKd7d&amp;id=537191521576" target="_blank" rel="noopener">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-14802299686.26.54ba6ae1HJKd7d&amp;id=537191521576</a></td>
+<td style="text-align:center">100(6.72)</td>
+<td style="text-align:right">树莓派摄像头5MP</td>
+</tr>
+<tr>
+<td>树莓派杜邦线</td>
+<td style="text-align:center"><a href="https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-14802299686.23.2fd00909E38MRt&amp;id=18189793269" target="_blank" rel="noopener">https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-14802299686.23.2fd00909E38MRt&amp;id=18189793269</a></td>
+<td style="text-align:center">2</td>
+<td style="text-align:right">树莓派连接线</td>
+</tr>
+<tr>
+<td>电机驱动芯片 PCA 9685</td>
+<td style="text-align:center"><a href="https://detail.tmall.com/item.htm?spm=a230r.1.14.1.3bc5178b59bMmJ&amp;id=538283746663&amp;cm_id=140105335569ed55e27b&amp;abbucket=1" target="_blank" rel="noopener">https://detail.tmall.com/item.htm?spm=a230r.1.14.1.3bc5178b59bMmJ&amp;id=538283746663&amp;cm_id=140105335569ed55e27b&amp;abbucket=1</a></td>
+<td style="text-align:center">15(+5.4)</td>
+<td style="text-align:right">资料下载<a href="https://pan.baidu.com/s/1miRuKti" target="_blank" rel="noopener">https://pan.baidu.com/s/1miRuKti</a></td>
+</tr>
+<tr>
+<td>3D打印架</td>
+<td style="text-align:center">CAD Files: a360.co/2pf3Dam STL Files: thingiverse.com/thing:2260575</td>
+<td style="text-align:center">x</td>
+<td style="text-align:right">需要3D打印机</td>
+</tr>
+</tbody>
+</table>
+<h4 id="配件介绍"><a href="#配件介绍" class="headerlink" title="配件介绍"></a>配件介绍</h4><h5 id="HSP无限94182"><a href="#HSP无限94182" class="headerlink" title="HSP无限94182"></a>HSP无限94182</h5><p>模型参数：<br><img src="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg" alt="此处输入图片的描述"><br>模型结构：<br> <img src="https://img.alicdn.com/imgextra/i3/13651274/TB2CqaihVXXXXbwXpXXXXXXXXXX_!!13651274.jpg" alt="此处输入图片的描述"></p>
+<h5 id="电调（Electronic-Speed-Control，ESC）"><a href="#电调（Electronic-Speed-Control，ESC）" class="headerlink" title="电调（Electronic Speed Control，ESC）"></a>电调（Electronic Speed Control，ESC）</h5><p>电子调速器，主要有两个作用，一是将电池降压，适合接收机和其他舵机的工作电压；二是从接收机获得油门信号，控制马达的转速，从而改变飞机的速度。<br>❤连接方式为：<br>1、电调的输入线与电池连接；<br>2、电调的输出线（有刷两根、无刷三根）与电机连接；（在我们用到的有刷模型中，是红色和黑色的两根比较粗的线）<br>3、电调的信号线（三根红色，白色和黑色的较细的线）与接收机（PCA驱动芯片）连接。</p>
+<h5 id="舵机"><a href="#舵机" class="headerlink" title="舵机"></a>舵机</h5><p>舵机的工作原理：舵机常用的控制信号是一个周期为20毫秒左右，宽度为1毫秒到2毫秒的脉冲信号。当舵机收到该信号后，会马上激发出一个与之相同的，宽度为1.5毫秒的负向标准的中位脉冲。之后二个脉冲在一个加法器中进行相加得到了所谓的差值脉冲。输入信号脉冲如果宽于负向的标准脉冲，得到的就是正的差值脉冲。如果输入脉冲比标准脉冲窄，相加后得到的肯定是负的脉冲。此差值脉冲放大后就是驱动舵机正反转动的动力信号。舵机电机的转动，通过齿轮组减速后，同时驱动转盘和标准脉冲宽度调节电位器转动。直到标准脉冲与输入脉冲宽度完全相同时，差值脉冲消失时才会停止转动。<br>❤连接方式：将输出的三线与对应的PCA驱动板引脚连接。电调和舵机都是标准3线母插头连接只要按照对应的引脚插入驱动板就可以了。(地线一般为黑色或棕色、信号线一般为黄色或白色)。</p>
+<h5 id="树莓派-miscro-SD存储卡："><a href="#树莓派-miscro-SD存储卡：" class="headerlink" title="树莓派+miscro SD存储卡："></a>树莓派+miscro SD存储卡：</h5><p>Raspberry Pi(中文名为“树莓派”,简写为RPi，(或者RasPi / RPI) <a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">1</a>  是为学习计算机编程教育而设计，只有信用卡大小的微型电脑，其系统基于Linux。<br>关于树莓派的详细教程参考<a href="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg" target="_blank" rel="noopener">7</a>。<br>Raspberry Pi 3B+主板图解：<br><img src="https://s1.ax1x.com/2018/07/15/PMHqiQ.png" alt="此处输入图片的描述"><br>树莓派主板图解<br><img src="https://s1.ax1x.com/2018/07/15/PMHORs.jpg" alt="此处输入图片的描述"></p>
+<p>树莓派引脚GPIO定义<br>❤连接方式：<br>1、USB电源接口接入充电宝电源<br>2、摄像头接口连接摄像头<br>3、树莓派和PCA9685连接：只连四根线，3.3v，两根 I2C 引脚 (SDA 和 SCL)，地线 ground。</p>
+<h5 id="PCA电机驱动芯片9685（舵机驱动板）"><a href="#PCA电机驱动芯片9685（舵机驱动板）" class="headerlink" title="PCA电机驱动芯片9685（舵机驱动板）"></a>PCA电机驱动芯片9685（舵机驱动板）</h5><p>资料下载：<a href="https://pan.baidu.com/s/1miRuKti" target="_blank" rel="noopener">https://pan.baidu.com/s/1miRuKti</a><br>详细教程参考<a href="https://s1.ax1x.com/2018/07/15/PMHqiQ.png" target="_blank" rel="noopener">9</a>。</p>
+<p>PCA9685是一款基于IIC总线通信的12位精度16通道PWM波输出的芯片, 可用于控制舵机、led、电机等设备，i2c通信，节省主机资源。<br>❤连接和使用方式：<br>1、    连接树莓派：<br>GND -&gt; RPi GND（9脚）<br>SCL -&gt; RPi SCL1（5脚）<br>SDA -&gt; RPi SDA1（3脚）<br>VCC -&gt; RPi 3.3V （1脚）<br>V+ -&gt; RPi 5V（本实验中PCA上的V+接口不需要接入电源）</p>
+<p>树莓派和PCA9685连接图<br><img src="https://s1.ax1x.com/2018/07/15/PMHXzn.png" alt="此处输入图片的描述"><br>2、    连接舵机和电调：电调和舵机都是标准3线母插头连接只要按照对应的引脚插入驱动板就可以了。(地线一般为黑色或棕色、信号线一般为黄色或白色，所以对应黑色的线要插在GND对应的针头)。</p>
+<p>PCA9685连接图<br>在上图中，两股标准3线母插头分别连接舵机与电调。</p>
+<h5 id="广角摄像头"><a href="#广角摄像头" class="headerlink" title="广角摄像头"></a>广角摄像头</h5><p>WARNING：不要在树莓派开机时插拔摄像头！<br>摄像头需要满足的参数：<br><img src="https://s1.ax1x.com/2018/07/15/PMHvMq.png" alt="此处输入图片的描述"><br>购买的Camera 5MP广角摄像头参数：<br><img src="https://s1.ax1x.com/2018/07/15/PMHxs0.png" alt="此处输入图片的描述"></p>
+<h5 id="充电宝"><a href="#充电宝" class="headerlink" title="充电宝"></a>充电宝</h5><p>提供5v2A的usb输出和12V输出，主要给树莓派供电<br>❤连接方式：将充电宝的输出microusb输出连接到树莓派的电源输入端。</p>
+<h5 id="3D打印架"><a href="#3D打印架" class="headerlink" title="3D打印架"></a>3D打印架</h5><p><img src="https://s1.ax1x.com/2018/07/15/PMHzLV.png" alt="此处输入图片的描述"><br>❤用螺丝和销钉固定在小车车架上。</p>
+<h5 id="杜邦线"><a href="#杜邦线" class="headerlink" title="杜邦线"></a>杜邦线</h5><p>杜邦线可用于实验板的引脚扩展，增加实验项目等。可以非常牢靠地和插针连接,无需焊接,可以快速进行电路试验。<br>本实验中，用来连接树莓派与PCA驱动芯片的对应引脚。<br><img src="https://s1.ax1x.com/2018/07/15/PMbpZT.jpg" alt="此处输入图片的描述"></p>
+<h3 id="硬件组装"><a href="#硬件组装" class="headerlink" title="硬件组装"></a>硬件组装</h3><h4 id="组装流程"><a href="#组装流程" class="headerlink" title="组装流程"></a>组装流程</h4><p>1)，2)两步为3D打印步骤，如果不适用3D打印，可以用纸板和小刀手工完成顶部结构。<br>1)    打印部件（3D打印）<br>用黑色PLA打印零件，层高2毫米，没有支撑。顶部翻转杆设计成倒置打印。<br>用黑色PLA打印零件，0.3mm层高，一个0.5mm喷嘴，没有支撑。顶部翻转杆设计成倒置打印。<br>打印的结构图：<br><img src="https://s1.ax1x.com/2018/07/15/PMHzLV.png" alt="此处输入图片的描述"><br>2)    清理零件（手工修正）<br>几乎所有3D打印部件都需要清理。重新钻孔，并清理多余的塑料。</p>
+<p><img src="http://images.ncnynl.com/ros/2018/hardware_ass_2a.png" alt="此处输入图片的描述"><br><img src="http://images.ncnynl.com/ros/2018/hardware_ass_2b.png" alt="此处输入图片的描述"></p>
+<p>3)    组装顶板结构，树莓派电源充电宝<br>顶部结构手工完成后的图片：</p>
+<p>4)    将PCA驱动板连接到树莓派<br>利用杜邦线连接，对应的针脚如下：<br>GND -&gt; RPi GND（9脚）<br>SCL -&gt; RPi SCL1（5脚）<br>SDA -&gt; RPi SDA1（3脚）<br>VCC -&gt; RPi 3.3V （1脚）<br>V+ -&gt; RPi 5V（本实验中PCA上的V+接口不需要接入电源）<br>本实验只需要连接四个针脚即可。</p>
+<p>5)    将树莓派和PCA驱动板附加到3D打印的底板上。</p>
+<p>6)    安装摄像头<br>使用摄像头前，取下相机镜头上的塑料薄膜。<br>安装方式：将树莓派上摄像头插销扒开，插入相机电缆，注意触点的位置，随后按入插销即可。<br><img src="http://images.ncnynl.com/ros/2018/hardware_ass_6a.png" alt="此处输入图片的描述"><br><img src="http://images.ncnynl.com/ros/2018/hardware_ass_6b.png" alt="此处输入图片的描述"></p>
+<p>7)    硬件整合<br>舵机与电调已经在小车上固定好，所以接下来只需用三线母插头把PCA驱动板连接舵机与电调。因为电调和舵机都是标准3线母插头连接只要按照对应的引脚插入驱动板就好。(地线一般为黑色或棕色、信号线一般为黄色或白色，所以对应黑色的线要插在GND对应的针头)。</p>
+<h4 id="组装完成"><a href="#组装完成" class="headerlink" title="组装完成"></a>组装完成</h4><p>几种不同形态智能小车的完成体：<br><img src="http://images.ncnynl.com/ros/2018/donkey.png" alt="此处输入图片的描述"><br><img src="https://s1.ax1x.com/2018/07/15/PMb9dU.jpg" alt="此处输入图片的描述"><br><img src="https://s1.ax1x.com/2018/07/15/PMbCoF.jpg" alt="此处输入图片的描述"></p>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a><font color="red">软件</font></h2><h3 id="软件清单"><a href="#软件清单" class="headerlink" title="软件清单"></a>软件清单</h3><p>❤系统：<br>树莓派系统<br>Ubuntu系统<br>❤在linux下安装donkeycar<br>安装依赖：virtualenv build-essential python3-dev gfortran libhdf5-dev<br><a href="https://github.com/wroscoe/donkey" target="_blank" rel="noopener">https://github.com/wroscoe/donkey</a><br>❤在Windows下安装donkeycar<br><a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a><br>git库<a href="https://github.com/wroscoe/donkey" target="_blank" rel="noopener">https://github.com/wroscoe/donkey</a><br>❤在MAC下安装donkeycar<br><a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br><a href="https://www.atlassian.com/git/tutorials/install-git" target="_blank" rel="noopener">https://www.atlassian.com/git/tutorials/install-git</a><br>xcode-select –install<br>pip install <a href="https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl" target="_blank" rel="noopener">https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl</a><br>开源机器学习框架：<br>❤pip install keras==2.0.6<br>❤pip install tensorflow==1.3.0</p>
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><h4 id="安装树莓派系统"><a href="#安装树莓派系统" class="headerlink" title="安装树莓派系统"></a>安装树莓派系统</h4><p>将SD卡用读卡器连接到本地PC。<br>首先为树莓派安装固件，下载地址：<br><a href="https://www.dropbox.com/s/wiudnm2dcsvoquu/donkey_v22.img.zip?dl=0" target="_blank" rel="noopener">https://www.dropbox.com/s/wiudnm2dcsvoquu/donkey_v22.img.zip?dl=0</a><br>安装步骤：<br>方法1：使用<a href="https://s1.ax1x.com/2018/07/15/PMHHIg.png" target="_blank" rel="noopener">6</a>中的推荐步骤<br><img src="https://s1.ax1x.com/2018/07/15/PMbFJJ.png" alt="此处输入图片的描述"><br>方法2：利用安装软件Etcher。<br>    安装方法参考教程<a href="https://s1.ax1x.com/2018/07/15/PMHXzn.png" target="_blank" rel="noopener">11</a>（For ubuntu）,<a href="https://s1.ax1x.com/2018/07/15/PMHvMq.png" target="_blank" rel="noopener">12</a>（For windows）。</p>
+<h4 id="设置wifi连接"><a href="#设置wifi连接" class="headerlink" title="设置wifi连接"></a>设置wifi连接</h4><p>我们需要让树莓派连接wifi热点，从而可以无线操控小车。方法有两种：<br>方法1：SD卡插入树莓派，显示屏，键盘和鼠标连入树莓派，开机后通过界面链接wifi。<br>方法2：（没有显示屏和键鼠条件下）<br>首先，新建一个无线热点。可以使用本地PC新建wifi热点。记录ssid和password。<br>接下来修改树莓派的系统文件：<br>在boot部分的根目录下，新建文件名为wpa_supplicant.conf的文件，文件内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">country=US</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line">network=&#123;</span><br><span class="line">   ssid=&quot;&lt;your network name&gt;&quot;</span><br><span class="line">    psk=&quot;&lt;your password&gt;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>分别在ssid和psk设置自己的WiFi用户名和密码，注意不能有&lt;&gt;，</p>
+<h4 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h4><p>如果网络中有多个树莓派，还需要修改本树莓派的用户名,以下命令需要将sd卡挂载到Linux上运行，由于创建本文档时只有一个树莓派，所以并没有修改用户名，本文档的所有用户名均为pi，若读者对树莓派的用户名有修改，登录时需要改成自己的用户名和密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /media/userID/UUID/etc/hostname</span><br><span class="line">sudo vi /media/userID/UUID/etc/hosts</span><br></pre></td></tr></table></figure></p>
+<p>注意用户名只能是小写。<br>然后把SD卡插进树莓派里，给树莓派上电。</p>
+<h4 id="设置SSH远程登录"><a href="#设置SSH远程登录" class="headerlink" title="设置SSH远程登录"></a>设置SSH远程登录</h4><p>首先查看网络环境，树莓派连接的网络是本地连接13创建的共享热点：<br><img src="https://s1.ax1x.com/2018/07/15/PMbudO.png" alt="此处输入图片的描述"><br>用抓包工具或者nmap扫描工具查找树莓派的ip地址：<br><img src="https://s1.ax1x.com/2018/07/15/PMbAzR.png" alt="此处输入图片的描述"><br>或者可以用cmd自带的ARP命令查看相应地址的ARP缓存也可以找到小车地址，arp -a<br>从上图可以找到树莓派的ip地址是192.168.155.2，接着通过ssh登录树莓派，用户名pi,密码asdfasdf ，登录进去之后界面如图所示：<br><img src="https://s1.ax1x.com/2018/07/15/PMbZsx.png" alt="此处输入图片的描述"><br>另外，可以通过win10自带的移动热点看到连接设备的IP地址：<br><img src="https://s1.ax1x.com/2018/07/15/PMbeL6.png" alt="此处输入图片的描述"><br>推荐使用的ssh客户端登录软件比如Xshell。</p>
+<h4 id="在树莓派镜像安装，升级donkeycar"><a href="#在树莓派镜像安装，升级donkeycar" class="headerlink" title="在树莓派镜像安装，升级donkeycar"></a>在树莓派镜像安装，升级donkeycar</h4><p>存储卡图像上的donkeycar Python代码可能比Github repo上的要早，所以一旦你运行了Pi，需要更新，在ssh客户端连接树莓派后，键入命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/donkeycar</span><br><span class="line">git pull</span><br><span class="line">pip install -e .</span><br></pre></td></tr></table></figure></p>
+<h4 id="在本地PC安装donkeycar并创建本地工作目录"><a href="#在本地PC安装donkeycar并创建本地工作目录" class="headerlink" title="在本地PC安装donkeycar并创建本地工作目录"></a>在本地PC安装donkeycar并创建本地工作目录</h4><p>接下来是在本地笔记本电脑或服务器上设置相同的代码库，以便测试和训练智能小车。安装因平台而异。有如下三种方法，仅给出了windows上的安装结果。</p>
+<h5 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h5><p>❤安装miniconda Python 3.6 64 bit. <a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br>❤确保选中该框以允许它修改您的系统路径变量以添加conda。<br>❤安装git 64 bit，<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a><br>❤从开始菜单启动Anaconda<br>❤更改为您希望用作项目主管的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir projects</span><br><span class="line">cd projects</span><br></pre></td></tr></table></figure></p>
+<p>❤安装donkeycar<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/wroscoe/donkey</span><br><span class="line">cd donkey</span><br></pre></td></tr></table></figure></p>
+<p>❤创建Python Anaconda环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f envs\windows.yml</span><br><span class="line">activate donkey</span><br></pre></td></tr></table></figure></p>
+<p>❤安装代码源并创建您的本地工作目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .</span><br><span class="line">donkey createcar --path ~/d2 #本地工作目录名称设置为d2，可以自己定义</span><br></pre></td></tr></table></figure></p>
+<p>安装结果：<br><img src="https://s1.ax1x.com/2018/07/15/PMbkW9.png" alt="此处输入图片的描述"><br>注意：在关闭Anaconda提示符后，当再次打开它时，您需要键入activate donkey以重新启用映射到特定于donkey的Python库。（关于anaconda的使用，可以参考<a href="https://s1.ax1x.com/2018/07/15/PMHORs.jpg" target="_blank" rel="noopener">10</a>）<br>项目主管目录示例：<br><img src="https://s1.ax1x.com/2018/07/15/PMbVQ1.png" alt="此处输入图片的描述"><br>创建的本地工作目录示例：<br><img src="https://s1.ax1x.com/2018/07/15/PMbneK.png" alt="此处输入图片的描述"></p>
+<h5 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h5><p>❤安装依赖和python环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install virtualenv build-essential python3-dev gfortran libhdf5-dev</span><br><span class="line">virtualenv env -p python3</span><br><span class="line">source env/bin/activate</span><br><span class="line">pip install keras==2.0.6</span><br><span class="line">pip install tensorflow==1.3.0</span><br></pre></td></tr></table></figure></p>
+<p>❤安装donkeycar<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/wroscoe/donkey donkeycar</span><br><span class="line">pip install -e donkeycar</span><br></pre></td></tr></table></figure></p>
+<h5 id="Mac系统"><a href="#Mac系统" class="headerlink" title="Mac系统"></a>Mac系统</h5><p>❤安装miniconda Python 3.6 64 bit. <a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br>❤安装git 64 bit，<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a><br>❤启动终端<br>❤如果Xcode or gcc 没安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure></p>
+<p>❤创建项目根目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir projects</span><br><span class="line">cd projects</span><br></pre></td></tr></table></figure></p>
+<p>❤下载donkeycar<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/wroscoe/donkey</span><br><span class="line">cd donkey</span><br></pre></td></tr></table></figure></p>
+<p>❤创建Python Anaconda环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f envs/mac.yml</span><br><span class="line">source activate donkey</span><br></pre></td></tr></table></figure></p>
+<p>❤安装Tensorflow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl</span><br></pre></td></tr></table></figure></p>
+<p>❤安装donkey<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .</span><br><span class="line">donkey createcar --path ~/d2</span><br></pre></td></tr></table></figure></p>
+<p>注意：关闭终端后，当您再次打开终端时，您需要键入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate donkey</span><br></pre></td></tr></table></figure></p>
+<p>来重新启用映射到特定于donkey的Python库。</p>
+<h2 id="运行智能小车"><a href="#运行智能小车" class="headerlink" title="运行智能小车"></a><font color="red">运行智能小车</font></h2><p>WARNING：先放置到安全地方并让轮子离地！</p>
+<h3 id="Windows系统-1"><a href="#Windows系统-1" class="headerlink" title="Windows系统"></a>Windows系统</h3><p>-打开Anaconda<br>-激活映射到donkey的Python设置：<br><figure class="highlight plain"><figcaption><span>donkey</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">-进入管理donkey的本地目录：</span><br><span class="line">```cd ~/d2</span><br></pre></td></tr></table></figure></p>
+<h3 id="远程登录树莓派"><a href="#远程登录树莓派" class="headerlink" title="远程登录树莓派"></a>远程登录树莓派</h3><p>-用Xshell登录，详细见3.2.4节。</p>
+<h3 id="启动和控制小车"><a href="#启动和控制小车" class="headerlink" title="启动和控制小车"></a>启动和控制小车</h3><p>-在Xshell连接成功后，打开你小车目录，并开启小车<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/d2</span><br><span class="line">python manage.py drive</span><br></pre></td></tr></table></figure></p>
+<p>-这个脚本将启动你的小车，其中包括一个作为Web服务器的部件，以便控制你的小车。<br>-现在可以通过以下网址从网络浏览器控制您的汽车：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;your car&apos;s IP&apos;s address&gt;:8887</span><br></pre></td></tr></table></figure></p>
+<p>接下来在本地PC通过浏览器（推荐Chrome浏览器）登录上述网址，在web端控制智能小车：<br><img src="https://s1.ax1x.com/2018/07/15/PMbYOP.png" alt="此处输入图片的描述"></p>
+<h3 id="校准小车"><a href="#校准小车" class="headerlink" title="校准小车"></a>校准小车</h3><p>小车的配置信息是存在config.py脚本中的，这个脚本会在运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">donkey createcar --path ~/d2</span><br></pre></td></tr></table></figure></p>
+<p>这个命令之后出现在。./d2这个目录下，如下所示：<br><img src="https://s1.ax1x.com/2018/07/15/PMbwFg.png" alt="此处输入图片的描述"><br>其内容是各个部件的参数配置：<br><img src="https://s1.ax1x.com/2018/07/15/PMb8SA.png" alt="此处输入图片的描述"><br>校准小车的目的就是将上述参数调整到合适的值，这样才能顺利的驾驶小车，以及共享同款小车的校准数据。</p>
+<h4 id="舵机校准（转向校准）"><a href="#舵机校准（转向校准）" class="headerlink" title="舵机校准（转向校准）"></a>舵机校准（转向校准）</h4><p>要填的数据有：<br><img src="https://s1.ax1x.com/2018/07/15/PMbJyt.png" alt="此处输入图片的描述"><br>注意，此时应让小车离开地面，避免乱跑<br>1、    打开小车，找到舵机伺服电缆插到了PCA的那个通道上了，应该是1或者0.<br>2、    运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">donkey calibrate --channel &lt;your_steering_channel&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3、    输入 360’会看到小车的轮子轻微转动，如果没有的话就输入400或者300<br>4、    左右调整 +/- 10，一直到轮子完全转向左边或者右边，记录此时的值，并填入config.py</p>
+<h4 id="马力校准（电机控制）"><a href="#马力校准（电机控制）" class="headerlink" title="马力校准（电机控制）"></a>马力校准（电机控制）</h4><p>需要校准的参数：<br><img src="https://s1.ax1x.com/2018/07/15/PMb0YQ.png" alt="此处输入图片的描述"><br>1、    找到ESC的电缆，看看它插到PCA的哪个位置，这就是马力通道。<br>2、    运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">donkey calibrate --channel &lt;your_throttle_channel&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当提示输入PWM值的时候输入370，此时应该能听到ESC发出哔哔声，表示已经经过校准。<br>3、    输入400，这时小车应该就能往前走了，如果不能往前，则有可能是反向的，此时应该输入330<br>4、    多尝试几次，直到找到你认为比较合适的最大速度，记下此时的PWM值。</p>
+<h4 id="校准微调"><a href="#校准微调" class="headerlink" title="校准微调"></a>校准微调</h4><p>现在小车已经校准过了，可以开动小车查看是否按照预期运行：<br>1、    运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py drive</span><br></pre></td></tr></table></figure></p>
+<p>命令启动小车<br>2、    在浏览器中访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;your_cars_ip_address&gt;:8887</span><br></pre></td></tr></table></figure></p>
+<p>3、    按j，一直到小车的方向完全转向右边<br>4、    按i，一直到小车的方向完全朝向前方<br>5、    测量转弯直径，并将它记录在表格中<br>6、    在不同的转向值下重复同样的测量<br>7、    绘制表格看看小车在各个方向的转向是否相同（角度相同时）<br>如果你的转向在80%PWM和100%PWM相同时，将PWM值变为80%PWM,<br>如果你的车往一边偏，改变另一边的PWM值<br>经过微调之后你的表格大概会是这个样子<br><img src="https://s1.ax1x.com/2018/07/15/PMbUw8.png" alt="此处输入图片的描述"></p>
+<h2 id="训练智能小车"><a href="#训练智能小车" class="headerlink" title="训练智能小车"></a><font color="red">训练智能小车</font></h2><h3 id="赛道设置"><a href="#赛道设置" class="headerlink" title="赛道设置"></a>赛道设置</h3><p>可以用带颜色的胶带、丝带或者绳子，赛道最好宽4英尺，并且有2英寸的白色边框和黄色虚线中线。</p>
+<h3 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h3><p>①    先不记录数据，在跑道上跑几圈，当熟练跑道之后（10圈以上不出错）点击按钮Start Recording<br><img src="https://s1.ax1x.com/2018/07/15/PMbBWj.png" alt="此处输入图片的描述"><br>②    如果出错或者有意外发生时马上点击Stop Car停止记录<br>③    至少收集10-20圈好的数据之后即可以停止收集，Ctrl-c即可，收集的数据在data文件夹里</p>
+<p>需要注意的细节：<br>1，    清除d2/data目录下的之前的数据<br>2，    回到d2目录下 python namage.py drive启动小车<br>3，    到浏览器中model选择user，然后用电脑控制小车在场景下跑几圈<br>4，    等到操作小车在场景下基本不出错之后点击start recording开始记录数据<br>5，    记录大约半个小时的数据就可以了<br>注意在记录数据的过程中，可能会出现小车没电的情况，解决的办法就是，刚开始在config.py文件中把THROTTLE_FORWARD_PWM设置的小一点，本车是335或者330，过一会感觉小车跑的变慢了，停止记录，停下小车，关闭程序。调整THROTTLE_FORWARD_PWM变大一点到440，重启程序，记得保持小车的运行速度以及Throttle差不多一致。同理慢慢可以变为445和450<br>6，    记录完数据，筛选数据。手动删除数据中撞墙等不好的数据<br>7，    将数据考到电脑上装的donkey的d2/data目录下（小文件太多，速度会特别慢）<br>8，    进入d2目录，运行命令 python manage.py train –model ~/d2/models/mypilot<br>9，    等待训练结束，到到d2/models下将mypilot文件发送到小车的对应目录下<br>10，    用命令python manage.py drive –model ~/d2/models/mypilot启动小车，然后到浏览器中选择local pilot模式启动自动驾驶</p>
+<h3 id="拷贝数据至本地PC"><a href="#拷贝数据至本地PC" class="headerlink" title="拷贝数据至本地PC"></a>拷贝数据至本地PC</h3><p>由于树莓派计算能力有限，需要将数据迁移到电脑上进行模型的训练，有两种方法：<br>方法1：新开一个SSH窗口用rsync命令从树莓派复制数据。命令如下：<br>rsync -r pi@&lt;your_pi_ip_address&gt;:~/d2/data/  ~/d2/data/<br>方法2：利用Xshell里面的新建文件传输直接复制粘贴。<br><img src="https://s1.ax1x.com/2018/07/15/PMbaTS.md.png" alt="此处输入图片的描述"></p>
+<h3 id="利用keras训练模型"><a href="#利用keras训练模型" class="headerlink" title="利用keras训练模型"></a>利用keras训练模型</h3><p>复制好数据之后就可以运行训练脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ~/d2/manage.py train --tub &lt;tub folder names comma separated&gt; --model ./models/mypilot</span><br></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ~/d2/manage.py train --model ~/d2/models/mypilot</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://s1.ax1x.com/2018/07/15/PMbrSs.png" alt="此处输入图片的描述"></p>
+<h3 id="拷贝模型至树莓派"><a href="#拷贝模型至树莓派" class="headerlink" title="拷贝模型至树莓派"></a>拷贝模型至树莓派</h3><p>训练好之后再讲pilot迁移回树莓派：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -r ~/d2/models/ pi@&lt;your_ip_address&gt;:~/d2/models/</span><br></pre></td></tr></table></figure></p>
+<h3 id="用自动驾驶模型启动小车"><a href="#用自动驾驶模型启动小车" class="headerlink" title="用自动驾驶模型启动小车"></a>用自动驾驶模型启动小车</h3><p>重新启动小车，将训练好的模型穿进去：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py drive --model ~/d2/models/mypilot</span><br></pre></td></tr></table></figure></p>
+<h3 id="用模拟器训练小车"><a href="#用模拟器训练小车" class="headerlink" title="用模拟器训练小车*"></a>用模拟器训练小车*</h3><p>用于生成训练用的图片，测试自动驾驶仪等。当然你也可以不用这种方法，根据网页【<a href="http://docs.donkeycar.com/guide/build_hardware/】的描述，你也可以先用手机控制小车在赛道上开10-20次来收集训练数据。" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/build_hardware/】的描述，你也可以先用手机控制小车在赛道上开10-20次来收集训练数据。</a><br>下载之后直接双击EXE文件运行，你可以在input里面看到控制按钮信息。<br><img src="https://s1.ax1x.com/2018/07/15/PMbRTU.png" alt="此处输入图片的描述"><br><img src="https://s1.ax1x.com/2018/07/15/PMb2wT.png" alt="此处输入图片的描述"><br>模拟器中共有三个场景，但是网站【<a href="http://docs.donkeycar.com/guide/simulator/】中只给了前两种的描述，第三种是sparkfun" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/simulator/】中只给了前两种的描述，第三种是sparkfun</a> AVC机器人大赛的场景：<br>Generated Road Scene：通用场景<br>The purpose of this is to create a randomly generated road so that you can have miles of curves on different road surfaces. You can train on one road and test on something similar, or a totally different surface.<br>Warehouse Scene：专用场景<br>The purpose of this is to create a specific track that is somewhat similar to an actual course in use as the primary track for the Oakland DIYRobocars Meetup.<br><img src="https://s1.ax1x.com/2018/07/15/PMbfkF.md.png" alt="此处输入图片的描述"></p>
+<p>进入模拟器，右上角可以选择操作选项，根据网站【<a href="http://docs.donkeycar.com/guide/simulator/】的介绍，Joystick/Keyboard" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/simulator/】的介绍，Joystick/Keyboard</a> No Rec的意思就是摇杆或者键盘控制，但是数据不记录，其他选项意思类推。Next Track：在生成的道路场景中，这将改变路面和轨道宽度。Regen Track：使用当前的表面类型，但生成一个新的随机路径和路径。<br>下图为我用键盘控制时的截图，在网站【<a href="http://docs.donkeycar.com/guide/simulator/】的介绍中，有一个注意事项是这样描述的：Note" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/simulator/】的介绍中，有一个注意事项是这样描述的：Note</a>: Keyboard data produces steering information that is stepped (ie. -1, 0, +1) and may be difficult to train with. See below for joystick setup.大意是说由于键盘控制并不像摇杆可以产生连续的转向信息，而只能是间断的，所以并不适合用来训练。<br><img src="https://s1.ax1x.com/2018/07/15/PMbhY4.png" alt="此处输入图片的描述"><br>键盘控制页面<br>下图为自动驾驶页面，可以看到左下角一共有四个参数，目前并没有搞得很清楚这四个参数的具体含义，暂且先贴出网页【<a href="http://docs.donkeycar.com/guide/simulator/】上的解释：" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/simulator/】上的解释：</a><br>Max Speed：这个应该就是决定了自动驾驶的最大速度<br>This setting determines the target speed during the PID auto drive. It will also affect the speed when driving by keyboard controls (not recommended).<br>Prop：转向角度<br>This is short for proportional. This is the P part of PID that attempts to adjust steering back to the path in proportion to the deviation.<br>Diff：为了防止角度调整过大<br>This is the D part of PID that attempts to limit steering back to the path as derivative to the trend of deviation, designed to limit overshoot.<br>Max Steering<br>Max steering can only be adjusted when using Auto Drive No Rec. It will also affect joystick and keyboard steering range, and should be saved and reloaded for you.<br>另外关于这个参数，原文中有一个注意事项： Max Steering is an important adjustment. This affects categorical training quite strongly. As the steering data is normalized when written, and multiplies after coming from Python, this angle should remain constant over training and simulation. Take care when changing this value. And separate data and models by max steering setting.<br><img src="https://s1.ax1x.com/2018/07/15/PMb4fJ.md.png" alt="此处输入图片的描述"><br>自动驾驶时的截图<br>训练结束后，在log目录中会有训练的图片，图片大小为160*120像素<br><img src="https://s1.ax1x.com/2018/07/15/PMbgmV.md.png" alt="此处输入图片的描述"><br>贴一个网页【<a href="http://docs.donkeycar.com/guide/simulator/】上给出的典型用法，方便以后使用。" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/simulator/】上给出的典型用法，方便以后使用。</a><br><img src="https://s1.ax1x.com/2018/07/15/PMb6O0.png" alt="此处输入图片的描述"></p>
+<h2 id="参考创新方向"><a href="#参考创新方向" class="headerlink" title="参考创新方向"></a><font color="red">参考创新方向</font></h2><h3 id="无人驾驶车障碍竞速"><a href="#无人驾驶车障碍竞速" class="headerlink" title="无人驾驶车障碍竞速"></a>无人驾驶车障碍竞速</h3><h3 id="无人取件车-送餐车-领路车"><a href="#无人取件车-送餐车-领路车" class="headerlink" title="无人取件车/送餐车/领路车"></a>无人取件车/送餐车/领路车</h3><h3 id="无人捡球车"><a href="#无人捡球车" class="headerlink" title="无人捡球车"></a>无人捡球车</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li style="list-style: none"><input type="checkbox"> <a href="http://docs.donkeycar.com/" target="_blank" rel="noopener">http://docs.donkeycar.com/</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">https://www.ncnynl.com/archives/201804/2398.html</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="https://github.com/OSSDC/donkey" target="_blank" rel="noopener">https://github.com/OSSDC/donkey</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="https://github.com/wroscoe/donkey\" target="_blank" rel="noopener">https://github.com/wroscoe/donkey\</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="http://docs.donkeycar.com/guide/build_hardware/" target="_blank" rel="noopener">http://docs.donkeycar.com/guide/build_hardware/</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="http://www.donkeycar.com/" target="_blank" rel="noopener">http://www.donkeycar.com/</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="http://www.makerspace.cn/thread-5681-1-1.html" target="_blank" rel="noopener">http://www.makerspace.cn/thread-5681-1-1.html</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="https://www.raspberrypi.org/blog/self-driving-car/" target="_blank" rel="noopener">https://www.raspberrypi.org/blog/self-driving-car/</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="https://blog.csdn.net/nicekwell/article/details/53616277" target="_blank" rel="noopener">https://blog.csdn.net/nicekwell/article/details/53616277</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="http://python.jobbole.com/87522/" target="_blank" rel="noopener">http://python.jobbole.com/87522/</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="https://bbs.pediy.com/thread-221193.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-221193.htm</a></li>
+<li style="list-style: none"><input type="checkbox"> <a href="http://www.xue51.com/soft/2044.html" target="_blank" rel="noopener">http://www.xue51.com/soft/2044.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="http://creativecommons.org/images/deed/logo_deed.gif"><a href="http://wufan.site/" style="color:#258FC6">Fan Wu's Blog</a> by <a href="http://wufan.site/" style="color:#258FC6">Fan Wu</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br/>
+由<a href="http://wufan.site/" style="color:#258FC6">Fan Wu</a>创作并维护的<a href="http://wufan.site/" style="color:#258FC6">Fan Wu's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br/>
+本文首发于<a href="http://wufan.site/" style="color:#258FC6">Fan Wu's Blog</a> 博客（ <a href="http://wufan.site/" style="color:#258FC6">http://wufan.site/</a> ），版权所有，侵权必究。</p>
+</div>
+</div>
+
+
+      
+    </div>
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="http://creativecommons.org/images/deed/logo_deed.gif"><a href="http://wufan.site/" style="color:#258FC6">Fan Wu's Blog</a> by <a href="http://wufan.site/" style="color:#258FC6">Fan Wu</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br/>
+由<a href="http://wufan.site/" style="color:#258FC6">Fan Wu</a>创作并维护的<a href="http://wufan.site/" style="color:#258FC6">Fan Wu's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br/>
+本文首发于<a href="http://wufan.site/" style="color:#258FC6">Fan Wu's Blog</a> 博客（ <a href="http://wufan.site/" style="color:#258FC6">http://wufan.site/</a> ），版权所有，侵权必究。</p>
+</div>
+</div>
+
+
+      
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/notes/" rel="tag"># notes</a>
+          
+            <a href="/tags/donkeycar/" rel="tag"># donkeycar</a>
+          
+            <a href="/tags/Machine-learning/" rel="tag"># Machine learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/02/Conda常用命令/" rel="next" title="Conda常用命令">
+                <i class="fa fa-chevron-left"></i> Conda常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/15/JupyterNotebook教程/" rel="prev" title="JupyterNotebook教程">
+                JupyterNotebook教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://static.byr.cn/uploadFace/X/XerxexXF.1498.gif"
+                alt="wufan" />
+            
+              <p class="site-author-name" itemprop="name">wufan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wufans" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=wufan_bupt@qq.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/profile.php?id=100017964075220" target="_blank" title="FB Page">
+                    
+                      <i class="fa fa-fw fa-facebook"></i></a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zybuluo.com/wuxin1994/note/905881" title="Cmd Markdown" target="_blank">Cmd Markdown</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.wufan.site" title="Blog" target="_blank">Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ouyangsong.com" title="ouyangsong@blog" target="_blank">ouyangsong@blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件"><span class="nav-number">2.</span> <span class="nav-text">硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件清单"><span class="nav-number">2.1.</span> <span class="nav-text">硬件清单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配件明细"><span class="nav-number">2.1.1.</span> <span class="nav-text">配件明细</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#模型要求："><span class="nav-number">2.1.1.1.</span> <span class="nav-text">模型要求：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#推荐配置参考："><span class="nav-number">2.1.1.2.</span> <span class="nav-text">推荐配置参考：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#购买配置清单（价格仅供参考，更新于2018-7-3）"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">购买配置清单（价格仅供参考，更新于2018-7-3）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配件介绍"><span class="nav-number">2.1.2.</span> <span class="nav-text">配件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HSP无限94182"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">HSP无限94182</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#电调（Electronic-Speed-Control，ESC）"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">电调（Electronic Speed Control，ESC）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#舵机"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">舵机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#树莓派-miscro-SD存储卡："><span class="nav-number">2.1.2.4.</span> <span class="nav-text">树莓派+miscro SD存储卡：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PCA电机驱动芯片9685（舵机驱动板）"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">PCA电机驱动芯片9685（舵机驱动板）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#广角摄像头"><span class="nav-number">2.1.2.6.</span> <span class="nav-text">广角摄像头</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#充电宝"><span class="nav-number">2.1.2.7.</span> <span class="nav-text">充电宝</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3D打印架"><span class="nav-number">2.1.2.8.</span> <span class="nav-text">3D打印架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#杜邦线"><span class="nav-number">2.1.2.9.</span> <span class="nav-text">杜邦线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件组装"><span class="nav-number">2.2.</span> <span class="nav-text">硬件组装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#组装流程"><span class="nav-number">2.2.1.</span> <span class="nav-text">组装流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组装完成"><span class="nav-number">2.2.2.</span> <span class="nav-text">组装完成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件"><span class="nav-number">3.</span> <span class="nav-text">软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件清单"><span class="nav-number">3.1.</span> <span class="nav-text">软件清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件安装"><span class="nav-number">3.2.</span> <span class="nav-text">软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装树莓派系统"><span class="nav-number">3.2.1.</span> <span class="nav-text">安装树莓派系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置wifi连接"><span class="nav-number">3.2.2.</span> <span class="nav-text">设置wifi连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置主机名"><span class="nav-number">3.2.3.</span> <span class="nav-text">设置主机名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置SSH远程登录"><span class="nav-number">3.2.4.</span> <span class="nav-text">设置SSH远程登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在树莓派镜像安装，升级donkeycar"><span class="nav-number">3.2.5.</span> <span class="nav-text">在树莓派镜像安装，升级donkeycar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在本地PC安装donkeycar并创建本地工作目录"><span class="nav-number">3.2.6.</span> <span class="nav-text">在本地PC安装donkeycar并创建本地工作目录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows系统"><span class="nav-number">3.2.6.1.</span> <span class="nav-text">Windows系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linux系统"><span class="nav-number">3.2.6.2.</span> <span class="nav-text">Linux系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mac系统"><span class="nav-number">3.2.6.3.</span> <span class="nav-text">Mac系统</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行智能小车"><span class="nav-number">4.</span> <span class="nav-text">运行智能小车</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows系统-1"><span class="nav-number">4.1.</span> <span class="nav-text">Windows系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程登录树莓派"><span class="nav-number">4.2.</span> <span class="nav-text">远程登录树莓派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动和控制小车"><span class="nav-number">4.3.</span> <span class="nav-text">启动和控制小车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校准小车"><span class="nav-number">4.4.</span> <span class="nav-text">校准小车</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#舵机校准（转向校准）"><span class="nav-number">4.4.1.</span> <span class="nav-text">舵机校准（转向校准）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#马力校准（电机控制）"><span class="nav-number">4.4.2.</span> <span class="nav-text">马力校准（电机控制）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#校准微调"><span class="nav-number">4.4.3.</span> <span class="nav-text">校准微调</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练智能小车"><span class="nav-number">5.</span> <span class="nav-text">训练智能小车</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#赛道设置"><span class="nav-number">5.1.</span> <span class="nav-text">赛道设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据收集"><span class="nav-number">5.2.</span> <span class="nav-text">数据收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝数据至本地PC"><span class="nav-number">5.3.</span> <span class="nav-text">拷贝数据至本地PC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用keras训练模型"><span class="nav-number">5.4.</span> <span class="nav-text">利用keras训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝模型至树莓派"><span class="nav-number">5.5.</span> <span class="nav-text">拷贝模型至树莓派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用自动驾驶模型启动小车"><span class="nav-number">5.6.</span> <span class="nav-text">用自动驾驶模型启动小车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用模拟器训练小车"><span class="nav-number">5.7.</span> <span class="nav-text">用模拟器训练小车*</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考创新方向"><span class="nav-number">6.</span> <span class="nav-text">参考创新方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无人驾驶车障碍竞速"><span class="nav-number">6.1.</span> <span class="nav-text">无人驾驶车障碍竞速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无人取件车-送餐车-领路车"><span class="nav-number">6.2.</span> <span class="nav-text">无人取件车/送餐车/领路车</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无人捡球车"><span class="nav-number">6.3.</span> <span class="nav-text">无人捡球车</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wufan</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">40.0k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.6/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'Nj1m9dTDebsjO0USNks1rIht-gzGzoHsz',
+        app_key: 'R1iUcpazJN8CQRP2eHfhQUHV',
+        placeholder: 'Hello, stranger ! :)'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>
