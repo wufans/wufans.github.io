@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb4fJ.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbgmV.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb6O0.png">
-<meta property="og:updated_time" content="2018-07-15T12:52:57.231Z">
+<meta property="og:updated_time" content="2018-07-17T15:51:25.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Donkeycar教程">
 <meta name="twitter:description" content="摘要：本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。">
@@ -593,7 +593,7 @@
 <p>-这个脚本将启动你的小车，其中包括一个作为Web服务器的部件，以便控制你的小车。<br>-现在可以通过以下网址从网络浏览器控制您的汽车：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;your car&apos;s IP&apos;s address&gt;:8887</span><br></pre></td></tr></table></figure></p>
 <p>接下来在本地PC通过浏览器（推荐Chrome浏览器）登录上述网址，在web端控制智能小车：<br><img src="https://s1.ax1x.com/2018/07/15/PMbYOP.png" alt="此处输入图片的描述"></p>
 <h3 id="校准小车"><a href="#校准小车" class="headerlink" title="校准小车"></a>校准小车</h3><p>小车的配置信息是存在config.py脚本中的，这个脚本会在运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">donkey createcar --path ~/d2</span><br></pre></td></tr></table></figure></p>
-<p>这个命令之后出现在。./d2这个目录下，如下所示：<br><img src="https://s1.ax1x.com/2018/07/15/PMbwFg.png" alt="此处输入图片的描述"><br>其内容是各个部件的参数配置：<br><img src="https://s1.ax1x.com/2018/07/15/PMb8SA.png" alt="此处输入图片的描述"><br>校准小车的目的就是将上述参数调整到合适的值，这样才能顺利的驾驶小车，以及共享同款小车的校准数据。</p>
+<p>这个命令之后出现在”./d2”这个目录下，如下所示：<br><img src="https://s1.ax1x.com/2018/07/15/PMbwFg.png" alt="此处输入图片的描述"><br>其内容是各个部件的参数配置：<br><img src="https://s1.ax1x.com/2018/07/15/PMb8SA.png" alt="此处输入图片的描述"><br>校准小车的目的就是将上述参数调整到合适的值，这样才能顺利的驾驶小车，以及共享同款小车的校准数据。</p>
 <h4 id="舵机校准（转向校准）"><a href="#舵机校准（转向校准）" class="headerlink" title="舵机校准（转向校准）"></a>舵机校准（转向校准）</h4><p>要填的数据有：<br><img src="https://s1.ax1x.com/2018/07/15/PMbJyt.png" alt="此处输入图片的描述"><br>注意，此时应让小车离开地面，避免乱跑<br>1、    打开小车，找到舵机伺服电缆插到了PCA的那个通道上了，应该是1或者0.<br>2、    运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">donkey calibrate --channel &lt;your_steering_channel&gt;</span><br></pre></td></tr></table></figure></p>
 <p>3、    输入 360’会看到小车的轮子轻微转动，如果没有的话就输入400或者300<br>4、    左右调整 +/- 10，一直到轮子完全转向左边或者右边，记录此时的值，并填入config.py</p>
 <h4 id="马力校准（电机控制）"><a href="#马力校准（电机控制）" class="headerlink" title="马力校准（电机控制）"></a>马力校准（电机控制）</h4><p>需要校准的参数：<br><img src="https://s1.ax1x.com/2018/07/15/PMb0YQ.png" alt="此处输入图片的描述"><br>1、    找到ESC的电缆，看看它插到PCA的哪个位置，这就是马力通道。<br>2、    运行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">donkey calibrate --channel &lt;your_throttle_channel&gt;</span><br></pre></td></tr></table></figure></p>
