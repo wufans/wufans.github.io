@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="notes,python," />
+  <meta name="keywords" content="notes," />
 
 
 
@@ -81,20 +81,18 @@
 
 
 
-<meta name="description" content="摘要：使用Anaconda管理python各种python环境和库，可以极大提高在不同项目切换的效率。">
-<meta name="keywords" content="notes,python">
+<meta name="description" content="摘要：记录使用Linux遇到的问题与解决办法。![此处输入图片的描述][1]">
+<meta name="keywords" content="notes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Conda常用命令">
-<meta property="og:url" content="http://yoursite.com/2018/05/02/Conda常用命令/index.html">
+<meta property="og:title" content="Linux之路">
+<meta property="og:url" content="http://yoursite.com/2018/07/22/Linux之路/index.html">
 <meta property="og:site_name" content="Fan Wu">
-<meta property="og:description" content="摘要：使用Anaconda管理python各种python环境和库，可以极大提高在不同项目切换的效率。">
+<meta property="og:description" content="摘要：记录使用Linux遇到的问题与解决办法。![此处输入图片的描述][1]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=694027017,1634354710&fm=58&bpow=944&bpoh=794">
-<meta property="og:updated_time" content="2018-07-18T06:42:47.768Z">
+<meta property="og:updated_time" content="2018-07-22T08:00:23.002Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Conda常用命令">
-<meta name="twitter:description" content="摘要：使用Anaconda管理python各种python环境和库，可以极大提高在不同项目切换的效率。">
-<meta name="twitter:image" content="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=694027017,1634354710&fm=58&bpow=944&bpoh=794">
+<meta name="twitter:title" content="Linux之路">
+<meta name="twitter:description" content="摘要：记录使用Linux遇到的问题与解决办法。![此处输入图片的描述][1]">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/02/Conda常用命令/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/22/Linux之路/"/>
 
 
 
 
 
-  <title>Conda常用命令 | Fan Wu</title>
+  <title>Linux之路 | Fan Wu</title>
   
 
 
@@ -311,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/Conda常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/Linux之路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wufan">
@@ -328,7 +326,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Conda常用命令</h2>
+          <h2 class="post-title" itemprop="name headline">Linux之路</h2>
         
 
         <div class="post-meta">
@@ -340,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T14:38:20+08:00">
-                2018-05-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-22T14:38:00+08:00">
+                2018-07-22
               </time>
             
 
@@ -399,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  394 字
+                  178 字
                 </span>
               
 
@@ -415,7 +413,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -436,68 +434,10 @@
       
 
       
-        <p><strong>摘要：</strong>使用Anaconda管理python各种python环境和库，可以极大提高在不同项目切换的效率。</p>
-<p><img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=694027017,1634354710&amp;fm=58&amp;bpow=944&amp;bpoh=794" alt="此处输入图片的描述"></p>
-<a id="more"></a>
-<h2 id="帮助与版本"><a href="#帮助与版本" class="headerlink" title="帮助与版本"></a>帮助与版本</h2><ul>
-<li><p>查看当前conda版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda -V</span><br><span class="line">conda -version</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新conda</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br><span class="line">conda update anaconda #更新anaconda</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>某个命令的帮助信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --help</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="环境管理"><a href="#环境管理" class="headerlink" title="环境管理"></a>环境管理</h2><ul>
-<li><p>查看当前环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info -e</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看所有环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda info --envs</span><br><span class="line">conda env list</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建新的环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">conda create --name environment_name</span><br><span class="line">#创建不同python版本的环境</span><br><span class="line">conda create --name environment_name python=3.6</span><br><span class="line">conda create --name environment_name python=2.7</span><br><span class="line">#创建时添加库的环境</span><br><span class="line">conda create --name environment_name numpy scipy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切换环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#切换到新环境</span><br><span class="line">activate environment_name</span><br><span class="line">#退出环境</span><br><span class="line">deactivate environment_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>移除环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#conda remove --name environment_name --all</span><br><span class="line">conda remove -n py36 --all</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>复制某个环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name new_name --clone old_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>保存环境配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env export &gt; environment.yml</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>读取环境配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f environment.yml</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>Note:</strong> 当遇到错误”SpecNotFound: Can’t process without a name”时，因为导入环境时目录有问题，所以需要检查.yml文件的path是否有误。</p>
-<h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><ul>
-<li><p>列举当前环境下所有包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>列举某个环境下所有包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list -n environment_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查找某个包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda search package_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为指定环境安装某个包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -n environment_name package_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update package_name</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>卸载包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove package_name</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="设置镜像"><a href="#设置镜像" class="headerlink" title="设置镜像"></a>设置镜像</h2><p>访问国外资源网速较低时，可以考虑改变源，使用国内镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></p>
+        <p><strong>摘要：</strong><br>记录使用Linux遇到的问题与解决办法。<br>![此处输入图片的描述][1]<br><a id="more"></a></p>
+<h2 id="无法解析或打开软件包的列表或是状态文件问题的解决方案"><a href="#无法解析或打开软件包的列表或是状态文件问题的解决方案" class="headerlink" title="无法解析或打开软件包的列表或是状态文件问题的解决方案"></a>无法解析或打开软件包的列表或是状态文件问题的解决方案</h2><p>在通过sudo apt-get install安装软件的时候，可能会出现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 有错误！</span><br><span class="line">E: Encountered a section with no Package: header</span><br><span class="line">E: Problem with MergeList /var/lib/apt/lists/??</span><br><span class="line">E: 无法解析或打开软件包的列表或是状态文件。</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>执行下面两条语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/lib/apt/lists/* -vf #删掉apt下的lists文件下的内容</span><br><span class="line"></span><br><span class="line">sudo apt-get update # 更新软件源</span><br></pre></td></tr></table></figure></p>
+<p> [1] <a href="http://www.runoob.com/wp-content/uploads/2014/06/linux.jpg" target="_blank" rel="noopener">http://www.runoob.com/wp-content/uploads/2014/06/linux.jpg</a></p>
 
       
     </div>
@@ -535,8 +475,6 @@
           
             <a href="/tags/notes/" rel="tag"># notes</a>
           
-            <a href="/tags/python/" rel="tag"># python</a>
-          
         </div>
       
 
@@ -548,8 +486,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/17/对抗攻击防御策略一览/" rel="next" title="对抗攻击防御策略一览">
-                <i class="fa fa-chevron-left"></i> 对抗攻击防御策略一览
+              <a href="/2018/07/15/JupyterNotebook教程/" rel="next" title="JupyterNotebook教程">
+                <i class="fa fa-chevron-left"></i> JupyterNotebook教程
               </a>
             
           </div>
@@ -557,10 +495,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/13/Donkeycar教程/" rel="prev" title="Donkeycar教程">
-                Donkeycar教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -751,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助与版本"><span class="nav-number">1.</span> <span class="nav-text">帮助与版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境管理"><span class="nav-number">2.</span> <span class="nav-text">环境管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包管理"><span class="nav-number">3.</span> <span class="nav-text">包管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置镜像"><span class="nav-number">4.</span> <span class="nav-text">设置镜像</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#无法解析或打开软件包的列表或是状态文件问题的解决方案"><span class="nav-number">1.</span> <span class="nav-text">无法解析或打开软件包的列表或是状态文件问题的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
             
 
           </div>

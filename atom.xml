@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-15T08:30:53.358Z</updated>
+  <updated>2018-07-22T08:00:23.002Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux之路</title>
+    <link href="http://yoursite.com/2018/07/22/Linux%E4%B9%8B%E8%B7%AF/"/>
+    <id>http://yoursite.com/2018/07/22/Linux之路/</id>
+    <published>2018-07-22T06:38:00.000Z</published>
+    <updated>2018-07-22T08:00:23.002Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>摘要：</strong><br>记录使用Linux遇到的问题与解决办法。<br>![此处输入图片的描述][1]<br><a id="more"></a></p><h2 id="无法解析或打开软件包的列表或是状态文件问题的解决方案"><a href="#无法解析或打开软件包的列表或是状态文件问题的解决方案" class="headerlink" title="无法解析或打开软件包的列表或是状态文件问题的解决方案"></a>无法解析或打开软件包的列表或是状态文件问题的解决方案</h2><p>在通过sudo apt-get install安装软件的时候，可能会出现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 有错误！</span><br><span class="line">E: Encountered a section with no Package: header</span><br><span class="line">E: Problem with MergeList /var/lib/apt/lists/??</span><br><span class="line">E: 无法解析或打开软件包的列表或是状态文件。</span><br></pre></td></tr></table></figure></p><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>执行下面两条语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/lib/apt/lists/* -vf #删掉apt下的lists文件下的内容</span><br><span class="line"></span><br><span class="line">sudo apt-get update # 更新软件源</span><br></pre></td></tr></table></figure></p><p> [1] <a href="http://www.runoob.com/wp-content/uploads/2014/06/linux.jpg" target="_blank" rel="noopener">http://www.runoob.com/wp-content/uploads/2014/06/linux.jpg</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;摘要：&lt;/strong&gt;&lt;br&gt;记录使用Linux遇到的问题与解决办法。&lt;br&gt;![此处输入图片的描述][1]&lt;br&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="notes" scheme="http://yoursite.com/tags/notes/"/>
+    
+  </entry>
   
   <entry>
     <title>JupyterNotebook教程</title>
@@ -467,30 +489,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;Title:&lt;/strong&gt; Robust Physical-World Attacks on Machine Learning Models&lt;br&gt;&lt;strong&gt;Authors:&lt;/strong&gt; Evtimov, Ivan; Eykholt, Kevin; Fernandes, Earlence; Kohno, Tadayoshi; Li, Bo; Prakash, Atul; Rahmati, Amir; Song, Dawn&lt;br&gt;&lt;strong&gt;Publication:&lt;/strong&gt; eprint arXiv:1707.08945&lt;br&gt;&lt;strong&gt;Publication Date:&lt;/strong&gt; 07/2017&lt;br&gt;&lt;strong&gt;Origin:&lt;/strong&gt; ARXIV&lt;br&gt;&lt;strong&gt;Keywords:&lt;/strong&gt; Computer Science - Cryptography and Security, Computer Science - Learning&lt;br&gt;&lt;strong&gt;Bibliographic Code:&lt;/strong&gt; 2017arXiv170708945E&lt;br&gt;
-    
-    </summary>
-    
-      <category term="paper" scheme="http://yoursite.com/categories/paper/"/>
-    
-    
-      <category term="secure" scheme="http://yoursite.com/tags/secure/"/>
-    
-      <category term="papernotes" scheme="http://yoursite.com/tags/papernotes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《Concrete Problems for Autonomous Vehicle Safety:Advantages of Bayesian Deep Learning》论文笔记</title>
-    <link href="http://yoursite.com/2017/10/29/%E3%80%8AConcrete-Problems-for-Autonomous-Vehicle-Safety-Advantages-of-Bayesian-Deep-Learning%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2017/10/29/《Concrete-Problems-for-Autonomous-Vehicle-Safety-Advantages-of-Bayesian-Deep-Learning》论文笔记/</id>
-    <published>2017-10-29T15:53:55.000Z</published>
-    <updated>2017-10-31T16:19:29.900Z</updated>
-    
-    <content type="html"><![CDATA[<p>Rowan McAllister, Yarin Gal†, Alex Kendall, Mark van der Wilk, Amar Shah, Roberto Cipolla, Adrian Weller†<br>Department of Engineering, University of Cambridge, UK† also Alan Turing Institute, London, UK，<br>Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence (IJCAI-17)<br><a id="more"></a></p><h2 id="Citation"><a href="#Citation" class="headerlink" title="Citation"></a>Citation</h2><p>Mcallister R, Gal Y, Kendall A, et al. Concrete Problems for Autonomous Vehicle Safety: Advantages of Bayesian Deep Learning[C]// Twenty-Sixth International Joint Conference on Artificial Intelligence. 2017:4745-4753.</p><p>##概要##<br>这篇论文主要讲的是<strong>安全的实际应用</strong>。<br>在<strong>自动汽车领域</strong>，软件方面就是通过一系列流程，将各种传感器的输入链接到发动机的输出上。而在这种传播过程中，如果有信息的损失就会有差错（比如将80%几率不会相撞直接判断为不会相撞） 。各个部分的差错也会被依次累积传递下去，最终输出错误的结果。<br>同时，要让客户信任自动汽车，并使用这个系统，必须在三个方面开展研究：自动汽车的安全性（通过量化每个部分输出的不确定性，并且将这个不确定性也顺着流程传递下去）、可解释性（向客户解释自动汽车所看到的，并且为什么作出一系列决策，从而让客户安心）、顺从性（指的是让客户在自动汽车驾驶过程中维持对汽车的控制）。</p><p>自动汽车软件系统由多个单独的子系统组合而成。主要有object detection and localisation components负责场景识别，scene prediction component负责根据场景来预测汽车的运动，最后，decision components做出汽车最终动作决定，控制发动机完成汽车驾驶。而目前，这三个方面渐渐使用深度学习工具搭建，比传统的方法在多个任务上具有更好地效果。但是，基于深度学习的自动汽车软件系统也有许多挑战。正如容易受到对抗样本的干扰，从而做出错误的决断。</p><h2 id="提升自动汽车可靠性的三个方面"><a href="#提升自动汽车可靠性的三个方面" class="headerlink" title="##提升自动汽车可靠性的三个方面##"></a>##提升自动汽车可靠性的三个方面##</h2><h2 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h2><p>在自动汽车的软件部分由多个单独的部分联合构成。为了提升系统的安全性，提升每个部分是必要但不是充分的，因为单个部分的错误会随着整体流程而累积。因此，为了避免最终输出的结果出现错误，应该把每个部分的错误和不确定性都体现在其输出上，最终的输出也就体现了所有部分的不确定性。<br>而传播这种不确定性主要有两种方法：一种是贝叶斯概率理论，一种是ensembling。而利用贝叶斯工具掌握这种不确定性在传统自动汽车研究中已经使用过。但是与深度学习系统结合，还存在很多困难。<br>因此，论文提出了贝叶斯深度学习（Bayesian Deep Learning）模型。<br><img src="http://img.blog.csdn.net/20170808234621800?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbTBfMzcyMzEwMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="此处输入图片的描述"></p><p>如上图，利用BDL模型的自动汽车，可以得到汽车有可能会相撞的结果，从而采取相应的停车措施。<br>而在自动汽车的各个部分，都采用BDL工具。</p><p>##Interpretability##<br>解释性算法能让客户掌握自动汽车作的每一个决策以及得到的输出。这种掌握可以采取三种形式：图像、文字语言或者听觉。这样，每一个客户对自动汽车整个系统就有了比较直观的理解。比如，可以通过在路程中询问：“你为什么突然左转”，自动汽车就会给出作出左转决策的原因。而对这个问题的探索，有两个技术方面：model saliency 和 auxiliary outputs。前者根据图片显示与系统决策关联最显著的部分；后者是根据传感器的输入得到辅助输出，显示系统的控制信息。</p><h2 id="Compliance"><a href="#Compliance" class="headerlink" title="Compliance"></a>Compliance</h2><p>这部分即是让自动汽车也能服从人的命令，而不是一味按照自己的算法模型作出决策。这样也能让客户感觉可靠。而自动汽车服从命令主要是按照两个方面：passenger reassurance和 law abiding。前者是根据乘客的需要改变决策，后者是所有的决策要在法律允许的范围内，要满足社会常识的前提。</p><p>这篇论文和对抗攻击的关联不大，只是给针对各种攻击的defence提供了一种<strong>利用贝叶斯公式传递不确定性</strong>的思想。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Rowan McAllister, Yarin Gal†, Alex Kendall, Mark van der Wilk, Amar Shah, Roberto Cipolla, Adrian Weller†&lt;br&gt;Department of Engineering, University of Cambridge, UK† also Alan Turing Institute, London, UK，&lt;br&gt;Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence (IJCAI-17)&lt;br&gt;
     
     </summary>
     

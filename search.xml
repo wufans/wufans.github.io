@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux之路]]></title>
+    <url>%2F2018%2F07%2F22%2FLinux%E4%B9%8B%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[摘要：记录使用Linux遇到的问题与解决办法。![此处输入图片的描述][1] 无法解析或打开软件包的列表或是状态文件问题的解决方案在通过sudo apt-get install安装软件的时候，可能会出现:1234正在读取软件包列表... 有错误！E: Encountered a section with no Package: headerE: Problem with MergeList /var/lib/apt/lists/??E: 无法解析或打开软件包的列表或是状态文件。 解决方案执行下面两条语句：123sudo rm /var/lib/apt/lists/* -vf #删掉apt下的lists文件下的内容sudo apt-get update # 更新软件源 [1] http://www.runoob.com/wp-content/uploads/2014/06/linux.jpg]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JupyterNotebook教程]]></title>
     <url>%2F2018%2F07%2F15%2FJupyterNotebook%E6%95%99%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[摘要：简单总结Jupyter Notebook的教程,方便以后使用。 notebook 界面组成 notebook 的名称 主工具栏，提供了保存、导出、重载 notebook，以及重启内核等选项 快捷键 notebook 主要区域，包含了 notebook 的内容编辑区 两种模式Command mode 和 Edit mode。 在一个cell中，按下Enter,进入Edit模式，按下Esc,进入Command 模式 运行当前cell，并移动到下一个Cell在一个cell中（在command模式下）, Shift + Enter 创建Cell在一个cell中（在command模式下） 按下 a ,即可在这个cell之前创建一个新的cell； 按下 b,即可在这个cell之后创建一个新的cell; Cell中 Code 和 Markdown的切换在一个cell中（在command模式下） 按下y, 进入Code; 按下m, 进入Markdown; 显示Cell中的行数在一个cell中（在command模式下），按下 l 删除Cell在一个cell中（在command模式下）, 按两次d 保存Notebook在一个cell中（在command模式下）, 按下s 启动命令面板在一个cell中（在command模式下）, 按下 Ctrl + Shift + P界面中的小键盘图标也可以启动。 可以通过这个命令面板快速的执行命令。比如我这里将一个cell移动到它下一个cell的下面：在一个cell中（在command模式下），然后按下 Ctrl + Shift + P ，输入 move ，键盘方向键选择要执行的命令即可，然后按下回车即可执行。 Matplotlib 集成如果你用 Python 绘制过图形，那你肯定知道 matplotlib。Matplotlib 是一个用于创建漂亮图形的 Python 库，结合 Jupyter notebook 使用时体验更佳。 要想在 Jupyter notebook 中使用 matplotlib，需要告诉 Jupyter 获取 matplotlib 生成的所有图形，并将其嵌入 notebook 中。为此，需要计算：1%matplotlib inline 译注：要想执行成功，需要先1pip install matplotlib。 运行这个指令可能要花个几秒钟，但是在 notebook 中需要执行一次即可。接下来，我们来绘制一个图形，看看具体的集成效果： 1234567import matplotlib.pyplot as pltimport numpy as npx = np.arange(20)y = x**2plt.plot(x, y) 上面的代码将绘制方程式 y=x^2 。计算单元格后，会得到如下图形： 终极奥义按下键盘的 h。查看所有快捷键~~]]></content>
