@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/05/02/Conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2018-07-30T12:27:25.558Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/07/29/CUDA%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
     
     <lastmod>2018-07-29T07:41:47.914Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://yoursite.com/2018/07/13/Donkeycar%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2018-07-19T13:06:05.587Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/05/02/Conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2018-07-18T06:42:47.768Z</lastmod>
     
   </url>
   
