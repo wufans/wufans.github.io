@@ -209,9 +209,9 @@
       <category term="english" scheme="http://yoursite.com/categories/english/"/>
     
     
-      <category term="paper" scheme="http://yoursite.com/tags/paper/"/>
-    
       <category term="notes" scheme="http://yoursite.com/tags/notes/"/>
+    
+      <category term="paper" scheme="http://yoursite.com/tags/paper/"/>
     
   </entry>
   
