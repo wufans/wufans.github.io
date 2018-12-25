@@ -90,7 +90,7 @@
 <meta property="og:description" content="摘要：汇总搭建博客遇见的几个问题">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0060lm7Tly1fkveprebuhj30if0bq754.jpg">
-<meta property="og:updated_time" content="2018-11-01T14:01:56.209Z">
+<meta property="og:updated_time" content="2018-12-25T14:58:07.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建博客时候问题小记">
 <meta name="twitter:description" content="摘要：汇总搭建博客遇见的几个问题">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,164 字
+                  2,450 字
                 </span>
               
 
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -521,6 +521,12 @@
 <p>找到如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>重新预览，即可看到不蒜子统计功能已经生效<br><a href="https://blog.csdn.net/qijian2003122/article/details/82987577" target="_blank" rel="noopener">原文</a></p>
+<h2 id="恢复你的博客，只需要三步"><a href="#恢复你的博客，只需要三步" class="headerlink" title="恢复你的博客，只需要三步"></a>恢复你的博客，只需要三步</h2><p><strong>如果你重装了系统或者更换了新电脑/新平台，怎么才能快速恢复原来的博客呢？</strong><br>如果你保留了原来博客文件夹下所有文件，那么恢复博客只需要三步：</p>
+<h3 id="安装必备组件"><a href="#安装必备组件" class="headerlink" title="安装必备组件"></a>安装必备组件</h3><p>包括：安装Git，安装Node.js</p>
+<h3 id="Github配对"><a href="#Github配对" class="headerlink" title="Github配对"></a>Github配对</h3><p>打开git bash，在用户主目录下运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>把其中的邮件地址换成自己的邮件地址，然后一路回车,在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥<br>登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容），最后点击「Add SSH Key」<br>测试是否配对成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>打开git bash客户端，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
+<p>，开始安装hexo<br>安装成功后，进入你原来的博客目录，就可以用hexo命令进行博客生成和部署啦~</p>
 
       
     </div>
@@ -770,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number">1.</span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number">2.</span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number">3.</span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建流量统计功能的方法"><span class="nav-number">4.</span> <span class="nav-text">创建流量统计功能的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附加功能的添加"><span class="nav-number">5.</span> <span class="nav-text">附加功能的添加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决公式显示不正常的问题"><span class="nav-number">6.</span> <span class="nav-text">解决公式显示不正常的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo设置侧边栏头像"><span class="nav-number">7.</span> <span class="nav-text">hexo设置侧边栏头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo部署失败，不能连接github的解决"><span class="nav-number">8.</span> <span class="nav-text">hexo部署失败，不能连接github的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github不能访问、不能正常加载CSS的解决"><span class="nav-number">9.</span> <span class="nav-text">Github不能访问、不能正常加载CSS的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另外"><span class="nav-number">10.</span> <span class="nav-text">另外</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加版权声明"><span class="nav-number">11.</span> <span class="nav-text">添加版权声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建-passage-end-tag-swig-文件"><span class="nav-number">11.1.</span> <span class="nav-text">新建 passage-end-tag.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-post-swig-文件"><span class="nav-number">11.2.</span> <span class="nav-text">修改 post.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在主题配置文件中添加字段"><span class="nav-number">11.3.</span> <span class="nav-text">在主题配置文件中添加字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加动画效果"><span class="nav-number">12.</span> <span class="nav-text">添加动画效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi-count）"><span class="nav-number">13.</span> <span class="nav-text">解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi_count）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">13.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因分析"><span class="nav-number">13.2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">13.3.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number">1.</span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number">2.</span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number">3.</span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建流量统计功能的方法"><span class="nav-number">4.</span> <span class="nav-text">创建流量统计功能的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附加功能的添加"><span class="nav-number">5.</span> <span class="nav-text">附加功能的添加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决公式显示不正常的问题"><span class="nav-number">6.</span> <span class="nav-text">解决公式显示不正常的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo设置侧边栏头像"><span class="nav-number">7.</span> <span class="nav-text">hexo设置侧边栏头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo部署失败，不能连接github的解决"><span class="nav-number">8.</span> <span class="nav-text">hexo部署失败，不能连接github的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github不能访问、不能正常加载CSS的解决"><span class="nav-number">9.</span> <span class="nav-text">Github不能访问、不能正常加载CSS的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另外"><span class="nav-number">10.</span> <span class="nav-text">另外</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加版权声明"><span class="nav-number">11.</span> <span class="nav-text">添加版权声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建-passage-end-tag-swig-文件"><span class="nav-number">11.1.</span> <span class="nav-text">新建 passage-end-tag.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-post-swig-文件"><span class="nav-number">11.2.</span> <span class="nav-text">修改 post.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在主题配置文件中添加字段"><span class="nav-number">11.3.</span> <span class="nav-text">在主题配置文件中添加字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加动画效果"><span class="nav-number">12.</span> <span class="nav-text">添加动画效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi-count）"><span class="nav-number">13.</span> <span class="nav-text">解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi_count）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">13.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因分析"><span class="nav-number">13.2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">13.3.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复你的博客，只需要三步"><span class="nav-number">14.</span> <span class="nav-text">恢复你的博客，只需要三步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装必备组件"><span class="nav-number">14.1.</span> <span class="nav-text">安装必备组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github配对"><span class="nav-number">14.2.</span> <span class="nav-text">Github配对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo"><span class="nav-number">14.3.</span> <span class="nav-text">安装hexo</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -804,7 +810,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32.3k</span>
+    <span title="Site words total count">32.6k</span>
   
 </div>
 
