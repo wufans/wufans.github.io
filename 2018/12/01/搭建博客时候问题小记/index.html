@@ -90,7 +90,12 @@
 <meta property="og:description" content="摘要：汇总搭建博客遇见的几个问题">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0060lm7Tly1fkveprebuhj30if0bq754.jpg">
-<meta property="og:updated_time" content="2018-12-25T15:01:58.411Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/26/F2rlvj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/26/F2r3Ks.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/26/F2rdGF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/26/F2rDM9.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/26/F2rsq1.png">
+<meta property="og:updated_time" content="2018-12-26T15:28:44.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建博客时候问题小记">
 <meta name="twitter:description" content="摘要：汇总搭建博客遇见的几个问题">
@@ -397,7 +402,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,450 字
+                  2,742 字
                 </span>
               
 
@@ -413,7 +418,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -527,6 +532,14 @@
 <p>把其中的邮件地址换成自己的邮件地址，然后一路回车,在用户主目录下生成.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key密钥对，id_rsa是私钥<br>登陆GitHub，打开「Settings」-&gt;「SSH and GPG keys」，然后点击「new SSH key」，填上任意Title，在Key文本框里粘贴公钥id_rsa.pub文件的内容），最后点击「Add SSH Key」<br>测试是否配对成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
 <h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>打开git bash客户端，输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
 <p>，开始安装hexo<br>安装成功后，进入你原来的博客目录，就可以用hexo命令进行博客生成和部署啦~</p>
+<h2 id="给博客自定义域名开启Https"><a href="#给博客自定义域名开启Https" class="headerlink" title="给博客自定义域名开启Https"></a>给博客自定义域名开启Https</h2><p><strong>HTTPS</strong>（全称：Hyper Text Transfer Protocol over Secure Socket Layer 或 Hypertext Transfer Protocol Secure，超文本传输安全协议），是以安全为目标的HTTP通道，简单讲是HTTP的安全版。<br>GitHub官方在5月1号宣布，GitHub Pages的自定义域名获得对HTTPS的支持。但是因为自己的域名是自定义的，购于阿里云，因此不能直接在Setting中设置Enforce HTTPS:<br><img src="https://s1.ax1x.com/2018/12/26/F2rlvj.png" alt="此处输入图片的描述"><br>而Github pages不支持SSL证书上传，因此，开启HTTPS需要借助CloudFlare的CDN代理。即用户到CDN服务器的连接为https，而CDN服务器到GithubPage服务器的连接为http，就是在CDN服务器那里加上反向代理。<br>步骤如下：</p>
+<ol>
+<li>首先注册并登陆CloudFlare,在域名购买的地方修改name sever，修改DNS解析地址。（启用动态DNS加速）<br><img src="https://s1.ax1x.com/2018/12/26/F2r3Ks.png" alt="此处输入图片的描述"></li>
+<li>与域名绑定并激活成功后，设置CloudFlare 的 DNS：<br><img src="https://s1.ax1x.com/2018/12/26/F2rdGF.png" alt="此处输入图片的描述"></li>
+<li>设置CloudFlare 的 Crypto：<br><img src="https://s1.ax1x.com/2018/12/26/F2rDM9.png" alt="此处输入图片的描述"></li>
+<li>设置路由规则Page Rules：<br><img src="https://s1.ax1x.com/2018/12/26/F2rsq1.png" alt="此处输入图片的描述"><br>至此，等待一段时间，就可以用https协议访问你的自定义域名！<br>同时，修改了DNS解析服务器后，网站相应速度也更快了！一举两得！</li>
+</ol>
+<hr>
 
       
     </div>
@@ -685,7 +698,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -780,7 +793,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number">1.</span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number">2.</span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number">3.</span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建流量统计功能的方法"><span class="nav-number">4.</span> <span class="nav-text">创建流量统计功能的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附加功能的添加"><span class="nav-number">5.</span> <span class="nav-text">附加功能的添加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决公式显示不正常的问题"><span class="nav-number">6.</span> <span class="nav-text">解决公式显示不正常的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo设置侧边栏头像"><span class="nav-number">7.</span> <span class="nav-text">hexo设置侧边栏头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo部署失败，不能连接github的解决"><span class="nav-number">8.</span> <span class="nav-text">hexo部署失败，不能连接github的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github不能访问、不能正常加载CSS的解决"><span class="nav-number">9.</span> <span class="nav-text">Github不能访问、不能正常加载CSS的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另外"><span class="nav-number">10.</span> <span class="nav-text">另外</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加版权声明"><span class="nav-number">11.</span> <span class="nav-text">添加版权声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建-passage-end-tag-swig-文件"><span class="nav-number">11.1.</span> <span class="nav-text">新建 passage-end-tag.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-post-swig-文件"><span class="nav-number">11.2.</span> <span class="nav-text">修改 post.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在主题配置文件中添加字段"><span class="nav-number">11.3.</span> <span class="nav-text">在主题配置文件中添加字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加动画效果"><span class="nav-number">12.</span> <span class="nav-text">添加动画效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi-count）"><span class="nav-number">13.</span> <span class="nav-text">解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi_count）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">13.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因分析"><span class="nav-number">13.2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">13.3.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复你的博客，只需要三步"><span class="nav-number">14.</span> <span class="nav-text">恢复你的博客，只需要三步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装必备组件"><span class="nav-number">14.1.</span> <span class="nav-text">安装必备组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github配对"><span class="nav-number">14.2.</span> <span class="nav-text">Github配对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo"><span class="nav-number">14.3.</span> <span class="nav-text">安装hexo</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误1"><span class="nav-number">1.</span> <span class="nav-text">错误1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误2"><span class="nav-number">2.</span> <span class="nav-text">错误2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误3"><span class="nav-number">3.</span> <span class="nav-text">错误3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建流量统计功能的方法"><span class="nav-number">4.</span> <span class="nav-text">创建流量统计功能的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附加功能的添加"><span class="nav-number">5.</span> <span class="nav-text">附加功能的添加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决公式显示不正常的问题"><span class="nav-number">6.</span> <span class="nav-text">解决公式显示不正常的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo设置侧边栏头像"><span class="nav-number">7.</span> <span class="nav-text">hexo设置侧边栏头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo部署失败，不能连接github的解决"><span class="nav-number">8.</span> <span class="nav-text">hexo部署失败，不能连接github的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github不能访问、不能正常加载CSS的解决"><span class="nav-number">9.</span> <span class="nav-text">Github不能访问、不能正常加载CSS的解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另外"><span class="nav-number">10.</span> <span class="nav-text">另外</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加版权声明"><span class="nav-number">11.</span> <span class="nav-text">添加版权声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建-passage-end-tag-swig-文件"><span class="nav-number">11.1.</span> <span class="nav-text">新建 passage-end-tag.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-post-swig-文件"><span class="nav-number">11.2.</span> <span class="nav-text">修改 post.swig 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在主题配置文件中添加字段"><span class="nav-number">11.3.</span> <span class="nav-text">在主题配置文件中添加字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加动画效果"><span class="nav-number">12.</span> <span class="nav-text">添加动画效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi-count）"><span class="nav-number">13.</span> <span class="nav-text">解决博客浏览统计功能突然失效的方法（hexo-theme-next-busuanzi_count）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">13.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原因分析"><span class="nav-number">13.2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">13.3.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复你的博客，只需要三步"><span class="nav-number">14.</span> <span class="nav-text">恢复你的博客，只需要三步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装必备组件"><span class="nav-number">14.1.</span> <span class="nav-text">安装必备组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github配对"><span class="nav-number">14.2.</span> <span class="nav-text">Github配对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo"><span class="nav-number">14.3.</span> <span class="nav-text">安装hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给博客自定义域名开启Https"><span class="nav-number">15.</span> <span class="nav-text">给博客自定义域名开启Https</span></a></li></ol></div>
             
 
           </div>
@@ -814,7 +827,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32.8k</span>
+    <span title="Site words total count">33.1k</span>
   
 </div>
 
