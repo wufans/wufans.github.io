@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="notes,python,">
+  <meta name="keywords" content="python,Machine Learning,">
 
 
 
@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="如何去掉一个字符串中所有的符号">
-<meta name="keywords" content="notes,python">
+<meta name="description" content="在模型测试过程中，如何让两个模型中间层的输入输出拼在一起呢？">
+<meta name="keywords" content="python,Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python去掉文章中所有的符号">
-<meta property="og:url" content="http://yoursite.com/2017/01/05/Python匹配所有符号/index.html">
+<meta property="og:title" content="keras模型拼接">
+<meta property="og:url" content="http://yoursite.com/2018/12/25/keras模型拼接/index.html">
 <meta property="og:site_name" content="Fan Wu">
-<meta property="og:description" content="如何去掉一个字符串中所有的符号">
+<meta property="og:description" content="在模型测试过程中，如何让两个模型中间层的输入输出拼在一起呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522348726856&di=94ad6fe367916649eef70bb9303a9537&imgtype=0&src=http://file.digitaling.com/eImg/image/20140113/20140113145051_79090.jpg">
-<meta property="og:updated_time" content="2018-03-30T04:28:32.623Z">
+<meta property="og:image" content="https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png">
+<meta property="og:updated_time" content="2018-12-26T13:12:10.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python去掉文章中所有的符号">
-<meta name="twitter:description" content="如何去掉一个字符串中所有的符号">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522348726856&di=94ad6fe367916649eef70bb9303a9537&imgtype=0&src=http://file.digitaling.com/eImg/image/20140113/20140113145051_79090.jpg">
+<meta name="twitter:title" content="keras模型拼接">
+<meta name="twitter:description" content="在模型测试过程中，如何让两个模型中间层的输入输出拼在一起呢？">
+<meta name="twitter:image" content="https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/01/05/Python匹配所有符号/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/25/keras模型拼接/">
 
 
 
 
 
-  <title>python去掉文章中所有的符号 | Fan Wu</title>
+  <title>keras模型拼接 | Fan Wu</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/05/Python匹配所有符号/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/25/keras模型拼接/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wufan">
@@ -326,7 +326,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">python去掉文章中所有的符号</h2>
+          <h2 class="post-title" itemprop="name headline">keras模型拼接</h2>
         
 
         <div class="post-meta">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-05T14:48:20+08:00">
-                2017-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-25T20:48:20+08:00">
+                2018-12-25
               </time>
             
 
@@ -361,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index">
-                    <span itemprop="name">coding</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  60 字
+                  243 字
                 </span>
               
 
@@ -434,11 +434,13 @@
       
 
       
-        <p><strong>如何去掉一个字符串中所有的符号</strong><br><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1522348726856&amp;di=94ad6fe367916649eef70bb9303a9537&amp;imgtype=0&amp;src=http://file.digitaling.com/eImg/image/20140113/20140113145051_79090.jpg" alt="此处输入图片的描述"></p>
+        <p><strong>在模型测试过程中，如何让两个模型中间层的输入输出拼在一起呢？</strong><br><img src="https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png" alt="此处输入图片的描述"></p>
 <a id="more"></a>
-<p>使用python中的正则相关的库：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br></pre></td></tr></table></figure></p>
-<p>然后用写出对应的正则表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = &quot;[+\.\!\/_,$%^*(+\&quot;\&apos;]+|[+——！，。？?、~@《￥》\&#123;\&#125;#￥%…“•”…&amp;*（）\n\t\s]+&quot;</span><br></pre></td></tr></table></figure></p>
-<p>接着用替换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.sub(r,&apos;&apos;,&quot;nishog.;dfs$fd*&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>首先，加载训练好的模型后，我们可以用下面的方式获取模型的中间层输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = load_model(&quot;model1.h5&quot;)</span><br><span class="line">First_model = Model(inputs=model.input, outputs=model.layers[7].output)#表示获取模型第7层的输出</span><br></pre></td></tr></table></figure></p>
+<p>然后如何把第7层的输出，作为下一个模型中间层的输入呢？用下面的方法是不可以的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model2 = load_model(&quot;model2.h5&quot;)</span><br><span class="line">second_model = Model(inputs=model2.layers[8].input, outputs=model2.layers[-1].output)</span><br></pre></td></tr></table></figure></p>
+<p>这样会得到类似下面的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RuntimeError: Graph disconnected: cannot obtain value for tensor Tensor(&quot;conv2d_1_input:0&quot;, shape=(?, 144, 144, 3), dtype=float32) at layer &quot;conv2d_1_input&quot;. The following previous layers were accessed without issue: []</span><br></pre></td></tr></table></figure></p>
+<p>解决办法是声明一个新的Input Layer,用下面的方式拼接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">second_input = Input(model.layers[8].input_shape[1:])</span><br><span class="line">second_model = second_input</span><br><span class="line">for layer in model.layers[8:]:</span><br><span class="line">    second_model = layer(second_model)</span><br><span class="line">second_model = Model(inputs=second_input, outputs=second_model)</span><br></pre></td></tr></table></figure></p>
+<p>由此，便完成了模型的拼接！</p>
 
       
     </div>
@@ -474,9 +476,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/notes/" rel="tag"># notes</a>
-          
             <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
         </div>
       
@@ -489,15 +491,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/01/搭建博客时候问题小记/" rel="next" title="搭建博客时候问题小记">
+                <i class="fa fa-chevron-left"></i> 搭建博客时候问题小记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/18/My-Notes-Of-Adversarial-Attack/" rel="prev" title="My Notes Of Adversarial Attack">
-                My Notes Of Adversarial Attack <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
