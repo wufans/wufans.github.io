@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/03/30/Academic%20Writing%20Lessons/</loc>
+    
+    <lastmod>2018-12-26T15:47:40.410Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/12/25/keras%E6%A8%A1%E5%9E%8B%E6%8B%BC%E6%8E%A5/</loc>
     
     <lastmod>2018-12-26T15:41:44.820Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://yoursite.com/2018/07/15/JupyterNotebook%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2018-12-26T15:38:36.126Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/03/30/Academic%20Writing%20Lessons/</loc>
-    
-    <lastmod>2018-12-26T15:37:29.811Z</lastmod>
     
   </url>
   
