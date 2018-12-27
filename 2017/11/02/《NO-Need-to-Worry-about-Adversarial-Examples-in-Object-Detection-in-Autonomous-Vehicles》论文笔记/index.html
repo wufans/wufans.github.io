@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="papernotes,secure,">
+  <meta name="keywords" content="papernotes,adversarial attack,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="citationLu J, Sibai H, Fabry E, et al. NO Need to Worry about Adversarial Examples in Object Detection in Autonomous Vehicles[J]. 2017.">
-<meta name="keywords" content="papernotes,secure">
+<meta name="keywords" content="papernotes,adversarial attack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《NO Need to Worry about Adversarial Examples in Object Detection in Autonomous Vehicles》论文笔记">
 <meta property="og:url" content="https://yoursite.com/2017/11/02/《NO-Need-to-Worry-about-Adversarial-Examples-in-Object-Detection-in-Autonomous-Vehicles》论文笔记/index.html">
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/0060lm7Tly1fl4pq1sy7pj30gn04raac.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060lm7Tly1fl4pq38tx7j30gl04wq7c.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0060lm7Tly1fl4pq4gonwj30n108twfz.jpg">
-<meta property="og:updated_time" content="2017-11-03T06:38:48.674Z">
+<meta property="og:updated_time" content="2018-12-27T03:23:13.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《NO Need to Worry about Adversarial Examples in Object Detection in Autonomous Vehicles》论文笔记">
 <meta name="twitter:description" content="citationLu J, Sibai H, Fabry E, et al. NO Need to Worry about Adversarial Examples in Object Detection in Autonomous Vehicles[J]. 2017.">
@@ -364,8 +364,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -457,7 +457,7 @@
 <p>本文的实验方法与前面提到的攻击算法研究中修改图片不同，关注的是在物理世界的攻击，也就是打印应用这些攻击之后的图片并测试目标模型的稳定性。应用到实际场景时，作者考虑了<strong>拍摄相机与目标的距离</strong>和<strong>拍摄角度</strong>的变量影响。</p>
 <h2 id="experimental-results"><a href="#experimental-results" class="headerlink" title="experimental results"></a>experimental results</h2><ul>
 <li>分析生成的对抗样本结果<br>首先是针对detector目标模型生成的对抗样本：<br><img src="http://ww2.sinaimg.cn/large/0060lm7Tly1fl4pq1sy7pj30gn04raac.jpg" alt="此处输入图片的描述"><br>对比针对traffic sign classifier生成的对抗样本：<br><img src="http://ww1.sinaimg.cn/large/0060lm7Tly1fl4pq38tx7j30gl04wq7c.jpg" alt="此处输入图片的描述"><br>可以发现前者的密度更低。从直观理解也很容易，因为密度越高的对抗扰动可以让探测器的实时监测扰动更加困难。</li>
-<li>整体的对抗样本稳定性的实验结果<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tly1fl4pq4gonwj30n108twfz.jpg" alt="此处输入图片的描述"><br>DR%代表这个stop标志被识别的概率。表格中的Ori指的是完整的图片，Crop则指的是裁剪出只有交通标志的部分。表格的左边是对抗样本在直接作为模型输入时的对抗效果，右边是在现实场景下的实验结果。<br>从表格可以得出下面的结论： </li>
+<li>整体的对抗样本稳定性的实验结果<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tly1fl4pq4gonwj30n108twfz.jpg" alt="此处输入图片的描述"><br>DR%代表这个stop标志被识别的概率。表格中的Ori指的是完整的图片，Crop则指的是裁剪出只有交通标志的部分。表格的左边是对抗样本在直接作为模型输入时的对抗效果，右边是在现实场景下的实验结果。<br>从表格可以得出下面的结论：</li>
 <li>只关注标志本身的，经过裁剪之后的对抗样本效果更好</li>
 <li>在实际应用场景下，对抗样本的对抗性会随着距离的增加而减弱，模型的识别准确率会更高</li>
 <li>从结果来看对抗攻击方法的效果，L-BFGS整体要差于FGSM方法。</li>
@@ -504,7 +504,7 @@
           
             <a href="/tags/papernotes/" rel="tag"># papernotes</a>
           
-            <a href="/tags/secure/" rel="tag"># secure</a>
+            <a href="/tags/adversarial-attack/" rel="tag"># adversarial attack</a>
           
         </div>
       
@@ -623,7 +623,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -634,7 +634,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

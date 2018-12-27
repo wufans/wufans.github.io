@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="papernotes,secure,">
+  <meta name="keywords" content="papernotes,adversarial attack,">
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="Title: Robust Physical-World Attacks on Machine Learning ModelsAuthors: Evtimov, Ivan; Eykholt, Kevin; Fernandes, Earlence; Kohno, Tadayoshi; Li, Bo; Prakash, Atul; Rahmati, Amir; Song, DawnPublicatio">
-<meta name="keywords" content="papernotes,secure">
+<meta name="keywords" content="papernotes,adversarial attack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Robust Physical-World Attacks on Machine Learning Models》论文笔记">
 <meta property="og:url" content="https://yoursite.com/2017/10/30/《Robust-Physical-World-Attacks-on-Machine-Learning-Models》论文笔记/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
 <meta property="og:description" content="Title: Robust Physical-World Attacks on Machine Learning ModelsAuthors: Evtimov, Ivan; Eykholt, Kevin; Fernandes, Earlence; Kohno, Tadayoshi; Li, Bo; Prakash, Atul; Rahmati, Amir; Song, DawnPublicatio">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-03T06:02:34.926Z">
+<meta property="og:updated_time" content="2018-12-27T03:22:48.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Robust Physical-World Attacks on Machine Learning Models》论文笔记">
 <meta name="twitter:description" content="Title: Robust Physical-World Attacks on Machine Learning ModelsAuthors: Evtimov, Ivan; Eykholt, Kevin; Fernandes, Earlence; Kohno, Tadayoshi; Li, Bo; Prakash, Atul; Rahmati, Amir; Song, DawnPublicatio">
@@ -360,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -470,13 +470,13 @@
 <li>Subtle Perturbations:（A. Kurakin, I. J. Goodfellow, and S. Bengio, <strong>“Adversarial examples in the physical world,”</strong> CoRR, vol. abs/1607.02533, 2016. [Online].Available: <a href="http://arxiv.org/abs/1607.02533）里面修改控制图片的数字表示，然后将图片打印出来，通过手机相机来读取图片并作为分类器的输入。" target="_blank" rel="noopener">http://arxiv.org/abs/1607.02533）里面修改控制图片的数字表示，然后将图片打印出来，通过手机相机来读取图片并作为分类器的输入。</a></li>
 <li>Camouflage Perturbations：（<strong>“Best practices for developing with kairos,”</strong> 2017. [Online]. Available:<a href="https://www.kairos.com/docs/api/best-practices）和（M" target="_blank" rel="noopener">https://www.kairos.com/docs/api/best-practices）和（M</a>. Sharif, S. Bhagavatula, L. Bauer, and M. K. Reiter, <strong>“Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition,”</strong> in Proceedings of the 23rd ACM SIGSAC Conference on Computer and Communications Security, Oct. 2016. [Online]. Available: <a href="https://www.ece.cmu.edu/~lbauer/papers/2016/ccs2016-face-recognition.pdf）中显示了有着对抗perturbation的眼睛能够欺骗面部识别系统，与本论文的目的一致——通过重建物理目标，给已经存在的目标加入新的对象能够欺骗深度神经网络。与面部识别的不同之处仅仅在于环境不同。" target="_blank" rel="noopener">https://www.ece.cmu.edu/~lbauer/papers/2016/ccs2016-face-recognition.pdf）中显示了有着对抗perturbation的眼睛能够欺骗面部识别系统，与本论文的目的一致——通过重建物理目标，给已经存在的目标加入新的对象能够欺骗深度神经网络。与面部识别的不同之处仅仅在于环境不同。</a></li>
 </ul>
-<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32<br>    实验用TensorFlow工具构建分类器，神经网络结构为：三成带有全连接层的卷积层。最终的分类器准确率为91%。<br>攻击过程的选择，本实验只能修改测试集数据，即是<strong>evasion attacks</strong>。<br>攻击流程： </p>
+<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p>数据集：LISA数据集，包含47种不同的路标图片，在本实验中重设尺寸为32×32<br>    实验用TensorFlow工具构建分类器，神经网络结构为：三成带有全连接层的卷积层。最终的分类器准确率为91%。<br>攻击过程的选择，本实验只能修改测试集数据，即是<strong>evasion attacks</strong>。<br>攻击流程：</p>
 <pre><code>1. 得到没有对抗perturbation的干净目标路标图
 2. 预处理路标图（维度等）将之作为分类器的输入
 3. 用攻击算法处理分类器和提取的路标图片
 4. 用映射函数在路标上输出相应的对抗perturbation的物理位置
 5. 构建数字对抗perturbation，并基于上面函数的输出将这个改动应用到物理目标中。
-</code></pre><p>自然对抗perturbation的评估方法：<br>    受自然情况下环境条件、空间限制、样本构建误差、维度变化和不可探测的物理限制等影响，在评估对抗样本效果时，论文考虑了三个主要的方面：<strong>距离、角度和维度</strong>。 </p>
+</code></pre><p>自然对抗perturbation的评估方法：<br>    受自然情况下环境条件、空间限制、样本构建误差、维度变化和不可探测的物理限制等影响，在评估对抗样本效果时，论文考虑了三个主要的方面：<strong>距离、角度和维度</strong>。</p>
 <p>Robust Physical Perturbations(RP2)算法：<br>    是一种优化的扰动生成方法，在untarget对抗攻击时，目标函数为<br>    $$argmin_λ||δ||<em>p − J(fθ(x + δ),y)$$<br>    即是让加入扰动后的输出损失越大越好。<br>    在target对抗攻击时，目标函数为<br>   $$argmin</em>λ||δ||<em>p + J(f</em>θ(x + δ),y_0)$$<br>   即是让加入扰动后输出损失与特定目标差别越小越好。<br>    其中λ都代表对扰动规模的限制。</p>
 <h2 id="Future-work"><a href="#Future-work" class="headerlink" title="Future work"></a>Future work</h2><ol>
 <li>因为论文用的交通标志比较有限，考虑使用更多的交通标志完成target classification attack。</li>
@@ -528,7 +528,7 @@
           
             <a href="/tags/papernotes/" rel="tag"># papernotes</a>
           
-            <a href="/tags/secure/" rel="tag"># secure</a>
+            <a href="/tags/adversarial-attack/" rel="tag"># adversarial attack</a>
           
         </div>
       
@@ -647,7 +647,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -658,7 +658,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
