@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yoursite.com/2018/07/29/CUDA%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
+    
+    <lastmod>2018-12-27T03:33:38.367Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yoursite.com/2018/04/17/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E7%AD%96%E7%95%A5%E4%B8%80%E8%A7%88/</loc>
     
     <lastmod>2018-12-27T03:23:16.794Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>https://yoursite.com/2018/12/25/keras%E6%A8%A1%E5%9E%8B%E6%8B%BC%E6%8E%A5/</loc>
     
     <lastmod>2018-12-27T03:22:45.316Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yoursite.com/2018/07/29/CUDA%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
-    
-    <lastmod>2018-12-27T03:22:41.319Z</lastmod>
     
   </url>
   
