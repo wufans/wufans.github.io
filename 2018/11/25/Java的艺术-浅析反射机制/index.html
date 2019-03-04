@@ -90,7 +90,7 @@
 <meta property="og:description" content="在运行时发现和使用类的信息-Java反射。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-04T14:25:06.588Z">
+<meta property="og:updated_time" content="2019-03-04T14:26:37.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-浅谈反射机制">
 <meta name="twitter:description" content="在运行时发现和使用类的信息-Java反射。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,295 字
+                  1,290 字
                 </span>
               
 
@@ -453,30 +453,20 @@
 <h2 id="Class对象的获取"><a href="#Class对象的获取" class="headerlink" title="Class对象的获取"></a>Class对象的获取</h2><p>加载完类之后, 在堆内存中会产生一个Class类型的对象(一个类只有一个Class对象), 这个对象包含了完整的类的结构信息,而且这个Class对象就像一面镜子,透过这个镜子看到类的结构,所以被称之为:<strong>反射。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">--java.lang.Class&lt;T&gt;</span><br></pre></td></tr></table></figure></p>
 <p>获取Class对象的方法一般有三种方法：</p>
 <blockquote>
-<ol>
-<li>对象的getClass()方法;</li>
-</ol>
+<p>对象的getClass()方法;</p>
 </blockquote>
 <blockquote>
-<ol>
-<li>类的.class(最安全/性能最好)属性;</li>
-</ol>
+<p>类的.class(最安全/性能最好)属性;</p>
 </blockquote>
 <blockquote>
-<ol>
-<li>运用Class.forName(String className)动态加载类,className需要是类的全限定名(最常用)</li>
-</ol>
+<p>运用Class.forName(String className)动态加载类,className需要是类的全限定名(最常用)</p>
 </blockquote>
 <h2 id="创建实例化对象"><a href="#创建实例化对象" class="headerlink" title="创建实例化对象"></a>创建实例化对象</h2><p>得到了对应java.lang.Class对象，有两种方法通过反射生成对象：</p>
 <blockquote>
-<ol>
-<li>使用Class对象的newInstance()方法来创建该Class对象对应类的实例(这种方式要求该Class对象的对应类有默认构造器)；</li>
-</ol>
+<p>使用Class对象的newInstance()方法来创建该Class对象对应类的实例(这种方式要求该Class对象的对应类有默认构造器)；</p>
 </blockquote>
 <blockquote>
-<ol>
-<li>先使用Class对象获取指定的Constructor对象, 再调用Constructor对象的newInstance()方法来创建该Class对象对应类的实例(通过这种方式可以选择指定的构造器来创建实例).</li>
-</ol>
+<p>先使用Class对象获取指定的Constructor对象, 再调用Constructor对象的newInstance()方法来创建该Class对象对应类的实例(通过这种方式可以选择指定的构造器来创建实例).</p>
 </blockquote>
 <h2 id="访问成员变量"><a href="#访问成员变量" class="headerlink" title="访问成员变量"></a>访问成员变量</h2><p>通过Class对象的的getField()方法可以获取该类所包含的全部或指定的成员变量Field,Filed提供了如下两组方法来读取和设置成员变量值：</p>
 <blockquote>
