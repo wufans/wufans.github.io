@@ -90,7 +90,7 @@
 <meta property="og:description" content="在运行时发现和使用类的信息-Java反射。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-04T14:26:37.553Z">
+<meta property="og:updated_time" content="2019-03-05T07:50:55.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-浅谈反射机制">
 <meta name="twitter:description" content="在运行时发现和使用类的信息-Java反射。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,290 字
+                  2,345 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -445,38 +445,66 @@
 <p>有没有更简单的方法？答案是肯定的，我们可以利用反射机制来完成这一工作，在程序运行时根据类名实例化对应的对象，并调用对应的方法</p>
 <p>步骤如下：</p>
 <p>1、首先我们需要用到接口，至于为什么会用到，后文会有解说<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface IFood &#123;</span><br><span class="line">	public void cook();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、所有的食材类实现这一接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Pork implements&#123;     //猪肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook pork&quot;);</span><br><span class="line">&#125;</span><br><span class="line">public class Beef implements&#123;     //牛肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook beef&quot;);</span><br><span class="line">&#125;</span><br><span class="line">public class Mutton implements&#123;    //羊肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook mutton&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3、接下来我们看看怎么使程序更为简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class test&#123;</span><br><span class="line">      public static void main(String[] args)&#123;</span><br><span class="line">         String food=null;                   //字符串food代表食物的类</span><br><span class="line">         Class c=Class.forName(food);        //根据字符串food来载入类对象</span><br><span class="line">         Object object=c.newInstance();      //生成对象</span><br><span class="line">         IFood Ifood=(IFood)object;          //强制转型</span><br><span class="line">         Ifood.cook();                       //调用方法</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、所有的食材类实现这一接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Pork implements IFood&#123;     //猪肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook pork&quot;);</span><br><span class="line">&#125;</span><br><span class="line">public class Beef implements IFood&#123;     //牛肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook beef&quot;);</span><br><span class="line">&#125;</span><br><span class="line">public class Mutton implements IFood&#123;    //羊肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook mutton&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、接下来我们看看怎么使程序更为简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class test&#123;</span><br><span class="line">      public static void main(String[] args)&#123;</span><br><span class="line">         String food=&quot;Pork&quot;;                   //字符串food代表食物的类</span><br><span class="line">         Class c=Class.forName(food);        //根据字符串food来载入类对象</span><br><span class="line">         Object object=c.newInstance();      //生成对象</span><br><span class="line">         IFood Ifood=(IFood)object;          //强制转型</span><br><span class="line">         Ifood.cook();                       //调用方法</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如此一来我们不需要写冗杂的if else 嵌套了</p>
 <p>只需要利用 Class.forName()方法根据字符串来实例化对应的类，并调用其方法即可。</p>
 <p>当我们需要处理其他的食材的时候只需要添加对应的类即可，而主程序中可以不改变一行代码。</p>
-<h2 id="Class对象的获取"><a href="#Class对象的获取" class="headerlink" title="Class对象的获取"></a>Class对象的获取</h2><p>加载完类之后, 在堆内存中会产生一个Class类型的对象(一个类只有一个Class对象), 这个对象包含了完整的类的结构信息,而且这个Class对象就像一面镜子,透过这个镜子看到类的结构,所以被称之为:<strong>反射。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">--java.lang.Class&lt;T&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="反射的应用"><a href="#反射的应用" class="headerlink" title="反射的应用"></a>反射的应用</h2><h3 id="Class对象的获取"><a href="#Class对象的获取" class="headerlink" title="Class对象的获取"></a>Class对象的获取</h3><p>加载完类之后, 在堆内存中会产生一个Class类型的对象(一个类只有一个Class对象), 这个对象包含了完整的类的结构信息,而且这个Class对象就像一面镜子,透过这个镜子看到类的结构,所以被称之为:<strong>反射。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">--java.lang.Class&lt;T&gt;</span><br></pre></td></tr></table></figure></p>
 <p>获取Class对象的方法一般有三种方法：</p>
 <blockquote>
-<p>对象的getClass()方法;</p>
+<p>调用<strong>对象</strong>的getClass()方法;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer sb = new StringBuffer(&quot;test&quot;);</span><br><span class="line">Class&lt;?&gt; class1 = sb.getClass();</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
-<p>类的.class(最安全/性能最好)属性;</p>
+<p><strong>类名</strong>的.class(最安全/性能最好)属性，或者TYPE属性(继承自Object类);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; class1 = int.class;</span><br><span class="line">Class&lt;?&gt; class2 = Integer.class;</span><br><span class="line">Class&lt;?&gt; class3 = Integer.TYPE;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
-<p>运用Class.forName(String className)动态加载类,className需要是类的全限定名(最常用)</p>
+<p>运用<strong>Class.forName(String className)</strong>动态加载类,className需要是类的全限定名(最常用)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; class1 = Class.forName(&quot;Integer&quot;);</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="创建实例化对象"><a href="#创建实例化对象" class="headerlink" title="创建实例化对象"></a>创建实例化对象</h2><p>得到了对应java.lang.Class对象，有两种方法通过反射生成对象：</p>
+<h3 id="创建实例化对象"><a href="#创建实例化对象" class="headerlink" title="创建实例化对象"></a>创建实例化对象</h3><p>得到了对应java.lang.Class对象，有两种方法通过反射生成对象：[<strong>都需要抛出异常</strong>]</p>
 <blockquote>
-<p>使用Class对象的newInstance()方法来创建该Class对象对应类的实例(这种方式要求该Class对象的对应类有默认构造器)；</p>
+<p>使用Class对象的newInstance()方法来创建该Class对象对应类的实例(这种方式要求该Class对象的对应类有默认构造器)；<strong>相当于无参构造</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; class1 = String.class;</span><br><span class="line">Object str = c.newInstance();</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
-<p>先使用Class对象获取指定的Constructor对象, 再调用Constructor对象的newInstance()方法来创建该Class对象对应类的实例(通过这种方式可以选择指定的构造器来创建实例).</p>
+<p>先使用Class对象获取指定的Constructor对象, 再调用Constructor对象的newInstance()方法来创建该Class对象对应类的实例(通过这种方式可以选择指定的构造器来创建实例).<strong>适用于无参和有参的构造方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="访问成员变量"><a href="#访问成员变量" class="headerlink" title="访问成员变量"></a>访问成员变量</h2><p>通过Class对象的的getField()方法可以获取该类所包含的全部或指定的成员变量Field,Filed提供了如下两组方法来读取和设置成员变量值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//获取String所对应的Class对象</span><br><span class="line">Class&lt;?&gt; c = String.class;</span><br><span class="line">//获取String类带一个String参数的构造器</span><br><span class="line">Constructor constructor = c.getConstructor(String.class);</span><br><span class="line">//根据构造器创建实例</span><br><span class="line">Object obj = constructor.newInstance(&quot;test&quot;);</span><br></pre></td></tr></table></figure>
+<p>另外可以用getConstructors()方法返回Constructor对象的一个数组。这些对象反映此 Class 对象所表示的类的所有公共构造方法。如果该类没有公共构造方法，或者该类是一个数组类，或者该类反映一个基本类型或 void，则返回一个长度为 0 的数组。 注意，此方法返回 Constructor<t> 对象的数组（即取自此类构造方法的数组）时，此方法的返回类型是 Constructor&lt;?&gt;[]，不是预期的 Constructor<t>[]。此少量信息的返回类型是必需的，因为从此方法返回之后，该数组可能被修改以保存不同类的 Constructor 对象，而这将违反 Constructor<t>[] 的类型保证。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; c = String.class;//获取Class对象</span><br><span class="line">Constructor&lt;?&gt; cons[] = c.getConstructors();</span><br><span class="line">for (Constructor&lt;?&gt; constructor : cons) &#123;</span><br><span class="line">    System.out.println(constructor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></t></t></t></p>
+<p>执行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public java.lang.String(byte[],int,int)</span><br><span class="line">public java.lang.String(byte[],java.nio.charset.Charset)</span><br><span class="line">public java.lang.String(byte[],java.lang.String) throws java.io.UnsupportedEncodingException</span><br><span class="line">public java.lang.String(byte[],int,int,java.nio.charset.Charset)</span><br><span class="line">public java.lang.String(byte[],int,int,java.lang.String) throws java.io.UnsupportedEncodingException</span><br><span class="line">public java.lang.String(java.lang.StringBuilder)</span><br><span class="line">public java.lang.String(java.lang.StringBuffer)</span><br><span class="line">public java.lang.String(byte[])</span><br><span class="line">public java.lang.String(int[],int,int)</span><br><span class="line">public java.lang.String()</span><br><span class="line">public java.lang.String(char[])</span><br><span class="line">public java.lang.String(java.lang.String)</span><br><span class="line">public java.lang.String(char[],int,int)</span><br><span class="line">public java.lang.String(byte[],int)</span><br><span class="line">public java.lang.String(byte[],int,int,int)</span><br></pre></td></tr></table></figure></p>
+<p>此外，还可以用getDeclaredConstructors()方法获取所有的构造方法。</p>
 <blockquote>
-<ol>
-<li>getXxx(Object obj): 获取obj对象的该成员变量的值, 此处的Xxx对应8中基本类型,如果该成员变量的类型是引用类型, 则取消get后面的Xxx;</li>
-<li>setXxx(Object obj, Xxx val): 将obj对象的该成员变量值设置成val值.此处的Xxx对应8种基本类型, 如果该成员类型是引用类型, 则取消set后面的Xxx;</li>
-</ol>
+<p><strong>getConstructor()和getDeclaredConstructor()区别:</strong></p>
+</blockquote>
+<blockquote>
+<p>getDeclaredConstructor(Class&lt;?&gt;… parameterTypes)<br>这个方法会返回制定参数类型的所有构造器，包括public的和非public的，当然也包括private的。<br>getDeclaredConstructors()的返回结果就没有参数类型的过滤了。</p>
+</blockquote>
+<blockquote>
+<p>getConstructor(Class&lt;?&gt;… parameterTypes)<br>这个方法返回的是getDeclaredConstructor()方法返回结果的子集，只返回制定参数类型访问权限是public的构造器。<br>getConstructors()的返回结果同样也没有参数类型的过滤。</p>
+</blockquote>
+<h3 id="获取方法"><a href="#获取方法" class="headerlink" title="获取方法"></a>获取方法</h3><p>获取某个Class对象的方法集合，主要有以下几种方法：</p>
+<blockquote>
+<p>getDeclaredMethods方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Method[] getDeclaredMethods() throws SecurityException</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>getMethods方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Method[] getMethods() throws SecurityException</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>getMethod 方法返回一个特定的方法，其中第一个参数为方法名称，后面的参数为方法的参数对应Class的对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Method getMethod(String name, Class&lt;?&gt;... parameterTypes)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><blockquote>
+<p>当我们从类中获取了一个方法后，我们就可以用 invoke() 方法来调用这个方法。invoke 方法的原型为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Object invoke(Object obj, Object... args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="访问成员变量"><a href="#访问成员变量" class="headerlink" title="访问成员变量"></a>访问成员变量</h3><p>通过Class对象的的getField()方法可以获取该类所包含的全部或指定的成员变量Field,Filed提供了如下两组方法来读取和设置成员变量值：<br><strong>getFiled：</strong>访问公有的成员变量<br><strong>getDeclaredField：</strong>所有已声明的成员变量，但不能得到其父类的成员变量</p>
+<blockquote>
+<p>getXxx(Object obj): 获取obj对象的该成员变量的值, 此处的Xxx对应8中基本类型,如果该成员变量的类型是引用类型, 则取消get后面的Xxx;<br>setXxx(Object obj, Xxx val): 将obj对象的该成员变量值设置成val值.此处的Xxx对应8种基本类型, 如果该成员类型是引用类型, 则取消set后面的Xxx;</p>
 </blockquote>
 <p><font color="red">注: getDeclaredXxx方法可以获取所有的成员变量,无论private/public</font>;</p>
-<h2 id="反射与Spring框架设计"><a href="#反射与Spring框架设计" class="headerlink" title="反射与Spring框架设计"></a>反射与Spring框架设计</h2><p>Spring内部采用了很多反射机制。<br>很多web框架的前端，实现URI请求映射到Action方法，也可以简单的通过反射来做。<br>这部分内容后面再单独补充。</p>
+<h2 id="反射与Spring框架设计"><a href="#反射与Spring框架设计" class="headerlink" title="反射与Spring框架设计"></a>反射与Spring框架设计</h2><p>反射最重要的用途就是开发各种通用框架。很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。</p>
+<p>Spring内部采用了很多反射机制。<br>很多web框架的前端，实现URI请求映射到Action方法，也可以简单的通过反射来做。<br>这部分内容后面再单独补充。</p>
+<h2 id="反射存在的问题"><a href="#反射存在的问题" class="headerlink" title="反射存在的问题"></a><a href="https://www.sczyh30.com/posts/Java/java-reflection-1/" target="_blank" rel="noopener">反射存在的问题</a></h2><ol>
+<li>由于反射会额外消耗一定的系统资源，因此如果不需要动态地创建一个对象，那么就不需要用反射。</li>
+<li>另外，反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全问题。</li>
+</ol>
 
       
     </div>
@@ -731,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是反射"><span class="nav-number">1.</span> <span class="nav-text">什么是反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态语言"><span class="nav-number">2.</span> <span class="nav-text">动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的作用"><span class="nav-number">3.</span> <span class="nav-text">反射的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class对象的获取"><span class="nav-number">4.</span> <span class="nav-text">Class对象的获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实例化对象"><span class="nav-number">5.</span> <span class="nav-text">创建实例化对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问成员变量"><span class="nav-number">6.</span> <span class="nav-text">访问成员变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射与Spring框架设计"><span class="nav-number">7.</span> <span class="nav-text">反射与Spring框架设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是反射"><span class="nav-number">1.</span> <span class="nav-text">什么是反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态语言"><span class="nav-number">2.</span> <span class="nav-text">动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的作用"><span class="nav-number">3.</span> <span class="nav-text">反射的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的应用"><span class="nav-number">4.</span> <span class="nav-text">反射的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class对象的获取"><span class="nav-number">4.1.</span> <span class="nav-text">Class对象的获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建实例化对象"><span class="nav-number">4.2.</span> <span class="nav-text">创建实例化对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法"><span class="nav-number">4.3.</span> <span class="nav-text">获取方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用方法"><span class="nav-number">4.4.</span> <span class="nav-text">调用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问成员变量"><span class="nav-number">4.5.</span> <span class="nav-text">访问成员变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射与Spring框架设计"><span class="nav-number">5.</span> <span class="nav-text">反射与Spring框架设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射存在的问题"><span class="nav-number">6.</span> <span class="nav-text">反射存在的问题</span></a></li></ol></div>
             
 
           </div>
@@ -765,7 +793,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.3k</span>
+    <span title="Site words total count">54.4k</span>
   
 </div>
 
