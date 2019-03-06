@@ -90,7 +90,7 @@
 <meta property="og:description" content="在运行时发现和使用类的信息 - Java反射。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-06T00:51:38.704Z">
+<meta property="og:updated_time" content="2019-03-06T08:06:37.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-浅谈反射机制">
 <meta name="twitter:description" content="在运行时发现和使用类的信息 - Java反射。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,331 字
+                  2,643 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -494,6 +494,25 @@
 <h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><blockquote>
 <p>当我们从类中获取了一个方法后，我们就可以用 invoke() 方法来调用这个方法。invoke 方法的原型为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Object invoke(Object obj, Object... args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+<p><strong>invoke回调流程示例：</strong></p>
+<ul>
+<li><p>由Class对象动态构造对应类型对象；</p>
+</li>
+<li><p>利用Class对象的getMethod()、getMethods()、getDeclaredMethod()、getDeclaredMethods()等方法构造method对象；</p>
+</li>
+<li><p>类型对象，使其执行对应形参的方法（也就是需要传入一个<strong>动态执行方法的对象</strong>，以及<strong>对应方法的形参</strong>）。</p>
+</li>
+</ul>
+<p>举例：(利用反射调用String对象的toString()方法)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class test = String.class;</span><br><span class="line">Object ob = new String(&quot;abc&quot;);</span><br><span class="line">Method me = test.getDeclaredMethod(&quot;toString&quot;);</span><br><span class="line">System.out.println(me.invoke(ob,null));</span><br></pre></td></tr></table></figure></p>
+<p><strong>invoke()的缺点:</strong></p>
+<ul>
+<li><p>invoke的参数和返回值必需时Object类型的，这意味着必须进行多次的类型转换（特别是基本数据类型），而这将导致编译器错过检查代码的机会，有类型安全的风险，只有到了测试阶段才会发现这些错误，此时找到并改正他们将会更加困难。</p>
+</li>
+<li><p>使用反射获得方法指针的代码要比仅仅直接调用方法明显慢一些。</p>
+</li>
+<li><p>因此仅在必要时才使用Method对象，而最好使用<strong>接口和内部类</strong>，不建议Java开发者使用Method对象的回调功能，使用接口进行回调不仅会使代码的运行速度更快，还更易于维护。</p>
+</li>
+</ul>
 <h3 id="访问成员变量"><a href="#访问成员变量" class="headerlink" title="访问成员变量"></a>访问成员变量</h3><p>通过Class对象的的getField()方法可以获取该类所包含的全部或指定的成员变量Field,Filed提供了如下两组方法来读取和设置成员变量值：<br><strong>getFiled：</strong>访问公有的成员变量<br><strong>getDeclaredField：</strong>所有已声明的成员变量，但不能得到其父类的成员变量</p>
 <blockquote>
 <p>getXxx(Object obj): 获取obj对象的该成员变量的值, 此处的Xxx对应8中基本类型,如果该成员变量的类型是引用类型, 则取消get后面的Xxx;<br>setXxx(Object obj, Xxx val): 将obj对象的该成员变量值设置成val值.此处的Xxx对应8种基本类型, 如果该成员类型是引用类型, 则取消set后面的Xxx;</p>
@@ -793,7 +812,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">54.4k</span>
+    <span title="Site words total count">54.7k</span>
   
 </div>
 
