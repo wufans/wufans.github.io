@@ -90,7 +90,7 @@
 <meta property="og:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-06T09:32:26.617Z">
+<meta property="og:updated_time" content="2019-03-06T10:06:57.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-注解类型(Annotation)">
 <meta name="twitter:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
@@ -497,11 +497,12 @@
 </blockquote>
 </li>
 <li><p><strong>@Repeatable</strong></p>
+<blockquote>
+<p>Repeatable 是可重复的意思。@Repeatable 是 Java 1.8 才加进来的，所以算是一个新的特性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@interface Persons &#123;</span><br><span class="line">	Person[]  value();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Repeatable(Persons.class)</span><br><span class="line">@interface Person&#123;</span><br><span class="line">	String role default &quot;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Person(role=&quot;artist&quot;)</span><br><span class="line">@Person(role=&quot;coder&quot;)</span><br><span class="line">@Person(role=&quot;PM&quot;)</span><br><span class="line">public class SuperMan&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
 </li>
 </ul>
-<blockquote>
-<p>Repeatable 是可重复的意思。@Repeatable 是 Java 1.8 才加进来的，所以算是一个新的特性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@interface Persons &#123;</span><br><span class="line">	Person[]  value();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Repeatable(Persons.class)</span><br><span class="line">@interface Person&#123;</span><br><span class="line">	String role default &quot;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Person(role=&quot;artist&quot;)</span><br><span class="line">@Person(role=&quot;coder&quot;)</span><br><span class="line">@Person(role=&quot;PM&quot;)</span><br><span class="line">public class SuperMan&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
 <p>@Repeatable 注解了 Person。而 @Repeatable 后面括号中的类相当于一个容器注解。</p>
 <p>什么是<strong>容器注解</strong>呢？就是用来存放其它注解的地方。它本身也是一个注解。</p>
 <p>我们再看看代码中的相关容器注解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@interface Persons &#123;</span><br><span class="line">	Person[]  value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
