@@ -90,7 +90,7 @@
 <meta property="og:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-06T10:06:57.821Z">
+<meta property="og:updated_time" content="2019-03-06T11:05:47.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-注解类型(Annotation)">
 <meta name="twitter:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,011 字
+                  2,394 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -454,6 +454,9 @@
 </blockquote>
 <blockquote>
 <p>注解中方法的返回值只能为：基本数据类型，String，Class，美剧类型，注解和他们的一维数组。</p>
+</blockquote>
+<blockquote>
+<p>注解的继承只能作用在类上，方法上的注解不会被继承，Interface中的所有注解不会被继承。</p>
 </blockquote>
 <h2 id="常见注解"><a href="#常见注解" class="headerlink" title="常见注解"></a>常见注解</h2><h3 id="五种元注解"><a href="#五种元注解" class="headerlink" title="五种元注解"></a>五种元注解</h3><p>前面我们提到，Java中有五种元注解。</p>
 <ul>
@@ -549,8 +552,8 @@
 <p>注解也就是代码添加元数据，描述信息。</p>
 <p>相比使用单独的XML来描述这些元数据，使用注解要简单些，和代码在一起也更好维护。相比使用继承（如TesCase）或者方法前缀的约定（如testXXX是测试方法）要灵活些。</p>
 <p></p><p>一些插件机制就是通过注解提供插件的元数据，在加载类后扫描所以带该注解的类就可以找到插件，减少了配置的麻烦。</p><p></p>
-<h2 id="反射和注解"><a href="#反射和注解" class="headerlink" title="反射和注解"></a>反射和注解</h2><p>注解的提取需要借助于 Java 的反射技术，反射比较慢，所以注解使用时也需要谨慎计较时间成本。</p>
-<blockquote>
+<h2 id="反射和注解"><a href="#反射和注解" class="headerlink" title="反射和注解"></a>反射和注解</h2><p>注解的提取（解析）需要借助于 Java 的反射技术，反射比较慢，所以注解使用时也需要谨慎计较时间成本。</p>
+<h3 id="类的注解的解析"><a href="#类的注解的解析" class="headerlink" title="类的注解的解析"></a>类的注解的解析</h3><blockquote>
 <p>首先通过Class对象的isAnnotationPresent()方法判断他是否应用了某个注解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public boolean isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)&#123;&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
@@ -561,6 +564,12 @@
 </blockquote>
 <blockquote>
 <p>如果获取到的 Annotation 如果不为 null，则就可以调用它们的属性方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@AnnotationTest()</span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">		boolean hasAnnotation = Test.class.isAnnotationPresent(TestAnnotation.class);</span><br><span class="line"></span><br><span class="line">		if ( hasAnnotation ) &#123;</span><br><span class="line">			TestAnnotation testAnnotation = Test.class.getAnnotation(TestAnnotation.class);</span><br><span class="line"></span><br><span class="line">			System.out.println(&quot;id:&quot;+testAnnotation.id());</span><br><span class="line">			System.out.println(&quot;message:&quot;+testAnnotation.message());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>也可以使用forName()方法加载类，使用isAnnotation(Annotation.class)判定对象是否存在注解，并使用getAnnotation(Description.class)得到带有@Description注解的类。</p>
+<h3 id="方法的注解的解析"><a href="#方法的注解的解析" class="headerlink" title="方法的注解的解析"></a>方法的注解的解析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">    @AnnotationTest()</span><br><span class="line">    public void test_method(String str) &#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException &#123;</span><br><span class="line">        Test my_test = new Test();</span><br><span class="line">        Class test_class = Test.class;</span><br><span class="line">        Method method = test_class.getDeclaredMethod(&quot;test_method&quot;,String.class);</span><br><span class="line">        if (method.isAnnotationPresent(AnnotationTest.class)) &#123;</span><br><span class="line">            //执行方法</span><br><span class="line">            method.setAccessible(true);</span><br><span class="line">            method.invoke(my_test, &quot;hello&quot;);</span><br><span class="line">            //解析注解元素</span><br><span class="line">            AnnotationTest a = method.getAnnotation(AnnotationTest.class);</span><br><span class="line">            System.out.println(a.test());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类的属性的注解的解析"><a href="#类的属性的注解的解析" class="headerlink" title="类的属性的注解的解析"></a>类的属性的注解的解析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">    @AnnotationTest()</span><br><span class="line">    public void test_method(String str) &#123;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException &#123;</span><br><span class="line">        Test my_test = new Test();</span><br><span class="line">        //利用反射，通过class对象的getDeclaredField(String str)获得元素Field对象</span><br><span class="line">        Field test_field = Test.class.getDeclaredField(&quot;value&quot;);</span><br><span class="line">        //判断元素是否是注解的对象</span><br><span class="line">        if(test_field.isAnnotationPresent(AnnotationTest.class))&#123;</span><br><span class="line">            //修改权限（同一个类内部其实没有必要，肯定有访问权限。）</span><br><span class="line">            test_field.setAccessible(true);</span><br><span class="line">            //利用Field对象的getXXX()获取实例的值。</span><br><span class="line">            System.out.println(test_field.getInt(my_test));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><blockquote>
+<p>一定要用@Retention元注解表示出注解的存活时间，不然在动态执行时可能判定某个类并没有受到注解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface AnnotationTest &#123;</span><br><span class="line">    abstract int test() default 2019;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p><a href="https://www.cnblogs.com/Qian123/p/5256084.html" target="_blank" rel="noopener">参考1</a><br><a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">参考2</a></p>
 
@@ -817,7 +826,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的基本语法"><span class="nav-number">2.</span> <span class="nav-text">注解的基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的属性"><span class="nav-number">2.2.</span> <span class="nav-text">注解的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见注解"><span class="nav-number">3.</span> <span class="nav-text">常见注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种元注解"><span class="nav-number">3.1.</span> <span class="nav-text">五种元注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java预置注解"><span class="nav-number">3.2.</span> <span class="nav-text">Java预置注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的作用"><span class="nav-number">4.</span> <span class="nav-text">注解的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和注解"><span class="nav-number">5.</span> <span class="nav-text">反射和注解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的基本语法"><span class="nav-number">2.</span> <span class="nav-text">注解的基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的属性"><span class="nav-number">2.2.</span> <span class="nav-text">注解的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见注解"><span class="nav-number">3.</span> <span class="nav-text">常见注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种元注解"><span class="nav-number">3.1.</span> <span class="nav-text">五种元注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java预置注解"><span class="nav-number">3.2.</span> <span class="nav-text">Java预置注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的作用"><span class="nav-number">4.</span> <span class="nav-text">注解的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和注解"><span class="nav-number">5.</span> <span class="nav-text">反射和注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的注解的解析"><span class="nav-number">5.1.</span> <span class="nav-text">类的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法的注解的解析"><span class="nav-number">5.2.</span> <span class="nav-text">方法的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的属性的注解的解析"><span class="nav-number">5.3.</span> <span class="nav-text">类的属性的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">5.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -851,7 +860,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.7k</span>
+    <span title="Site words total count">57.1k</span>
   
 </div>
 
