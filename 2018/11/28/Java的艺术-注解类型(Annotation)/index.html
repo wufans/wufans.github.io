@@ -90,7 +90,7 @@
 <meta property="og:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-06T11:05:47.716Z">
+<meta property="og:updated_time" content="2019-03-06T11:10:32.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-注解类型(Annotation)">
 <meta name="twitter:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,394 字
+                  2,395 字
                 </span>
               
 
@@ -437,7 +437,7 @@
       
         <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551345094255&amp;di=7757ebd7ca42b6b8acc5a3432680f30c&amp;imgtype=0&amp;src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png" alt="此处输入图片的描述"><br>使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？</p>
 <a id="more"></a>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>注解（Annotation）</strong></p>
+<h2 id="one-概念"><a href="#one-概念" class="headerlink" title=":one: 概念"></a>:one: 概念</h2><p><strong>注解（Annotation）</strong></p>
 <blockquote>
 <p>也叫元数据。一种代码级别的说明。它是JDK1.5及以后版本引入的一个特性，与类、接口、枚举是在同一个层次。它可以声明在包、类、字段、方法、局部变量、方法参数等的前面，用来对这些元素进行说明，注释。<br>这些标记和注释可以在编译、类加载、运行时被读取，并执行响应的处理。<br><strong>通俗地讲，注解相当于给类、属性或者方法贴上一个标签。</strong></p>
 </blockquote>
@@ -826,7 +826,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的基本语法"><span class="nav-number">2.</span> <span class="nav-text">注解的基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的属性"><span class="nav-number">2.2.</span> <span class="nav-text">注解的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见注解"><span class="nav-number">3.</span> <span class="nav-text">常见注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种元注解"><span class="nav-number">3.1.</span> <span class="nav-text">五种元注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java预置注解"><span class="nav-number">3.2.</span> <span class="nav-text">Java预置注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的作用"><span class="nav-number">4.</span> <span class="nav-text">注解的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和注解"><span class="nav-number">5.</span> <span class="nav-text">反射和注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的注解的解析"><span class="nav-number">5.1.</span> <span class="nav-text">类的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法的注解的解析"><span class="nav-number">5.2.</span> <span class="nav-text">方法的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的属性的注解的解析"><span class="nav-number">5.3.</span> <span class="nav-text">类的属性的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">5.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#one-概念"><span class="nav-number">1.</span> <span class="nav-text">:one: 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的基本语法"><span class="nav-number">2.</span> <span class="nav-text">注解的基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的属性"><span class="nav-number">2.2.</span> <span class="nav-text">注解的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见注解"><span class="nav-number">3.</span> <span class="nav-text">常见注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种元注解"><span class="nav-number">3.1.</span> <span class="nav-text">五种元注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java预置注解"><span class="nav-number">3.2.</span> <span class="nav-text">Java预置注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解的作用"><span class="nav-number">4.</span> <span class="nav-text">注解的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和注解"><span class="nav-number">5.</span> <span class="nav-text">反射和注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的注解的解析"><span class="nav-number">5.1.</span> <span class="nav-text">类的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法的注解的解析"><span class="nav-number">5.2.</span> <span class="nav-text">方法的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的属性的注解的解析"><span class="nav-number">5.3.</span> <span class="nav-text">类的属性的注解的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">5.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
             
 
           </div>
