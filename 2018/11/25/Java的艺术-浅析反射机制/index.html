@@ -90,7 +90,7 @@
 <meta property="og:description" content="在运行时发现和使用类的信息 - Java反射。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-05T07:54:00.088Z">
+<meta property="og:updated_time" content="2019-03-06T00:51:38.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-浅谈反射机制">
 <meta name="twitter:description" content="在运行时发现和使用类的信息 - Java反射。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,345 字
+                  2,331 字
                 </span>
               
 
@@ -444,9 +444,9 @@
 <p>以上的做法是很容易想到的，很直观，但是当我们的食材有几十种甚至上百种时，我们要怎么写上百个if else 来判断食材，再实例化对应的类，调用对应的方法。</p>
 <p>有没有更简单的方法？答案是肯定的，我们可以利用反射机制来完成这一工作，在程序运行时根据类名实例化对应的对象，并调用对应的方法</p>
 <p>步骤如下：</p>
-<p>1、首先我们需要用到接口，至于为什么会用到，后文会有解说<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface IFood &#123;</span><br><span class="line">	public void cook();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1、首先我们需要用到接口:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface IFood &#123;</span><br><span class="line">	public void cook();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2、所有的食材类实现这一接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Pork implements IFood&#123;     //猪肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook pork&quot;);</span><br><span class="line">&#125;</span><br><span class="line">public class Beef implements IFood&#123;     //牛肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook beef&quot;);</span><br><span class="line">&#125;</span><br><span class="line">public class Mutton implements IFood&#123;    //羊肉</span><br><span class="line">   public void cook()&#123;</span><br><span class="line">      System.out.println(&quot;cook mutton&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3、接下来我们看看怎么使程序更为简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class test&#123;</span><br><span class="line">      public static void main(String[] args)&#123;</span><br><span class="line">         String food=&quot;Pork&quot;;                   //字符串food代表食物的类</span><br><span class="line">         Class c=Class.forName(food);        //根据字符串food来载入类对象</span><br><span class="line">         Object object=c.newInstance();      //生成对象</span><br><span class="line">         IFood Ifood=(IFood)object;          //强制转型</span><br><span class="line">         Ifood.cook();                       //调用方法</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、接下来我们看看怎么使程序更为简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class test&#123;</span><br><span class="line">      public static void main(String[] args)&#123;</span><br><span class="line">         String food=&quot;Pork&quot;;                 //字符串food代表食物的类</span><br><span class="line">         Class c=Class.forName(food);        //根据字符串food来载入类对象</span><br><span class="line">         Object object=c.newInstance();      //生成对象</span><br><span class="line">         IFood Ifood=(IFood)object;          //强制转型</span><br><span class="line">         Ifood.cook();                       //调用方法</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如此一来我们不需要写冗杂的if else 嵌套了</p>
 <p>只需要利用 Class.forName()方法根据字符串来实例化对应的类，并调用其方法即可。</p>
 <p>当我们需要处理其他的食材的时候只需要添加对应的类即可，而主程序中可以不改变一行代码。</p>
@@ -502,8 +502,8 @@
 <h2 id="反射与Spring框架设计"><a href="#反射与Spring框架设计" class="headerlink" title="反射与Spring框架设计"></a>反射与Spring框架设计</h2><p>反射最重要的用途就是开发各种通用框架。很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。</p>
 <p>Spring内部采用了很多反射机制。<br>很多web框架的前端，实现URI请求映射到Action方法，也可以简单的通过反射来做。<br>这部分内容后面再单独补充。</p>
 <h2 id="反射存在的问题"><a href="#反射存在的问题" class="headerlink" title="反射存在的问题"></a><a href="https://www.sczyh30.com/posts/Java/java-reflection-1/" target="_blank" rel="noopener">反射存在的问题</a></h2><ol>
-<li>由于反射会额外消耗一定的系统资源，因此如果不需要动态地创建一个对象，那么就不需要用反射。</li>
-<li>另外，反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致安全问题。</li>
+<li>由于反射会<strong>额外消耗一定的系统资源</strong>，因此如果不需要动态地创建一个对象，那么就不需要用反射。</li>
+<li>另外，反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致<strong>安全问题</strong>。</li>
 </ol>
 
       
