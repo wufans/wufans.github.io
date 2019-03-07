@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,容器,">
+  <meta name="keywords" content="Java,容器,源码,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？">
-<meta name="keywords" content="Java,容器">
+<meta name="keywords" content="Java,容器,源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java的艺术-Java容器(2)之并发修改异常">
 <meta property="og:url" content="https://yoursite.com/2019/01/06/Java的艺术-Java容器(2)之并发修改异常/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:description" content="ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-07T11:18:21.945Z">
+<meta property="og:updated_time" content="2019-03-07T16:22:37.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-Java容器(2)之并发修改异常">
 <meta name="twitter:description" content="ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  592 字
+                  1,256 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -447,11 +447,25 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">res.add(&quot;a&quot;);</span><br><span class="line">res.add(&quot;b&quot;);</span><br><span class="line">Iterator it = res.iterator();</span><br><span class="line">while(it.hasNext())&#123;</span><br><span class="line">    String s =(String) it.next();</span><br><span class="line">    if(s == &quot;a&quot;)&#123;</span><br><span class="line">        res.add(&quot;c&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面的代码都会出现下面的异常：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:909)</span><br><span class="line">	at java.util.ArrayList$Itr.next(ArrayList.java:859)</span><br><span class="line">	at offer.Solution38.Permutation(Solution38.java:25)</span><br><span class="line">	at offer.Solution38.main(Solution38.java:35)</span><br></pre></td></tr></table></figure>
-<h2 id="为什么会出现“并发修改异常”？"><a href="#为什么会出现“并发修改异常”？" class="headerlink" title="为什么会出现“并发修改异常”？"></a><strong>为什么会出现“并发修改异常”？</strong></h2><blockquote>
-<p>分析源码，在多线程程序中，如果有多个线程都在使用一个集合对象X，假设X的modCount变量的初值为5，则X的迭代器的expectedModCount变量的初值也是5。可能出现这样一种情况：A线程正在对X进行遍历，而B线程对X进行增删，每增加或修改一次时，X的modCount都会加1，假设B线程删除了一个元素，此时modCount变成了6。A线程继续迭代，当A线程调用迭代器的next()方法时，发现modCount不等于expectedModCount，因此就抛出了ConcurrentModificationException异常。这可能就是它为什么叫并发修改异常的原因。从这一点也能说明ArrayList不是线程安全的。</p>
+<h2 id="为什么会出现“并发修改异常”？"><a href="#为什么会出现“并发修改异常”？" class="headerlink" title="为什么会出现“并发修改异常”？"></a><strong>为什么会出现“并发修改异常”？</strong></h2><h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a><font color="red"><strong>源码分析</strong></font></h3><p>首先我们看ArrayList类的源码，其iterator()方法为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public Iterator&lt;E&gt; iterator() &#123;</span><br><span class="line">        return new Itr();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>返回一个新建的<strong>Itr</strong>对象，源码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Itr() &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>是个没有内容内部类，我们只能看看ArrayList的父类AbstractList有没有对应的内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">private class Itr implements Iterator&lt;E&gt; &#123;</span><br><span class="line">        /**</span><br><span class="line">         * Index of element to be returned by subsequent call to next.</span><br><span class="line">         */</span><br><span class="line">        int cursor = 0;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * Index of element returned by most recent call to next or</span><br><span class="line">         * previous.  Reset to -1 if this element is deleted by a call</span><br><span class="line">         * to remove.</span><br><span class="line">         */</span><br><span class="line">        int lastRet = -1;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * The modCount value that the iterator believes that the backing</span><br><span class="line">         * List should have.  If this expectation is violated, the iterator</span><br><span class="line">         * has detected concurrent modification.</span><br><span class="line">         */</span><br><span class="line">        int expectedModCount = modCount;</span><br><span class="line"></span><br><span class="line">        public boolean hasNext() &#123;</span><br><span class="line">            return cursor != size();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public E next() &#123;</span><br><span class="line">            checkForComodification();</span><br><span class="line">            try &#123;</span><br><span class="line">                int i = cursor;</span><br><span class="line">                E next = get(i);</span><br><span class="line">                lastRet = i;</span><br><span class="line">                cursor = i + 1;</span><br><span class="line">                return next;</span><br><span class="line">            &#125; catch (IndexOutOfBoundsException e) &#123;</span><br><span class="line">                checkForComodification();</span><br><span class="line">                throw new NoSuchElementException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void remove() &#123;</span><br><span class="line">            if (lastRet &lt; 0)</span><br><span class="line">                throw new IllegalStateException();</span><br><span class="line">            checkForComodification();</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                AbstractList.this.remove(lastRet);</span><br><span class="line">                if (lastRet &lt; cursor)</span><br><span class="line">                    cursor--;</span><br><span class="line">                lastRet = -1;</span><br><span class="line">                expectedModCount = modCount;</span><br><span class="line">            &#125; catch (IndexOutOfBoundsException e) &#123;</span><br><span class="line">                throw new ConcurrentModificationException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        final void checkForComodification() &#123;</span><br><span class="line">            if (modCount != expectedModCount)</span><br><span class="line">                throw new ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>是一个实现了<strong>Iterator</strong>接口的私有内部类。<br>分析它的<strong>hasNext()</strong>方法，会发现一个成员变量<strong>cursor</strong>。分析发现，这个变量表示下一个要访问元素的索引，当索引大于集合的<strong>size()</strong>后，则<strong>hasNext()=false</strong>。并且，<strong>next()</strong>方法返回的元素调用了<strong>get(cursor)</strong>,而get()方法在ArrayList中为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public E get(int index) &#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    return elementData(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而elementData就是用来存储ArrayList的数组。<br>什么时候会出现ConcurrentModificationException呢？<br>我们发现了Itr类的两个方法<strong>remove()和checkForComodification()</strong>会抛出这个异常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void remove() &#123;</span><br><span class="line">        if (lastRet &lt; 0)</span><br><span class="line">            throw new IllegalStateException();</span><br><span class="line">        checkForComodification();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            AbstractList.this.remove(lastRet);</span><br><span class="line">            if (lastRet &lt; cursor)</span><br><span class="line">                cursor--;</span><br><span class="line">            lastRet = -1;</span><br><span class="line">            expectedModCount = modCount;</span><br><span class="line">        &#125; catch (IndexOutOfBoundsException e) &#123;</span><br><span class="line">            throw new ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以及<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">final void checkForComodification() &#123;</span><br><span class="line">            if (modCount != expectedModCount)</span><br><span class="line">                throw new ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们观察上面抛出异常的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">res.add(&quot;a&quot;);</span><br><span class="line">res.add(&quot;b&quot;);</span><br><span class="line">Iterator it = res.iterator();</span><br><span class="line">while(it.hasNext())&#123;</span><br><span class="line">    String s =(String) it.next();</span><br><span class="line">    if(s == &quot;a&quot;)&#123;</span><br><span class="line">        res.add(&quot;c&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>首先在next()方法中会调用<strong>checkForComodification()</strong>方法，然后根据cursor的值获取到元素，接着将cursor的值赋给lastRet，并对cursor的值进行加1操作。初始时，cursor为0，lastRet为-1，那么调用一次之后，cursor的值为1，lastRet的值为0。注意此时，<strong>modCount为0，expectedModCount也为0</strong>。</p>
+<p>随后，代码调用了res.add(“c”)。<br>查看源码，ArrayList的add()方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">        ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">        elementData[size++] = e;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>再查看ensureCapacityInternal()的源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">        ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">        modCount++;</span><br><span class="line"></span><br><span class="line">        // overflow-conscious code</span><br><span class="line">        if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们发现了关键一行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modCount++;</span><br></pre></td></tr></table></figure></p>
+<p>此时，<strong>modCount为1，expectedModCount为0</strong>。<br>在调用next()方法时，执行<strong>checkForComodification()</strong>显然就会抛出<strong>ConcurrentModificationException()</strong>！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">final void checkForComodification() &#123;</span><br><span class="line">    if (modCount != expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>终于解决了这个疑惑！</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><blockquote>
+<p>分析源码，在多线程程序中，如果有多个线程都在使用一个集合对象X，线程继续迭代，当A线程调用迭代器的next()方法时，发现modCount不等于expectedModCount，因此就抛出了ConcurrentModificationException异常。这可能就是它为什么叫并发修改异常的原因。<strong>从这一点也能说明ArrayList不是线程安全的。</strong></p>
 </blockquote>
 <blockquote>
-<p>简单来说，调用list.remove()方法导致modCount和expectedModCount的值不一致。使用for-each进行迭代实际上也会出现这种问题。</p>
+<p>简单来说，调用list.remove(),list.add()方法导致modCount和expectedModCount的值不一致。使用for-each进行迭代实际上也会出现这种问题。</p>
 </blockquote>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h2><p>一般有2种解决办法：</p>
 <blockquote>
@@ -510,6 +524,8 @@
             <a href="/tags/Java/" rel="tag"># Java</a>
           
             <a href="/tags/容器/" rel="tag"># 容器</a>
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
           
         </div>
       
@@ -639,7 +655,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -723,7 +739,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候出现“并发修改异常”？"><span class="nav-number">1.</span> <span class="nav-text">什么时候出现“并发修改异常”？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会出现“并发修改异常”？"><span class="nav-number">2.</span> <span class="nav-text">为什么会出现“并发修改异常”？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候出现“并发修改异常”？"><span class="nav-number">1.</span> <span class="nav-text">什么时候出现“并发修改异常”？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会出现“并发修改异常”？"><span class="nav-number">2.</span> <span class="nav-text">为什么会出现“并发修改异常”？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.1.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">2.2.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
             
 
           </div>
@@ -757,7 +773,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64.1k</span>
+    <span title="Site words total count">64.7k</span>
   
 </div>
 
