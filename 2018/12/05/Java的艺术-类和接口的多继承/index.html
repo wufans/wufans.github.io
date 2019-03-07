@@ -90,7 +90,7 @@
 <meta property="og:description" content="Java也有多继承？来看看JDK8的这个新特性！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-07T02:53:17.109Z">
+<meta property="og:updated_time" content="2019-03-07T02:56:29.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-类和接口的多继承">
 <meta name="twitter:description" content="Java也有多继承？来看看JDK8的这个新特性！">
@@ -440,11 +440,15 @@
 <p>Java接口是一系列方法的声明，是一些方法特征的集合，一个接口只有方法的特征没有方法的实现，因此这些方法可以在不同的地方被不同的类实现，而这些实现可以具有不同的行为（功能）。</p>
 </blockquote>
 <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><blockquote>
-<p><strong>(JDK8以前)</strong>接口中可以含有 变量和方法。但是要注意，接口中的变量会被隐式地指定为<strong>public static final</strong>变量（并且只能是public static final变量，用private修饰会报编译错误），而方法会被隐式地指定为<strong>public abstract</strong>方法且只能是public abstract方法（用其他关键字，比如private、protected、static、 final等修饰会报编译错误），并且<strong>接口中所有的方法不能有具体的实现</strong>，也就是说，<font color="red"><strong>接口中的方法必须都是抽象方法</strong></font>。从这里可以隐约看出接口和抽象类的区别，接口是一种极度抽象的类型，它比抽象类更加“抽象”，并且一般情况下不在接口中定义变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface Test &#123;</span><br><span class="line">    //default关键字不能省略，否则提示Interface abstract methods cannot have body</span><br><span class="line">    default String test(String str)&#123;</span><br><span class="line">        return str;</span><br><span class="line">    &#125;</span><br><span class="line">    //默认为public,abstract的</span><br><span class="line">    int test2();</span><br><span class="line">    //default关键字不能与abstact同时修饰接口方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>(JDK8以前)</strong>接口中可以含有 变量和方法。但是要注意，接口中的变量会被隐式地指定为<strong>public static final</strong>变量（并且只能是public static final变量，用private修饰会报编译错误），而方法会被隐式地指定为<strong>public abstract</strong>方法且只能是public abstract方法（用其他关键字，比如private、protected、static、 final等修饰会报编译错误）</p>
+</blockquote>
+<blockquote>
+<p>并且<strong>接口中所有的方法不能有具体的实现</strong>，也就是说，<font color="red"><strong>接口中的方法必须都是抽象方法</strong></font>。从这里可以隐约看出接口和抽象类的区别，接口是一种极度抽象的类型，它比抽象类更加“抽象”，并且一般情况下不在接口中定义变量。</p>
 </blockquote>
 <h3 id="Java8-新特性"><a href="#Java8-新特性" class="headerlink" title="Java8 新特性"></a>Java8 新特性</h3><blockquote>
 <p><font color="red"><strong>但是，自从Java 8发布后，接口中也可以自定义方法了（default method）</strong></font>。这样如果为很多继承了同一个接口的类增加功能，不必对这些类重新设计。</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface Test &#123;</span><br><span class="line">    //default关键字不能省略，否则提示Interface abstract methods cannot have body</span><br><span class="line">    default String test(String str)&#123;</span><br><span class="line">        return str;</span><br><span class="line">    &#125;</span><br><span class="line">    //默认为public,abstract的</span><br><span class="line">    int test2();</span><br><span class="line">    //default关键字不能与abstact同时修饰接口方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>同时，接口方法也可以被<strong>static</strong>修饰。</p>
 </blockquote>
