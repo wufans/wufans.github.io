@@ -84,16 +84,16 @@
 <meta name="description" content="详解JAVA容器。">
 <meta name="keywords" content="Java,容器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的艺术-Java容器基础解析（1）">
-<meta property="og:url" content="https://yoursite.com/2019/01/05/Java的艺术-Java容器（1）/index.html">
+<meta property="og:title" content="Java的艺术-Java容器(1)之容器基础">
+<meta property="og:url" content="https://yoursite.com/2019/01/05/Java的艺术-Java容器(1)之容器基础/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
 <meta property="og:description" content="详解JAVA容器。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/07/kxN22n.md.jpg">
-<meta property="og:updated_time" content="2019-03-07T10:57:03.440Z">
+<meta property="og:updated_time" content="2019-03-07T11:18:56.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的艺术-Java容器基础解析（1）">
+<meta name="twitter:title" content="Java的艺术-Java容器(1)之容器基础">
 <meta name="twitter:description" content="详解JAVA容器。">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://yoursite.com/2019/01/05/Java的艺术-Java容器（1）/">
+  <link rel="canonical" href="https://yoursite.com/2019/01/05/Java的艺术-Java容器(1)之容器基础/">
 
 
 
 
 
-  <title>Java的艺术-Java容器基础解析（1） | Fan Wu's Blog</title>
+  <title>Java的艺术-Java容器(1)之容器基础 | Fan Wu's Blog</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2019/01/05/Java的艺术-Java容器（1）/">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2019/01/05/Java的艺术-Java容器(1)之容器基础/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fan Wu">
@@ -328,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Java的艺术-Java容器基础解析（1）</h2>
+          <h2 class="post-title" itemprop="name headline">Java的艺术-Java容器(1)之容器基础</h2>
         
 
         <div class="post-meta">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,230 字
+                  4,240 字
                 </span>
               
 
@@ -592,7 +592,7 @@
 </blockquote>
 <h2 id="容器的遍历"><a href="#容器的遍历" class="headerlink" title="容器的遍历"></a><font color="red"><strong>容器的遍历</strong></font></h2><h3 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a><strong>迭代器模式</strong></h3><p>Collection 实现了 Iterable 接口，其中的 iterator() 方法能够产生一个 Iterator 对象，通过这个对象就可以迭代遍历 Collection 中的元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Iterator it = container.iterator();</span><br><span class="line">while(it.hasNext()) &#123;</span><br><span class="line">　　Object obj = it.next();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="List遍历"><a href="#List遍历" class="headerlink" title="List遍历"></a><strong>List遍历</strong></h3><p>主要有三种：<br>第一种：迭代器+for<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(Iterator iterator = list.iterator();iterator.hasNext();)&#123;                    </span><br><span class="line">    int i = (Integer) iterator.next();                   </span><br><span class="line">    System.out.println(i);               </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>第二种：迭代器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Iterator iterator = list.iterator();</span><br><span class="line">while(iterator.hasNext())&#123;</span><br><span class="line">    int i = (Integer) iterator.next();</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二种：迭代器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Iterator iterator = list.iterator();</span><br><span class="line">while(iterator.hasNext())&#123;</span><br><span class="line">    int i = (Integer) iterator.next();//注意next()返回的是Object对象！！</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>第三种：增强for<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (Object object : list) &#123;</span><br><span class="line">    System.out.println(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>第四种：普通for<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(int i = 0 ;i&lt;list.size();i++) &#123;  </span><br><span class="line">    int j= (Integer) list.get(i);</span><br><span class="line">    System.out.println(j);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a><strong>Map遍历</strong></h3><p><strong>有四种：</strong></p>
@@ -628,7 +628,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接:</strong>
-    <a href="/2019/01/05/Java的艺术-Java容器（1）/" title="Java的艺术-Java容器基础解析（1）">2019/01/05/Java的艺术-Java容器（1）/</a>
+    <a href="/2019/01/05/Java的艺术-Java容器(1)之容器基础/" title="Java的艺术-Java容器(1)之容器基础">2019/01/05/Java的艺术-Java容器(1)之容器基础/</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议:</strong>
@@ -668,8 +668,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/21/算法之美-回溯/" rel="prev" title="算法之美-回溯">
-                算法之美-回溯 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/06/Java的艺术-Java容器(2)之并发修改异常/" rel="prev" title="Java的艺术-Java容器(2)之并发修改异常">
+                Java的艺术-Java容器(2)之并发修改异常 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -753,7 +753,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -893,7 +893,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">63.5k</span>
+    <span title="Site words total count">64.1k</span>
   
 </div>
 
