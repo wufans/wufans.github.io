@@ -90,7 +90,7 @@
 <meta property="og:description" content="一文道尽Java数据类型怎么用。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-11T14:17:44.026Z">
+<meta property="og:updated_time" content="2019-03-12T00:51:36.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-数据类型详解">
 <meta name="twitter:description" content="一文道尽Java数据类型怎么用。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,234 字
+                  3,205 字
                 </span>
               
 
@@ -454,7 +454,68 @@
 <p><strong>double</strong>：双精度浮点型，用于存储带有小数点的数字，在内存中占64位，即8个字节，默认值0</p>
 <p><strong>char</strong>：字符型，用于存储单个字符，占16位，即2个字节，取值范围0~65535，默认值为空</p>
 <p><strong>boolean</strong>：布尔类型，占<a href="https://www.jianshu.com/p/2f663dc820d0" target="_blank" rel="noopener">1位，1个字节或者四个字节(存在不同解释角度)</a>，用于判断真或假（仅有两个值，即true、false），默认值false。</p>
-<p>Java中基本类型的存储是固定字节的，具体大小与对应的包装类型如下：<br>|基本类型 |存储位数 |包装类型 |<br>|:-:|:-:|:-:|<br>|boolean|<a href="https://www.jianshu.com/p/2f663dc820d0" target="_blank" rel="noopener">1,8,32</a>|Boolean|<br>|byte|8|Byte|<br>|char|16|Character|<br>|short|16|Short|<br>|int|32|Integer|<br>|long|64|Long|<br>|float|32|Float|<br>|double|64|Double|<br>|X|X|BigInteger|<br>|X|X|BigDecimal|</p>
+<p>Java中基本类型的存储是固定字节的，具体大小与对应的包装类型如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">基本类型</th>
+<th style="text-align:center">存储位数</th>
+<th style="text-align:center">包装类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center"><a href="https://www.jianshu.com/p/2f663dc820d0" target="_blank" rel="noopener">1,8,32</a></td>
+<td style="text-align:center">Boolean</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">Byte</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">Character</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">Short</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">Integer</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">64</td>
+<td style="text-align:center">Long</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">Float</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">64</td>
+<td style="text-align:center">Double</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">BigInteger</td>
+</tr>
+<tr>
+<td style="text-align:center">X</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">BigDecimal</td>
+</tr>
+</tbody>
+</table>
 <h3 id="封装类型特征"><a href="#封装类型特征" class="headerlink" title="封装类型特征"></a>封装类型特征</h3><blockquote>
 <p>每个基本类型都有一个包装类，这些包装类包含在<strong>java.lang</strong>包中。继承关系如下：</p>
 </blockquote>
