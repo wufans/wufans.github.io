@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1689841-383f7101e6588094.png?imageMogr2/auto-orient/strip%7CimageView2/2">
-<meta property="og:updated_time" content="2019-03-11T03:11:31.020Z">
+<meta property="og:updated_time" content="2019-03-12T00:40:07.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-多线程(1)">
 <meta name="twitter:description" content="详解Java的多线程编程。">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,318 字
+                  3,446 字
                 </span>
               
 
@@ -497,14 +497,26 @@
 <li><p>当一个线程在执行操作共享数据的多条代码过程中，其他线程参与了运算。就会导致线程安全问题的产生。</p>
 </li>
 </ul>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><ul>
-<li><p>同步代码块<br>将多条操作共享数据的线程代码封装起来，当有线程在执行这些代码的时候，其他线程时不可以参与运算的。必须要当前线程把这些代码都执行完毕后，其他线程才可以参与运算。在java中，用同步代码块就可以解决这个问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> ynchronized(对象)</span><br><span class="line">&#123;</span><br><span class="line">需要被同步的代码 ；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解决办法synchronized"><a href="#解决办法synchronized" class="headerlink" title="解决办法synchronized"></a>解决办法synchronized</h3><ul>
+<li><p>修饰同步代码块</p>
+<blockquote>
+<p>将多条操作共享数据的线程代码封装起来，当有线程在执行这些代码的时候，其他线程时不可以参与运算的。必须要当前线程把这些代码都执行完毕后，其他线程才可以参与运算。在java中，用同步代码块就可以解决这个问题。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> synchronized(对象)</span><br><span class="line">&#123;</span><br><span class="line">需要被同步的代码 ；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>同步函数(方法)</p>
+<li><p>修饰同步函数(方法)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 修饰符 synchronized 返回值 方法名()&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<blockquote>
+<p>修饰一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；</p>
+</blockquote>
+<blockquote>
+<p>修饰一个类，其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。</p>
+</blockquote>
+<blockquote>
+<p>Synchronized的作用主要有三个：<br>（1）确保线程互斥的访问同步代码<br>（2）保证共享变量的修改能够及时可见<br>（3）有效解决重排序问题。</p>
+</blockquote>
 <h3 id="好处和弊端"><a href="#好处和弊端" class="headerlink" title="好处和弊端"></a>好处和弊端</h3><p>同步的好处：解决了线程的安全问题。</p>
 <p>同步的弊端：相对降低了效率，因为同步外的线程的都会判断同步锁。</p>
 <p>同步的前提：同步中必须有多个线程并使用同一个锁。</p>
@@ -764,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的生命周期"><span class="nav-number">2.</span> <span class="nav-text">线程的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的优先级"><span class="nav-number">3.</span> <span class="nav-text">线程的优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的实现"><span class="nav-number">4.</span> <span class="nav-text">线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">4.1.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类本身"><span class="nav-number">4.2.</span> <span class="nav-text">继承Thread类本身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Callabel和Future创建线程（不常用）"><span class="nav-number">4.3.</span> <span class="nav-text">通过Callabel和Future创建线程（不常用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种方式对比"><span class="nav-number">5.</span> <span class="nav-text">三种方式对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread的run-和start-方法的区别"><span class="nav-number">6.</span> <span class="nav-text">Thread的run()和start()方法的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终止线程的方法"><span class="nav-number">7.</span> <span class="nav-text">终止线程的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全问题"><span class="nav-number">8.</span> <span class="nav-text">线程安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全问题产生的原因"><span class="nav-number">8.1.</span> <span class="nav-text">安全问题产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法"><span class="nav-number">8.2.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#好处和弊端"><span class="nav-number">8.3.</span> <span class="nav-text">好处和弊端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁问题"><span class="nav-number">8.4.</span> <span class="nav-text">死锁问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程常见问题汇总"><span class="nav-number">9.</span> <span class="nav-text">多线程常见问题汇总</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的生命周期"><span class="nav-number">2.</span> <span class="nav-text">线程的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的优先级"><span class="nav-number">3.</span> <span class="nav-text">线程的优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的实现"><span class="nav-number">4.</span> <span class="nav-text">线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">4.1.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类本身"><span class="nav-number">4.2.</span> <span class="nav-text">继承Thread类本身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Callabel和Future创建线程（不常用）"><span class="nav-number">4.3.</span> <span class="nav-text">通过Callabel和Future创建线程（不常用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种方式对比"><span class="nav-number">5.</span> <span class="nav-text">三种方式对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread的run-和start-方法的区别"><span class="nav-number">6.</span> <span class="nav-text">Thread的run()和start()方法的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终止线程的方法"><span class="nav-number">7.</span> <span class="nav-text">终止线程的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程安全问题"><span class="nav-number">8.</span> <span class="nav-text">线程安全问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全问题产生的原因"><span class="nav-number">8.1.</span> <span class="nav-text">安全问题产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法synchronized"><span class="nav-number">8.2.</span> <span class="nav-text">解决办法synchronized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#好处和弊端"><span class="nav-number">8.3.</span> <span class="nav-text">好处和弊端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁问题"><span class="nav-number">8.4.</span> <span class="nav-text">死锁问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程常见问题汇总"><span class="nav-number">9.</span> <span class="nav-text">多线程常见问题汇总</span></a></li></ol></div>
             
 
           </div>
@@ -798,7 +810,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">60.9k</span>
+    <span title="Site words total count">61.0k</span>
   
 </div>
 
