@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb4fJ.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbgmV.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb6O0.png">
-<meta property="og:updated_time" content="2018-12-27T04:07:35.386Z">
+<meta property="og:updated_time" content="2019-03-14T03:01:06.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Donkeycar教程">
 <meta name="twitter:description" content="摘要：本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。">
@@ -442,7 +442,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6,417 字
+                  6,420 字
                 </span>
               
 
@@ -572,7 +572,7 @@
 <h4 id="在本地PC安装donkeycar并创建本地工作目录"><a href="#在本地PC安装donkeycar并创建本地工作目录" class="headerlink" title="在本地PC安装donkeycar并创建本地工作目录"></a>在本地PC安装donkeycar并创建本地工作目录</h4><p>接下来是在本地笔记本电脑或服务器上设置相同的代码库，以便测试和训练智能小车。安装因平台而异。有如下三种方法，仅给出了windows上的安装结果。</p>
 <h5 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h5><p>❤安装miniconda Python 3.6 64 bit. <a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br>❤确保选中该框以允许它修改您的系统路径变量以添加conda。<br>❤安装git 64 bit，<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a><br>❤从开始菜单启动Anaconda<br>❤更改为您希望用作项目主管的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir projects</span><br><span class="line">cd projects</span><br></pre></td></tr></table></figure></p>
 <p>❤安装donkeycar<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/wroscoe/donkey</span><br><span class="line">cd donkey</span><br></pre></td></tr></table></figure></p>
-<p>❤创建Python Anaconda环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f envs\windows.yml</span><br><span class="line">activate donkey</span><br></pre></td></tr></table></figure></p>
+<p>❤创建Python Anaconda环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env create -n donkeycar -f install\envs\windows.yml</span><br><span class="line">activate donkey</span><br></pre></td></tr></table></figure></p>
 <p>❤安装代码源并创建您的本地工作目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -e .</span><br><span class="line">donkey createcar --path ~/d2 #本地工作目录名称设置为d2，可以自己定义</span><br></pre></td></tr></table></figure></p>
 <p>安装结果：<br><img src="https://s1.ax1x.com/2018/07/15/PMbkW9.png" alt="此处输入图片的描述"><br>注意：在关闭Anaconda提示符后，当再次打开它时，您需要键入activate donkey以重新启用映射到特定于donkey的Python库。（关于anaconda的使用，可以参考<a href="https://s1.ax1x.com/2018/07/15/PMHORs.jpg" target="_blank" rel="noopener">10</a>）<br>项目主管目录示例：<br><img src="https://s1.ax1x.com/2018/07/15/PMbVQ1.png" alt="此处输入图片的描述"><br>创建的本地工作目录示例：<br><img src="https://s1.ax1x.com/2018/07/15/PMbneK.png" alt="此处输入图片的描述"></p>
 <h5 id="Linux系统"><a href="#Linux系统" class="headerlink" title="Linux系统"></a>Linux系统</h5><p>❤安装依赖和python环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install virtualenv build-essential python3-dev gfortran libhdf5-dev</span><br><span class="line">virtualenv env -p python3</span><br><span class="line">source env/bin/activate</span><br><span class="line">pip install keras==2.0.6</span><br><span class="line">pip install tensorflow==1.3.0</span><br></pre></td></tr></table></figure></p>
