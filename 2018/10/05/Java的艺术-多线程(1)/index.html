@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1689841-383f7101e6588094.png?imageMogr2/auto-orient/strip%7CimageView2/2">
-<meta property="og:updated_time" content="2019-03-15T15:22:31.849Z">
+<meta property="og:updated_time" content="2019-03-15T15:51:51.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-多线程初探(1)">
 <meta name="twitter:description" content="本文介绍Java中线程、进程、多线程的概念，详细介绍多线程的不同实现方式，从源码分析Callable()接口和Runnable()接口和FutureTask类。">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,321 字
+                  3,322 字
                 </span>
               
 
@@ -451,7 +451,7 @@
 <blockquote>
 <p>问题：Java程序运行至少启动几个线程？<br>至少启动两个线程，每当使用 Java 命令执行一个类时，实际上都会启动一个 JVM，每一个JVM实际上就是在操作系统中启动一个线程，Java 本身具备了垃圾的收集机制。所以在 Java 运行时至少会启动两个线程，一个是 main 线程，另外一个是垃圾收集线程。</p>
 </blockquote>
-<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a><a href="http://www.runoob.com/java/java-multithreading.html" target="_blank" rel="noopener"><font color="red">线程的生命周期</font></a></h2><p><strong>新建状态:</strong><br>使用 new 关键字和 Thread 类或其子类建立一个线程对象后，该线程对象就处于新建状态。它保持这个状态直到程序 start() 这个线程。</p>
+<h2 id="二、线程的生命周期"><a href="#二、线程的生命周期" class="headerlink" title="二、线程的生命周期"></a><a href="http://www.runoob.com/java/java-multithreading.html" target="_blank" rel="noopener"><font color="red">二、线程的生命周期</font></a></h2><p><strong>新建状态:</strong><br>使用 new 关键字和 Thread 类或其子类建立一个线程对象后，该线程对象就处于新建状态。它保持这个状态直到程序 start() 这个线程。</p>
 <p><strong>就绪状态:</strong><br>当线程对象调用了start()方法之后，该线程就进入就绪状态。就绪状态的线程处于就绪队列中，要等待JVM里线程调度器的调度。</p>
 <p><strong>运行状态:</strong><br>如果就绪状态的线程获取 CPU 资源，就可以执行 run()，此时线程便处于运行状态。处于运行状态的线程最为复杂，它可以变为阻塞状态、就绪状态和死亡状态。</p>
 <p><strong>阻塞状态:</strong><br>如果一个线程执行了sleep（睡眠）、suspend（挂起）等方法，失去所占用资源之后，该线程就从运行状态进入阻塞状态。在睡眠时间已到或获得设备资源后可以重新进入就绪状态。可以分为三种：</p>
@@ -469,7 +469,7 @@
 <p>Java 线程的优先级是一个整数，其取值范围是 <strong>1 （Thread.MIN_PRIORITY ） - 10 （Thread.MAX_PRIORITY ）</strong>。</p>
 <p>默认情况下，每一个线程都会分配一个优先级 NORM_PRIORITY（5）。</p>
 <p>具有较高优先级的线程对程序更重要，并且应该在低优先级的线程之前分配处理器资源。但是，线程优先级不能保证线程执行的顺序，而且非常依赖于平台。</p>
-<h2 id="三、线程的实现"><a href="#三、线程的实现" class="headerlink" title="三、线程的实现"></a><font color="red">三、线程的实现</font></h2><p>Java提供了三种创建线程的方法：</p>
+<h2 id="四、线程的实现"><a href="#四、线程的实现" class="headerlink" title="四、线程的实现"></a><font color="red">四、线程的实现</font></h2><p>Java提供了三种创建线程的方法：</p>
 <h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><ul>
 <li>声明实现 Runnable 接口的类。该类然后实现 run 方法。然后创建Runnable的子类对象，传入到某个线程的构造方法中，开启线程。</li>
 <li>将线程的任务从线程的子类中分离出来，进行了单独的封装。按照面向对象的思想将任务的封装成对象。</li>
@@ -492,10 +492,10 @@
 </li>
 </ol>
 <h3 id="Thread的run-和start-方法的区别"><a href="#Thread的run-和start-方法的区别" class="headerlink" title="Thread的run()和start()方法的区别"></a>Thread的run()和start()方法的区别</h3><p>start()：该方法是在当前线程中启动一个新的线程，而新启动的线程会调用run()方法，同时该方法不能重复调用；<br>run()  ：该方法和普通的方法一样，可以重复执行，不会创建新的线程。</p>
-<h2 id="四、终止线程"><a href="#四、终止线程" class="headerlink" title="四、终止线程"></a>四、终止线程</h2><p>1、当run方法执行完毕，自动终止；</p>
+<h2 id="五、终止线程"><a href="#五、终止线程" class="headerlink" title="五、终止线程"></a>五、终止线程</h2><p>1、当run方法执行完毕，自动终止；</p>
 <p>2、使用stop方法，不过这个方法不推荐使用，会有意料不到的后果；</p>
 <p>3、使用interrupt方法</p>
-<h2 id="五、源码解析"><a href="#五、源码解析" class="headerlink" title="五、源码解析"></a>五、<strong>源码解析</strong></h2><h3 id="Runnable-和-Callable-接口的源码"><a href="#Runnable-和-Callable-接口的源码" class="headerlink" title="Runnable 和 Callable 接口的源码"></a>Runnable 和 Callable 接口的源码</h3><p>从源码看返回值的差别：</p>
+<h2 id="六、源码解析"><a href="#六、源码解析" class="headerlink" title="六、源码解析"></a>六、<strong>源码解析</strong></h2><h3 id="Runnable-和-Callable-接口的源码"><a href="#Runnable-和-Callable-接口的源码" class="headerlink" title="Runnable 和 Callable 接口的源码"></a>Runnable 和 Callable 接口的源码</h3><p>从源码看返回值的差别：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Callable</span>&lt;<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">	<span class="function">V <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="FutureTask类源码"><a href="#FutureTask类源码" class="headerlink" title="FutureTask类源码"></a>FutureTask类源码</h3><p>FutureTask用来包装实现了Callable接口的类，创建有返回值的多线程。<br>FutureTask的继承关系如下：</p>
 <ul>
@@ -774,7 +774,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、进程与线程"><span class="nav-number">1.</span> <span class="nav-text">一、进程与线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的生命周期"><span class="nav-number">2.</span> <span class="nav-text">线程的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线程的优先级"><span class="nav-number">3.</span> <span class="nav-text">二、线程的优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、线程的实现"><span class="nav-number">4.</span> <span class="nav-text">三、线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">4.1.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类本身"><span class="nav-number">4.2.</span> <span class="nav-text">继承Thread类本身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Callabel和Future创建线程（不常用）"><span class="nav-number">4.3.</span> <span class="nav-text">通过Callabel和Future创建线程（不常用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三种方式对比"><span class="nav-number">4.4.</span> <span class="nav-text">三种方式对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread的run-和start-方法的区别"><span class="nav-number">4.5.</span> <span class="nav-text">Thread的run()和start()方法的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、终止线程"><span class="nav-number">5.</span> <span class="nav-text">四、终止线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、源码解析"><span class="nav-number">6.</span> <span class="nav-text">五、源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Runnable-和-Callable-接口的源码"><span class="nav-number">6.1.</span> <span class="nav-text">Runnable 和 Callable 接口的源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FutureTask类源码"><span class="nav-number">6.2.</span> <span class="nav-text">FutureTask类源码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、进程与线程"><span class="nav-number">1.</span> <span class="nav-text">一、进程与线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线程的生命周期"><span class="nav-number">2.</span> <span class="nav-text">二、线程的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线程的优先级"><span class="nav-number">3.</span> <span class="nav-text">二、线程的优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、线程的实现"><span class="nav-number">4.</span> <span class="nav-text">四、线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">4.1.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread类本身"><span class="nav-number">4.2.</span> <span class="nav-text">继承Thread类本身</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Callabel和Future创建线程（不常用）"><span class="nav-number">4.3.</span> <span class="nav-text">通过Callabel和Future创建线程（不常用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三种方式对比"><span class="nav-number">4.4.</span> <span class="nav-text">三种方式对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread的run-和start-方法的区别"><span class="nav-number">4.5.</span> <span class="nav-text">Thread的run()和start()方法的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、终止线程"><span class="nav-number">5.</span> <span class="nav-text">五、终止线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、源码解析"><span class="nav-number">6.</span> <span class="nav-text">六、源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Runnable-和-Callable-接口的源码"><span class="nav-number">6.1.</span> <span class="nav-text">Runnable 和 Callable 接口的源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FutureTask类源码"><span class="nav-number">6.2.</span> <span class="nav-text">FutureTask类源码</span></a></li></ol></li></ol></div>
             
 
           </div>
