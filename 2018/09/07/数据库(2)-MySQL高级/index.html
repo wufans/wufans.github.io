@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,容器,源码,">
+  <meta name="keywords" content="数据库,MySQL,">
 
 
 
@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？">
-<meta name="keywords" content="Java,容器,源码">
+<meta name="description" content="MySQL特性，多表查询与SQL注入的介绍。">
+<meta name="keywords" content="数据库,MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的艺术-Java容器(2)之并发修改异常">
-<meta property="og:url" content="https://yoursite.com/2019/01/06/Java的艺术-Java容器(2)之并发修改异常/index.html">
+<meta property="og:title" content="数据库(2)-SQL其他须知">
+<meta property="og:url" content="https://yoursite.com/2018/09/07/数据库(2)-MySQL高级/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
-<meta property="og:description" content="ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？">
+<meta property="og:description" content="MySQL特性，多表查询与SQL注入的介绍。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-12T07:39:23.615Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
+<meta property="og:updated_time" content="2019-03-16T13:05:51.870Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的艺术-Java容器(2)之并发修改异常">
-<meta name="twitter:description" content="ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
+<meta name="twitter:title" content="数据库(2)-SQL其他须知">
+<meta name="twitter:description" content="MySQL特性，多表查询与SQL注入的介绍。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://yoursite.com/2019/01/06/Java的艺术-Java容器(2)之并发修改异常/">
+  <link rel="canonical" href="https://yoursite.com/2018/09/07/数据库(2)-MySQL高级/">
 
 
 
 
 
-  <title>Java的艺术-Java容器(2)之并发修改异常 | Fan Wu's Blog</title>
+  <title>数据库(2)-SQL其他须知 | Fan Wu's Blog</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2019/01/06/Java的艺术-Java容器(2)之并发修改异常/">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2018/09/07/数据库(2)-MySQL高级/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fan Wu">
@@ -327,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Java的艺术-Java容器(2)之并发修改异常</h2>
+          <h2 class="post-title" itemprop="name headline">数据库(2)-SQL其他须知</h2>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T20:18:20+08:00">
-                2019-01-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T16:48:20+08:00">
+                2018-09-07
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Languages/" itemprop="url" rel="index">
-                    <span itemprop="name">Languages</span>
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
                   </a>
                 </span>
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,256 字
+                  1,934 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -435,64 +435,124 @@
       
 
       
-        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551345094255&amp;di=7757ebd7ca42b6b8acc5a3432680f30c&amp;imgtype=0&amp;src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png" alt="此处输入图片的描述"><br>ConcurrentModificationException（并发修改异常）为什么会出现？怎么解决呢？<br><a id="more"></a></p>
-<h2 id="什么时候出现“并发修改异常”？"><a href="#什么时候出现“并发修改异常”？" class="headerlink" title="什么时候出现“并发修改异常”？"></a><strong>什么时候出现“并发修改异常”？</strong></h2><p>看下面这两段代码</p>
-<blockquote>
-<p>(1)增强for</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">res.add(<span class="string">"a"</span>);</span><br><span class="line">res.add(<span class="string">"b"</span>);</span><br><span class="line"><span class="keyword">for</span> (String s:res)&#123;</span><br><span class="line">    <span class="keyword">if</span>(s==<span class="string">"a"</span>)&#123;</span><br><span class="line">        res.add(<span class="string">"c"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>(2)迭代器</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">res.add(<span class="string">"a"</span>);</span><br><span class="line">res.add(<span class="string">"b"</span>);</span><br><span class="line">Iterator it = res.iterator();</span><br><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">    String s =(String) it.next();</span><br><span class="line">    <span class="keyword">if</span>(s == <span class="string">"a"</span>)&#123;</span><br><span class="line">        res.add(<span class="string">"c"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码都会出现下面的异常：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:<span class="number">909</span>)</span><br><span class="line">	at java.util.ArrayList$Itr.next(ArrayList.java:<span class="number">859</span>)</span><br><span class="line">	at offer.Solution38.Permutation(Solution38.java:<span class="number">25</span>)</span><br><span class="line">	at offer.Solution38.main(Solution38.java:<span class="number">35</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="为什么会出现“并发修改异常”？"><a href="#为什么会出现“并发修改异常”？" class="headerlink" title="为什么会出现“并发修改异常”？"></a><strong>为什么会出现“并发修改异常”？</strong></h2><h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a><font color="red"><strong>源码分析</strong></font></h3><p>首先我们看ArrayList类的源码，其iterator()方法为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Itr();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>返回一个新建的<strong>Itr</strong>对象，源码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Itr() &#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>是个没有内容内部类，我们只能看看ArrayList的父类AbstractList有没有对应的内容：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Index of element to be returned by subsequent call to next.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> cursor = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Index of element returned by most recent call to next or</span></span><br><span class="line"><span class="comment">         * previous.  Reset to -1 if this element is deleted by a call</span></span><br><span class="line"><span class="comment">         * to remove.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> lastRet = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * The modCount value that the iterator believes that the backing</span></span><br><span class="line"><span class="comment">         * List should have.  If this expectation is violated, the iterator</span></span><br><span class="line"><span class="comment">         * has detected concurrent modification.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> expectedModCount = modCount;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> cursor != size();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            checkForComodification();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">int</span> i = cursor;</span><br><span class="line">                E next = get(i);</span><br><span class="line">                lastRet = i;</span><br><span class="line">                cursor = i + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">return</span> next;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;</span><br><span class="line">                checkForComodification();</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">            checkForComodification();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                AbstractList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">                <span class="keyword">if</span> (lastRet &lt; cursor)</span><br><span class="line">                    cursor--;</span><br><span class="line">                lastRet = -<span class="number">1</span>;</span><br><span class="line">                expectedModCount = modCount;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>是一个实现了<strong>Iterator</strong>接口的私有内部类。</p>
-<p>分析它的<strong>hasNext()</strong>方法，会发现一个成员变量<strong>cursor</strong>。分析发现，这个变量表示下一个要访问元素的索引，当索引大于集合的<strong>size()</strong>后，则<strong>hasNext()=false</strong>。并且，<strong>next()</strong>方法返回的元素调用了<strong>get(cursor)</strong>,而get()方法在ArrayList中为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    <span class="keyword">return</span> elementData(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而<strong>elementData</strong>就是用来存储ArrayList的Object数组。</p>
-<blockquote>
-<p>什么时候会出现ConcurrentModificationException呢？</p>
-</blockquote>
-<p>我们发现了Itr类的两个方法<strong>remove()和checkForComodification()</strong>会抛出这个异常：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">        checkForComodification();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            AbstractList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">            <span class="keyword">if</span> (lastRet &lt; cursor)</span><br><span class="line">                cursor--;</span><br><span class="line">            lastRet = -<span class="number">1</span>;</span><br><span class="line">            expectedModCount = modCount;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>以及<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">final void checkForComodification() &#123;</span><br><span class="line">            if (modCount != expectedModCount)</span><br><span class="line">                throw new ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们观察上面抛出异常的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; res = new ArrayList&lt;&gt;();</span><br><span class="line">res.add(&quot;a&quot;);</span><br><span class="line">res.add(&quot;b&quot;);</span><br><span class="line">Iterator it = res.iterator();</span><br><span class="line">while(it.hasNext())&#123;</span><br><span class="line">    String s =(String) it.next();</span><br><span class="line">    if(s == &quot;a&quot;)&#123;</span><br><span class="line">        res.add(&quot;c&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>首先在next()方法中会调用<strong>checkForComodification()</strong>方法，然后根据cursor的值获取到元素，接着将cursor的值赋给lastRet，并对cursor的值进行加1操作。初始时，cursor为0，lastRet为-1，那么调用一次之后，cursor的值为1，lastRet的值为0。注意此时，<strong>modCount为0，expectedModCount也为0</strong>。</p>
-<p>随后，代码调用了res.add(“c”)。</p>
-<p>查看源码，ArrayList的add()方法如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">        elementData[size++] = e;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>再查看<strong>ensureCapacityInternal()</strong>的源码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// overflow-conscious code</span></span><br><span class="line">        <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</span><br><span class="line">            grow(minCapacity);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>我们发现了关键一行：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modCount++;</span><br></pre></td></tr></table></figure>
-<p>此时，<strong>modCount为1，expectedModCount为0</strong>。</p>
-<p>在调用next()方法时，执行<strong>checkForComodification()</strong>显然就会抛出<strong>ConcurrentModificationException()</strong>！<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
-<p>终于解决了这个疑惑！</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><blockquote>
-<p>分析源码，在多线程程序中，如果有多个线程都在使用一个集合对象X，线程继续迭代，当A线程调用迭代器的next()方法时，发现modCount不等于expectedModCount，因此就抛出了ConcurrentModificationException异常。这可能就是它为什么叫并发修改异常的原因。<strong>从这一点也能说明ArrayList不是线程安全的。</strong></p>
+        <p><img src="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg" alt="此处输入图片的描述"><br>MySQL特性，多表查询与SQL注入的介绍。</p>
+<a id="more"></a>
+<h2 id="一、MySQL正则表达式"><a href="#一、MySQL正则表达式" class="headerlink" title="一、MySQL正则表达式"></a>一、MySQL正则表达式</h2><blockquote>
+<p>在<a href="https://wufan.site/2018/08/05/%E6%95%B0%E6%8D%AE%E5%BA%93%281%29-SQL%E5%88%9D%E8%AF%86/" target="_blank" rel="noopener">数据库(1)-SQL初识</a>中介绍了SQL基础语句。MySQL可以通过 LIKE 来进行模糊匹配。</p>
 </blockquote>
 <blockquote>
-<p>简单来说，调用list.remove(),list.add()方法导致modCount和expectedModCount的值不一致。使用for-each进行迭代实际上也会出现这种问题。</p>
+<p>同时，MySQL也支持使用 REGEXP 操作符来进行正则表达式匹配。</p>
 </blockquote>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h2><p>一般有2种解决办法：</p>
-<blockquote>
-<p>(1)不使用迭代器遍历集合,就可以在遍历的时候使用集合的方法进行增加或删除</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">res.add(<span class="string">"a"</span>);</span><br><span class="line">res.add(<span class="string">"b"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; res.size(); i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(res.get(i) == <span class="string">"a"</span>)</span><br><span class="line">        res.add(<span class="string">"c"</span>);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(res);</span><br><span class="line"><span class="keyword">return</span> res;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>(2)依然使用迭代器遍历,那么就需要使用Iterator的子接口ListIterator来实现向集合中添加</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ListIterator lit = res.listIterator();</span><br><span class="line"><span class="keyword">while</span>(lit.hasNext()) &#123;</span><br><span class="line">	String s = (String)lit.next();</span><br><span class="line">	<span class="keyword">if</span>(s.equals(<span class="string">"a"</span>)) &#123;</span><br><span class="line">		lit.add(<span class="string">"c"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其他解决同步问题的办法：</p>
-<blockquote>
-<p>(3)在使用iterator迭代的时候使用synchronized或者Lock进行同步；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--查找name字段中以'st'为开头的所有数据：</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span> <span class="keyword">FROM</span> tabel_name <span class="keyword">WHERE</span> <span class="keyword">name</span> REGEXP <span class="string">'^st'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="二、MySQL事务"><a href="#二、MySQL事务" class="headerlink" title="二、MySQL事务"></a>二、MySQL事务</h2><blockquote>
+<p><strong>MySQL 事务</strong>主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个人员，你即需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，这样，这些数据库操作语句就构成一个事务。</p>
 </blockquote>
 <blockquote>
-<p>(4)使用并发容器CopyOnWriteArrayList代替ArrayList和Vector。</p>
+<p>事务是必须满足4个条件（ACID）：<strong>原子性</strong>（Atomicity，或称不可分割性）、<strong>一致性</strong>（Consistency）、<strong>隔离性</strong>（Isolation，又称独立性）、<strong>持久性</strong>（Durability）。</p>
 </blockquote>
+<ul>
+<li><p>原子性：一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，不会结束在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。</p>
+</li>
+<li><p>一致性：在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则，这包含资料的精确度、串联性以及后续数据库可以自发性地完成预定的工作。</p>
+</li>
+<li><p>隔离性：数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</p>
+</li>
+<li><p>持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</p>
+</li>
+</ul>
+<blockquote>
+<p>MYSQL 事务处理主要有两种方法：</p>
+</blockquote>
+<ul>
+<li><p>1、用 BEGIN, ROLLBACK, COMMIT来实现</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> 开始一个事务</span><br><span class="line"><span class="keyword">ROLLBACK</span> 事务回滚</span><br><span class="line"><span class="keyword">COMMIT</span> 事务确认</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、直接用 SET 来改变 MySQL 的自动提交模式:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> AUTOCOMMIT=<span class="number">0</span> 禁止自动提交</span><br><span class="line"><span class="keyword">SET</span> AUTOCOMMIT=<span class="number">1</span> 开启自动提交</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="三、导入导出数据"><a href="#三、导入导出数据" class="headerlink" title="三、导入导出数据"></a>三、导入导出数据</h2><h3 id="（1）导出数据"><a href="#（1）导出数据" class="headerlink" title="（1）导出数据"></a>（1）导出数据</h3><blockquote>
+<p>使用 SELECT … INTO OUTFILE 语句导出数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">INTO</span> <span class="keyword">OUTFILE</span> <span class="string">'test.txt'</span>;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="（2）导入数据"><a href="#（2）导入数据" class="headerlink" title="（2）导入数据"></a>（2）导入数据</h3><blockquote>
+<p>A.mysql 命令导入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u用户名 -p密码 &lt; in_database.sql</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>B.source 命令导入<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /path/in_database.sql</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>C.使用 LOAD DATA 导入数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> <span class="keyword">INFILE</span> <span class="string">'database.txt'</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> mytbl;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>D.使用 mysqlimport 导入数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqlimport -u root -p <span class="comment">--local database_name database.txt</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="四、多表查询"><a href="#四、多表查询" class="headerlink" title="四、多表查询"></a>四、<strong>多表查询</strong></h2><p>多表查询需要用到各种连接查询，包括内连接和外链接。</p>
+<h3 id="1-多表的建表原则"><a href="#1-多表的建表原则" class="headerlink" title="(1)多表的建表原则"></a>(1)多表的建表原则</h3><blockquote>
+<p>在事务性数据库中，table一般有三种关系：1 to 1, n to m, 1 to n。</p>
+</blockquote>
+<p>（a）<strong>1 to 1</strong></p>
+<ul>
+<li>当作是一对多情况，在任意一张表添加一个唯一外键,指向另外一张表。</li>
+<li>直接将两张表合并成一张表</li>
+</ul>
+<p>（b）<strong>n to m</strong></p>
+<ul>
+<li>建立一张中间表,将多对多的关系,拆分成一对多的关系,中间表至少要有两个外键,分别指向原来的那两张表</li>
+</ul>
+<p>（c）<strong>1 to n</strong></p>
+<ul>
+<li>在多的一方添加一个外键,指向一的一方的主键</li>
+</ul>
+<h3 id="2-内连接"><a href="#2-内连接" class="headerlink" title="(2)内连接"></a>(2)内连接</h3><blockquote>
+<p>隐式内连接<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> atable a,btable b</span><br><span class="line"><span class="keyword">WHERE</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>显式内连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM atable a INNER JOIN btable b</span><br><span class="line">ON a.col1=b.col2;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>区别<br>    隐式内连接: 在查询出结果的基础上去做的WHERE条件过滤<br>    显示内连接: 带着条件去查询结果, 执行效率要高</p>
+</blockquote>
+<h3 id="3-外连接"><a href="#3-外连接" class="headerlink" title="(3)外连接"></a>(3)外连接</h3><p>外连接可分为：左连接、右连接、完全外连接、交叉连接。</p>
+<blockquote>
+<p>左连接: left join 或 left outer join.<br>左外连接包含join左表所有行，如果左表中某行在右表没有匹配，则结果中对应行右表的部分全部为空(NULL).</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> b_table</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>右连接: right join 或 right outer join<br>右外连接包含right join右表所有行，如果左表中某行在右表没有匹配，则结果中对应左表的部分全部为空(NULL)。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> b_table</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>完全外连接  full join 或 full outer join.<br>完全外连接包含full join左右两表中所有的行，如果右表中某行在左表中没有匹配，则结果中对应行右表的部分全部为空(NULL)，如果左表中某行在右表中没有匹配，则结果中对应行左表的部分全部为空(NULL)。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">FULL</span> <span class="keyword">JOIN</span> b_table</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure>
+<font color="red">注意：<strong>内外连接中INNER、OUTER都可以省略</strong></font>
+
+<h3 id="4-交叉连接"><a href="#4-交叉连接" class="headerlink" title="(4)交叉连接"></a>(4)交叉连接</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--cross join</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> b_table</span><br></pre></td></tr></table></figure>
+<p>等效于笛卡尔积：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_tabl,b_table;</span><br></pre></td></tr></table></figure></p>
+<p>如果加上条件，ON a.col1=b.col2，则效果等价于INNER JOIN.</p>
+<h2 id="五、SQL注入"><a href="#五、SQL注入" class="headerlink" title="五、SQL注入"></a>五、<strong>SQL注入</strong></h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p><strong>SQL注入</strong>是未经授权的人可以访问各种关键和私人数据的漏洞。在SQL注入中，攻击者使用各种命令与DB服务器交互，并从中获取各种数据。SQL注入不是Web或数据库服务器中的缺陷，而是由于编程实践较差且缺乏经验而导致的。它是从远程位置执行的最致命和最容易的攻击之一。</p>
+</blockquote>
+<h3 id="常见SQL注入"><a href="#常见SQL注入" class="headerlink" title="常见SQL注入"></a>常见SQL注入</h3><h4 id="（1）绕过登陆"><a href="#（1）绕过登陆" class="headerlink" title="（1）绕过登陆"></a>（1）绕过登陆</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">USER</span> <span class="keyword">from</span> <span class="keyword">database</span> <span class="keyword">WHERE</span> username =<span class="string">'admin'</span> <span class="keyword">AND</span> <span class="keyword">password</span> =<span class="string">'admin'</span></span><br></pre></td></tr></table></figure>
+<p>username和password字段为用户在登陆表单的输入，若服务器将这个命令评估为True，则将授予用户访问权限。</p>
+<p>攻击者可以在登录表单中输入以下用户数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username:a or 1=1--</span><br><span class="line">password:blank</span><br></pre></td></tr></table></figure></p>
+<p>查询变为了：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">USER</span> <span class="keyword">from</span> <span class="keyword">database</span></span><br><span class="line"><span class="keyword">WHERE</span> username=<span class="string">'a'</span> <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span></span><br><span class="line"><span class="comment">-- AND password=''</span></span><br></pre></td></tr></table></figure></p>
+<p>这条语句始终为True，因此用户可以访问该数据库。</p>
+<h4 id="（2）获得数据库中隐私数据"><a href="#（2）获得数据库中隐私数据" class="headerlink" title="（2）获得数据库中隐私数据"></a>（2）获得数据库中隐私数据</h4><p>对于一个页面：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site.com/article.php?id=50</span><br></pre></td></tr></table></figure></p>
+<p>网站后台如果没有经过过滤，可能包含这样的SQL查询：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select * from [表名] where id=50</span><br></pre></td></tr></table></figure></p>
+<p>如果我们将URL修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site.com/article.php?id=5+UPDATE+article+SET+title=&apos;Hacked&apos;</span><br></pre></td></tr></table></figure></p>
+<p>则SQL变成了<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> * <span class="keyword">from</span> [表名] <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">50</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> article <span class="keyword">SET</span> title=<span class="string">'Hacked'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>甚至可以改为：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site.com/article.php?id=5+SHUTDOWN+WITH+NOWAIT;</span><br></pre></td></tr></table></figure></p>
+<p>从而关闭服务器。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><ul>
+<li>1.永远不要信任用户的输入。对用户的输入进行校验，可以通过正则表达式，或限制长度；对单引号和 双”-“进行转换等。</li>
+<li>2.永远不要使用动态拼装sql，可以使用参数化的sql或者直接使用存储过程进行数据查询存取。</li>
+<li>3.永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。</li>
+<li>4.不要把机密信息直接存放，加密或者hash掉密码和敏感的信息。</li>
+<li>5.应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装</li>
+<li>6.sql注入的检测方法一般采取辅助软件或网站平台来检测，软件一般采用sql注入检测工具jsky，网站平台就有亿思网站安全平台检测工具。MDCSOFT SCAN等。采用MDCSOFT-IPS可以有效的防御SQL注入，XSS攻击等。</li>
+</ul>
+<p><strong>参考资料：</strong><br><a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">史上最完整的MySQL注入</a><br><a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">MySQL 事务</a></p>
 
       
     </div>
@@ -516,7 +576,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接:</strong>
-    <a href="/2019/01/06/Java的艺术-Java容器(2)之并发修改异常/" title="Java的艺术-Java容器(2)之并发修改异常">2019/01/06/Java的艺术-Java容器(2)之并发修改异常/</a>
+    <a href="/2018/09/07/数据库(2)-MySQL高级/" title="数据库(2)-SQL其他须知">2018/09/07/数据库(2)-MySQL高级/</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议:</strong>
@@ -531,11 +591,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
-            <a href="/tags/容器/" rel="tag"># 容器</a>
-          
-            <a href="/tags/源码/" rel="tag"># 源码</a>
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
           
         </div>
       
@@ -548,8 +606,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/05/Java的艺术-Java容器(1)之容器基础/" rel="next" title="Java的艺术-Java容器(1)之容器基础">
-                <i class="fa fa-chevron-left"></i> Java的艺术-Java容器(1)之容器基础
+              <a href="/2018/08/05/数据库(1)-SQL初识/" rel="next" title="数据库(1)-SQL初识">
+                <i class="fa fa-chevron-left"></i> 数据库(1)-SQL初识
               </a>
             
           </div>
@@ -558,8 +616,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/21/算法之美-回溯/" rel="prev" title="算法之美-回溯">
-                算法之美-回溯 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/05/Java的艺术-多线程(1)/" rel="prev" title="Java的艺术-多线程初探(1)">
+                Java的艺术-多线程初探(1) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -749,7 +807,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候出现“并发修改异常”？"><span class="nav-number">1.</span> <span class="nav-text">什么时候出现“并发修改异常”？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会出现“并发修改异常”？"><span class="nav-number">2.</span> <span class="nav-text">为什么会出现“并发修改异常”？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.1.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">2.2.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、MySQL正则表达式"><span class="nav-number">1.</span> <span class="nav-text">一、MySQL正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、MySQL事务"><span class="nav-number">2.</span> <span class="nav-text">二、MySQL事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、导入导出数据"><span class="nav-number">3.</span> <span class="nav-text">三、导入导出数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）导出数据"><span class="nav-number">3.1.</span> <span class="nav-text">（1）导出数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）导入数据"><span class="nav-number">3.2.</span> <span class="nav-text">（2）导入数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、多表查询"><span class="nav-number">4.</span> <span class="nav-text">四、多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-多表的建表原则"><span class="nav-number">4.1.</span> <span class="nav-text">(1)多表的建表原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-内连接"><span class="nav-number">4.2.</span> <span class="nav-text">(2)内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-外连接"><span class="nav-number">4.3.</span> <span class="nav-text">(3)外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-交叉连接"><span class="nav-number">4.4.</span> <span class="nav-text">(4)交叉连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、SQL注入"><span class="nav-number">5.</span> <span class="nav-text">五、SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">5.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见SQL注入"><span class="nav-number">5.2.</span> <span class="nav-text">常见SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）绕过登陆"><span class="nav-number">5.2.1.</span> <span class="nav-text">（1）绕过登陆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）获得数据库中隐私数据"><span class="nav-number">5.2.2.</span> <span class="nav-text">（2）获得数据库中隐私数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法"><span class="nav-number">5.3.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></div>
             
 
           </div>
