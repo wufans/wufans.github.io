@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yoursite.com/2018/10/07/Java%E7%9A%84%E8%89%BA%E6%9C%AF-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    
+    <lastmod>2019-03-15T16:03:23.122Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yoursite.com/2018/10/05/Java%E7%9A%84%E8%89%BA%E6%9C%AF-%E5%A4%9A%E7%BA%BF%E7%A8%8B(1)/</loc>
     
     <lastmod>2019-03-15T15:51:51.615Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://yoursite.com/2018/11/28/Java%E7%9A%84%E8%89%BA%E6%9C%AF-%E6%B3%A8%E8%A7%A3%E7%B1%BB%E5%9E%8B(Annotation)/</loc>
     
     <lastmod>2019-03-12T07:41:08.792Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yoursite.com/2018/10/07/Java%E7%9A%84%E8%89%BA%E6%9C%AF-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
-    
-    <lastmod>2019-03-12T07:40:16.320Z</lastmod>
     
   </url>
   
