@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2019-03-16T02:09:22.026Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://yoursite.com/2018/10/07/Java%E7%9A%84%E8%89%BA%E6%9C%AF-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
     
     <lastmod>2019-03-15T16:03:23.122Z</lastmod>
@@ -264,13 +271,6 @@
     <loc>https://yoursite.com/2017/10/29/%E3%80%8AConcrete-Problems-for-Autonomous-Vehicle-Safety-Advantages-of-Bayesian-Deep-Learning%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2018-12-27T03:22:38.901Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2018-12-25T14:36:27.739Z</lastmod>
     
   </url>
   
