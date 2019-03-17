@@ -90,7 +90,7 @@
 <meta property="og:description" content="JAVA数据库连接JDBC、以及DAO模式的使用。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
-<meta property="og:updated_time" content="2019-03-17T02:23:52.580Z">
+<meta property="og:updated_time" content="2019-03-17T02:27:06.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库(3)-JDBC">
 <meta name="twitter:description" content="JAVA数据库连接JDBC、以及DAO模式的使用。">
@@ -452,7 +452,7 @@
 <blockquote>
 <p>b.建立连接</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 一个参数，用&amp;隔开</span></span><br><span class="line">DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost/database_name?user=user&amp;password=password"</span>);</span><br><span class="line"><span class="comment">//2. 建立连接 参数一： 协议 + 访问的数据库 ， 参数二： 用户名 ， 参数三： 密码。</span></span><br><span class="line">conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost/database_name"</span>, <span class="string">"user"</span>, <span class="string">"password"</span>);</span><br><span class="line">```       </span><br><span class="line"></span><br><span class="line">&gt;c.**创建statement**</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="comment">//3. 创建statement对象 ，很重要的一个类</span></span><br><span class="line">st = conn.createStatement();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 一个参数，用&amp;隔开</span></span><br><span class="line">DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost/database_name?user=user&amp;password=password"</span>);</span><br><span class="line"><span class="comment">//2. 建立连接 参数一： 协议 + 访问的数据库 ， 参数二： 用户名 ， 参数三： 密码。</span></span><br><span class="line">conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost/database_name"</span>, <span class="string">"user"</span>, <span class="string">"password"</span>);</span><br><span class="line">```       </span><br><span class="line"></span><br><span class="line">&gt;c.创建statement</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="comment">//3. 创建statement对象 ，很重要的一个类</span></span><br><span class="line">st = conn.createStatement();</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>d.执行sql ，得到ResultSet</p>
 </blockquote>
