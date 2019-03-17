@@ -90,7 +90,7 @@
 <meta property="og:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-12T07:41:08.792Z">
+<meta property="og:updated_time" content="2019-03-17T04:13:49.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-注解类型(Annotation)">
 <meta name="twitter:description" content="使用注解来进行开发，可以免去写XML配置。那么注解到底是什么呢？">
@@ -571,6 +571,7 @@
 <h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><blockquote>
 <p>一定要用@Retention元注解表示出注解的存活时间，不然在动态执行时可能判定某个类并没有受到注解。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AnnotationTest &#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">default</span> 2019</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+<hr>
 <p><a href="https://www.cnblogs.com/Qian123/p/5256084.html" target="_blank" rel="noopener">参考1</a><br><a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">参考2</a></p>
 
       
