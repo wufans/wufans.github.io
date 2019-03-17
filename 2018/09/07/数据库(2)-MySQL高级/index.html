@@ -90,7 +90,7 @@
 <meta property="og:description" content="MySQL特性，多表查询与SQL注入的介绍。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
-<meta property="og:updated_time" content="2019-03-17T02:21:21.139Z">
+<meta property="og:updated_time" content="2019-03-17T03:49:37.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库(2)-SQL其他须知">
 <meta name="twitter:description" content="MySQL特性，多表查询与SQL注入的介绍。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,934 字
+                  1,933 字
                 </span>
               
 
@@ -435,7 +435,7 @@
       
 
       
-        <p><img src="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg" alt="此处输入图片的描述"><br>MySQL特性，多表查询与SQL注入的介绍。</p>
+        <p><img src="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg" alt="此处输入图片的描述"><br>MySQL特性，多表查询与<code>SQL注入</code>的介绍。</p>
 <a id="more"></a>
 <h2 id="一、MySQL正则表达式"><a href="#一、MySQL正则表达式" class="headerlink" title="一、MySQL正则表达式"></a>一、MySQL正则表达式</h2><blockquote>
 <p>在<a href="https://wufan.site/2018/08/05/%E6%95%B0%E6%8D%AE%E5%BA%93%281%29-SQL%E5%88%9D%E8%AF%86/" target="_blank" rel="noopener">数据库(1)-SQL初识</a>中介绍了SQL基础语句。MySQL可以通过 LIKE 来进行模糊匹配。</p>
@@ -507,28 +507,28 @@
 <p>隐式内连接<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> atable a,btable b</span><br><span class="line"><span class="keyword">WHERE</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
-<p>显式内连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM atable a INNER JOIN btable b</span><br><span class="line">ON a.col1=b.col2;</span><br></pre></td></tr></table></figure></p>
+<p>显式内连接<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> atable a <span class="keyword">INNER</span> <span class="keyword">JOIN</span> btable b</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
 <p>区别<br>    隐式内连接: 在查询出结果的基础上去做的WHERE条件过滤<br>    显示内连接: 带着条件去查询结果, 执行效率要高</p>
 </blockquote>
 <h3 id="3-外连接"><a href="#3-外连接" class="headerlink" title="(3)外连接"></a>(3)外连接</h3><p>外连接可分为：左连接、右连接、完全外连接、交叉连接。</p>
 <blockquote>
-<p>左连接: left join 或 left outer join.<br>左外连接包含join左表所有行，如果左表中某行在右表没有匹配，则结果中对应行右表的部分全部为空(NULL).</p>
+<p>左连接:<code>left join</code> 或<code>left outer join</code>.<br>左外连接包含join左表所有行，如果左表中某行在右表没有匹配，则结果中对应行右表的部分全部为空(NULL).</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> b_table</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>右连接: right join 或 right outer join<br>右外连接包含right join右表所有行，如果左表中某行在右表没有匹配，则结果中对应左表的部分全部为空(NULL)。</p>
+<p>右连接: <code>right join</code>或<code>right outer join</code><br>右外连接包含right join右表所有行，如果左表中某行在右表没有匹配，则结果中对应左表的部分全部为空(NULL)。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> b_table</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>完全外连接  full join 或 full outer join.<br>完全外连接包含full join左右两表中所有的行，如果右表中某行在左表中没有匹配，则结果中对应行右表的部分全部为空(NULL)，如果左表中某行在右表中没有匹配，则结果中对应行左表的部分全部为空(NULL)。</p>
+<p>完全外连接 <code>full join</code> 或 <code>full outer join</code>.<br>完全外连接包含full join左右两表中所有的行，如果右表中某行在左表中没有匹配，则结果中对应行右表的部分全部为空(NULL)，如果左表中某行在右表中没有匹配，则结果中对应行左表的部分全部为空(NULL)。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">FULL</span> <span class="keyword">JOIN</span> b_table</span><br><span class="line"><span class="keyword">ON</span> a.col1=b.col2;</span><br></pre></td></tr></table></figure>
 <font color="red">注意：<strong>内外连接中INNER、OUTER都可以省略</strong></font>
 
 <h3 id="4-交叉连接"><a href="#4-交叉连接" class="headerlink" title="(4)交叉连接"></a>(4)交叉连接</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--cross join</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_table <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> b_table</span><br></pre></td></tr></table></figure>
-<p>等效于笛卡尔积：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_tabl,b_table;</span><br></pre></td></tr></table></figure></p>
+<p>等效于<code>笛卡尔积</code>：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> a_tabl,b_table;</span><br></pre></td></tr></table></figure></p>
 <p>如果加上条件，ON a.col1=b.col2，则效果等价于INNER JOIN.</p>
 <h2 id="五、SQL注入"><a href="#五、SQL注入" class="headerlink" title="五、SQL注入"></a>五、<strong>SQL注入</strong></h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
 <p><strong>SQL注入</strong>是未经授权的人可以访问各种关键和私人数据的漏洞。在SQL注入中，攻击者使用各种命令与DB服务器交互，并从中获取各种数据。SQL注入不是Web或数据库服务器中的缺陷，而是由于编程实践较差且缺乏经验而导致的。它是从远程位置执行的最致命和最容易的攻击之一。</p>
@@ -545,12 +545,12 @@
 <p>甚至可以改为：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site.com/article.php?id=5+SHUTDOWN+WITH+NOWAIT;</span><br></pre></td></tr></table></figure></p>
 <p>从而关闭服务器。</p>
 <h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><ul>
-<li>1.永远不要信任用户的输入。对用户的输入进行校验，可以通过正则表达式，或限制长度；对单引号和 双”-“进行转换等。</li>
-<li>2.永远不要使用动态拼装sql，可以使用参数化的sql或者直接使用存储过程进行数据查询存取。</li>
-<li>3.永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。</li>
-<li>4.不要把机密信息直接存放，加密或者hash掉密码和敏感的信息。</li>
-<li>5.应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装</li>
-<li>6.sql注入的检测方法一般采取辅助软件或网站平台来检测，软件一般采用sql注入检测工具jsky，网站平台就有亿思网站安全平台检测工具。MDCSOFT SCAN等。采用MDCSOFT-IPS可以有效的防御SQL注入，XSS攻击等。</li>
+<li>1).永远不要信任用户的输入。对用户的输入进行<code>校验</code>，可以通过正则表达式，或限制长度；对单引号和 双”-“进行转换等。</li>
+<li>2).永远不要使用动态拼装sql，可以使用参数化的sql或者直接使用存储过程进行数据查询存取。</li>
+<li>3).永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。</li>
+<li>4).不要把机密信息直接存放，加密或者hash掉密码和敏感的信息。</li>
+<li>5).应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装</li>
+<li>6).sql注入的检测方法一般采取辅助软件或网站平台来检测，软件一般采用sql注入检测工具jsky，网站平台就有亿思网站安全平台检测工具。MDCSOFT SCAN等。采用MDCSOFT-IPS可以有效的防御SQL注入，XSS攻击等。</li>
 </ul>
 <hr>
 <p><strong>参考资料：</strong><br><a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">史上最完整的MySQL注入</a><br><a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">MySQL 事务</a></p>
