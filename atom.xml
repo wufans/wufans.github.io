@@ -110,9 +110,9 @@
     
       <category term="Java基础" scheme="https://yoursite.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="Java源码" scheme="https://yoursite.com/tags/Java%E6%BA%90%E7%A0%81/"/>
-    
       <category term="Java容器" scheme="https://yoursite.com/tags/Java%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="Java源码" scheme="https://yoursite.com/tags/Java%E6%BA%90%E7%A0%81/"/>
     
   </entry>
   
@@ -371,9 +371,9 @@
     
       <category term="Java基础" scheme="https://yoursite.com/tags/Java%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="Java并发" scheme="https://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
-    
       <category term="Java源码" scheme="https://yoursite.com/tags/Java%E6%BA%90%E7%A0%81/"/>
+    
+      <category term="Java并发" scheme="https://yoursite.com/tags/Java%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   
