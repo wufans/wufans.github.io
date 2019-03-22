@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,736 字
+                  1,662 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -459,8 +459,10 @@
 3. 攻击形式是指定目标的target attack：原因一是因为非目标攻击威胁不大，其二是因为真实攻击者用目标攻击往往能产生更好的攻击效果。
 4. attack success rate：攻击成功率用来衡量生成的对抗样本，也是一个标准测量方法。
 5. 提高模型的输出概率：因为模型是根据输出的概率向量来预测问题的答案，如果这个概率比较低，就容易被防御策略检测出来，因此，提高对抗样本的输出概率值，也能反映攻击的有效性。
-</code></pre><h2 id="algorithms"><a href="#algorithms" class="headerlink" title="algorithms"></a>algorithms</h2><p>VQA模型定义为$f_\theta(I,Q)$,$\theta$是模型的参数，I是输入图片，Q是输入问题，f的结果是预测的答案概率值。与传统将VQA问题视作分类问题不同，作者将对这个模型$f_\theta$攻击抽象为，构建一个对抗样本图片$I^{adv}$,让模型的输出为问答对$(Q^{target},A^{target})$的概率最大，即是<br>$$f_\theta(Q^{target},A^{target})=A^{target} s.t.d(I^{adv},I^{ori})\le B$$<br>整体的优化问题即是：<br>$$argmin_{I^{adv}}L(J_\theta (I^{adv},Q^{target}),A^{target}) s.t.d(I^{adv},I^{ori})\le B$$</p>
-<p>本文提出的算法优化，主要就是用一种替代目标函数来逼近优化函数，从而提升效率。<br>$$\xi(A^{predict})= L(J_\theta (I^{adv},Q^{target})+\lambda <em>1.l(A</em>{target}\ne A^{predict}.(\tau-L(J_\theta(x,Q^{target},A^{predict})))+\lambda _2.ReLU(d(x,I^{ori})-B+\epsilon)$$<br>整体的算法如下：<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tly1flq4t7v27ej30bn06lmxx.jpg" alt="此处输入图片的描述"></p>
+</code></pre><h2 id="algorithms"><a href="#algorithms" class="headerlink" title="algorithms"></a>algorithms</h2><p>VQA模型定义为$f_\theta(I,Q)$,$\theta$是模型的参数，I是输入图片，Q是输入问题，f的结果是预测的答案概率值。与传统将VQA问题视作分类问题不同，作者将对这个模型$f_\theta$攻击抽象为，构建一个对抗样本图片$I^{adv}$,让模型的输出为问答对$(Q^{target},A^{target})$的概率最大，即是</p>
+<script type="math/tex; mode=display">f_\theta(Q^{target},A^{target})=A^{target} s.t.d(I^{adv},I^{ori})\le B</script><p>整体的优化问题即是：</p>
+<script type="math/tex; mode=display">argmin_{I^{adv}}L(J_\theta (I^{adv},Q^{target}),A^{target}) s.t.d(I^{adv},I^{ori})\le B</script><p>本文提出的算法优化，主要就是用一种替代目标函数来逼近优化函数，从而提升效率。</p>
+<script type="math/tex; mode=display">\xi(A^{predict})= L(J_\theta (I^{adv},Q^{target})+\lambda _1.l(A_{target}\ne A^{predict}.(\tau-L(J_\theta(x,Q^{target},A^{predict})))+\lambda _2.ReLU(d(x,I^{ori})-B+\epsilon)</script><p>整体的算法如下：<br><img src="http://ww3.sinaimg.cn/large/0060lm7Tly1flq4t7v27ej30bn06lmxx.jpg" alt="此处输入图片的描述"></p>
 <h2 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h2><p>文章的结论有三个方面：</p>
 <pre><code>1. 目标对抗攻击（本文是目标对抗攻击）的成功率主要受到所选择的question-answer pair的类别的影响，跟参考图片的选择关系不大。
 2. 发现了language prior phenomenon，给针对特定question-answer pair能产生对抗样本提供了一种可能的解释。
@@ -754,7 +756,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

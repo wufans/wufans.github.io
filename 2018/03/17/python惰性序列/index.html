@@ -446,9 +446,9 @@
 <h3 id="code-examples"><a href="#code-examples" class="headerlink" title="code examples"></a>code examples</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from collections import Iterable</span><br><span class="line">&gt;&gt;&gt;isinstance(&quot;abc&quot;,Iterable)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;from collections import Iterator</span><br><span class="line">&gt;&gt;&gt;isinstance([],Iterator)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt;isinstance(iter([]),Iterator)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#注意下面的区别</span><br><span class="line">&gt;&gt;&gt;isinstance((x for x in range(10)),Iterator)</span><br><span class="line">#返回的是一个生成器对象，不是tuple</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt;isinstance((),Iterator)</span><br><span class="line">#tuple不是迭代器</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt;isinstance([x for x in range(10)],Iterator)</span><br><span class="line">#返回一个list</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
-<pre><code>为什么list、dict、str等数据类型不是Iterator？
-这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。
-Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。
+<pre><code>    为什么list、dict、str等数据类型不是Iterator？
+    这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。
+    Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。
 </code></pre><h2 id="惰性序列"><a href="#惰性序列" class="headerlink" title="惰性序列"></a><font color="red">惰性序列</font></h2><h3 id="惰性计算"><a href="#惰性计算" class="headerlink" title="惰性计算"></a><a href="https://zh.wikipedia.org/wiki/%E6%83%B0%E6%80%A7%E6%B1%82%E5%80%BC" target="_blank" rel="noopener">惰性计算</a></h3><h3 id="惰性序列-1"><a href="#惰性序列-1" class="headerlink" title="惰性序列"></a>惰性序列</h3><p>python中的惰性序列多数指Iterator。对于存在巨大甚至无限多的元素的序列，迭代器仅仅在迭代至某个元素时才计算该元素，在此之前或者之后，元素可以不存在或者被销毁。</p>
 <h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><p>一是这样我们就可以实现的无限序列的表示，比如全部的自然数(无穷尽)，而不需要真的在内存中计算出所有的自然数(那根本不可能，因为内存也不是无限的)，而是需要哪个数，计算到哪个数，或者需要哪些数，计算到那些数(比如前1000个)。<br>二是在大规模数据处理中起到延迟计算的作用。当你处理大规模数据时，一次性进行处理往往是不方便的。而惰性序列就可以解决这个问题，它把计算的步骤延迟到了要实际使用该数据的时候。<br>惰性序列可以看作是一个”流”，需要的时候从其中取一滴水。</p>
 <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a><font color="red">reference</font></h2><p><a href="https://blog.csdn.net/solo95/article/details/78834041" target="_blank" rel="noopener">博客</a><br><a href="https://blog.csdn.net/it_dream_er/article/details/50890201" target="_blank" rel="noopener">博客2</a><br><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014317852443934a86aa5bb5ea47fbbd5f35282b331335000" target="_blank" rel="noopener">教程</a></p>
@@ -738,7 +738,7 @@ Iterator甚至可以表示一个无限大的数据流，例如全体自然数。
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

@@ -451,11 +451,7 @@
 <p>甚至当注解没有属性时，可以不用括号：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Check &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//没有属性的注解，不用括号</span></span><br><span class="line"><span class="meta">@Check</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a><strong>注意</strong></h3><blockquote>
 <p>注解中所有方法（也就是属性）没有方法体，且只允许public和abstract修饰。缺省默认为public，且注解方法不允许有throws子句。</p>
-</blockquote>
-<blockquote>
 <p>注解中方法的返回值只能为：基本数据类型，String，Class，美剧类型，注解和他们的一维数组。</p>
-</blockquote>
-<blockquote>
 <p>注解的继承只能作用在类上，方法上的注解不会被继承，Interface中的所有注解不会被继承。</p>
 </blockquote>
 <h2 id="常见注解"><a href="#常见注解" class="headerlink" title="常见注解"></a><font color="red"><strong>常见注解</strong></font></h2><h3 id="五种元注解"><a href="#五种元注解" class="headerlink" title="五种元注解"></a>五种元注解</h3><p>前面我们提到，Java中有五种元注解。</p>
@@ -541,11 +537,7 @@
 </ul>
 <h2 id="注解的作用"><a href="#注解的作用" class="headerlink" title="注解的作用"></a><font color="red"><strong>注解的作用</strong></font></h2><blockquote>
 <p><strong>编译检查</strong> 编译器可以利用注解来探测错误和警告信息；通过代码里标识的元数据让编译器能够实现基本的编译检查【Override】</p>
-</blockquote>
-<blockquote>
 <p><strong>编写文档</strong> 软件工具可以用来利用注解信息来生成代码、Html文档或者做其它相应处理。通过代码里标识的元数据生成文档【生成文档doc文档】</p>
-</blockquote>
-<blockquote>
 <p><strong>代码分析</strong> 某些注解可以在程序运行的时候接受代码的提取；通过代码里标识的元数据对代码进行分析【使用反射】</p>
 </blockquote>
 <p>总之，当开发者使用了Annotation 修饰了类、方法、Field 等成员之后，这些 Annotation 不会自己生效，必须由开发者提供相应的代码来提取并处理 Annotation 信息。这些处理提取和处理 Annotation 的代码统称为 APT（Annotation Processing Tool)。<br><strong>而注解主要就是给编译器或者APT用的。</strong></p>
@@ -555,14 +547,8 @@
 <h2 id="注解的解析-反射"><a href="#注解的解析-反射" class="headerlink" title="注解的解析-反射"></a><font color="red"><strong>注解的解析-反射</strong></font></h2><p>注解的提取（解析）需要借助于 Java 的反射技术，反射比较慢，所以注解使用时也需要谨慎计较时间成本。</p>
 <h3 id="类的注解的解析"><a href="#类的注解的解析" class="headerlink" title="类的注解的解析"></a>类的注解的解析</h3><blockquote>
 <p>首先通过Class对象的isAnnotationPresent()方法判断他是否应用了某个注解：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnnotationPresent</span><span class="params">(Class&lt;? extends Annotation&gt; annotationClass)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
 <p>然后通过getAnnotation()方法获取Annotation对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;A extends Annotation&gt; <span class="function">A <span class="title">getAnnotation</span><span class="params">(Class&lt;A&gt; annotationClass)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
 <p>或者getAnnotations()方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Annotation[] getAnnotations() &#123;&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
 <p>如果获取到的 Annotation 如果不为 null，则就可以调用它们的属性方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AnnotationTest</span>()</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">boolean</span> hasAnnotation = Test.class.isAnnotationPresent(TestAnnotation.class);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( hasAnnotation ) &#123;</span><br><span class="line">			TestAnnotation testAnnotation = Test.class.getAnnotation(TestAnnotation.class);</span><br><span class="line"></span><br><span class="line">			System.out.println(<span class="string">"id:"</span>+testAnnotation.id());</span><br><span class="line">			System.out.println(<span class="string">"message:"</span>+testAnnotation.message());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <p>也可以使用forName()方法加载类，使用isAnnotation(Annotation.class)判定对象是否存在注解，并使用getAnnotation(Description.class)得到带有@Description注解的类。</p>
@@ -859,7 +845,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

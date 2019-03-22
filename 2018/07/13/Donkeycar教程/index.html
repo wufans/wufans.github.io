@@ -442,7 +442,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6,420 字
+                  6,419 字
                 </span>
               
 
@@ -486,7 +486,8 @@
 <h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a><font color="red">硬件</font></h2><h3 id="硬件清单"><a href="#硬件清单" class="headerlink" title="硬件清单"></a>硬件清单</h3><h4 id="配件明细"><a href="#配件明细" class="headerlink" title="配件明细"></a>配件明细</h4><h5 id="模型要求："><a href="#模型要求：" class="headerlink" title="模型要求："></a>模型要求：</h5><p>我们需要选择：<br>①独立ESC（电子调速器）和接收机的RC小车<br>②选择三线连接器，三线舵机<br>③选择速度更慢的有刷小车模型更容易实现。</p>
 <h5 id="推荐配置参考："><a href="#推荐配置参考：" class="headerlink" title="推荐配置参考："></a>推荐配置参考：</h5><p>1:16模型配置<br><img src="https://s1.ax1x.com/2018/07/15/PMH7dS.png" alt="此处输入图片的描述"></p>
 <p>1:10模型配置<br><img src="https://s1.ax1x.com/2018/07/15/PMHHIg.png" alt="此处输入图片的描述"><br>参数解释：<br>motor是电机的参数，2040就是表示定子外径是20mm，定子高度是40mm，定子的外径和高度越多，定子的铁芯越大，线圈绕的匝数也越多，表现出来就是电机的功率越大。<br>无刷电机KV值定义为转速/V，意思为输入电压增加1伏特(V)，无刷电机空转转速（转/分钟）增加的转速值。<br>ESC的25A是指持续电流25A，这个峰值电流是85A，BEC输出5V，1A。<br>Tcaction：四驱，双差速器。<br>Groung Clearance：小车底部离地面的距离。</p>
-<h5 id="购买配置清单（价格仅供参考，更新于2018-7-3）"><a href="#购买配置清单（价格仅供参考，更新于2018-7-3）" class="headerlink" title="购买配置清单（价格仅供参考，更新于2018-7-3）"></a>购买配置清单（价格仅供参考，更新于2018-7-3）</h5><table>
+<h5 id="购买配置清单（价格仅供参考，更新于2018-7-3）"><a href="#购买配置清单（价格仅供参考，更新于2018-7-3）" class="headerlink" title="购买配置清单（价格仅供参考，更新于2018-7-3）"></a>购买配置清单（价格仅供参考，更新于2018-7-3）</h5><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>名称</th>
@@ -540,6 +541,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="配件介绍"><a href="#配件介绍" class="headerlink" title="配件介绍"></a>配件介绍</h4><h5 id="HSP无限94182"><a href="#HSP无限94182" class="headerlink" title="HSP无限94182"></a>HSP无限94182</h5><p>模型参数：<br><img src="https://img.alicdn.com/imgextra/i4/13651274/TB2OMaChVXXXXbbXXXXXXXXXXXX_!!13651274.jpg" alt="此处输入图片的描述"><br>模型结构：<br> <img src="https://img.alicdn.com/imgextra/i3/13651274/TB2CqaihVXXXXbwXpXXXXXXXXXX_!!13651274.jpg" alt="此处输入图片的描述"></p>
 <h5 id="电调（Electronic-Speed-Control，ESC）"><a href="#电调（Electronic-Speed-Control，ESC）" class="headerlink" title="电调（Electronic Speed Control，ESC）"></a>电调（Electronic Speed Control，ESC）</h5><p>电子调速器，主要有两个作用，一是将电池降压，适合接收机和其他舵机的工作电压；二是从接收机获得油门信号，控制马达的转速，从而改变飞机的速度。<br>❤连接方式为：<br>1、电调的输入线与电池连接；<br>2、电调的输出线（有刷两根、无刷三根）与电机连接；（在我们用到的有刷模型中，是红色和黑色的两根比较粗的线）<br>3、电调的信号线（三根红色，白色和黑色的较细的线）与接收机（PCA驱动芯片）连接。</p>
 <h5 id="舵机"><a href="#舵机" class="headerlink" title="舵机"></a>舵机</h5><p>舵机的工作原理：舵机常用的控制信号是一个周期为20毫秒左右，宽度为1毫秒到2毫秒的脉冲信号。当舵机收到该信号后，会马上激发出一个与之相同的，宽度为1.5毫秒的负向标准的中位脉冲。之后二个脉冲在一个加法器中进行相加得到了所谓的差值脉冲。输入信号脉冲如果宽于负向的标准脉冲，得到的就是正的差值脉冲。如果输入脉冲比标准脉冲窄，相加后得到的肯定是负的脉冲。此差值脉冲放大后就是驱动舵机正反转动的动力信号。舵机电机的转动，通过齿轮组减速后，同时驱动转盘和标准脉冲宽度调节电位器转动。直到标准脉冲与输入脉冲宽度完全相同时，差值脉冲消失时才会停止转动。<br>❤连接方式：将输出的三线与对应的PCA驱动板引脚连接。电调和舵机都是标准3线母插头连接只要按照对应的引脚插入驱动板就可以了。(地线一般为黑色或棕色、信号线一般为黄色或白色)。</p>
@@ -561,7 +563,7 @@
 <p>6)    安装摄像头<br>使用摄像头前，取下相机镜头上的塑料薄膜。<br>安装方式：将树莓派上摄像头插销扒开，插入相机电缆，注意触点的位置，随后按入插销即可。<br><img src="http://images.ncnynl.com/ros/2018/hardware_ass_6a.png" alt="此处输入图片的描述"><br><img src="http://images.ncnynl.com/ros/2018/hardware_ass_6b.png" alt="此处输入图片的描述"></p>
 <p>7)    硬件整合<br>舵机与电调已经在小车上固定好，所以接下来只需用三线母插头把PCA驱动板连接舵机与电调。因为电调和舵机都是标准3线母插头连接只要按照对应的引脚插入驱动板就好。(地线一般为黑色或棕色、信号线一般为黄色或白色，所以对应黑色的线要插在GND对应的针头)。</p>
 <h4 id="组装完成"><a href="#组装完成" class="headerlink" title="组装完成"></a>组装完成</h4><p>几种不同形态智能小车的完成体：<br><img src="http://images.ncnynl.com/ros/2018/donkey.png" alt="此处输入图片的描述"><br><img src="https://s1.ax1x.com/2018/07/15/PMb9dU.jpg" alt="此处输入图片的描述"><br><img src="https://s1.ax1x.com/2018/07/15/PMbCoF.jpg" alt="此处输入图片的描述"></p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a><font color="red">软件</font></h2><h3 id="软件清单"><a href="#软件清单" class="headerlink" title="软件清单"></a>软件清单</h3><p>❤系统：<br>树莓派系统<br>Ubuntu系统<br>❤在linux下安装donkeycar<br>安装依赖：virtualenv build-essential python3-dev gfortran libhdf5-dev<br><a href="https://github.com/wroscoe/donkey" target="_blank" rel="noopener">https://github.com/wroscoe/donkey</a><br>❤在Windows下安装donkeycar<br><a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a><br>git库<a href="https://github.com/wroscoe/donkey" target="_blank" rel="noopener">https://github.com/wroscoe/donkey</a><br>❤在MAC下安装donkeycar<br><a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br><a href="https://www.atlassian.com/git/tutorials/install-git" target="_blank" rel="noopener">https://www.atlassian.com/git/tutorials/install-git</a><br>xcode-select –install<br>pip install <a href="https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl" target="_blank" rel="noopener">https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl</a><br>开源机器学习框架：<br>❤pip install keras==2.0.6<br>❤pip install tensorflow==1.3.0</p>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a><font color="red">软件</font></h2><h3 id="软件清单"><a href="#软件清单" class="headerlink" title="软件清单"></a>软件清单</h3><p>❤系统：<br>树莓派系统<br>Ubuntu系统<br>❤在linux下安装donkeycar<br>安装依赖：virtualenv build-essential python3-dev gfortran libhdf5-dev<br><a href="https://github.com/wroscoe/donkey" target="_blank" rel="noopener">https://github.com/wroscoe/donkey</a><br>❤在Windows下安装donkeycar<br><a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">https://git-scm.com/download/win</a><br>git库<a href="https://github.com/wroscoe/donkey" target="_blank" rel="noopener">https://github.com/wroscoe/donkey</a><br>❤在MAC下安装donkeycar<br><a href="https://conda.io/miniconda.html" target="_blank" rel="noopener">https://conda.io/miniconda.html</a><br><a href="https://www.atlassian.com/git/tutorials/install-git" target="_blank" rel="noopener">https://www.atlassian.com/git/tutorials/install-git</a><br>xcode-select —install<br>pip install <a href="https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl" target="_blank" rel="noopener">https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.3.0-py3-none-any.whl</a><br>开源机器学习框架：<br>❤pip install keras==2.0.6<br>❤pip install tensorflow==1.3.0</p>
 <h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><h4 id="安装树莓派系统"><a href="#安装树莓派系统" class="headerlink" title="安装树莓派系统"></a>安装树莓派系统</h4><p>将SD卡用读卡器连接到本地PC。<br>首先为树莓派安装固件，下载地址：<br><a href="https://www.dropbox.com/s/wiudnm2dcsvoquu/donkey_v22.img.zip?dl=0" target="_blank" rel="noopener">https://www.dropbox.com/s/wiudnm2dcsvoquu/donkey_v22.img.zip?dl=0</a><br>安装步骤：<br>方法1：使用<a href="https://s1.ax1x.com/2018/07/15/PMHHIg.png" target="_blank" rel="noopener">6</a>中的推荐步骤<br><img src="https://s1.ax1x.com/2018/07/15/PMbFJJ.png" alt="此处输入图片的描述"><br>方法2：利用安装软件Etcher。<br>    安装方法参考教程<a href="https://bbs.pediy.com/thread-221193.htm" target="_blank" rel="noopener">（For ubuntu）</a>,<a href="http://www.xue51.com/soft/2044.html" target="_blank" rel="noopener">（For windows）</a>。</p>
 <h4 id="设置wifi连接"><a href="#设置wifi连接" class="headerlink" title="设置wifi连接"></a>设置wifi连接</h4><p>我们需要让树莓派连接wifi热点，从而可以无线操控小车。方法有两种：<br>方法1：SD卡插入树莓派，显示屏，键盘和鼠标连入树莓派，开机后通过界面链接wifi。<br>方法2：（没有显示屏和键鼠条件下）<br>首先，新建一个无线热点。可以使用本地PC新建wifi热点。记录ssid和password。<br>接下来修改树莓派的系统文件：<br>在boot部分的根目录下，新建文件名为wpa_supplicant.conf的文件，文件内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">country=US</span><br><span class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</span><br><span class="line">update_config=1</span><br><span class="line">network=&#123;</span><br><span class="line">   ssid=&quot;&lt;your network name&gt;&quot;</span><br><span class="line">    psk=&quot;&lt;your password&gt;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>分别在ssid和psk设置自己的WiFi用户名和密码，注意不能有&lt;&gt;，</p>
@@ -602,8 +604,8 @@
 <p>3、    按j，一直到小车的方向完全转向右边<br>4、    按i，一直到小车的方向完全朝向前方<br>5、    测量转弯直径，并将它记录在表格中<br>6、    在不同的转向值下重复同样的测量<br>7、    绘制表格看看小车在各个方向的转向是否相同（角度相同时）<br>如果你的转向在80%PWM和100%PWM相同时，将PWM值变为80%PWM,<br>如果你的车往一边偏，改变另一边的PWM值<br>经过微调之后你的表格大概会是这个样子<br><img src="https://s1.ax1x.com/2018/07/15/PMbUw8.png" alt="此处输入图片的描述"></p>
 <h2 id="训练智能小车"><a href="#训练智能小车" class="headerlink" title="训练智能小车"></a><font color="red">训练智能小车</font></h2><h3 id="赛道设置"><a href="#赛道设置" class="headerlink" title="赛道设置"></a>赛道设置</h3><p>可以用带颜色的胶带、丝带或者绳子，赛道最好宽4英尺，并且有2英寸的白色边框和黄色虚线中线。</p>
 <h3 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h3><p>①    先不记录数据，在跑道上跑几圈，当熟练跑道之后（10圈以上不出错）点击按钮Start Recording<br><img src="https://s1.ax1x.com/2018/07/15/PMbBWj.png" alt="此处输入图片的描述"><br>②    如果出错或者有意外发生时马上点击Stop Car停止记录<br>③    至少收集10-20圈好的数据之后即可以停止收集，Ctrl-c即可，收集的数据在data文件夹里</p>
-<p>需要注意的细节：<br>1，    清除d2/data目录下的之前的数据<br>2，    回到d2目录下 python namage.py drive启动小车<br>3，    到浏览器中model选择user，然后用电脑控制小车在场景下跑几圈<br>4，    等到操作小车在场景下基本不出错之后点击start recording开始记录数据<br>5，    记录大约半个小时的数据就可以了<br>注意在记录数据的过程中，可能会出现小车没电的情况，解决的办法就是，刚开始在config.py文件中把THROTTLE_FORWARD_PWM设置的小一点，本车是335或者330，过一会感觉小车跑的变慢了，停止记录，停下小车，关闭程序。调整THROTTLE_FORWARD_PWM变大一点到440，重启程序，记得保持小车的运行速度以及Throttle差不多一致。同理慢慢可以变为445和450<br>6，    记录完数据，筛选数据。手动删除数据中撞墙等不好的数据<br>7，    将数据考到电脑上装的donkey的d2/data目录下（小文件太多，速度会特别慢）<br>8，    进入d2目录，运行命令 python manage.py train –model ~/d2/models/mypilot<br>9，    等待训练结束，到到d2/models下将mypilot文件发送到小车的对应目录下<br>10，    用命令python manage.py drive –model ~/d2/models/mypilot启动小车，然后到浏览器中选择local pilot模式启动自动驾驶</p>
-<h3 id="拷贝数据至本地PC"><a href="#拷贝数据至本地PC" class="headerlink" title="拷贝数据至本地PC"></a>拷贝数据至本地PC</h3><p>由于树莓派计算能力有限，需要将数据迁移到电脑上进行模型的训练，有两种方法：<br>方法1：新开一个SSH窗口用rsync命令从树莓派复制数据。命令如下：<br>rsync -r pi@&lt;your_pi_ip_address&gt;:~/d2/data/  ~/d2/data/<br>方法2：利用Xshell里面的新建文件传输直接复制粘贴。<br><img src="https://s1.ax1x.com/2018/07/15/PMbaTS.md.png" alt="此处输入图片的描述"></p>
+<p>需要注意的细节：<br>1，    清除d2/data目录下的之前的数据<br>2，    回到d2目录下 python namage.py drive启动小车<br>3，    到浏览器中model选择user，然后用电脑控制小车在场景下跑几圈<br>4，    等到操作小车在场景下基本不出错之后点击start recording开始记录数据<br>5，    记录大约半个小时的数据就可以了<br>注意在记录数据的过程中，可能会出现小车没电的情况，解决的办法就是，刚开始在config.py文件中把THROTTLE_FORWARD_PWM设置的小一点，本车是335或者330，过一会感觉小车跑的变慢了，停止记录，停下小车，关闭程序。调整THROTTLE_FORWARD_PWM变大一点到440，重启程序，记得保持小车的运行速度以及Throttle差不多一致。同理慢慢可以变为445和450<br>6，    记录完数据，筛选数据。手动删除数据中撞墙等不好的数据<br>7，    将数据考到电脑上装的donkey的d2/data目录下（小文件太多，速度会特别慢）<br>8，    进入d2目录，运行命令 python manage.py train —model ~/d2/models/mypilot<br>9，    等待训练结束，到到d2/models下将mypilot文件发送到小车的对应目录下<br>10，    用命令python manage.py drive —model ~/d2/models/mypilot启动小车，然后到浏览器中选择local pilot模式启动自动驾驶</p>
+<h3 id="拷贝数据至本地PC"><a href="#拷贝数据至本地PC" class="headerlink" title="拷贝数据至本地PC"></a>拷贝数据至本地PC</h3><p>由于树莓派计算能力有限，需要将数据迁移到电脑上进行模型的训练，有两种方法：<br>方法1：新开一个SSH窗口用rsync命令从树莓派复制数据。命令如下：<br>rsync -r pi@<your_pi_ip_address>:~/d2/data/  ~/d2/data/<br>方法2：利用Xshell里面的新建文件传输直接复制粘贴。<br><img src="https://s1.ax1x.com/2018/07/15/PMbaTS.md.png" alt="此处输入图片的描述"></your_pi_ip_address></p>
 <h3 id="利用keras训练模型"><a href="#利用keras训练模型" class="headerlink" title="利用keras训练模型"></a>利用keras训练模型</h3><p>复制好数据之后就可以运行训练脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ~/d2/manage.py train --tub &lt;tub folder names comma separated&gt; --model ./models/mypilot</span><br></pre></td></tr></table></figure></p>
 <p>或者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ~/d2/manage.py train --model ~/d2/models/mypilot</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://s1.ax1x.com/2018/07/15/PMbrSs.png" alt="此处输入图片的描述"></p>
@@ -634,18 +636,18 @@
 <p>c)  大家在用训练的模型驾驶的时候，切换到local pilot时，可能会遇到类似摄像头框消失，树莓派报错的情况。</p>
 <p>这是因为树莓派上有的python文件版本和本地电脑从github上面clone的文件不一致。如果有报这种错误，可以把本地代码库上面的对应文件覆盖到树莓派上解决。</p>
 <h2 id="参考创新方向"><a href="#参考创新方向" class="headerlink" title="参考创新方向"></a><font color="red">参考创新方向</font></h2><h3 id="无人驾驶车障碍竞速"><a href="#无人驾驶车障碍竞速" class="headerlink" title="无人驾驶车障碍竞速"></a>无人驾驶车障碍竞速</h3><h3 id="无人取件车-送餐车-领路车"><a href="#无人取件车-送餐车-领路车" class="headerlink" title="无人取件车/送餐车/领路车"></a>无人取件车/送餐车/领路车</h3><h3 id="无人捡球车"><a href="#无人捡球车" class="headerlink" title="无人捡球车"></a>无人捡球车</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li style="list-style: none"><input type="checkbox"> <a href="https://docs.donkeycar.com/" target="_blank" rel="noopener">https://docs.donkeycar.com/</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">https://www.ncnynl.com/archives/201804/2398.html</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://github.com/OSSDC/donkey" target="_blank" rel="noopener">https://github.com/OSSDC/donkey</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://github.com/wroscoe/donkey\" target="_blank" rel="noopener">https://github.com/wroscoe/donkey\</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://docs.donkeycar.com/guide/build_hardware/" target="_blank" rel="noopener">https://docs.donkeycar.com/guide/build_hardware/</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://www.donkeycar.com/" target="_blank" rel="noopener">https://www.donkeycar.com/</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="http://www.makerspace.cn/thread-5681-1-1.html" target="_blank" rel="noopener">http://www.makerspace.cn/thread-5681-1-1.html</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://www.raspberrypi.org/blog/self-driving-car/" target="_blank" rel="noopener">https://www.raspberrypi.org/blog/self-driving-car/</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://blog.csdn.net/nicekwell/article/details/53616277" target="_blank" rel="noopener">https://blog.csdn.net/nicekwell/article/details/53616277</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://python.jobbole.com/87522/" target="_blank" rel="noopener">https://python.jobbole.com/87522/</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://bbs.pediy.com/thread-221193.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-221193.htm</a></li>
-<li style="list-style: none"><input type="checkbox"> <a href="https://www.xue51.com/soft/2044.html" target="_blank" rel="noopener">https://www.xue51.com/soft/2044.html</a></li>
+<li>[ ] <a href="https://docs.donkeycar.com/" target="_blank" rel="noopener">https://docs.donkeycar.com/</a></li>
+<li>[ ] <a href="https://www.ncnynl.com/archives/201804/2398.html" target="_blank" rel="noopener">https://www.ncnynl.com/archives/201804/2398.html</a></li>
+<li>[ ] <a href="https://github.com/OSSDC/donkey" target="_blank" rel="noopener">https://github.com/OSSDC/donkey</a></li>
+<li>[ ] <a href="https://github.com/wroscoe/donkey\" target="_blank" rel="noopener">https://github.com/wroscoe/donkey\</a></li>
+<li>[ ] <a href="https://docs.donkeycar.com/guide/build_hardware/" target="_blank" rel="noopener">https://docs.donkeycar.com/guide/build_hardware/</a></li>
+<li>[ ] <a href="https://www.donkeycar.com/" target="_blank" rel="noopener">https://www.donkeycar.com/</a></li>
+<li>[ ] <a href="http://www.makerspace.cn/thread-5681-1-1.html" target="_blank" rel="noopener">http://www.makerspace.cn/thread-5681-1-1.html</a></li>
+<li>[ ] <a href="https://www.raspberrypi.org/blog/self-driving-car/" target="_blank" rel="noopener">https://www.raspberrypi.org/blog/self-driving-car/</a></li>
+<li>[ ] <a href="https://blog.csdn.net/nicekwell/article/details/53616277" target="_blank" rel="noopener">https://blog.csdn.net/nicekwell/article/details/53616277</a></li>
+<li>[ ] <a href="https://python.jobbole.com/87522/" target="_blank" rel="noopener">https://python.jobbole.com/87522/</a></li>
+<li>[ ] <a href="https://bbs.pediy.com/thread-221193.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-221193.htm</a></li>
+<li>[ ] <a href="https://www.xue51.com/soft/2044.html" target="_blank" rel="noopener">https://www.xue51.com/soft/2044.html</a></li>
 </ul>
 
       
@@ -933,7 +935,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

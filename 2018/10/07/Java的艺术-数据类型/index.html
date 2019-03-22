@@ -440,8 +440,6 @@
 <h2 id="一、什么是数据类型"><a href="#一、什么是数据类型" class="headerlink" title="一、什么是数据类型"></a><font color="red">一、什么是数据类型</font></h2><p>　　数据类型在计算机语言里面，是对内存位置的一个抽象表达方式，可以理解为针对内存的一种抽象的表达方式。<br>　　Java是强类型语言，所以Java对于数据类型的规范会相对严格。数据类型是语言的抽象原子概念，可以说是语言中最基本的单元定义，在Java里面，本质上讲将数据类型分为两种：基本类型和引用数据类型。</p>
 <blockquote>
 <p>基本类型：简单数据类型是不能简化的、内置的数据类型、由编程语言本身定义，它表示了真实的数字、字符和整数。</p>
-</blockquote>
-<blockquote>
 <p>引用数据类型：Java语言本身不支持C++中的结构（struct）或联合（union）数据类型，它的复合数据类型一般都是通过类或接口进行构造，类提供了捆绑数据和方法的方式，同时可以针对程序外部进行信息隐藏。</p>
 </blockquote>
 <p>　　不同数据类型的变量在内存中分配的字节数不同，同时存储方式也是不同的。所以Java给变量赋值前需要先确定变量的类型，确定了变量的类型，即确定了数据需分配内存空间的大小，数据在内存的存储方式。</p>
@@ -455,6 +453,7 @@
 <p><strong>char</strong>：字符型，用于存储单个字符，占16位，即2个字节，取值范围0~65535，默认值为空</p>
 <p><strong>boolean</strong>：布尔类型，占<a href="https://www.jianshu.com/p/2f663dc820d0" target="_blank" rel="noopener">1位，1个字节或者四个字节(存在不同解释角度)</a>，用于判断真或假（仅有两个值，即true、false），默认值false。</p>
 <p>Java中基本类型的存储是固定字节的，具体大小与对应的包装类型如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -516,6 +515,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="封装类型特征"><a href="#封装类型特征" class="headerlink" title="封装类型特征"></a>封装类型特征</h3><blockquote>
 <p>每个基本类型都有一个包装类，这些包装类包含在<strong>java.lang</strong>包中。继承关系如下：</p>
 </blockquote>
@@ -539,14 +539,8 @@
 </ul>
 <blockquote>
 <p><strong>BigInteger、BigDecimal</strong>没有相对应的基本类型，主要应用于高精度的运算，<strong>BigInteger</strong> 支持任意精度的整数，<strong>BigDecimal</strong>支持任意精度带小数点的运算。</p>
-</blockquote>
-<blockquote>
 <p>当整数类型的数据使用字面量赋值的时候，默认值为int类型，就是直接使用0或者其他数字的时候，<strong>默认值的类型为int类型</strong>，所以当使用 long a = 0这种赋值方式的时候，JVM内部存在数据转换。</p>
-</blockquote>
-<blockquote>
 <p>浮点类型的数据使用字面量赋值的时候，<strong>默认值为double类型</strong>，就是当小数字面量出现的时候，JVM会使用double类型的数据类型。</p>
-</blockquote>
-<blockquote>
 <p>从JDK 5.0开始，Java包含<strong>自动拆箱装箱</strong>的特性.调用valueOf()方法。</p>
 </blockquote>
 <h3 id="缓存池"><a href="#缓存池" class="headerlink" title="缓存池"></a>缓存池</h3><p>基本类型对应的缓冲池如下：</p>
@@ -559,33 +553,19 @@
 </ul>
 <h2 id="三、在内存中的存储方式"><a href="#三、在内存中的存储方式" class="headerlink" title="三、在内存中的存储方式"></a><font color="red">三、在内存中的存储方式</font></h2><blockquote>
 <p><strong>基本数据类型：</strong>所有的简单数据类型不存在“引用”的概念，基本数据类型都是直接存储在内存中的堆、栈上；</p>
-</blockquote>
-<blockquote>
 <p><strong>引用类型：</strong>引用类型继承于Object类（也是引用类型）都是按照Java里面存储对象的内存模型来进行数据存储的，使用Java内存堆和内存栈来进行这种类型的数据存储，简单地讲，“引用”是存储在有序的内存栈上的，而对象本身的值存储在内存堆上的；</p>
 </blockquote>
 <h3 id="关于基本数据类型存放的位置"><a href="#关于基本数据类型存放的位置" class="headerlink" title="关于基本数据类型存放的位置"></a><strong>关于基本数据类型存放的位置</strong></h3><p>取决于基本类型声明的位置：</p>
 <blockquote>
 <p><strong>在方法中声明的变量</strong>，即该变量是局部变量，每当程序调用方法时，系统都会为该方法建立一个方法栈，其所在方法中声明的变量就放在方法栈中，当方法结束系统会释放方法栈，其对应在该方法中声明的变量随着栈的销毁而结束，这就局部变量只能在方法中有效的原因。方法中声明的变量可以是基本类型的变量，也可以是引用类型的变量。<br>（1）当声明是基本类型的变量的时，其变量名及值（变量名及值是两个概念）是放在方法栈中<br>（2）当声明的是引用变量时，所声明的变量（该变量实际上是在方法中存储的是内存地址值）是放在方法的栈中，该变量所指向的对象是放在堆类存中的。</p>
-</blockquote>
-<blockquote>
 <p><strong>在类中声明的变量</strong>是成员变量，也叫全局变量，放在堆中的（因为全局变量不会随着某个方法执行结束而销毁）。同样在类中声明的变量即可是基本类型的变量 也可是引用类型的变量。<br>（1）当声明的是基本类型的变量其变量名及其值放在堆内存中的<br>（2）引用类型时，其声明的变量仍然会存储一个内存地址值，该内存地址值指向所引用的对象。引用变量名和对应的对象仍然存储在相应的堆中</p>
 </blockquote>
 <h3 id="基本类型和封装类型异同"><a href="#基本类型和封装类型异同" class="headerlink" title="基本类型和封装类型异同"></a>基本类型和封装类型异同</h3><blockquote>
 <p>基本类型不是对象</p>
-</blockquote>
-<blockquote>
 <p>声明方式不同：包装类型需要用new。</p>
-</blockquote>
-<blockquote>
 <p>存储方式和存储位置不同</p>
-</blockquote>
-<blockquote>
 <p>初始值不同：boolean初始为false,int为0，而Boolean和Integer都为null。</p>
-</blockquote>
-<blockquote>
 <p>使用方式和场景不同：基本类型数据存储相对简单，运算效率比较高。使用包装类型会牺牲一些转换效率，但可以避免持久化数据时产生的一些异常。同时，集合的元素必须是对象类型，满足了java一切皆是对象的思想。</p>
-</blockquote>
-<blockquote>
 <p>销毁效率不同：基本类型定义的变量创建和销毁很快，而类定义的变量还需要JVM去销毁。</p>
 </blockquote>
 <h2 id="四、类型转换"><a href="#四、类型转换" class="headerlink" title="四、类型转换"></a><font color="red"><strong>四、类型转换</strong></font></h2><h3 id="基本类型之自动类型转换"><a href="#基本类型之自动类型转换" class="headerlink" title="基本类型之自动类型转换"></a>基本类型之自动类型转换</h3><p>注意，只能低精度转向高精度。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> char1 = <span class="string">'a'</span>;</span><br><span class="line"><span class="keyword">char</span> char2 = <span class="string">'b'</span>;</span><br><span class="line"><span class="keyword">int</span> int1 = char1 + <span class="number">1</span>;<span class="comment">//这里即自动类型转换。</span></span><br><span class="line"><span class="keyword">int</span> int2 = char1 +char2;<span class="comment">//这里也完成了自动类型转换。</span></span><br><span class="line"><span class="comment">//char2 = int1;//出错</span></span><br></pre></td></tr></table></figure></p>
@@ -617,12 +597,8 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>常见的类型转换，以Integer为例：</p>
 <h4 id="int-→-String"><a href="#int-→-String" class="headerlink" title="int → String"></a>int → String</h4><blockquote>
 <p>(1)int后直接+””<br>(2)s = String.valueOf(i);<br>(3)Integer.toString(i);</p>
-</blockquote>
-<h4 id="String→int"><a href="#String→int" class="headerlink" title="String→int"></a>String→int</h4><blockquote>
-<p>(1) i = Integer.parseInt(s);<br>(2) i = Integer.valueOf(s).intValue();<br>(3) i = new Integer(s).intValue();</p>
-</blockquote>
+<h4 id="String→int"><a href="#String→int" class="headerlink" title="String→int"></a>String→int</h4><p>(1) i = Integer.parseInt(s);<br>(2) i = Integer.valueOf(s).intValue();<br>(3) i = new Integer(s).intValue();</p>
 <h2 id="五、枚举类型"><a href="#五、枚举类型" class="headerlink" title="五、枚举类型"></a>五、枚举类型</h2><p>Java 5.0版本之后引入的除泛型之外的另外一个强大特性：枚举(Enums)。性能远高于静态类。解决一些固定常量集合的问题上枚举成为唯一首选和推荐的一种方式。<br><a href="https://blog.csdn.net/zyhlwzy/article/details/79045066" target="_blank" rel="noopener">枚举类解析</a></p>
-<blockquote>
 <p>enum 不能使用 extends 关键字继承其他类，因为 enum 已经继承了 java.lang.Enum（java是单一继承）。</p>
 </blockquote>
 
@@ -913,7 +889,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

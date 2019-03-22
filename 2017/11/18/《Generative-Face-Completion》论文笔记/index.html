@@ -454,8 +454,12 @@
 <p>加上autoencoder结构的semantic parsing network之后，生成的图片会更加和谐：</p>
 <p><img src="http://img.blog.csdn.net/20170426165112396?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbTBfMzcyMzEwMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p><strong>d) 损失函数：</strong></p>
-<p>因为模型分为三部分，因此损失函数也有三部分：<br>    整体的损失函数如下：<br>        $$L = L_r + λ_1L_{a1} + λ_2L_{a2} + λ_3L_p$$<br>    其中，<br>    ①$L_r$是生成器的损失，就是输入与输出的二阶范数。<br>    ②$L_{a1}$与$L_{a2}$是两个判别器的损失，其形式跟GAN的判别器损失大同小异：</p>
-<p><img src="http://img.blog.csdn.net/20170426165144818?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbTBfMzcyMzEwMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>因为模型分为三部分，因此损失函数也有三部分：<br>    整体的损失函数如下：</p>
+<pre><code>    $$L = L_r + λ_1L_{a1} + λ_2L_{a2} + λ_3L_p$$
+其中，
+①$L_r$是生成器的损失，就是输入与输出的二阶范数。
+②$L_{a1}$与$L_{a2}$是两个判别器的损失，其形式跟GAN的判别器损失大同小异：
+</code></pre><p><img src="http://img.blog.csdn.net/20170426165144818?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbTBfMzcyMzEwMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p>③Lp就是semantic parsing network的损失，就是简单的softmax层损失。<br>    它们前面的参数是用来平衡各个部分损失不同影响的。</p>
 <p><strong>e) 训练步骤：</strong></p>
 <p>与我上一篇看的pix2pix两步走的训练步骤类似，作者采用了三步训练：<br>    ①用生成器直接训练，得到模糊的结果；<br>    ②用局部判别器损失来微调生成模型；<br>    ③联合整体判别器和意义转化网络损失来调整生成模型参数。<br>    这个方法据说可以避免训练开始阶段判别器的作用过强。和我毕设的预训练类似。</p>
@@ -753,7 +757,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

@@ -473,8 +473,6 @@
 <p>终于解决了这个疑惑！</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><blockquote>
 <p>分析源码，在多线程程序中，如果有多个线程都在使用一个集合对象X，线程继续迭代，当A线程调用迭代器的next()方法时，发现modCount不等于expectedModCount，因此就抛出了ConcurrentModificationException异常。这可能就是它为什么叫并发修改异常的原因。<strong>从这一点也能说明ArrayList不是线程安全的。</strong></p>
-</blockquote>
-<blockquote>
 <p>简单来说，调用list.remove(),list.add()方法导致modCount和expectedModCount的值不一致。使用for-each进行迭代实际上也会出现这种问题。</p>
 </blockquote>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h2><p>一般有2种解决办法：</p>
@@ -489,8 +487,6 @@
 <p>其他解决同步问题的办法：</p>
 <blockquote>
 <p>(3)在使用iterator迭代的时候使用synchronized或者Lock进行同步；</p>
-</blockquote>
-<blockquote>
 <p>(4)使用并发容器CopyOnWriteArrayList代替ArrayList和Vector。</p>
 </blockquote>
 
@@ -783,7 +779,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.5k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 
