@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java基础,数据库,MySQL,">
+  <meta name="keywords" content="数据库,MySQL,JDBC,">
 
 
 
@@ -82,7 +82,7 @@
 
 
 <meta name="description" content="JAVA数据库连接JDBC、以及DAO模式的使用。">
-<meta name="keywords" content="Java基础,数据库,MySQL">
+<meta name="keywords" content="数据库,MySQL,JDBC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库(3)-JDBC">
 <meta property="og:url" content="https://yoursite.com/2018/12/07/数据库(3)-JDBC/index.html">
@@ -90,7 +90,7 @@
 <meta property="og:description" content="JAVA数据库连接JDBC、以及DAO模式的使用。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
-<meta property="og:updated_time" content="2019-03-21T16:06:28.555Z">
+<meta property="og:updated_time" content="2019-03-24T08:45:44.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库(3)-JDBC">
 <meta name="twitter:description" content="JAVA数据库连接JDBC、以及DAO模式的使用。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,160 字
+                  2,458 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -485,6 +485,11 @@
 <p>在需要传入参数的SQL语句中，替换<code>Statement</code>对象。</p>
 <p>相比较以前的<code>Statemen</code>， 预先处理给定的sql语句，对其执行语法检查。 在sql语句里面使用<code>?</code>占位符来替代后续要传递进来的变量。后面进来的变量值，将会被看成是字符串，不会产生任何的关键字。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String sql = <span class="string">"insert into table_name values(? , ? , ?)"</span>;</span><br><span class="line">PrepareStatement ps = conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line"><span class="comment">//给占位符赋值</span></span><br><span class="line"><span class="comment">//注意从左到右数过来，1 代表第一个问号， 永远从1开始。</span></span><br><span class="line">ps.setInt(<span class="number">1</span>,id);</span><br><span class="line">ps.setString(<span class="number">2</span>, userName);</span><br><span class="line">ps.setString(<span class="number">3</span>, phone);</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+<h3 id="PreparedStatement-和-Statement比较"><a href="#PreparedStatement-和-Statement比较" class="headerlink" title="PreparedStatement 和 Statement比较"></a>PreparedStatement 和 Statement比较</h3><blockquote>
+<p>A.<code>PreparedStatement</code> 尽最大可能提高性能<br><code>sql</code> 语句被数据库的编译器编译后的执行代码被缓存下来，那么下次调用时只要是相同的预编译语句就不需要编译，只要将参数直接传入编译过的语句执行代码中就会得到执行。<br><code>PreparedStatement</code> 会先初始化SQL，先把这个SQL提交到数据库中进行预处理，并缓存下来，多次使用可提高效率。如果仅仅执行了一次的话，和普通的对象差别不大，体现不出它预编译的优越性。<br><code>Statement</code>不会初始化，没有预处理，每次都是从0开始执行SQL。</p>
+<p>B.极大地提高了安全性，防止SQL注入式攻击<br>在使用参数化查询的情况下，数据库系统不会将参数的内容视为 SQL 指令的一部分来处理，而是在数据库完成 SQL 指令的编译后，才套用参数运行，因此就算参数中含有破坏性的指令，也不会被数据库所运行。</p>
+<p>C.代码的可读性和可维护性更强</p>
+</blockquote>
 <h2 id="七、遇到的错误"><a href="#七、遇到的错误" class="headerlink" title="七、遇到的错误"></a>七、遇到的错误</h2><blockquote>
 <p>(1)time zone错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQLException: The server time zone value &apos;ÖÐ¹ú±ê×¼Ê±¼ä&apos; is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.</span><br><span class="line">SQLState: 01S00</span><br><span class="line">VendorError: 0</span><br></pre></td></tr></table></figure></p>
 </blockquote>
@@ -534,11 +539,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java基础/" rel="tag"># Java基础</a>
-          
             <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
             <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/JDBC/" rel="tag"># JDBC</a>
           
         </div>
       
@@ -646,7 +651,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,7 +673,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -752,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC概述"><span class="nav-number">1.</span> <span class="nav-text">JDBC概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装和配置"><span class="nav-number">2.</span> <span class="nav-text">一、安装和配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、下载数据库对应的jar包"><span class="nav-number">3.</span> <span class="nav-text">二、下载数据库对应的jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、JDBC基本操作"><span class="nav-number">4.</span> <span class="nav-text">三、JDBC基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用的基本步骤"><span class="nav-number">4.1.</span> <span class="nav-text">(1)使用的基本步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JDBC数据库CURD对应的SQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">(2)JDBC数据库CURD对应的SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Insert"><span class="nav-number">4.2.1.</span> <span class="nav-text">A. Insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Delete"><span class="nav-number">4.2.2.</span> <span class="nav-text">B. Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Query"><span class="nav-number">4.2.3.</span> <span class="nav-text">C. Query</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-Update"><span class="nav-number">4.2.4.</span> <span class="nav-text">D. Update</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、使用properties配置文件"><span class="nav-number">5.</span> <span class="nav-text">四、使用properties配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于Properties"><span class="nav-number">5.1.</span> <span class="nav-text">(1)关于Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用properties链接数据库"><span class="nav-number">5.2.</span> <span class="nav-text">(2)使用properties链接数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、DAO模式"><span class="nav-number">6.</span> <span class="nav-text">五、DAO模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">6.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组成部分"><span class="nav-number">6.2.</span> <span class="nav-text">组成部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接上代码"><span class="nav-number">6.3.</span> <span class="nav-text">直接上代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、PrepareStatement"><span class="nav-number">7.</span> <span class="nav-text">六、PrepareStatement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、遇到的错误"><span class="nav-number">8.</span> <span class="nav-text">七、遇到的错误</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC概述"><span class="nav-number">1.</span> <span class="nav-text">JDBC概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装和配置"><span class="nav-number">2.</span> <span class="nav-text">一、安装和配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、下载数据库对应的jar包"><span class="nav-number">3.</span> <span class="nav-text">二、下载数据库对应的jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、JDBC基本操作"><span class="nav-number">4.</span> <span class="nav-text">三、JDBC基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用的基本步骤"><span class="nav-number">4.1.</span> <span class="nav-text">(1)使用的基本步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JDBC数据库CURD对应的SQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">(2)JDBC数据库CURD对应的SQL语句</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Insert"><span class="nav-number">4.2.1.</span> <span class="nav-text">A. Insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Delete"><span class="nav-number">4.2.2.</span> <span class="nav-text">B. Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Query"><span class="nav-number">4.2.3.</span> <span class="nav-text">C. Query</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-Update"><span class="nav-number">4.2.4.</span> <span class="nav-text">D. Update</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、使用properties配置文件"><span class="nav-number">5.</span> <span class="nav-text">四、使用properties配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关于Properties"><span class="nav-number">5.1.</span> <span class="nav-text">(1)关于Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用properties链接数据库"><span class="nav-number">5.2.</span> <span class="nav-text">(2)使用properties链接数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、DAO模式"><span class="nav-number">6.</span> <span class="nav-text">五、DAO模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">6.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组成部分"><span class="nav-number">6.2.</span> <span class="nav-text">组成部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接上代码"><span class="nav-number">6.3.</span> <span class="nav-text">直接上代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、PrepareStatement"><span class="nav-number">7.</span> <span class="nav-text">六、PrepareStatement</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PreparedStatement-和-Statement比较"><span class="nav-number">7.1.</span> <span class="nav-text">PreparedStatement 和 Statement比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、遇到的错误"><span class="nav-number">8.</span> <span class="nav-text">七、遇到的错误</span></a></li></ol></div>
             
 
           </div>
@@ -786,7 +791,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">68.5k</span>
+    <span title="Site words total count">71.1k</span>
   
 </div>
 
