@@ -90,7 +90,7 @@
 <meta property="og:description" content="本文总结数据库事务、安全问题与隔离级别，以及数据库连接池的相关知识。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
-<meta property="og:updated_time" content="2019-03-24T08:49:21.756Z">
+<meta property="og:updated_time" content="2019-03-24T08:51:57.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库(4)-事务与数据库连接池">
 <meta name="twitter:description" content="本文总结数据库事务、安全问题与隔离级别，以及数据库连接池的相关知识。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,309 字
+                  2,340 字
                 </span>
               
 
@@ -539,6 +539,8 @@
 <p>连接容器中超时连接的释放有两种方式：<br>（1）在往容器中添加或者取出连接的时候释放。<br>（2）单独开一个线程不断轮询所有连接释放超时的连接。一般采用第一种方式。</p>
 <p>栈中连接的使用时间是有序的。所以每次释放的时候，只需要从底部向上开始扫描，遇到超时的连接则进行释放，遇上非超时的连接则停止扫描，如果栈中连接均未超时，则只需要扫描最后一个就可以了。</p>
 </blockquote>
+<hr>
+<p><strong>参考文献</strong><br><a href="https://www.cnblogs.com/JavaSubin/p/5294721.html" target="_blank" rel="noopener">常用数据库连接池 (DBCP、c3p0、Druid) 配置说明</a><br><a href="https://www.cnblogs.com/wym789/p/6374440.html" target="_blank" rel="noopener">数据库连接池的实现及原理</a></p>
 
       
     </div>
