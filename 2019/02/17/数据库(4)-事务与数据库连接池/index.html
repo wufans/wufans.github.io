@@ -90,7 +90,7 @@
 <meta property="og:description" content="本文总结数据库事务、安全问题与隔离级别，以及数据库连接池的相关知识。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
-<meta property="og:updated_time" content="2019-03-24T08:51:57.489Z">
+<meta property="og:updated_time" content="2019-03-24T08:54:08.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库(4)-事务与数据库连接池">
 <meta name="twitter:description" content="本文总结数据库事务、安全问题与隔离级别，以及数据库连接池的相关知识。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,340 字
+                  2,332 字
                 </span>
               
 
@@ -472,12 +472,11 @@
 <h3 id="（2）安全问题-写"><a href="#（2）安全问题-写" class="headerlink" title="（2）安全问题-写"></a>（2）安全问题-写</h3><blockquote>
 <p>丢失更新问题，指一个事务去修改数据库， 另一个事务也修改数据库，最后的那个事务，不管是提交还是回滚都会造成前面一个事务的数据更新丢失</p>
 </blockquote>
-<p>主要解决办法是加锁有：<strong>乐观锁、悲观锁</strong>。</p>
+<p>主要解决办法是加锁：<strong>乐观锁、悲观锁</strong>。</p>
 <blockquote>
-<p><strong>悲观锁：</strong>指事务在一开始就认为丢失更新一定会发生， 这是一件很悲观的事情。类似synchronized加锁。</p>
-<p><strong>乐观锁:</strong>指从来不会觉得丢失更新会发生。通过手动在数据库中设置字段，利用CAS实现。</p>
+<p><strong>悲观锁：</strong>指事务在一开始就认为丢失更新一定会发生， 这是一件很悲观的事情。类似synchronized加锁。悲观锁通过在查询条件后面加<code>for udate</code>实现。</p>
+<p><strong>乐观锁:</strong>指从来不会觉得丢失更新会发生。通过手动在数据库中设置字段，利用<code>CAS</code>实现。</p>
 </blockquote>
-<p>数据库中，悲观锁通过在查询条件后面加<code>for udate</code>实现。悲观锁</p>
 <h3 id="（3）不可重复读和幻读的区别"><a href="#（3）不可重复读和幻读的区别" class="headerlink" title="（3）不可重复读和幻读的区别"></a>（3）不可重复读和幻读的区别</h3><p>幻读更加关注于insert操作,事务在插入已经检查过不存在的记录时，惊奇的发现这些数据已经存在了，之前的检测获取到的数据如同鬼影一般。</p>
 <h3 id="（4）隔离级别-四种"><a href="#（4）隔离级别-四种" class="headerlink" title="（4）隔离级别-四种"></a>（4）<strong>隔离级别-四种</strong></h3><blockquote>
 <p><strong>读未提交</strong>:Read Uncommitted</p>
