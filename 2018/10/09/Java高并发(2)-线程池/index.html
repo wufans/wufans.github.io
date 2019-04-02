@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/4/22/8f025e56062328e4ac36e3c988e30d27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:updated_time" content="2019-04-02T14:05:37.430Z">
+<meta property="og:updated_time" content="2019-04-02T14:15:09.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发(2)-线程池">
 <meta name="twitter:description" content="本文介绍Java中线程池的相关概念和部分源码解析。">
@@ -463,7 +463,6 @@
 <p>STOP：不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程。在线程池处于 RUNNING 或 SHUTDOWN 状态时，调用 shutdownNow() 方法会使线程池进入到该状态；</p>
 <p>TIDYING：如果所有的任务都已终止了，workerCount (有效线程数) 为0，线程池进入该状态后会调用 terminated() 方法进入TERMINATED 状态。</p>
 <p>TERMINATED：在terminated() 方法执行完后进入该状态，默认terminated()方法中什么也没有做。<br>进入TERMINATED的条件如下：</p>
-</blockquote>
 <ul>
 <li>线程池不是RUNNING状态；</li>
 <li>线程池状态不是TIDYING状态或TERMINATED状态；</li>
@@ -471,6 +470,7 @@
 <li>workerCount为0；</li>
 <li>设置TIDYING状态成功。</li>
 </ul>
+</blockquote>
 <h2 id="三、Executor框架接口"><a href="#三、Executor框架接口" class="headerlink" title="三、Executor框架接口"></a>三、Executor框架接口</h2><p>  <img src="https://user-gold-cdn.xitu.io/2017/4/22/8f025e56062328e4ac36e3c988e30d27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="此处输入图片的描述"></p>
 <p><code>JUC(Java.util.concurrent)</code>中一共有三个Executor接口：</p>
 <blockquote>
@@ -505,11 +505,16 @@
 <p>shutdownNow(）<br>立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务。</p>
 </blockquote>
 <h3 id="判断线程池线程是否执行完"><a href="#判断线程池线程是否执行完" class="headerlink" title="判断线程池线程是否执行完"></a>判断线程池线程是否执行完</h3><blockquote>
-<p> isTerminated()<br>调用<code>ExecutorService.shutdown()</code>方法的时候，线程池不再接收任何新任务，但此时线程池并不会立刻退出，直到添加到线程池中的任务都已经处理完成，才会退出。在调用<code>shutdown</code>方法后我们可以在一个死循环里面用<code>isTerminated()</code>方法判断是否线程池中的所有线程已经执行完毕，如果子线程都结束了，我们就可以做关闭流等后续操作了。</p>
-<p>使用闭锁(CountDownLatch)<br>CountDownLatch是一种灵活的闭锁实现，它可以使一个或多个线程等待一组事件发生。闭锁状态包括一个计数器，该计数器被初始化为一个正数，表示需要等待的事件数量。countDown方法递减计数器，表示有一个事件已经发生了，而await方法等待计数器达到零，即表示需要等待的事情都已经发生。</p>
+<p> isTerminated()</p>
+</blockquote>
+<p>调用<code>ExecutorService.shutdown()</code>方法的时候，线程池不再接收任何新任务，但此时线程池并不会立刻退出，直到添加到线程池中的任务都已经处理完成，才会退出。在调用<code>shutdown</code>方法后我们可以在一个死循环里面用<code>isTerminated()</code>方法判断是否线程池中的所有线程已经执行完毕，如果子线程都结束了，我们就可以做关闭流等后续操作了。</p>
+<blockquote>
+<p>使用闭锁(CountDownLatch)</p>
+</blockquote>
+<p>CountDownLatch是一种灵活的闭锁实现，它可以使一个或多个线程等待一组事件发生。闭锁状态包括一个计数器，该计数器被初始化为一个正数，表示需要等待的事件数量。countDown方法递减计数器，表示有一个事件已经发生了，而await方法等待计数器达到零，即表示需要等待的事情都已经发生。</p>
+<blockquote>
 <p>使用信号量机制</p>
 </blockquote>
-<p>`</p>
 <h2 id="五、常见的四种线程池的用法"><a href="#五、常见的四种线程池的用法" class="headerlink" title="五、常见的四种线程池的用法"></a>五、常见的四种线程池的用法</h2><blockquote>
 <p>Java通过Executors类提供四种线程池</p>
 </blockquote>
