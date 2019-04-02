@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java基础,">
+  <meta name="keywords" content="Java基础,Java源码,Java并发,">
 
 
 
@@ -81,19 +81,20 @@
 
 
 
-<meta name="description" content="在运行时发现和使用类的信息 - Java反射。">
-<meta name="keywords" content="Java基础">
+<meta name="description" content="本文介绍Java中线程池的相关概念和部分源码解析。">
+<meta name="keywords" content="Java基础,Java源码,Java并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java的艺术-浅谈反射机制">
-<meta property="og:url" content="https://yoursite.com/2018/11/25/Java的艺术-浅析反射机制/index.html">
+<meta property="og:title" content="Java并发(2)-线程池">
+<meta property="og:url" content="https://yoursite.com/2018/10/09/Java高并发(2)-线程池/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
-<meta property="og:description" content="在运行时发现和使用类的信息 - Java反射。">
+<meta property="og:description" content="本文介绍Java中线程池的相关概念和部分源码解析。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
-<meta property="og:updated_time" content="2019-03-21T16:05:07.434Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/4/22/8f025e56062328e4ac36e3c988e30d27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2019-04-02T14:05:37.430Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java的艺术-浅谈反射机制">
-<meta name="twitter:description" content="在运行时发现和使用类的信息 - Java反射。">
+<meta name="twitter:title" content="Java并发(2)-线程池">
+<meta name="twitter:description" content="本文介绍Java中线程池的相关概念和部分源码解析。">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 
 
@@ -124,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="https://yoursite.com/2018/11/25/Java的艺术-浅析反射机制/">
+  <link rel="canonical" href="https://yoursite.com/2018/10/09/Java高并发(2)-线程池/">
 
 
 
 
 
-  <title>Java的艺术-浅谈反射机制 | Fan Wu's Blog</title>
+  <title>Java并发(2)-线程池 | Fan Wu's Blog</title>
   
 
 
@@ -310,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2018/11/25/Java的艺术-浅析反射机制/">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2018/10/09/Java高并发(2)-线程池/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fan Wu">
@@ -327,7 +328,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Java的艺术-浅谈反射机制</h2>
+          <h2 class="post-title" itemprop="name headline">Java并发(2)-线程池</h2>
         
 
         <div class="post-meta">
@@ -339,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-25T21:08:02+08:00">
-                2018-11-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-09T18:48:20+08:00">
+                2018-10-09
               </time>
             
 
@@ -398,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,674 字
+                  2,528 字
                 </span>
               
 
@@ -414,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -435,79 +436,93 @@
       
 
       
-        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551345094255&amp;di=7757ebd7ca42b6b8acc5a3432680f30c&amp;imgtype=0&amp;src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png" alt="此处输入图片的描述"><br>在运行时发现和使用类的信息 - <strong>Java反射</strong>。</p>
-<a id="more"></a>
-<h2 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h2><p>通俗的解释是：JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
-<h2 id="动态语言"><a href="#动态语言" class="headerlink" title="动态语言"></a>动态语言</h2><p>动态语言，是指程序在运行时可以改变其结构：新的函数可以被引进，已有的函数可以被删除等在结构上的变化。</p>
-<h2 id="反射的作用"><a href="#反射的作用" class="headerlink" title="反射的作用"></a>反射的作用</h2><p><a href="https://zhuanlan.zhihu.com/p/32259566" target="_blank" rel="noopener">参考</a><br>假设我们有很多食材需要处理，猪肉，牛肉，羊肉；每一样食材对应一个类，这个类里面有处理食材的方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pork</span></span>&#123;     <span class="comment">//猪肉</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"cook pork"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Beef</span></span>&#123;     <span class="comment">//牛肉</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"cook beef"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mutton</span></span>&#123;    <span class="comment">//羊肉</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"cook mutton"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当我们在程序中需要根据食材的不同来实例化对应类的对象，再调用对应的方法要怎么做呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">       String food=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(food.equals(<span class="string">"Pork"</span>))&#123;</span><br><span class="line">                Pork pork=<span class="keyword">new</span> Pork();</span><br><span class="line">                pork.cook();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(food.equals(<span class="string">"Beef"</span>))&#123;</span><br><span class="line">		Beef beef=<span class="keyword">new</span> Beef();</span><br><span class="line">		beef.cook();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(food.equals(<span class="string">"Mutton"</span>))&#123;</span><br><span class="line">		Mutton mutton=<span class="keyword">new</span> Mutton();</span><br><span class="line">		mutton.cook();</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>以上的做法是很容易想到的，很直观，但是当我们的食材有几十种甚至上百种时，我们要怎么写上百个if else 来判断食材，再实例化对应的类，调用对应的方法。</p>
-<p>有没有更简单的方法？答案是肯定的，我们可以利用反射机制来完成这一工作，在程序运行时根据类名实例化对应的对象，并调用对应的方法</p>
-<p>步骤如下：</p>
-<p>1、首先我们需要用到接口:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IFood</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、所有的食材类实现这一接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pork</span> <span class="keyword">implements</span> <span class="title">IFood</span></span>&#123;     <span class="comment">//猪肉</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"cook pork"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Beef</span> <span class="keyword">implements</span> <span class="title">IFood</span></span>&#123;     <span class="comment">//牛肉</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"cook beef"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mutton</span> <span class="keyword">implements</span> <span class="title">IFood</span></span>&#123;    <span class="comment">//羊肉</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cook</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"cook mutton"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>3、接下来我们看看怎么使程序更为简单<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">         String food=<span class="string">"Pork"</span>;                 <span class="comment">//字符串food代表食物的类</span></span><br><span class="line">         Class c=Class.forName(food);        <span class="comment">//根据字符串food来载入类对象</span></span><br><span class="line">         Object object=c.newInstance();      <span class="comment">//生成对象</span></span><br><span class="line">         IFood Ifood=(IFood)object;          <span class="comment">//强制转型</span></span><br><span class="line">         Ifood.cook();                       <span class="comment">//调用方法</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如此一来我们不需要写冗杂的if else 嵌套了</p>
-<p>只需要利用 Class.forName()方法根据字符串来实例化对应的类，并调用其方法即可。</p>
-<p>当我们需要处理其他的食材的时候只需要添加对应的类即可，而主程序中可以不改变一行代码。</p>
-<h2 id="反射的应用"><a href="#反射的应用" class="headerlink" title="反射的应用"></a>反射的应用</h2><h3 id="Class对象的获取"><a href="#Class对象的获取" class="headerlink" title="Class对象的获取"></a>Class对象的获取</h3><p>加载完类之后, 在堆内存中会产生一个Class类型的对象(一个类只有一个Class对象), 这个对象包含了完整的类的结构信息,而且这个Class对象就像一面镜子,透过这个镜子看到类的结构,所以被称之为:<strong>反射。</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object</span><br><span class="line">--java.lang.Class&lt;T&gt;</span><br></pre></td></tr></table></figure></p>
-<p>获取Class对象的方法一般有三种方法：</p>
-<blockquote>
-<p>调用<strong>对象</strong>的getClass()方法;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer sb = <span class="keyword">new</span> StringBuffer(<span class="string">"test"</span>);</span><br><span class="line">Class&lt;?&gt; class1 = sb.getClass();</span><br></pre></td></tr></table></figure></p>
-<p><strong>类名</strong>的.class(最安全/性能最好)属性，或者TYPE属性(继承自Object类);<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; class1 = <span class="keyword">int</span>.class;</span><br><span class="line">Class&lt;?&gt; class2 = Integer.class;</span><br><span class="line">Class&lt;?&gt; class3 = Integer.TYPE;</span><br></pre></td></tr></table></figure></p>
-<p>运用<strong>Class.forName(String className)</strong>动态加载类,className需要是类的全限定名(最常用)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; class1 = Class.forName(<span class="string">"Integer"</span>);</span><br></pre></td></tr></table></figure></p>
+        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551345094255&amp;di=7757ebd7ca42b6b8acc5a3432680f30c&amp;imgtype=0&amp;src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png" alt="此处输入图片的描述"><br>本文介绍Java中线程池的相关概念和部分源码解析。<br><a id="more"></a></p>
+<h2 id="一、为什么需要线程池？"><a href="#一、为什么需要线程池？" class="headerlink" title="一、为什么需要线程池？"></a>一、为什么需要线程池？</h2><blockquote>
+<p>因为服务器需要接受并处理请求，通常会给每一个请求分配一个线程来处理，假设每次请求都创建一个线程，如果并发的请求数量非常多，但每个线程执行的时间很短，这样就会频繁的创建和销毁线程，如此一来会大大降低系统的效率。可能出现服务器在为每个请求创建新线程和销毁线程上花费的时间和消耗的系统资源要比处理实际的用户请求的时间和资源更多。</p>
+<p>线程池具有以下优点：</p>
 </blockquote>
-<h3 id="创建实例化对象"><a href="#创建实例化对象" class="headerlink" title="创建实例化对象"></a>创建实例化对象</h3><p>得到了对应java.lang.Class对象，有两种方法通过反射生成对象：[<strong>都需要抛出异常</strong>]</p>
-<blockquote>
-<p>使用Class对象的newInstance()方法来创建该Class对象对应类的实例(这种方式要求该Class对象的对应类有默认构造器)；<strong>相当于无参构造</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; class1 = String.class;</span><br><span class="line">Object str = c.newInstance();</span><br></pre></td></tr></table></figure></p>
-<p>先使用Class对象获取指定的Constructor对象, 再调用Constructor对象的newInstance()方法来创建该Class对象对应类的实例(通过这种方式可以选择指定的构造器来创建实例).<strong>适用于无参和有参的构造方法</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span></span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取String所对应的Class对象</span></span><br><span class="line">Class&lt;?&gt; c = String.class;</span><br><span class="line"><span class="comment">//获取String类带一个String参数的构造器</span></span><br><span class="line">Constructor constructor = c.getConstructor(String.class);</span><br><span class="line"><span class="comment">//根据构造器创建实例</span></span><br><span class="line">Object obj = constructor.newInstance(<span class="string">"test"</span>);</span><br></pre></td></tr></table></figure>
-<p>另外可以用getConstructors()方法返回Constructor对象的一个数组。这些对象反映此 Class 对象所表示的类的所有公共构造方法。如果该类没有公共构造方法，或者该类是一个数组类，或者该类反映一个基本类型或 void，则返回一个长度为 0 的数组。 注意，此方法返回 Constructor<t> 对象的数组（即取自此类构造方法的数组）时，此方法的返回类型是 Constructor&lt;?&gt;[]，不是预期的 Constructor<t>[]。此少量信息的返回类型是必需的，因为从此方法返回之后，该数组可能被修改以保存不同类的 Constructor 对象，而这将违反 Constructor<t>[] 的类型保证。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; c = String.class;<span class="comment">//获取Class对象</span></span><br><span class="line">Constructor&lt;?&gt; cons[] = c.getConstructors();</span><br><span class="line"><span class="keyword">for</span> (Constructor&lt;?&gt; constructor : cons) &#123;</span><br><span class="line">    System.out.println(constructor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></t></t></t></p>
-<p>执行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],<span class="keyword">int</span>,<span class="keyword">int</span>)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],java.nio.charset.Charset)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],java.lang.String) <span class="keyword">throws</span> java.io.UnsupportedEncodingException</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],<span class="keyword">int</span>,<span class="keyword">int</span>,java.nio.charset.Charset)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],<span class="keyword">int</span>,<span class="keyword">int</span>,java.lang.String) <span class="keyword">throws</span> java.io.UnsupportedEncodingException</span><br><span class="line"><span class="keyword">public</span> java.lang.String(java.lang.StringBuilder)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(java.lang.StringBuffer)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[])</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">int</span>[],<span class="keyword">int</span>,<span class="keyword">int</span>)</span><br><span class="line"><span class="keyword">public</span> java.lang.String()</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">char</span>[])</span><br><span class="line"><span class="keyword">public</span> java.lang.String(java.lang.String)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">char</span>[],<span class="keyword">int</span>,<span class="keyword">int</span>)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],<span class="keyword">int</span>)</span><br><span class="line"><span class="keyword">public</span> java.lang.String(<span class="keyword">byte</span>[],<span class="keyword">int</span>,<span class="keyword">int</span>,<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure></p>
-<p>此外，还可以用getDeclaredConstructors()方法获取所有的构造方法。</p>
-<blockquote>
-<p><strong>getConstructor()和getDeclaredConstructor()区别:</strong></p>
-<p>getDeclaredConstructor(Class&lt;?&gt;… parameterTypes)<br>这个方法会返回制定参数类型的所有构造器，包括public的和非public的，当然也包括private的。<br>getDeclaredConstructors()的返回结果就没有参数类型的过滤了。</p>
-<p>getConstructor(Class&lt;?&gt;… parameterTypes)<br>这个方法返回的是getDeclaredConstructor()方法返回结果的子集，只返回制定参数类型访问权限是public的构造器。<br>getConstructors()的返回结果同样也没有参数类型的过滤。</p>
-<h3 id="获取方法"><a href="#获取方法" class="headerlink" title="获取方法"></a>获取方法</h3><p>获取某个Class对象的方法集合，主要有以下几种方法：</p>
-<p>getDeclaredMethods方法返回类或接口声明的所有方法，包括公共、保护、默认（包）访问和私有方法，但不包括继承的方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method[] getDeclaredMethods() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure></p>
-<p>getMethods方法返回某个类的所有公用（public）方法，包括其继承类的公用方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Method[] getMethods() <span class="keyword">throws</span> SecurityException</span><br></pre></td></tr></table></figure></p>
-<p>getMethod 方法返回一个特定的方法，其中第一个参数为方法名称，后面的参数为<font color="red"><strong>方法的参数对应Class的对象</strong></font>。<br>注意：如果不带方法参数对应的class对象，则无法根据方法名获取对应的方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><blockquote>
-<p>当我们从类中获取了一个方法后，我们就可以用 invoke() 方法来调用这个方法。invoke 方法的原型为:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span> <span class="keyword">throws</span> IllegalAccessException, IllegalArgumentException, InvocationTargetException</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p><strong>invoke回调流程示例：</strong></p>
 <ul>
-<li><p>由Class对象动态构造对应类型对象；</p>
-</li>
-<li><p>利用Class对象的getMethod()、getMethods()、getDeclaredMethod()、getDeclaredMethods()等方法构造method对象；</p>
-</li>
-<li><p>类型对象，使其执行对应形参的方法（也就是需要传入一个<strong>动态执行方法的对象</strong>，以及<strong>对应方法的形参</strong>）。</p>
-</li>
+<li><strong>线程复用，降低资源消耗</strong>：重用线程池中的线程,减少因对象创建,销毁所带来的性能开销;</li>
+<li><strong>控制并发数量，提高响应速度</strong>：能有效的控制线程的最大并发数,提高系统资源利用率,同时避免过多的资源竞争,避免堵塞;</li>
+<li><strong>提高线程的可管理性</strong>：能够对线程进行简单的管理并提供定时执行、间隔执行、单线程、并发数控制等功能,使线程的使用简单、高效。</li>
 </ul>
-<p>举例：(利用反射调用String对象的toString()方法)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Class test = String.class;</span><br><span class="line">Object ob = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">Method me = test.getDeclaredMethod(<span class="string">"toString"</span>);</span><br><span class="line">System.out.println(me.invoke(ob,<span class="keyword">null</span>));</span><br></pre></td></tr></table></figure></p>
-<p><strong>invoke()的缺点:</strong></p>
-<ul>
-<li><p>invoke的参数和返回值必需时Object类型的，这意味着必须进行多次的类型转换（特别是基本数据类型），而这将导致编译器错过检查代码的机会，有类型安全的风险，只有到了测试阶段才会发现这些错误，此时找到并改正他们将会更加困难。</p>
-</li>
-<li><p>使用反射获得方法指针的代码要比仅仅直接调用方法明显慢一些。</p>
-</li>
-<li><p>因此仅在必要时才使用Method对象，而最好使用<strong>接口和内部类</strong>，不建议Java开发者使用Method对象的回调功能，使用接口进行回调不仅会使代码的运行速度更快，还更易于维护。</p>
-</li>
-</ul>
-<h3 id="访问成员变量"><a href="#访问成员变量" class="headerlink" title="访问成员变量"></a>访问成员变量</h3><p>通过Class对象的的getField()方法可以获取该类所包含的全部或指定的成员变量Field,Filed提供了如下两组方法来读取和设置成员变量值：<br><strong>getFiled：</strong>访问公有的成员变量<br><strong>getDeclaredField：</strong>所有已声明的成员变量，但不能得到其父类的成员变量</p>
-<blockquote>
-<p>getXxx(Object obj): 获取obj对象的该成员变量的值, 此处的Xxx对应8中基本类型,如果该成员变量的类型是引用类型, 则取消get后面的Xxx;<br>setXxx(Object obj, Xxx val): 将obj对象的该成员变量值设置成val值.此处的Xxx对应8种基本类型, 如果该成员类型是引用类型, 则取消set后面的Xxx;</p>
+<h2 id="二、线程池原理"><a href="#二、线程池原理" class="headerlink" title="二、线程池原理"></a>二、线程池原理</h2><h3 id="线程池的特点"><a href="#线程池的特点" class="headerlink" title="线程池的特点"></a>线程池的特点</h3><blockquote>
+<p>（1）线程复用：实现线程复用的原理应该就是要保持线程处于存活状态（就绪，运行或阻塞）</p>
+<p>（2）控制并发数量：（核心线程和最大线程数控制）</p>
+<p>（3）管理线程（设置线程的状态）</p>
 </blockquote>
-<p><font color="red">注: getDeclaredXxx方法可以获取所有的成员变量,无论private/public</font>;</p>
-<h2 id="反射与Spring框架设计"><a href="#反射与Spring框架设计" class="headerlink" title="反射与Spring框架设计"></a>反射与Spring框架设计</h2><p>反射最重要的用途就是开发各种通用框架。很多框架（比如 Spring）都是配置化的（比如通过 XML 文件配置 Bean），为了保证框架的通用性，它们可能需要根据配置文件加载不同的对象或类，调用不同的方法，这个时候就必须用到反射，运行时动态加载需要加载的对象。</p>
-<p>Spring内部采用了很多反射机制。<br>很多web框架的前端，实现URI请求映射到Action方法，也可以简单的通过反射来做。<br>这部分内容后面再单独补充。</p>
-<h2 id="反射存在的问题"><a href="#反射存在的问题" class="headerlink" title="反射存在的问题"></a><a href="https://www.sczyh30.com/posts/Java/java-reflection-1/" target="_blank" rel="noopener">反射存在的问题</a></h2><ol>
-<li>由于反射会<strong>额外消耗一定的系统资源</strong>，因此如果不需要动态地创建一个对象，那么就不需要用反射。</li>
-<li>另外，反射调用方法时可以忽略权限检查，因此可能会破坏封装性而导致<strong>安全问题</strong>。</li>
-</ol>
+<h3 id="当往线程池中添加任务时"><a href="#当往线程池中添加任务时" class="headerlink" title="当往线程池中添加任务时"></a>当往线程池中添加任务时</h3><blockquote>
+<p>(1)线程数量未达到corePoolSize，则新建一个线程(核心线程)执行任务;</p>
+<p>(2)线程数量达到了corePoolSize，则将任务移入队列等待空闲线程将其取出去执行（通过getTask()方法从阻塞队列中获取等待的任务，如果队列中没有任务，getTask方法会被阻塞并挂起，不会占用cpu资源，整个getTask操作在自旋下完成）</p>
+<p>(4)队列已满，新建线程(非核心线程)执行任务</p>
+<p>(5)队列已满，总线程数又达到了maximumPoolSize，就会执行任务拒绝策略。</p>
+</blockquote>
+<h3 id="线程池状态：一共五种"><a href="#线程池状态：一共五种" class="headerlink" title="线程池状态：一共五种"></a>线程池状态：一共五种</h3><blockquote>
+<p>RUNNING ：能接受新提交的任务，并且也能处理阻塞队列中的任务；</p>
+<p>SHUTDOWN：关闭状态，不再接受新提交的任务，但却可以继续处理阻塞队列中已保存的任务。在线程池处于 RUNNING 状态时，调用shutdown()方法会使线程池进入到该状态。（finalize()方法在执行过程中也会调用shutdown()方法进入该状态）；</p>
+<p>STOP：不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程。在线程池处于 RUNNING 或 SHUTDOWN 状态时，调用 shutdownNow() 方法会使线程池进入到该状态；</p>
+<p>TIDYING：如果所有的任务都已终止了，workerCount (有效线程数) 为0，线程池进入该状态后会调用 terminated() 方法进入TERMINATED 状态。</p>
+<p>TERMINATED：在terminated() 方法执行完后进入该状态，默认terminated()方法中什么也没有做。<br>进入TERMINATED的条件如下：</p>
+</blockquote>
+<ul>
+<li>线程池不是RUNNING状态；</li>
+<li>线程池状态不是TIDYING状态或TERMINATED状态；</li>
+<li>如果线程池状态是SHUTDOWN并且workerQueue为空；</li>
+<li>workerCount为0；</li>
+<li>设置TIDYING状态成功。</li>
+</ul>
+<h2 id="三、Executor框架接口"><a href="#三、Executor框架接口" class="headerlink" title="三、Executor框架接口"></a>三、Executor框架接口</h2><p>  <img src="https://user-gold-cdn.xitu.io/2017/4/22/8f025e56062328e4ac36e3c988e30d27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="此处输入图片的描述"></p>
+<p><code>JUC(Java.util.concurrent)</code>中一共有三个Executor接口：</p>
+<blockquote>
+<p><code>Executor</code>：一个运行新任务的简单接口；</p>
+<p><code>ExecutorService</code>：扩展了<code>Executor</code>接口。添加了一些用来管理执行器生命周期和任务生命周期的方法；</p>
+<p><code>ScheduledExecutorService</code>：扩展了<code>ExecutorService</code>。支持Future和定期执行任务。</p>
+</blockquote>
+<h3 id="Executor接口"><a href="#Executor接口" class="headerlink" title="Executor接口"></a>Executor接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Executor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用execute方法替代创建或者启动线程的方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t = <span class="keyword">new</span> Thread();</span><br><span class="line">executor.execute(t);</span><br></pre></td></tr></table></figure></p>
+<h3 id="ExecutorService接口"><a href="#ExecutorService接口" class="headerlink" title="ExecutorService接口"></a>ExecutorService接口</h3><p>ExecutorService接口继承自Executor接口，提供了管理终止的方法，以及可为跟踪一个或多个异步任务执行状况而生成 <code>Future</code>的方法。增加了<code>shutDown()</code>，<code>shutDownNow()</code>，<code>invokeAll()</code>，<code>invokeAny()</code>和<code>submit()</code>等方法。如果需要支持即时关闭，也就是shutDownNow()方法，则任务需要正确处理中断。</p>
+<h3 id="ScheduledExecutorService接口"><a href="#ScheduledExecutorService接口" class="headerlink" title="ScheduledExecutorService接口"></a>ScheduledExecutorService接口</h3><p>ScheduledExecutorService扩展ExecutorService接口并增加了<code>schedule</code>方法。调用schedule方法可以在指定的延时后执行一个<code>Runnable</code>或者<code>Callable</code>任务。ScheduledExecutorService接口还定义了按照指定时间间隔定期执行任务的<code>scheduleAtFixedRate()</code>方法和<code>scheduleWithFixedDelay()</code>方法。</p>
+<h2 id="四、ThreadPoolExecutor类"><a href="#四、ThreadPoolExecutor类" class="headerlink" title="四、ThreadPoolExecutor类"></a>四、<strong>ThreadPoolExecutor类</strong></h2><p><code>ThreadPoolExecutor</code>继承自<code>AbstractExecutorService</code>，实现了<code>ExecutorService</code>接口。</p>
+<h3 id="重要字段"><a href="#重要字段" class="headerlink" title="重要字段"></a>重要字段</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger ctl = <span class="keyword">new</span> AtomicInteger(ctlOf(RUNNING, <span class="number">0</span>));</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COUNT_BITS = Integer.SIZE - <span class="number">3</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CAPACITY   = (<span class="number">1</span> &lt;&lt; COUNT_BITS) - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// runState is stored in the high-order bits</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RUNNING    = -<span class="number">1</span> &lt;&lt; COUNT_BITS;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHUTDOWN   =  <span class="number">0</span> &lt;&lt; COUNT_BITS;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STOP       =  <span class="number">1</span> &lt;&lt; COUNT_BITS;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIDYING    =  <span class="number">2</span> &lt;&lt; COUNT_BITS;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TERMINATED =  <span class="number">3</span> &lt;&lt; COUNT_BITS;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>ctl</code>是对线程池的运行状态和线程池中有效线程的数量进行控制的一个字段， 它包含两部分的信息: 线程池的运行状态 (runState) 和线程池内有效线程的数量 (workerCount)，使用了Integer类型来保存，高3位保存<code>runState</code>，低29位保存<code>workerCount</code>。<code>COUNT_BITS</code> 就是29，<code>CAPACITY</code>就是1左移29位减1（29个1），这个常量表示<code>workerCount</code>的上限值，大约是5亿。</p>
+</blockquote>
+<h3 id="ThreadPoolExecutor构造方法"><a href="#ThreadPoolExecutor构造方法" class="headerlink" title="ThreadPoolExecutor构造方法"></a>ThreadPoolExecutor构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (corePoolSize &lt; <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt;= <span class="number">0</span> ||</span><br><span class="line">        maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">        keepAliveTime &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    <span class="keyword">if</span> (workQueue == <span class="keyword">null</span> || threadFactory == <span class="keyword">null</span> || handler == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    <span class="keyword">this</span>.corePoolSize = corePoolSize;</span><br><span class="line">    <span class="keyword">this</span>.maximumPoolSize = maximumPoolSize;</span><br><span class="line">    <span class="keyword">this</span>.workQueue = workQueue;</span><br><span class="line">    <span class="keyword">this</span>.keepAliveTime = unit.toNanos(keepAliveTime);</span><br><span class="line">    <span class="keyword">this</span>.threadFactory = threadFactory;</span><br><span class="line">    <span class="keyword">this</span>.handler = handler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>构造方法的各个字段意义如下：</strong></p>
+<blockquote>
+<p><code>corePoolSize</code>：核心线程数（最小存活的工作线程数量）</p>
+<p><code>maxPoolSize</code>：最大线程数</p>
+<p><code>keepAliveTime</code>：线程存活时间（在corePoreSize&lt;maxPoolSize情况下有用,线程的空闲时间超过了keepAliveTime就会销毁）</p>
+<p><code>timeUnit</code>：存活时间的时间单位</p>
+<p><code>workQueue</code>：阻塞队列，用来保存等待被执行的任务（①<strong>synchronousQueue</strong>：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务；②<strong>LinkedBlockingQueue</strong>：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；③<strong>ArrayBlockingQueue</strong>：基于数组的先进先出队列，此队列创建时必须指定大小）</p>
+<p><code>threadFactory</code>：线程工厂，主要用来创建线程；</p>
+<p><code>handler</code>：表示当拒绝处理任务时的策略（线程池提供了4种策略：<strong>AbortPolicy</strong>：直接抛出异常，这是默认策略； <strong>CallerRunsPolicy</strong>：用调用者所在的线程来执行任务；<strong>DiscardOldestPolicy</strong>：丢弃阻塞队列中靠最前的任务，并执行当前任务； <strong>DiscardPolicy</strong>：直接丢弃任务；）</p>
+</blockquote>
+<h3 id="重要的方法"><a href="#重要的方法" class="headerlink" title="重要的方法"></a>重要的方法</h3><blockquote>
+<p>execute()<br>Executor中声明的方法，在ThreadPoolExecutor进行了具体的实现，这个方法是ThreadPoolExecutor的核心方法，通过这个方法可以向线程池提交一个任务，交由线程池去执行。</p>
+<p>submit()<br>在ExecutorService中声明的方法，在AbstractExecutorService就已经有了具体的实现，在ThreadPoolExecutor中并没有对其进行重写，这个方法也是用来向线程池提交任务的，实际上它还是调用的execute()方法，只不过它利用了Future来获取任务执行结果。</p>
+<p>shutdown()<br>不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务。</p>
+<p>shutdownNow(）<br>立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务。</p>
+</blockquote>
+<h3 id="判断线程池线程是否执行完"><a href="#判断线程池线程是否执行完" class="headerlink" title="判断线程池线程是否执行完"></a>判断线程池线程是否执行完</h3><blockquote>
+<p> isTerminated()<br>调用<code>ExecutorService.shutdown()</code>方法的时候，线程池不再接收任何新任务，但此时线程池并不会立刻退出，直到添加到线程池中的任务都已经处理完成，才会退出。在调用<code>shutdown</code>方法后我们可以在一个死循环里面用<code>isTerminated()</code>方法判断是否线程池中的所有线程已经执行完毕，如果子线程都结束了，我们就可以做关闭流等后续操作了。</p>
+<p>使用闭锁(CountDownLatch)<br>CountDownLatch是一种灵活的闭锁实现，它可以使一个或多个线程等待一组事件发生。闭锁状态包括一个计数器，该计数器被初始化为一个正数，表示需要等待的事件数量。countDown方法递减计数器，表示有一个事件已经发生了，而await方法等待计数器达到零，即表示需要等待的事情都已经发生。</p>
+<p>使用信号量机制</p>
+</blockquote>
+<p>`</p>
+<h2 id="五、常见的四种线程池的用法"><a href="#五、常见的四种线程池的用法" class="headerlink" title="五、常见的四种线程池的用法"></a>五、常见的四种线程池的用法</h2><blockquote>
+<p>Java通过Executors类提供四种线程池</p>
+</blockquote>
+<h3 id="1-CachedThreadPool-可缓存线程池"><a href="#1-CachedThreadPool-可缓存线程池" class="headerlink" title="1. CachedThreadPool()-可缓存线程池"></a>1. CachedThreadPool()-可缓存线程池</h3><p><code>newCachedThreadPool</code>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,<span class="number">60L</span>, TimeUnit.SECONDS,<span class="keyword">new</span>                       SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-FixedThreadPool-定长线程池"><a href="#2-FixedThreadPool-定长线程池" class="headerlink" title="2. FixedThreadPool()-定长线程池"></a>2. FixedThreadPool()-定长线程池</h3><p><code>newFixedThreadPool</code>创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;     	</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads, <span class="number">0L</span>, TimeUnit.MILLISECONDS,                       <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());     </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-SingleThreadPool-单线程池"><a href="#3-SingleThreadPool-单线程池" class="headerlink" title="3. SingleThreadPool()-单线程池"></a>3. SingleThreadPool()-单线程池</h3><p><code>newSingleThreadExecutor</code>创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;       </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService(<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0L</span>,                    TimeUnit.MILLISECONDS, <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-ScheduledThreadPool-调度线程池"><a href="#4-ScheduledThreadPool-调度线程池" class="headerlink" title="4. ScheduledThreadPool()-调度线程池"></a>4. ScheduledThreadPool()-调度线程池</h3><p><code>newScheduledThreadPool</code>创建一个定长线程池，支持定时及周期性任务执行。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newScheduledThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;     	       <span class="keyword">return</span> <span class="keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>ScheduledThreadPoolExecutor()</code>的构造方法为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(corePoolSize, Integer.MAX_VALUE, <span class="number">0</span>, NANOSECONDS,</span><br><span class="line">              <span class="keyword">new</span> DelayedWorkQueue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同样是用到了父类<code>ThreadPoolExecutor</code>的构造方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize, <span class="keyword">long</span> keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, Executors.defaultThreadFactory(), defaultHandler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>参考链接</strong>：<br><a href="https://juejin.im/entry/58fada5d570c350058d3aaad" target="_blank" rel="noopener">深入理解 Java 线程池：ThreadPoolExecutor</a></p>
 
       
     </div>
@@ -531,7 +546,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接:</strong>
-    <a href="/2018/11/25/Java的艺术-浅析反射机制/" title="Java的艺术-浅谈反射机制">2018/11/25/Java的艺术-浅析反射机制/</a>
+    <a href="/2018/10/09/Java高并发(2)-线程池/" title="Java并发(2)-线程池">2018/10/09/Java高并发(2)-线程池/</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议:</strong>
@@ -548,6 +563,10 @@
           
             <a href="/tags/Java基础/" rel="tag"># Java基础</a>
           
+            <a href="/tags/Java源码/" rel="tag"># Java源码</a>
+          
+            <a href="/tags/Java并发/" rel="tag"># Java并发</a>
+          
         </div>
       
 
@@ -559,8 +578,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/21/算法之美-二叉树的遍历/" rel="next" title="算法之美-二叉树的遍历">
-                <i class="fa fa-chevron-left"></i> 算法之美-二叉树的遍历
+              <a href="/2018/10/07/Java的艺术-数据类型/" rel="next" title="Java的艺术-数据类型详解">
+                <i class="fa fa-chevron-left"></i> Java的艺术-数据类型详解
               </a>
             
           </div>
@@ -569,8 +588,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/28/Java的艺术-注解类型(Annotation)/" rel="prev" title="Java的艺术-注解">
-                Java的艺术-注解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/21/算法之美-二叉树的遍历/" rel="prev" title="算法之美-二叉树的遍历">
+                算法之美-二叉树的遍历 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -760,7 +779,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是反射"><span class="nav-number">1.</span> <span class="nav-text">什么是反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态语言"><span class="nav-number">2.</span> <span class="nav-text">动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的作用"><span class="nav-number">3.</span> <span class="nav-text">反射的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射的应用"><span class="nav-number">4.</span> <span class="nav-text">反射的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class对象的获取"><span class="nav-number">4.1.</span> <span class="nav-text">Class对象的获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建实例化对象"><span class="nav-number">4.2.</span> <span class="nav-text">创建实例化对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法"><span class="nav-number">4.3.</span> <span class="nav-text">获取方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用方法"><span class="nav-number">4.4.</span> <span class="nav-text">调用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问成员变量"><span class="nav-number">4.5.</span> <span class="nav-text">访问成员变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射与Spring框架设计"><span class="nav-number">5.</span> <span class="nav-text">反射与Spring框架设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射存在的问题"><span class="nav-number">6.</span> <span class="nav-text">反射存在的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、为什么需要线程池？"><span class="nav-number">1.</span> <span class="nav-text">一、为什么需要线程池？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线程池原理"><span class="nav-number">2.</span> <span class="nav-text">二、线程池原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的特点"><span class="nav-number">2.1.</span> <span class="nav-text">线程池的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当往线程池中添加任务时"><span class="nav-number">2.2.</span> <span class="nav-text">当往线程池中添加任务时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池状态：一共五种"><span class="nav-number">2.3.</span> <span class="nav-text">线程池状态：一共五种</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Executor框架接口"><span class="nav-number">3.</span> <span class="nav-text">三、Executor框架接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Executor接口"><span class="nav-number">3.1.</span> <span class="nav-text">Executor接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExecutorService接口"><span class="nav-number">3.2.</span> <span class="nav-text">ExecutorService接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScheduledExecutorService接口"><span class="nav-number">3.3.</span> <span class="nav-text">ScheduledExecutorService接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、ThreadPoolExecutor类"><span class="nav-number">4.</span> <span class="nav-text">四、ThreadPoolExecutor类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重要字段"><span class="nav-number">4.1.</span> <span class="nav-text">重要字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadPoolExecutor构造方法"><span class="nav-number">4.2.</span> <span class="nav-text">ThreadPoolExecutor构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重要的方法"><span class="nav-number">4.3.</span> <span class="nav-text">重要的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断线程池线程是否执行完"><span class="nav-number">4.4.</span> <span class="nav-text">判断线程池线程是否执行完</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、常见的四种线程池的用法"><span class="nav-number">5.</span> <span class="nav-text">五、常见的四种线程池的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-CachedThreadPool-可缓存线程池"><span class="nav-number">5.1.</span> <span class="nav-text">1. CachedThreadPool()-可缓存线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-FixedThreadPool-定长线程池"><span class="nav-number">5.2.</span> <span class="nav-text">2. FixedThreadPool()-定长线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SingleThreadPool-单线程池"><span class="nav-number">5.3.</span> <span class="nav-text">3. SingleThreadPool()-单线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-ScheduledThreadPool-调度线程池"><span class="nav-number">5.4.</span> <span class="nav-text">4. ScheduledThreadPool()-调度线程池</span></a></li></ol></li></ol></div>
             
 
           </div>
