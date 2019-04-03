@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/07/kxN22n.md.jpg">
-<meta property="og:updated_time" content="2019-03-21T16:05:10.324Z">
+<meta property="og:updated_time" content="2019-04-03T07:58:42.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-Java容器(1)之容器基础">
 <meta name="twitter:description" content="详解JAVA容器。">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,270 字
+                  4,268 字
                 </span>
               
 
@@ -444,9 +444,8 @@
 <p>为什么需要容器呢？<br><strong>《thinking in java》</strong>书中说：“如果一个程序只包含固定数量的且生命周期都已知的对象，那么这是一个非常简单的数据。”但是事实上，我们平时接触的程序都不是如此简单的，很多程序都是在运行时才知道需要创建什么对象、创建多少对象，因此很可能我们需要在任意时刻任意位置创建任意数量的对象。因此，不能依靠创建命名的引用持有每一个对象，因为不确定性，我们必须要动态的创建对象，保存对象（其实是对象的引用）。</p>
 </blockquote>
 <h2 id="Java常见容器"><a href="#Java常见容器" class="headerlink" title="Java常见容器"></a><font color="red"><strong>Java常见容器</strong></font></h2><h3 id="Java完整容器类结构"><a href="#Java完整容器类结构" class="headerlink" title="Java完整容器类结构"></a>Java完整容器类结构</h3><p><img src="https://s2.ax1x.com/2019/03/07/kxN22n.md.jpg" alt="此处输入图片的描述"></p>
-<h3 id="详细结构及概述"><a href="#详细结构及概述" class="headerlink" title="详细结构及概述"></a><strong>详细结构及概述</strong></h3><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a><strong>结构</strong></h4><p><strong>Collection</strong>接口<br>　├<strong>List</strong>接口<br>　　│├LinkedList 双向链表，顺序访问，快速增删，栈、队列、双向队列<br>　　│├ArrayList 顺序结构动态数组实现，随机访问<br>　　│└Vector 向量<br>　　　│└Stack 栈<br>　├<strong>Set</strong>接口<br>　　│├TreeSet 红黑树实现，有序，查找O(logN)<br>　　│├HashSet 哈希表实现，无序，查找O(1)<br>　　　│└LinkedHashSet<br>　├<strong>Queue</strong>接口<br>　　│├PriorityQueue 堆实现，可实现优先队列<br>　　│└LinkedList 双向链表，顺序访问，快速增删，栈、队列、双向队列<br><strong>Map</strong>接口<br>　├<strong>HashMap</strong> 哈希表实现，线程不安全<br>　　├Hashtable 线程安全，现为ConcurrentHashMap替换，分段锁<br>　├<strong>TreeMap</strong> 红黑树实现<br>　　├LinkedHashMap 双向链表实现<br>　　├WeakHashMap<br>　　└IdentityHashMap</p>
-<h4 id="一句话概括常用不同容器类"><a href="#一句话概括常用不同容器类" class="headerlink" title="一句话概括常用不同容器类"></a><strong>一句话概括常用不同容器类</strong></h4><p>参考<a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Github</a></p>
-<blockquote>
+<h3 id="详细结构及概述"><a href="#详细结构及概述" class="headerlink" title="详细结构及概述"></a><strong>详细结构及概述</strong></h3><h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a><strong>结构</strong></h4><p><strong>Collection</strong>接口<br>　├<strong>List</strong>接口<br>　　│├LinkedList 双向链表，顺序访问，快速增删，栈、队列、双向队列<br>　　│├ArrayList 顺序结构动态数组实现，随机访问<br>　　│└Vector 向量<br>　　　│└Stack 栈<br>　├<strong>Set</strong>接口<br>　　│├TreeSet 红黑树实现，有序，查找O(logN)<br>　　│├HashSet 哈希表实现，无序，查找O(1)<br>　　　│└LinkedHashSet<br>　├<strong>Queue</strong>接口<br>　　│├PriorityQueue 堆实现，可实现优先队列<br>　　│└LinkedList 双向链表，顺序访问，快速增删，栈、队列、双向队列<br><strong>Map</strong>接口<br>　├<strong>HashMap</strong> 哈希表实现，线程不安全<br>　　├Hashtable 线程安全，现为ConcurrentHashMap替换，分段锁<br>　　├LinkedHashMap 双向链表实现<br>　├<strong>TreeMap</strong> 红黑树实现　<br>　├WeakHashMap<br>　└IdentityHashMap</p>
+<h4 id="一句话概括常用不同容器类"><a href="#一句话概括常用不同容器类" class="headerlink" title="一句话概括常用不同容器类"></a><strong>一句话概括常用不同容器类</strong></h4><blockquote>
 <p><strong>1.Set</strong><br>1.1 <strong>TreeSet</strong>：基于红黑树实现，支持有序性操作，例如根据一个范围查找元素的操作。但是查找效率不如 HashSet，HashSet查找的时间复杂度为 O(1)，TreeSet 则为 O(logN)。<br>1.2 <strong>HashSet</strong>：基于哈希表实现，支持快速查找，但不支持有序性操作。并且失去了元素的插入顺序信息，也就是说使用 Iterator 遍历 HashSet 得到的结果是不确定的。<br>1.3 <strong>LinkedHashSet</strong>：具有 HashSet 的查找效率，且内部使用双向链表维护元素的插入顺序。</p>
 <p><strong>2.List</strong><br>2.1 <strong>ArrayList</strong>：基于动态数组实现，支持随机访问。<br>2.2 <strong>Vector</strong>：和 ArrayList 类似，但它是线程安全的。<br>2.3 <strong>LinkedList</strong>：基于双向链表实现，只能顺序访问，但是可以快速地在链表中间<br>插入和删除元素。不仅如此，LinkedList 还可以用作栈、队列和双向队列。</p>
 <p><strong>3.Queue</strong><br>3.1 <strong>LinkedList</strong>：可以用它来实现双向队列。<br>3.2 <strong>PriorityQueue</strong>：基于堆结构实现，可以用它来实现优先队列。</p>
@@ -552,7 +551,7 @@
 <p>第三种：通过Map.entrySet遍历key和value，<strong>推荐，尤其是容量大时</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">    <span class="comment">//Map.entry&lt;Integer,String&gt; 映射项（键-值对）  有几个方法：用上面的名字entry</span></span><br><span class="line">    <span class="comment">//entry.getKey() ;entry.getValue(); entry.setValue();</span></span><br><span class="line">    <span class="comment">//map.entrySet()  返回此映射中包含的映射关系的 Set视图。</span></span><br><span class="line">    System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>第四种：通过Map.values()遍历所有的value，但不能遍历key<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String v : map.values()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"value= "</span> + v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
-<p><strong>参考：</strong><br><a href="https://blog.csdn.net/qq_37465368/article/details/80854672https://blog.csdn.net/qq_37465368/article/details/80854672" target="_blank" rel="noopener">Java常见的容器类及其区别</a><br><a href="https://blog.csdn.net/dandanzmc/article/details/23447827" target="_blank" rel="noopener">Java中的容器</a><br><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">一份涵盖大部分Java程序员所需要掌握的核心知识</a><br><a href="https://blog.csdn.net/starlh35/article/details/79262472" target="_blank" rel="noopener">深入整理java集合容器</a></p>
+<p><strong>参考：</strong><br><a href="https://blog.csdn.net/qq_37465368/article/details/80854672https://blog.csdn.net/qq_37465368/article/details/80854672" target="_blank" rel="noopener">Java常见的容器类及其区别</a><br><a href="https://blog.csdn.net/dandanzmc/article/details/23447827" target="_blank" rel="noopener">Java中的容器</a><br><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">一份涵盖大部分Java程序员所需要掌握的核心知识</a><br><a href="https://blog.csdn.net/starlh35/article/details/79262472" target="_blank" rel="noopener">深入整理java集合容器</a><br><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Github</a></p>
 
       
     </div>
