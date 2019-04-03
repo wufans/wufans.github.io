@@ -81,20 +81,20 @@
 
 
 
-<meta name="description" content="详解JAVA容器。">
+<meta name="description" content="简要介绍JAVA容器。">
 <meta name="keywords" content="Java基础,Java容器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java的艺术-Java容器(1)之容器基础">
 <meta property="og:url" content="https://yoursite.com/2019/01/05/Java的艺术-Java容器(1)之容器基础/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
-<meta property="og:description" content="详解JAVA容器。">
+<meta property="og:description" content="简要介绍JAVA容器。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/07/kxN22n.md.jpg">
-<meta property="og:updated_time" content="2019-04-03T07:58:42.519Z">
+<meta property="og:updated_time" content="2019-04-03T08:12:29.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java的艺术-Java容器(1)之容器基础">
-<meta name="twitter:description" content="详解JAVA容器。">
+<meta name="twitter:description" content="简要介绍JAVA容器。">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,268 字
+                  4,290 字
                 </span>
               
 
@@ -436,7 +436,7 @@
       
 
       
-        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551345094255&amp;di=7757ebd7ca42b6b8acc5a3432680f30c&amp;imgtype=0&amp;src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png" alt="此处输入图片的描述"><br>详解JAVA容器。<br><a id="more"></a></p>
+        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1551345094255&amp;di=7757ebd7ca42b6b8acc5a3432680f30c&amp;imgtype=0&amp;src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png" alt="此处输入图片的描述"><br>简要介绍JAVA容器。<br><a id="more"></a></p>
 <h2 id="Java容器是什么？"><a href="#Java容器是什么？" class="headerlink" title="Java容器是什么？"></a><font color="red"><strong>Java容器是什么？</strong></font></h2><blockquote>
 <p><strong>容器</strong>，顾名思义，就是盛东西的地方。我们的程序中经常要管理大量的对象，比如在学校的信息管理系统里，每一个学生的相关信息，都可以抽象成一个对象；再比如在web server的场景下，一个客户端可以抽象成一个对象。这些情况下，都会产生很多同类型的对象，这时候，我们就会把同一个类型的对象放到同一个容器中进行集中管理。</p>
 <p><strong>Java的容器</strong>是前人为我们设计好的一套存储对象和数据的一套轮子，<br>通过使用Java中写好的容器API我们可以很方便的存储、操作我们的数据。</p>
@@ -550,6 +550,7 @@
 </blockquote>
 <p>第三种：通过Map.entrySet遍历key和value，<strong>推荐，尤其是容量大时</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">    <span class="comment">//Map.entry&lt;Integer,String&gt; 映射项（键-值对）  有几个方法：用上面的名字entry</span></span><br><span class="line">    <span class="comment">//entry.getKey() ;entry.getValue(); entry.setValue();</span></span><br><span class="line">    <span class="comment">//map.entrySet()  返回此映射中包含的映射关系的 Set视图。</span></span><br><span class="line">    System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>第四种：通过Map.values()遍历所有的value，但不能遍历key<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String v : map.values()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"value= "</span> + v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong> 概述Java的容器类，有时间再补充详细的源码解析。</strong></p>
 <hr>
 <p><strong>参考：</strong><br><a href="https://blog.csdn.net/qq_37465368/article/details/80854672https://blog.csdn.net/qq_37465368/article/details/80854672" target="_blank" rel="noopener">Java常见的容器类及其区别</a><br><a href="https://blog.csdn.net/dandanzmc/article/details/23447827" target="_blank" rel="noopener">Java中的容器</a><br><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">一份涵盖大部分Java程序员所需要掌握的核心知识</a><br><a href="https://blog.csdn.net/starlh35/article/details/79262472" target="_blank" rel="noopener">深入整理java集合容器</a><br><a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Github</a></p>
 
