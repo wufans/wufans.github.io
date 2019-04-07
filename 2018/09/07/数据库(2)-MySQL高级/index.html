@@ -81,19 +81,19 @@
 
 
 
-<meta name="description" content="MySQL特性，多表查询与SQL注入的介绍。">
+<meta name="description" content="MySQL特性，多表查询，SQL注入以及数据库设计的三范式的介绍。">
 <meta name="keywords" content="数据库,MySQL,JDBC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库(2)-SQL其他须知">
 <meta property="og:url" content="https://yoursite.com/2018/09/07/数据库(2)-MySQL高级/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
-<meta property="og:description" content="MySQL特性，多表查询与SQL注入的介绍。">
+<meta property="og:description" content="MySQL特性，多表查询，SQL注入以及数据库设计的三范式的介绍。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
-<meta property="og:updated_time" content="2019-03-24T08:46:01.265Z">
+<meta property="og:updated_time" content="2019-04-07T13:23:44.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库(2)-SQL其他须知">
-<meta name="twitter:description" content="MySQL特性，多表查询与SQL注入的介绍。">
+<meta name="twitter:description" content="MySQL特性，多表查询，SQL注入以及数据库设计的三范式的介绍。">
 <meta name="twitter:image" content="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg">
 
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,436 字
+                  1,816 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -435,7 +435,7 @@
       
 
       
-        <p><img src="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg" alt="此处输入图片的描述"><br>MySQL特性，多表查询与<code>SQL注入</code>的介绍。</p>
+        <p><img src="https://s2.ax1x.com/2019/03/14/AAvGd0.jpg" alt="此处输入图片的描述"><br>MySQL特性，多表查询，SQL注入以及数据库设计的三范式的介绍。</p>
 <a id="more"></a>
 <h1 id="一、MySQL正则表达式"><a href="#一、MySQL正则表达式" class="headerlink" title="一、MySQL正则表达式"></a>一、MySQL正则表达式</h1><blockquote>
 <p>在<a href="https://wufan.site/2018/08/05/%E6%95%B0%E6%8D%AE%E5%BA%93%281%29-SQL%E5%88%9D%E8%AF%86/" target="_blank" rel="noopener">数据库(1)-SQL初识</a>中介绍了SQL基础语句。MySQL可以通过 LIKE 来进行模糊匹配。</p>
@@ -512,6 +512,24 @@
 <li>4).不要把机密信息直接存放，加密或者hash掉密码和敏感的信息。</li>
 <li>5).应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装</li>
 <li>6).sql注入的检测方法一般采取辅助软件或网站平台来检测，软件一般采用sql注入检测工具jsky，网站平台就有亿思网站安全平台检测工具。MDCSOFT SCAN等。采用MDCSOFT-IPS可以有效的防御SQL注入，XSS攻击等。</li>
+</ul>
+<h2 id="六、数据库设计的三范式"><a href="#六、数据库设计的三范式" class="headerlink" title="六、数据库设计的三范式"></a>六、<strong>数据库设计的三范式</strong></h2><p><strong>第一范式：</strong>原子性与属性不可分。</p>
+<blockquote>
+<p>当关系模式R的所有属性都不能在分解为更基本的数据单位时，称R是满足第一范式的，简记为<code>1NF</code>。满足第一范式是关系模式规范化的最低要求，否则，将有很多基本操作在这样的关系模式中实现不了。</p>
+</blockquote>
+<p><strong>第二范式</strong>：确保每一列都和主键相关。（符合<code>1NF</code>，同时非主属性完全依赖于主键）</p>
+<blockquote>
+<p>如果关系模式R满足第一范式，并且R得所有非主属性都完全依赖于R的每一个候选关键属性，称R满足第二范式，简记为<code>2NF</code>。</p>
+</blockquote>
+<p><strong>第三范式</strong>：确保每列都和主键列直接相关,而不是间接相关。（符合<code>2NF</code>，并且消除传递依赖）</p>
+<blockquote>
+<p>设R是一个满足第一范式条件的关系模式，X是R的任意属性集，如果X非传递依赖于R的任意一个候选关键字，称R满足第三范式，简记为<code>3NF</code>.</p>
+</blockquote>
+<p><strong>总结：</strong></p>
+<ul>
+<li>1NF是对<strong>属性的原子性</strong>约束，要求属性具有原子性，不可再分解；</li>
+<li>2NF是对<strong>记录的惟一性</strong>约束，要求记录有惟一标识，即实体的惟一性；</li>
+<li>3NF是对<strong>字段冗余性</strong>的约束，即任何字段不能由其他字段派生出来，它要求字段没有冗余。</li>
 </ul>
 <hr>
 <p><strong>参考资料：</strong><br><a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">史上最完整的MySQL注入</a><br><a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">MySQL 事务</a></p>
@@ -771,7 +789,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、MySQL正则表达式"><span class="nav-number">1.</span> <span class="nav-text">一、MySQL正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、导入导出数据"><span class="nav-number">2.</span> <span class="nav-text">二、导入导出数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）导出数据"><span class="nav-number">2.1.</span> <span class="nav-text">（1）导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）导入数据"><span class="nav-number">2.2.</span> <span class="nav-text">（2）导入数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、多表查询"><span class="nav-number">3.</span> <span class="nav-text">三、多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-多表的建表原则"><span class="nav-number">3.1.</span> <span class="nav-text">(1)多表的建表原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-内连接"><span class="nav-number">3.2.</span> <span class="nav-text">(2)内连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-外连接"><span class="nav-number">3.3.</span> <span class="nav-text">(3)外连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-交叉连接"><span class="nav-number">3.4.</span> <span class="nav-text">(4)交叉连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、SQL注入"><span class="nav-number">4.</span> <span class="nav-text">四、SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见SQL注入"><span class="nav-number">4.1.1.</span> <span class="nav-text">常见SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）绕过登陆"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">（1）绕过登陆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）获得数据库中隐私数据"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">（2）获得数据库中隐私数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">4.2.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、MySQL正则表达式"><span class="nav-number">1.</span> <span class="nav-text">一、MySQL正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、导入导出数据"><span class="nav-number">2.</span> <span class="nav-text">二、导入导出数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（1）导出数据"><span class="nav-number">2.1.</span> <span class="nav-text">（1）导出数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（2）导入数据"><span class="nav-number">2.2.</span> <span class="nav-text">（2）导入数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、多表查询"><span class="nav-number">3.</span> <span class="nav-text">三、多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-多表的建表原则"><span class="nav-number">3.1.</span> <span class="nav-text">(1)多表的建表原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-内连接"><span class="nav-number">3.2.</span> <span class="nav-text">(2)内连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-外连接"><span class="nav-number">3.3.</span> <span class="nav-text">(3)外连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-交叉连接"><span class="nav-number">3.4.</span> <span class="nav-text">(4)交叉连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、SQL注入"><span class="nav-number">4.</span> <span class="nav-text">四、SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见SQL注入"><span class="nav-number">4.1.1.</span> <span class="nav-text">常见SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）绕过登陆"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">（1）绕过登陆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）获得数据库中隐私数据"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">（2）获得数据库中隐私数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">4.2.</span> <span class="nav-text">解决办法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、数据库设计的三范式"><span class="nav-number">4.3.</span> <span class="nav-text">六、数据库设计的三范式</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -805,7 +823,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">84.5k</span>
+    <span title="Site words total count">84.9k</span>
   
 </div>
 
