@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/4/22/8f025e56062328e4ac36e3c988e30d27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:updated_time" content="2019-04-03T02:10:12.230Z">
+<meta property="og:updated_time" content="2019-04-07T07:12:39.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发(2)-线程池">
 <meta name="twitter:description" content="本文介绍Java中线程池的相关概念和部分源码解析。">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,553 字
+                  3,060 字
                 </span>
               
 
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  12 分钟
                 </span>
               
             </div>
@@ -496,37 +496,53 @@
 <p><code>timeUnit</code>：存活时间的时间单位</p>
 <p><code>workQueue</code>：阻塞队列，用来保存等待被执行的任务（①<strong>synchronousQueue</strong>：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务；②<strong>LinkedBlockingQueue</strong>：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE；③<strong>ArrayBlockingQueue</strong>：基于数组的先进先出队列，此队列创建时必须指定大小）</p>
 <p><code>threadFactory</code>：线程工厂，主要用来创建线程；</p>
-<p><code>handler</code>：表示当拒绝处理任务时的策略（线程池提供了4种策略：<strong>AbortPolicy</strong>：直接抛出异常，这是默认策略； <strong>CallerRunsPolicy</strong>：用调用者所在的线程来执行任务；<strong>DiscardOldestPolicy</strong>：丢弃阻塞队列中靠最前的任务，并执行当前任务； <strong>DiscardPolicy</strong>：直接丢弃任务；）</p>
+<p><code>handler</code>：表示当拒绝处理任务时的策略（线程池提供了4种策略，都实现了<code>RejectedExecutionHandler</code>接口:<br><strong>AbortPolicy</strong>：直接抛出异常，这是默认策略；<br><strong>CallerRunsPolicy</strong>：用调用者所在的线程来执行任务；<br><strong>DiscardOldestPolicy</strong>：丢弃阻塞队列中靠最前的任务，并执行当前任务；<br><strong>DiscardPolicy</strong>：直接丢弃任务；）</p>
 </blockquote>
 <h3 id="重要的方法"><a href="#重要的方法" class="headerlink" title="重要的方法"></a>重要的方法</h3><blockquote>
-<p>execute()<br>Executor中声明的方法，在ThreadPoolExecutor进行了具体的实现，这个方法是ThreadPoolExecutor的核心方法，通过这个方法可以向线程池提交一个任务，交由线程池去执行。</p>
-<p>submit()<br>在ExecutorService中声明的方法，在AbstractExecutorService就已经有了具体的实现，在ThreadPoolExecutor中并没有对其进行重写，这个方法也是用来向线程池提交任务的，实际上它还是调用的execute()方法，只不过它利用了Future来获取任务执行结果。</p>
-<p>shutdown()<br>不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务。</p>
-<p>shutdownNow(）<br>立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务。</p>
+<p><code>execute()</code><br>Executor中声明的方法，在ThreadPoolExecutor进行了具体的实现，这个方法是ThreadPoolExecutor的核心方法，通过这个方法可以向线程池提交一个任务，交由线程池去执行。<br><strong>适合不关注返回值的场景。</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPool</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService pool = Executors.newFixedThreadPool(<span class="number">10</span>);</span><br><span class="line">        pool.execute(() -&gt; &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"执行"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>submit()</code><br>在ExecutorService中声明的方法，在AbstractExecutorService就已经有了具体的实现，在ThreadPoolExecutor中并没有对其进行重写，这个方法也是用来向线程池提交任务的，实际上它还是调用的execute()方法，只不过它利用了Future来获取任务执行结果。<br><strong>适用于需要关注返回值的场景.</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ExecutorService</span> <span class="keyword">extends</span> <span class="title">Executor</span> </span>&#123;</span><br><span class="line">　　...</span><br><span class="line">　　&lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Callable&lt;T&gt; task)</span></span>;</span><br><span class="line">　　&lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(Runnable task, T result)</span></span>;</span><br><span class="line">　　Future&lt;?&gt; submit(Runnable task);</span><br><span class="line">　　...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>shutdown()</code><br>不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务。</p>
+<p><code>shutdownNow()</code><br>立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务。</p>
 </blockquote>
 <h3 id="判断线程池线程是否执行完"><a href="#判断线程池线程是否执行完" class="headerlink" title="判断线程池线程是否执行完"></a>判断线程池线程是否执行完</h3><blockquote>
-<p> isTerminated()</p>
-</blockquote>
-<p>调用<code>ExecutorService.shutdown()</code>方法的时候，线程池不再接收任何新任务，但此时线程池并不会立刻退出，直到添加到线程池中的任务都已经处理完成，才会退出。在调用<code>shutdown</code>方法后我们可以在一个死循环里面用<code>isTerminated()</code>方法判断是否线程池中的所有线程已经执行完毕，如果子线程都结束了，我们就可以做关闭流等后续操作了。</p>
-<blockquote>
-<p>使用闭锁(CountDownLatch)</p>
-</blockquote>
-<p>CountDownLatch是一种灵活的闭锁实现，它可以使一个或多个线程等待一组事件发生。闭锁状态包括一个计数器，该计数器被初始化为一个正数，表示需要等待的事件数量。countDown方法递减计数器，表示有一个事件已经发生了，而await方法等待计数器达到零，即表示需要等待的事情都已经发生。</p>
-<blockquote>
-<p>使用信号量机制</p>
+<p><code>isTerminated()</code><br>调用<code>ExecutorService.shutdown()</code>方法的时候，线程池不再接收任何新任务，但此时线程池并不会立刻退出，直到添加到线程池中的任务都已经处理完成，才会退出。在调用<code>shutdown</code>方法后我们可以在一个死循环里面用<code>isTerminated()</code>方法判断是否线程池中的所有线程已经执行完毕，如果子线程都结束了，我们就可以做关闭流等后续操作了。</p>
+<p><code>使用闭锁(CountDownLatch)</code><br>CountDownLatch是一种灵活的闭锁实现，它可以使一个或多个线程等待一组事件发生。闭锁状态包括一个计数器，该计数器被初始化为一个正数，表示需要等待的事件数量。countDown方法递减计数器，表示有一个事件已经发生了，而await方法等待计数器达到零，即表示需要等待的事情都已经发生。</p>
+<p><code>使用信号量机制</code></p>
 </blockquote>
 <h2 id="五、常见的四种线程池的用法"><a href="#五、常见的四种线程池的用法" class="headerlink" title="五、常见的四种线程池的用法"></a>五、常见的四种线程池的用法</h2><blockquote>
 <p>Java通过Executors类提供四种线程池</p>
 </blockquote>
 <h3 id="1-CachedThreadPool-可缓存线程池"><a href="#1-CachedThreadPool-可缓存线程池" class="headerlink" title="1. CachedThreadPool()-可缓存线程池"></a>1. CachedThreadPool()-可缓存线程池</h3><p><code>newCachedThreadPool</code>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>,</span><br><span class="line">    Integer.MAX_VALUE,</span><br><span class="line">    <span class="number">60L</span>,</span><br><span class="line">    TimeUnit.SECONDS,</span><br><span class="line">    <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这种线程池内部没有核心线程，线程的数量是有没限制的。</p>
+<p>在创建任务时，若有空闲的线程时则复用空闲的线程，若没有则新建线程。没有工作的线程（闲置状态）在超过了60S还不做事，就会销毁。</p>
+</blockquote>
+<p><strong>适用：执行很多短期异步的小程序或者负载较轻的服务器。</strong></p>
 <h3 id="2-FixedThreadPool-定长线程池"><a href="#2-FixedThreadPool-定长线程池" class="headerlink" title="2. FixedThreadPool()-定长线程池"></a>2. FixedThreadPool()-定长线程池</h3><p><code>newFixedThreadPool</code>创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;     	</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(</span><br><span class="line">    nThreads,</span><br><span class="line">    nThreads,</span><br><span class="line">    <span class="number">0L</span>,</span><br><span class="line">    TimeUnit.MILLISECONDS,</span><br><span class="line">    <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());     </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该线程池的最大线程数等于核心线程数，所以在默认情况下，该线程池的线程不会因为闲置状态超时而被销毁。</p>
+<p>如果当前线程数小于核心线程数，并且也有闲置线程的时候提交了任务，这时也不会去复用之前的闲置线程，会创建新的线程去执行任务。如果当前执行任务数大于了核心线程数，大于的部分就会进入队列等待。等着有闲置的线程来执行这个任务。</p>
+</blockquote>
+<p><strong>适用：执行长期的任务，性能好很多。</strong></p>
 <h3 id="3-SingleThreadPool-单线程池"><a href="#3-SingleThreadPool-单线程池" class="headerlink" title="3. SingleThreadPool()-单线程池"></a>3. SingleThreadPool()-单线程池</h3><p><code>newSingleThreadExecutor</code>创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;       </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService(</span><br><span class="line">      <span class="keyword">new</span> ThreadPoolExecutor(</span><br><span class="line">      <span class="number">1</span>,</span><br><span class="line">      <span class="number">1</span>,</span><br><span class="line">      <span class="number">0L</span>,                    </span><br><span class="line">      TimeUnit.MILLISECONDS,</span><br><span class="line">      <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有且仅有一个工作线程执行任务</p>
+<p>所有任务按照指定顺序执行，即遵循队列的入队出队规则。</p>
+</blockquote>
+<p><strong>适用：一个任务一个任务执行的场景。</strong></p>
 <h3 id="4-ScheduledThreadPool-调度线程池"><a href="#4-ScheduledThreadPool-调度线程池" class="headerlink" title="4. ScheduledThreadPool()-调度线程池"></a>4. ScheduledThreadPool()-调度线程池</h3><p><code>newScheduledThreadPool</code>创建一个定长线程池，支持定时及周期性任务执行。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ScheduledExecutorService <span class="title">newScheduledThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;     	       </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>其中<code>ScheduledThreadPoolExecutor()</code>的构造方法为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(corePoolSize,</span><br><span class="line">        Integer.MAX_VALUE,</span><br><span class="line">        <span class="number">0</span>,</span><br><span class="line">        NANOSECONDS,</span><br><span class="line">        <span class="keyword">new</span> DelayedWorkQueue());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>同样是用到了父类<code>ThreadPoolExecutor</code>的构造方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize, <span class="keyword">long</span> keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(corePoolSize,</span><br><span class="line">    maximumPoolSize,</span><br><span class="line">    keepAliveTime,</span><br><span class="line">    unit,</span><br><span class="line">    workQueue,</span><br><span class="line">    Executors.defaultThreadFactory(), </span><br><span class="line">    defaultHandler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同样是用到了父类<code>ThreadPoolExecutor</code>的构造方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize, <span class="keyword">long</span> keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(corePoolSize,</span><br><span class="line">    maximumPoolSize,</span><br><span class="line">    keepAliveTime,</span><br><span class="line">    unit,</span><br><span class="line">    workQueue,</span><br><span class="line">    Executors.defaultThreadFactory(),</span><br><span class="line">    defaultHandler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>DEFAULT_KEEPALIVE_MILLIS</code>就是默认10L，这里就是10秒。这个线程池有点像是<code>CachedThreadPool</code>和<code>FixedThreadPool</code> 结合了一下。</p>
+<p>不仅设置了核心线程数，最大线程数也是Integer.MAX_VALUE。</p>
+<p>这个线程池是上述4个中唯一一个有延迟执行和周期执行任务的线程池。</p>
+</blockquote>
+<p><strong>适用：周期性执行任务的场景（定期的同步数据）</strong></p>
+<hr>
 <p><strong>参考链接</strong>：<br><a href="https://juejin.im/entry/58fada5d570c350058d3aaad" target="_blank" rel="noopener">深入理解 Java 线程池：ThreadPoolExecutor</a></p>
 
       
@@ -818,7 +834,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">77.6k</span>
+    <span title="Site words total count">78.1k</span>
   
 </div>
 
