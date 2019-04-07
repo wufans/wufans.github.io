@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb4fJ.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMbgmV.md.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/07/15/PMb6O0.png">
-<meta property="og:updated_time" content="2019-04-07T07:35:27.653Z">
+<meta property="og:updated_time" content="2019-04-07T07:38:01.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Donkeycar教程">
 <meta name="twitter:description" content="摘要：本教程是基于Donkeycar的智能小车教程。DonkeyCar小车是基于树莓派和Python，利用Keras深度学习框架实现的自动驾驶小车。">
@@ -442,7 +442,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6,420 字
+                  6,422 字
                 </span>
               
 
@@ -610,7 +610,7 @@
 <p>1.清除<code>d2/data</code>目录下的之前的数据<br>2.回到d2目录下<code>python namage.py drive</code>启动小车<br>3.到浏览器中<code>model</code>选择<code>user</code>，然后用电脑控制小车在场景下跑几圈<br>4.等到操作小车在场景下基本不出错之后点击<code>start recording</code>开始记录数据<br>5.记录大约半个小时的数据就可以了<br>注意在记录数据的过程中，可能会出现小车没电的情况，解决的办法就是，刚开始在config.py文件中把THROTTLE_FORWARD_PWM设置的小一点，本车是335或者330，过一会感觉小车跑的变慢了，停止记录，停下小车，关闭程序。调整THROTTLE_FORWARD_PWM变大一点到440，重启程序，记得保持小车的运行速度以及Throttle差不多一致。同理慢慢可以变为445和450<br>6.记录完数据，筛选数据。手动删除数据中撞墙等不好的数据<br>7.将数据考到电脑上装的donkey的<code>d2/data</code>目录下（小文件太多，速度会特别慢）<br>8.进入d2目录，运行命令 <code>python manage.py train --model ~/d2/models/mypilot</code><br>9.等待训练结束，到到<code>d2/models</code>下将<code>mypilot</code>文件发送到小车的对应目录下<br>10.用命令<code>python manage.py drive --model ~/d2/models/mypilot</code>启动小车，然后到浏览器中选择<code>local pilot</code>模式启动自动驾驶</p>
 <h3 id="拷贝数据至本地PC"><a href="#拷贝数据至本地PC" class="headerlink" title="拷贝数据至本地PC"></a>拷贝数据至本地PC</h3><p>由于树莓派计算能力有限，需要将数据迁移到电脑上进行模型的训练，有两种方法：</p>
 <blockquote>
-<p>方法1：新开一个SSH窗口用rsync命令从树莓派复制数据。命令如下：<br>rsync -r pi@<your_pi_ip_address>:~/d2/data/  ~/d2/data/</your_pi_ip_address></p>
+<p>方法1：新开一个SSH窗口用rsync命令从树莓派复制数据。命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -r pi@&lt;your_pi_ip_address&gt;:~/d2/data/  ~/d2/data/</span><br></pre></td></tr></table></figure></p>
 <p>方法2：利用Xshell里面的新建文件传输直接复制粘贴。<br><img src="https://s1.ax1x.com/2018/07/15/PMbaTS.md.png" alt="此处输入图片的描述"></p>
 </blockquote>
 <h3 id="利用keras训练模型"><a href="#利用keras训练模型" class="headerlink" title="利用keras训练模型"></a>利用keras训练模型</h3><p>复制好数据之后就可以运行训练脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ~/d2/manage.py train --tub &lt;tub folder names comma separated&gt; --model ./models/mypilot</span><br></pre></td></tr></table></figure></p>
