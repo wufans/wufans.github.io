@@ -84,15 +84,15 @@
 <meta name="description" content="摘要：记录使用Linux遇到的问题与解决办法。">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux无法解析软件包">
+<meta property="og:title" content="Linux">
 <meta property="og:url" content="https://yoursite.com/2018/07/22/Linux之路/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
 <meta property="og:description" content="摘要：记录使用Linux遇到的问题与解决办法。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
-<meta property="og:updated_time" content="2019-03-22T06:33:53.055Z">
+<meta property="og:updated_time" content="2019-04-08T07:50:29.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux无法解析软件包">
+<meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="摘要：记录使用Linux遇到的问题与解决办法。">
 <meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
 
@@ -130,7 +130,7 @@
 
 
 
-  <title>Linux无法解析软件包 | Fan Wu's Blog</title>
+  <title>Linux | Fan Wu's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Linux无法解析软件包</h2>
+          <h2 class="post-title" itemprop="name headline">Linux</h2>
         
 
         <div class="post-meta">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  155 字
+                  569 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -437,8 +437,34 @@
       
         <p><strong>摘要：</strong><br>记录使用Linux遇到的问题与解决办法。</p>
 <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6" alt="此处输入图片的描述"><br><a id="more"></a></p>
-<h2 id="无法解析或打开软件包的列表或是状态文件问题的解决方案"><a href="#无法解析或打开软件包的列表或是状态文件问题的解决方案" class="headerlink" title="无法解析或打开软件包的列表或是状态文件问题的解决方案"></a>无法解析或打开软件包的列表或是状态文件问题的解决方案</h2><p>在通过sudo apt-get install安装软件的时候，可能会出现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 有错误！</span><br><span class="line">E: Encountered a section with no Package: header</span><br><span class="line">E: Problem with MergeList /var/lib/apt/lists/??</span><br><span class="line">E: 无法解析或打开软件包的列表或是状态文件。</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-无法解析或打开软件包的列表或是状态文件问题的解决方案"><a href="#1-无法解析或打开软件包的列表或是状态文件问题的解决方案" class="headerlink" title="1. 无法解析或打开软件包的列表或是状态文件问题的解决方案"></a>1. 无法解析或打开软件包的列表或是状态文件问题的解决方案</h2><p>在通过sudo apt-get install安装软件的时候，可能会出现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在读取软件包列表... 有错误！</span><br><span class="line">E: Encountered a section with no Package: header</span><br><span class="line">E: Problem with MergeList /var/lib/apt/lists/??</span><br><span class="line">E: 无法解析或打开软件包的列表或是状态文件。</span><br></pre></td></tr></table></figure></p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>执行下面两条语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/lib/apt/lists/* -vf #删掉apt下的lists文件下的内容</span><br><span class="line">sudo apt-get update # 更新软件源</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-kill-9-与kill-有什么区别"><a href="#2-kill-9-与kill-有什么区别" class="headerlink" title="2. kill -9 与kill 有什么区别?"></a>2. kill -9 与kill 有什么区别?</h2><p>面试的时候遇到这个问题，答案如下：</p>
+<blockquote>
+<p>1、<code>kill -9 id</code>：一般不加参数<code>kill</code>是使用<code>15</code>来杀，这相当于正常停止进程，停止进程的时候会释放进程所占用的资源；他们的区别就好比电脑关机中的软关机（通过“开始”菜单选择“关机”）与硬关机（直接切断电源），虽然都能关机，但是程序所作的处理是不一样的。</p>
+<p>2、<code>kill - 9</code> 表示<strong>强制杀死该进程</strong>；而 <code>kill</code> 则有局限性，例如后台进程，守护进程等；</p>
+<p>3、执行<code>kill</code>命令，系统会发送一个<code>SIGTERM</code>信号给对应的程序。<code>SIGTERM</code>多半是会被阻塞的。<code>kill -9</code>命令，系统给对应程序发送的信号是<code>SIGKILL</code>，即<code>exit</code>。<code>exit</code>信号不会被系统阻塞，所以<code>kill -9</code>能顺利杀掉进程。</p>
+</blockquote>
+<h2 id="3-linux-644-权限是什么？"><a href="#3-linux-644-权限是什么？" class="headerlink" title="3. linux 644 权限是什么？"></a>3. linux <code>644</code> 权限是什么？</h2><p>在linux系统中,文件或目录的权限可以分为3种:</p>
+<ul>
+<li><p><code>r:4</code> 读</p>
+</li>
+<li><p><code>w:2</code> 写</p>
+</li>
+<li><p><code>x:1</code>  执行</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>比如:</strong></p>
+</blockquote>
+<p> 最高权限<code>777</code>:<code>(4+2+1)-(4+2+1)-(4+2+1)</code></p>
+<p> 第一个7:表示当前文件的拥有者的权限,7=4+2+1 可读可写可执行权限</p>
+<p> 第二个7:表示当前文件的所属组（同组用户）权限,7=4+2+1 可读可写可执行权限</p>
+<p> 第三个7:表示当前文件的组外权限,7=4+2+1 可读可写可执行权限</p>
+<ul>
+<li><strong>常用的linux文件权限：</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">444 r--r--r--</span><br><span class="line">600 rw-------</span><br><span class="line">644 rw-r--r--</span><br><span class="line">666 rw-rw-rw-</span><br><span class="line">700 rwx------</span><br><span class="line">744 rwxr--r--</span><br><span class="line">755 rwxr-xr-x</span><br><span class="line">777 rwxrwxrwx</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -462,7 +488,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接:</strong>
-    <a href="/2018/07/22/Linux之路/" title="Linux无法解析软件包">2018/07/22/Linux之路/</a>
+    <a href="/2018/07/22/Linux之路/" title="Linux">2018/07/22/Linux之路/</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议:</strong>
@@ -691,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#无法解析或打开软件包的列表或是状态文件问题的解决方案"><span class="nav-number">1.</span> <span class="nav-text">无法解析或打开软件包的列表或是状态文件问题的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-无法解析或打开软件包的列表或是状态文件问题的解决方案"><span class="nav-number">1.</span> <span class="nav-text">1. 无法解析或打开软件包的列表或是状态文件问题的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-kill-9-与kill-有什么区别"><span class="nav-number">2.</span> <span class="nav-text">2. kill -9 与kill 有什么区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-linux-644-权限是什么？"><span class="nav-number">3.</span> <span class="nav-text">3. linux 644 权限是什么？</span></a></li></ol></div>
             
 
           </div>
@@ -725,7 +751,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">85.2k</span>
+    <span title="Site words total count">85.6k</span>
   
 </div>
 

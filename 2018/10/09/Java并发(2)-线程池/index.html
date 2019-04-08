@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551345094255&di=7757ebd7ca42b6b8acc5a3432680f30c&imgtype=0&src=http://p0.qhimg.com/t0174dfc0ed2d451c38.png">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/4/22/8f025e56062328e4ac36e3c988e30d27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:updated_time" content="2019-04-07T07:12:39.650Z">
+<meta property="og:updated_time" content="2019-04-07T14:41:30.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发(2)-线程池">
 <meta name="twitter:description" content="本文介绍Java中线程池的相关概念和部分源码解析。">
@@ -458,11 +458,11 @@
 <p>(5)队列已满，总线程数又达到了maximumPoolSize，就会执行任务拒绝策略。</p>
 </blockquote>
 <h3 id="线程池状态：一共五种"><a href="#线程池状态：一共五种" class="headerlink" title="线程池状态：一共五种"></a>线程池状态：一共五种</h3><blockquote>
-<p>RUNNING ：能接受新提交的任务，并且也能处理阻塞队列中的任务；</p>
-<p>SHUTDOWN：关闭状态，不再接受新提交的任务，但却可以继续处理阻塞队列中已保存的任务。在线程池处于 RUNNING 状态时，调用shutdown()方法会使线程池进入到该状态。（finalize()方法在执行过程中也会调用shutdown()方法进入该状态）；</p>
-<p>STOP：不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程。在线程池处于 RUNNING 或 SHUTDOWN 状态时，调用 shutdownNow() 方法会使线程池进入到该状态；</p>
-<p>TIDYING：如果所有的任务都已终止了，workerCount (有效线程数) 为0，线程池进入该状态后会调用 terminated() 方法进入TERMINATED 状态。</p>
-<p>TERMINATED：在terminated() 方法执行完后进入该状态，默认terminated()方法中什么也没有做。<br>进入TERMINATED的条件如下：</p>
+<p><code>RUNNING</code> ：能接受新提交的任务，并且也能处理阻塞队列中的任务；</p>
+<p><code>SHUTDOWN</code>：关闭状态，不再接受新提交的任务，但却可以继续处理阻塞队列中已保存的任务。在线程池处于 RUNNING 状态时，调用shutdown()方法会使线程池进入到该状态。（finalize()方法在执行过程中也会调用shutdown()方法进入该状态）；</p>
+<p><code>STOP</code>：不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程。在线程池处于 RUNNING 或 SHUTDOWN 状态时，调用 shutdownNow() 方法会使线程池进入到该状态；</p>
+<p><code>TIDYING</code>：如果所有的任务都已终止了，<code>workerCount</code> (有效线程数) 为0，线程池进入该状态后会调用 terminated() 方法进入TERMINATED 状态。</p>
+<p><code>TERMINATED</code>：在<code>terminated()</code> 方法执行完后进入该状态，默认<code>terminated()</code>方法中什么也没有做。<br>进入TERMINATED的条件如下：</p>
 <ul>
 <li>线程池不是RUNNING状态；</li>
 <li>线程池状态不是TIDYING状态或TERMINATED状态；</li>
@@ -834,7 +834,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">85.2k</span>
+    <span title="Site words total count">85.6k</span>
   
 </div>
 
