@@ -81,19 +81,19 @@
 
 
 
-<meta name="description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。">
+<meta name="description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现目标网页的控制和过滤。">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTPD配置重定向与过滤器">
 <meta property="og:url" content="https://yoursite.com/2019/05/18/HTTPD配置重定向与过滤器/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
-<meta property="og:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。">
+<meta property="og:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现目标网页的控制和过滤。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
-<meta property="og:updated_time" content="2019-05-19T15:43:00.024Z">
+<meta property="og:updated_time" content="2019-05-19T15:47:43.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPD配置重定向与过滤器">
-<meta name="twitter:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。">
+<meta name="twitter:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现目标网页的控制和过滤。">
 <meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
 
 
@@ -435,7 +435,7 @@
       
 
       
-        <p>本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。</p>
+        <p>本文介绍如何配置HTTPD服务器的反向代理服务，实现目标网页的控制和过滤。</p>
 <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6" alt="此处输入图片的描述"><br><a id="more"></a></p>
 <h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p><code>Apache HTTP Server</code>（简称Apache或httpd）是Apache软件基金会的一个开放源代码的网页服务器软件，旨在为unix，windows等操作系统中提供开源httpd服务。由于其安全性、高效性及可扩展性，被广泛使用，自1996年4月以来，Apache一直是Internet上最流行的HTTP服务器。它快速、可靠并且可通过简单的API扩充，将Perl／Python等解释器等编译到httpd的相关模块中。</p>
 <p>如果要实现对用户访问网页资源的控制和过滤，可以通过两种方式实现：<strong>重定向</strong>与<strong>过滤器</strong>。</p>
