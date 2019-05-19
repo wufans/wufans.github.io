@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="adversarial attack,">
+  <meta name="keywords" content="linux,">
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="摘要:对抗攻击简介">
-<meta name="keywords" content="adversarial attack">
+<meta name="description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My Notes Of Adversarial Attack">
-<meta property="og:url" content="https://yoursite.com/2017/10/18/My-Notes-Of-Adversarial-Attack/index.html">
+<meta property="og:title" content="HTTPD配置重定向与过滤器">
+<meta property="og:url" content="https://yoursite.com/2019/05/18/HTTPD配置重定向与过滤器/index.html">
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
-<meta property="og:description" content="摘要:对抗攻击简介">
+<meta property="og:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-27T03:23:09.078Z">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
+<meta property="og:updated_time" content="2019-05-19T15:43:00.024Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My Notes Of Adversarial Attack">
-<meta name="twitter:description" content="摘要:对抗攻击简介">
+<meta name="twitter:title" content="HTTPD配置重定向与过滤器">
+<meta name="twitter:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。">
+<meta name="twitter:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://yoursite.com/2017/10/18/My-Notes-Of-Adversarial-Attack/">
+  <link rel="canonical" href="https://yoursite.com/2019/05/18/HTTPD配置重定向与过滤器/">
 
 
 
 
 
-  <title>My Notes Of Adversarial Attack | Fan Wu's Blog</title>
+  <title>HTTPD配置重定向与过滤器 | Fan Wu's Blog</title>
   
 
 
@@ -308,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2017/10/18/My-Notes-Of-Adversarial-Attack/">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2019/05/18/HTTPD配置重定向与过滤器/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fan Wu">
@@ -325,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">My Notes Of Adversarial Attack</h2>
+          <h2 class="post-title" itemprop="name headline">HTTPD配置重定向与过滤器</h2>
         
 
         <div class="post-meta">
@@ -337,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T23:59:18+08:00">
-                2017-10-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T18:38:00+08:00">
+                2019-05-18
               </time>
             
 
@@ -360,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Operating-Systems/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating Systems</span>
                   </a>
                 </span>
 
@@ -396,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,476 字
+                  889 字
                 </span>
               
 
@@ -412,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -433,93 +435,40 @@
       
 
       
-        <p><strong>摘要:</strong>对抗攻击简介<br><a id="more"></a><br>正文:</p>
-<h2 id="一、对抗攻击简介"><a href="#一、对抗攻击简介" class="headerlink" title="一、对抗攻击简介"></a><strong>一、对抗攻击简介</strong></h2><p>对抗攻击是机器学习与计算机安全的结合（Intersection），是一个新兴的研究领域。以前设计的机器学习模型在面对攻击者精心设计的对抗攻击时往往会达不到预期的准确度，这种错误在如自动驾驶汽车等的实际应用中的影响是致命的。按照攻击者是否知道目的网络的结构参数，可以将对抗攻击分为白盒攻击和黑盒攻击。<br>对抗攻击采取的形式，就是攻击者根据某种算法给原始输入数据加入人为难以分辨的微小扰动从而构成对抗样本。目的网络将对抗样本作为输入时，往往会输出错误的分类结果。实际中，根据目的网络最终得到的分类结果是否是攻击者预先设计好的，将对抗攻击分为目标攻击和非目标攻击。<br>    研究对抗攻击的意义如下：</p>
-<ol>
-<li>能让机器学习模型处理大规模数据；</li>
-<li>以“计算机速度”处理攻击威胁；</li>
-<li>不依赖数据的明显特征，发现实际应用中的各种内在威胁；</li>
-<li>阻止已知和未知的恶意软件；</li>
-<li>阻止恶意软件的提前执行；</li>
-<li>优化模型，让分类模型达到更加高的分类准确率和更加低的错误率。<br>我总结的对抗攻击方面的研究可以概括为下面几个方面：攻击原理探究、对抗攻击、对抗攻击防御、实际应用。</li>
-</ol>
-<h2 id="二、攻击原理"><a href="#二、攻击原理" class="headerlink" title="二、攻击原理"></a><strong>二、攻击原理</strong></h2><p>对产生对抗攻击的原理的探究，目前主要有以下几个方面的观点：</p>
-<ol>
-<li>《Intriguing properties of neural networks》提出：深度神经网络模型的非线性导致的输入与输出映射的不连续性，加上不充分的模型平均和不充分的正则化导致的过拟合使得对抗攻击成为可能。<br>（It discovered was that several machine learning models, including state-of-the-art neural networks, are vulnerable to adversarial examples. That is, these machine learning models can misclassify examples that are only slightly different (imperceptibly so in many cases) from correctly classified examples drawn from the data distribution. In many cases, a wide variety of models with different architectures trained on different subsets of the training data misclassify the same adversarial example (this is kind of shocking). The implication is that adversarial examples expose fundamental problems in popular training algorithms.）</li>
-<li>《Explaining And Harnessing Adversarial Examples》提出：高维空间中的线性就足以造成对抗样本，深度模型对对抗样本的脆弱性最主要的还是由于其线性部分的存在。通过将模型转变成非线性的RBF模型，就能减少神经网络模型对对抗攻击的脆弱性。<br>(It shows that generic regularization strategies such as dropout, pre-training and model averaging or ensembling do not confer a significant reduction in a model’s vulnerability to adversarial examples. On the other hand, changing to nonlinear model families such as RBF networks can confer some resistance (to such adversarial examples).)</li>
-</ol>
-<h2 id="三、Adversarial-Attack"><a href="#三、Adversarial-Attack" class="headerlink" title="三、Adversarial Attack"></a><strong>三、Adversarial Attack</strong></h2><p>目前构建对抗样本的方法很多，总结如下：</p>
-<ol>
-<li>传统的梯度下降、牛顿法、BFGS、L-BFGS：这些方法在2013年发表的文章《Evasion attacks against machine learning at test time》和2014年发表的文章《Intriguing properties of neural networks》中提到并运用来生成对抗样本，同时，这两篇文章也是最早提出对抗攻击这个概念的。<br>前者用到的约束方式是传统的梯度下降法，同时约束目标上为了克服分类器函数的非凸性导致的局部最优解问题，提出给约束函数增加一个KDE（kernel density estimator）。</li>
-</ol>
-<p><strong>《Evasion attacks aginst machine learning at test time》这篇文章提出将KED部分放入到目标函数中，其作用类似于network intrusion detection(《Polymorphic blending attacks.》)，因此这个方法也可以算作是mimicry 攻击方法的一种。</strong></p>
-<p><strong>《Intriguing properties of neural networks》 The authors estimated adversarial examples by solving penalized optimization problems and presented an analysis showing that the high complexity of neural networks might be a reason explaining the presence of adversarial examples. Unfortunately, the optimization method employed in this article is time-consuming and therefore does not scale to large datasets.</strong></p>
-<ol>
-<li>FGSM：《Explaining And Harnessing Adversarial Examples》（2015.3）<br> 这篇Goodfellow提出的FGSM方法，是比较经典的对抗样本生成方法。</li>
-</ol>
-<p><strong>这篇文章提出将KED部分放入到目标函数中，其作用类似于network intrusion detection(《Polymorphic blending attacks.》)，因此这个方法也可以算作是mimicry 攻击方法的一种。</strong></p>
-<p><strong>缺点：Despite its efficiency, this method provides only a coarse approximation of the optimal perturbation vectors. In fact, it performs a unique gradient step, which often leads to sub-optimal solutions.</strong></p>
-<p>Iterative version of FGSM（The Basic Iterative Method ）：《Adversarial examples in the physical world》（2017.2）<br>这个方法可以视作是Fast Gradient Method的迭代应用。<br>这篇文章针对上一篇FGSM方法的扰动规模比较大的缺陷，提出构造规模更加受限的对抗样本。</p>
-<ol>
-<li>Jacobian saliency map attack (JSMA) ：《The limitations of deep learning in adversarial settings》（2015.10）<br>这篇文章提出的对抗样本构建方法，是建立在攻击者已知目标网络的结构和参数等信息的情况下。这种方法的核心思想，是通过计算神经网络前向传播过程中的导数生成对抗样本。<br><strong>（Notes: This algorithm used the Jacobian matrix to determine which features to modify when generating adversarial examples. The Jacobian matrix based approach is also a kind of gradient based algorithm.）</strong></li>
-<li>DeepFool：《Deepfool: a simple and accurate method to fool deep neural networks》（2015.10）<br>这是第一个通过计算出最小的必要扰动，并应用到对抗样本构建的方法，使用的限制扰动规模的方法是L2范数。最终得到的对抗样本效果优于前面的FGSM和JSMA方法，但是这三者都需要比较大的计算资源。</li>
-<li>Papernot Method：《 Adversarial perturbations against deep neural networks for malware classification》（2016.6）<br>论文笔记：（<a href="https://www.zybuluo.com/wuxin1994/note/854417）" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/854417）</a><br>这篇论文提到的对抗样本生成方法，更多的是针对于特定的应用场景——在输入是比较离散的数据情况下如何构建对抗样本。</li>
-<li>Universal Perturbations： 《Universal adversarial perturbations》（2016.10）：这是一种对DeepFool方法的延伸。<br>论文笔记：（<a href="https://www.zybuluo.com/wuxin1994/note/847422）" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/847422）</a><br><strong>（分析：Universal Perturbations is an untargeted attack that creates perturbations that can be applied to any image and is therefore useful as a black-box attack. Since this algorithm seeks the nearest class for misclassification, it is not easy to generate universal perturbations for targeted attacks.）</strong><br>《Analysis of universal adversarial perturbations》（2017.5）</li>
-<li>RP2： 《Robust Physical-World Attacks on Machine Learning Models》（2017.7）<br>论文笔记：（<a href="https://www.zybuluo.com/wuxin1994/note/839621）" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/839621）</a></li>
-<li>CW（The Carlini and Wagner）：《Towards evaluating the robustness of neural networks》（2017.3）<br>这篇文章的作者将Szegedy在《Explaining And Harnessing Adversarial Examples》提出的攻击方式转化成了一个更加高效的优化问题，能够以添加更小扰动的代价得到更加高效的对抗样本。<br><strong>(这篇文章是对《Explaining And Harnessing Adversarial Examples》的改进，能够用更小规模的扰动构造出效果更好的对抗样本，并且说明了distillation防御策略《Distillation as a defense to adversarial perturbations against deep neural networks》的不完备性)</strong></li>
-<li>Virtual adversarial examples：《Virtual adversarial training: a regularization method for supervised and semi-supervised learning》（2017.4）</li>
-<li>《Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN》(2017.2)<br>论文笔记：（<a href="https://www.zybuluo.com/wuxin1994/note/867495）" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/867495）</a></li>
-<li>《Machine Learning as an Adversarial Service: Learning Black-Box Adversarial Examples》（2017.8）<br>论文笔记：(<a href="https://www.zybuluo.com/wuxin1994/note/860472" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/860472</a>)</li>
-<li>《Towards Deep Learning Models Resistant to Adversarial Attacks》（2017.6）提到如何深入解释对抗样本的原理，如何构建universal的对抗样本。</li>
-</ol>
-<h2 id="四、Defence-Policy"><a href="#四、Defence-Policy" class="headerlink" title="四、Defence Policy"></a><strong>四、Defence Policy</strong></h2><p>对抗攻击的防御策略总结如下：</p>
-<ol>
-<li><p>Adversarial Training（augmenting the training data with perturbed examples）：《Intriguing properties of neural networks》（2014）<br>所谓的对抗训练，就是防卫者通过自己构造对抗攻击，并且将人为增加扰动的对抗样本也加入到训练数据中，从而增强训练集，让训练后得到的模型更加稳定。<br><strong>（10.5新增）</strong>《Towards deep learning models resistant to adversarial attacks 》提到对抗训练用比较弱的攻击时，往往并没有增加模型对更强的攻击的鲁棒性。（这篇文章对对抗训练的方法提出了质疑，即是这种方法是否真的可以应对未来将要遇到的更强的攻击？）</p>
+        <p>本文介绍如何配置HTTPD服务器的反向代理服务，实现对访问网页的资源控制。</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6" alt="此处输入图片的描述"><br><a id="more"></a></p>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p><code>Apache HTTP Server</code>（简称Apache或httpd）是Apache软件基金会的一个开放源代码的网页服务器软件，旨在为unix，windows等操作系统中提供开源httpd服务。由于其安全性、高效性及可扩展性，被广泛使用，自1996年4月以来，Apache一直是Internet上最流行的HTTP服务器。它快速、可靠并且可通过简单的API扩充，将Perl／Python等解释器等编译到httpd的相关模块中。</p>
+<p>如果要实现对用户访问网页资源的控制和过滤，可以通过两种方式实现：<strong>重定向</strong>与<strong>过滤器</strong>。</p>
+<h2 id="二、设置重定向"><a href="#二、设置重定向" class="headerlink" title="二、设置重定向"></a>二、设置重定向</h2><p>通过在配置文件中设置RewriteRule实现。<br>HTTPD的服务器配置文件<code>conf/httpd.conf</code>中，通过如下设置：</p>
+<ul>
+<li><p>去掉Module的注释，或者添加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule rewrite_module modules/mod_rewrite.so`</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>PCA whitening ：《Early methods for detecting adversarial images》（2016.8）</p>
+<li><p>开启<code>RewriteEngine</code>(也可以自定义配置文件，注意需要在<code>httpd.conf</code>中添加相关路径)</p>
 </li>
-<li><p>Defensive distillation：《Distillation as a defense to adversarial perturbations against deep neural networks》（2016.3）<br>这个方法通过两个步骤完成对模型稳定性的提升：第一步是训练分类模型，其最后一层的softmax层除以一个常数T；第二步是用同样的输入训练第二个模型，但是训练数据的标签不用原始标签，而是用第一步中训练的模型最后一层的概率向量作为最后softmax层的目标。<br>《Extending Defensive Distillation》（2017.5）<br>《Towards evaluating the robustness of neural networks》中推翻了这个防御策略，说明他效果不怎么好。</p>
+<li>配置<code>ServerName</code></li>
+<li>利用正则配置重定向路径规则<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RewriteRule old-URL new-URL</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li><p>Feature squeezing：《Feature squeezing: Detecting adversarial examples in deep neural networks》（2017.4）<br>《Feature squeezing mitigates and detects carlini/wagner adversarial examples》（2017.5）</p>
+</ul>
+<p>在自定义的配置文件中，完整的配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory target-file-path&gt;</span><br><span class="line">    #target-file-path：为目标资源路径名</span><br><span class="line">    AllowOverride NONE</span><br><span class="line">    Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    RewriteEngine on</span><br><span class="line">    ServerName test.com</span><br><span class="line">    RewriteRule ^/test.js  target-file-path</span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyRequests off</span><br><span class="line">    ProxyPass / http://test.com/</span><br><span class="line">    ProxyPassReverse / http://test.com/</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<p>对于配置中的问题，可以在<code>var/log/errorlog</code>中查看错误日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Fri May 17 20:53:36.109491 2019] [auth_digest:notice] [pid 18476] AH01757: generating secret for digest authentication ...</span><br><span class="line">[Fri May 17 20:53:36.109917 2019] [lbmethod_heartbeat:notice] [pid 18476] AH02282: No slotmem from mod_heartmonitor</span><br><span class="line">[Fri May 17 20:53:36.131890 2019] [mpm_prefork:notice] [pid 18476] AH00163: Apache/2.4.6 (CentOS) PHP/5.6.40 configured -- resuming normal operations</span><br><span class="line">[Fri May 17 20:53:36.131908 2019] [core:notice] [pid 18476] AH00094: Command line: &apos;/usr/sbin/httpd -D FOREGROUND&apos;</span><br><span class="line">[Fri May 17 20:53:46.777123 2019] [mpm_prefork:notice] [pid 18476] AH00170: caught SIGWINCH, shutting down gracefully</span><br><span class="line">[Fri May 17 20:53:47.824784 2019] [suexec:notice] [pid 18529] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)</span><br><span class="line">[Fri May 17 20:53:47.827118 2019] [so:warn] [pid 18529] AH01574: module rewrite_module is already loaded, skipping</span><br><span class="line">AH00558: httpd: Could not reliably determine the server&apos;s fully qualified domain name, using --------. Set the &apos;ServerName&apos; directive globally to suppress this message</span><br></pre></td></tr></table></figure>
+<h2 id="三、过滤器"><a href="#三、过滤器" class="headerlink" title="三、过滤器"></a>三、过滤器</h2><p><strong>过滤器</strong>用来对 server 收到/发送的数据进行再加工。过滤器分两种：<code>input filters</code> 用于处理 <code>server</code> 从 <code>client</code> 收到的数据，<code>output filters</code> 用于处理 <code>server</code> 向 <code>client</code> 发送的数据。一个数据流上可以挂多个过滤器。这些过滤器可以通过显式指定来确定执行顺序。</p>
+<p>为了实现对网页的过滤，可以利用过滤器得到网页，通过<code>JS注入</code>的方式改变网页DOM数结构。而过滤器实现可以通过<code>PHP</code>或者<code>Python</code>等脚本语言。</p>
+<ul>
+<li><p>首先配置过滤器，配置文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ExtFilterDefine testOutFilter mode=output intype=text/html #配置php执行路径与php脚本路径</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName test.com</span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyRequests off</span><br><span class="line">    ProxyPass / http://test.com/</span><br><span class="line">    ProxyPassReverse / http://test.com/</span><br><span class="line">    SetOutputFilter testOutFilter</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Detection systems: （这种defence方法采取的策略是在目的网络模型前面增加一个额外的探测系统，判断输入是否是经过人为扰动的对抗样本）<br>Performe statistical tests:《On the (statistical) detection of adversarial examples》（2017.2）<br>Use an additional model for detection:《Adversarial and clean data are not twins》（2017.4）<br>《On detecting adversarial perturbations》（2017.2）<br>Apply dropout at test time:《Detecting adversarial samples from artifacts》（2017.3）</p>
+<li><p>利用PHP脚本<code>JS注入</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $stream = file_get_contents(&quot;php://stdin&quot;);</span><br><span class="line">    $stream = gzdecode($stream);</span><br><span class="line">    $jsContent = file_get_contents(&quot;/etc/httpd/filters/test.js&quot;);</span><br><span class="line">    $dom = new DOMDocument();</span><br><span class="line">    $dom -&gt; loadHTML($stream);</span><br><span class="line">    $nodes = $dom -&gt; getElementsByTagName(&apos;body&apos;);</span><br><span class="line">    foreach($nodes as $node)&#123;</span><br><span class="line">        $script = $dom -&gt; createElement(&apos;script&apos;,$jsContent);</span><br><span class="line">        $script -&gt; setAttribute( &quot;type&quot;,&quot;text/javascript&quot;);</span><br><span class="line">        $js = $node -&gt; appendChild($script);</span><br><span class="line">    &#125;</span><br><span class="line">    echo gzencode($dom -&gt; saveHTML());</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li><p>Generative Adversarial Networks (GAN):《Generative Adversarial Trainer Defense to Adversarial Perturbations with GAN》（2017.5）<br>《AE-GAN: adversarial eliminating with GAN》（2017.7）<br>论文笔记：（<a href="https://www.zybuluo.com/wuxin1994/note/881171）" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/881171）</a></p>
+<li><p><code>JavaScript</code>的脚本<code>test.js</code>实现对<code>HTML</code>页面的<code>DOM树</code>修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">// test.js</span><br><span class="line">alert(&apos;0&apos;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>《Efficient Defenses Against Adversarial Attacks》（2017.7）<br>论文笔记：(<a href="https://www.zybuluo.com/wuxin1994/note/863551" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/863551</a>)</p>
-</li>
-</ol>
-<h2 id="五、其他研究"><a href="#五、其他研究" class="headerlink" title="五、其他研究"></a><strong>五、其他研究</strong></h2><p>对抗攻击可移植性研究：《Transferability in Machine Learning: from Phenomena to Black-Box Attacks using Adversarial Samples》（2016.5）<br>论文笔记：(<a href="https://www.zybuluo.com/wuxin1994/note/850755" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/850755</a>)</p>
-<p>《The space of transferable adversarial examples》（Florian Tramèr, Nicolas Papernot, Ian J. Goodfellow, Dan Boneh, and Patrick D. McDaniel.<br>The space of transferable adversarial examples. arXiv preprint arXiv:1704.03453, 2017.）：propose a linear algebraic notion of adversarial subspaces.</p>
-<p>《Towards Deep Learning Models Resistant to Adversarial Attacks》里面对可移植性也有一些研究：we find that larger model capacity and adversarial training reduces the transferability of adversarial examples）</p>
-<h2 id="六、实际应用"><a href="#六、实际应用" class="headerlink" title="六、实际应用"></a><strong>六、实际应用</strong></h2><p>对抗攻击在实际中的应用：</p>
-<ol>
-<li><p>面部识别：《Accessorize to a crime: Real and stealthy attacks on state-of-the-art face recognition》（2016.10）</p>
-</li>
-<li><p>实际拍照图片：《Adversarial examples in the physical world》（2017.2）<br>这篇文章是在实际应用中，对抗攻击往往不能将数字化的对抗样本作为目的分类器的输入，只能将对抗样本打印到纸张上，然后用拍照之类的方式得到目的网络的输入时，人为添加的扰动比较小，在拍照过程中产生了失真，不能达到攻击目的。</p>
-</li>
-<li><p>路标：《Robust Physical-World Attacks on Machine Learning Models》（2017.7）<br>论文笔记：(<a href="https://www.zybuluo.com/wuxin1994/note/839621" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/839621</a>)</p>
-</li>
-<li><p>自动汽车：《Concrete Problems for Autonomous Vehicle Safety: Advantages of Bayesian Deep Learning》（2017）<br>论文笔记：(<a href="https://www.zybuluo.com/wuxin1994/note/843327" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/843327</a>)</p>
-</li>
-<li><p>恶意软件分类：《Adversarial Perturbations Against Deep Neural Networks for Malware Classification》（2016.6）<br>论文笔记：(<a href="https://www.zybuluo.com/wuxin1994/note/854417" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/854417</a>)<br>《Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN》（2017.5）<br>论文笔记：（<a href="https://www.zybuluo.com/wuxin1994/note/867495）" target="_blank" rel="noopener">https://www.zybuluo.com/wuxin1994/note/867495）</a></p>
-</li>
-</ol>
-<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a><strong>七、总结</strong></h2><p>根据目前学习的对抗攻击研究，我觉得以后的<strong>研究方向</strong>主要有以下几个方面：</p>
-<ol>
-<li>效率更高的对抗样本构造方法；</li>
-<li>更好的Defence策略构建；</li>
-<li>根据特定的应用场景探究攻击和防御策略（垃圾邮件分类、恶意软件识别、人脸识别等与安全相关的领域）；</li>
-<li>得到对抗样本，在模型的训练集中加入对抗攻击样本，可以增强神经网络的鲁棒性；</li>
-<li>理解对抗攻击背后的数学原理，实际就是探索深度网络的原理，尝试打开这个黑盒子。</li>
-<li><em>（9.18更新）</em>已经知道了根据对目的模型的了解程度可以造成不同的影响结果，那么能否根据这一点来探究各个影响因素分别的效果呢？</li>
-<li><em>（10.4更新）</em>存在这样一个问题：很难去评判一个defence方法是否是足够有效的，也很难去评价一个攻击方法是否是足够成功的。因为往往在对抗攻击研究进程中，一个提出的defence策略总是会被后来提出的攻击方法证明是不够鲁棒的。反之，一个攻击方法也往往会被后面提出的defence方法证明是无效的。这种往复的循环博弈，给研究指出了一个新的方向:可以研究一种评估攻击方法或者防御策略的有效性的评估方法。<br>这一部分参考《Ground-Truth Adversarial Examples》：a defensive technique that was at first thought to produce robust networks was later shown to be susceptible to new kinds of attacks.</li>
-</ol>
-<p>最近将GAN与对抗攻击研究相结合的方向让我很感兴趣。它可以同时构建效果更加好的对抗样本和实现让模型更加鲁棒的defence策略。因为在我看来，对抗攻击可以实现，其本质一方面是因为神经网络乃至深度学习可以实现分类和预测目的的原理还比较模糊，因此可以利用这种不确定性来混淆模型；另一方面是因为数据本身就不能按照抽取的特征得到固定的分类结果，每一个个体具有比较大的误差因素。因此，模型容易受到对抗攻击是因为模型的泛化能力不够，在处理非训练数据时容易得到错误的结果。提高模型的泛化能力才是最好的defence策略。而最近特别火的GAN网络正是一种提高网络泛化能力的手段，在多个方面都被证明能让训练得到的模型具有更好的效果。</p>
+</ul>
+<hr>
+<p><strong>参考链接</strong><br><a href="https://blog.51cto.com/itwish/2160492" target="_blank" rel="noopener">[HTTPD] Linux（Apache）Httpd服务器安装，启动及httpd.conf配置详解</a><br><a href="http://apache-http-server.18135.x6.nabble.com/Apache-HTTP-Server-Dev-f4771363.html" target="_blank" rel="noopener">Apache HTTP Server - Dev</a></p>
 
       
     </div>
@@ -543,7 +492,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接:</strong>
-    <a href="/2017/10/18/My-Notes-Of-Adversarial-Attack/" title="My Notes Of Adversarial Attack">2017/10/18/My-Notes-Of-Adversarial-Attack/</a>
+    <a href="/2019/05/18/HTTPD配置重定向与过滤器/" title="HTTPD配置重定向与过滤器">2019/05/18/HTTPD配置重定向与过滤器/</a>
   </li>
   <li class="post-copyright-license">
     <strong>许可协议:</strong>
@@ -558,7 +507,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/adversarial-attack/" rel="tag"># adversarial attack</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -571,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/07/Loving/" rel="next" title="爱你一万年">
-                <i class="fa fa-chevron-left"></i> 爱你一万年
+              <a href="/2019/04/05/Java并发(3)-线程安全/" rel="next" title="Java并发(3)-线程安全">
+                <i class="fa fa-chevron-left"></i> Java并发(3)-线程安全
               </a>
             
           </div>
@@ -580,10 +529,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/26/范数总结/" rel="prev" title="范数总结">
-                范数总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -772,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、对抗攻击简介"><span class="nav-number">1.</span> <span class="nav-text">一、对抗攻击简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、攻击原理"><span class="nav-number">2.</span> <span class="nav-text">二、攻击原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Adversarial-Attack"><span class="nav-number">3.</span> <span class="nav-text">三、Adversarial Attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Defence-Policy"><span class="nav-number">4.</span> <span class="nav-text">四、Defence Policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、其他研究"><span class="nav-number">5.</span> <span class="nav-text">五、其他研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、实际应用"><span class="nav-number">6.</span> <span class="nav-text">六、实际应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、总结"><span class="nav-number">7.</span> <span class="nav-text">七、总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-number">1.</span> <span class="nav-text">一、简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、设置重定向"><span class="nav-number">2.</span> <span class="nav-text">二、设置重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、过滤器"><span class="nav-number">3.</span> <span class="nav-text">三、过滤器</span></a></li></ol></div>
             
 
           </div>
