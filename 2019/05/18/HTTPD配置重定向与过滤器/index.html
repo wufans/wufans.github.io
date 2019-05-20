@@ -90,7 +90,7 @@
 <meta property="og:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现目标网页的控制和过滤。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkXxUeuvvVGryPwRjR_fSlc7YHFVRj7oq-475WcJFVBQ2zZII6">
-<meta property="og:updated_time" content="2019-05-19T15:47:43.067Z">
+<meta property="og:updated_time" content="2019-05-20T13:06:27.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPD配置重定向与过滤器">
 <meta name="twitter:description" content="本文介绍如何配置HTTPD服务器的反向代理服务，实现目标网页的控制和过滤。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  889 字
+                  1,051 字
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -455,18 +455,28 @@
 <p>对于配置中的问题，可以在<code>var/log/errorlog</code>中查看错误日志：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Fri May 17 20:53:36.109491 2019] [auth_digest:notice] [pid 18476] AH01757: generating secret for digest authentication ...</span><br><span class="line">[Fri May 17 20:53:36.109917 2019] [lbmethod_heartbeat:notice] [pid 18476] AH02282: No slotmem from mod_heartmonitor</span><br><span class="line">[Fri May 17 20:53:36.131890 2019] [mpm_prefork:notice] [pid 18476] AH00163: Apache/2.4.6 (CentOS) PHP/5.6.40 configured -- resuming normal operations</span><br><span class="line">[Fri May 17 20:53:36.131908 2019] [core:notice] [pid 18476] AH00094: Command line: &apos;/usr/sbin/httpd -D FOREGROUND&apos;</span><br><span class="line">[Fri May 17 20:53:46.777123 2019] [mpm_prefork:notice] [pid 18476] AH00170: caught SIGWINCH, shutting down gracefully</span><br><span class="line">[Fri May 17 20:53:47.824784 2019] [suexec:notice] [pid 18529] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)</span><br><span class="line">[Fri May 17 20:53:47.827118 2019] [so:warn] [pid 18529] AH01574: module rewrite_module is already loaded, skipping</span><br><span class="line">AH00558: httpd: Could not reliably determine the server&apos;s fully qualified domain name, using --------. Set the &apos;ServerName&apos; directive globally to suppress this message</span><br></pre></td></tr></table></figure>
 <h2 id="三、过滤器"><a href="#三、过滤器" class="headerlink" title="三、过滤器"></a>三、过滤器</h2><p><strong>过滤器</strong>用来对 server 收到/发送的数据进行再加工。过滤器分两种：<code>input filters</code> 用于处理 <code>server</code> 从 <code>client</code> 收到的数据，<code>output filters</code> 用于处理 <code>server</code> 向 <code>client</code> 发送的数据。一个数据流上可以挂多个过滤器。这些过滤器可以通过显式指定来确定执行顺序。</p>
-<p>为了实现对网页的过滤，可以利用过滤器得到网页，通过<code>JS注入</code>的方式改变网页DOM数结构。而过滤器实现可以通过<code>PHP</code>或者<code>Python</code>等脚本语言。</p>
+<p><font color="red"><strong>注意</strong></font>: <code>InputFilter</code> 只能拦截客户端的<code>POST</code>请求，对于<code>GET</code>请求，需要设置如下的过滤方式。</p>
+<h3 id="3-1-JS注入"><a href="#3-1-JS注入" class="headerlink" title="3.1 JS注入"></a>3.1 <code>JS</code>注入</h3><p>为了实现对网页的过滤，可以利用过滤器得到网页，通过<code>JS注入</code>的方式改变网页DOM数结构。而过滤器实现可以通过<code>PHP</code>或者<code>Python</code>等脚本语言。</p>
 <ul>
-<li><p>首先配置过滤器，配置文件如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ExtFilterDefine testOutFilter mode=output intype=text/html #配置php执行路径与php脚本路径</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName test.com</span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyRequests off</span><br><span class="line">    ProxyPass / http://test.com/</span><br><span class="line">    ProxyPassReverse / http://test.com/</span><br><span class="line">    SetOutputFilter testOutFilter</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用PHP脚本<code>JS注入</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $stream = file_get_contents(&quot;php://stdin&quot;);</span><br><span class="line">    $stream = gzdecode($stream);</span><br><span class="line">    $jsContent = file_get_contents(&quot;/etc/httpd/filters/test.js&quot;);</span><br><span class="line">    $dom = new DOMDocument();</span><br><span class="line">    $dom -&gt; loadHTML($stream);</span><br><span class="line">    $nodes = $dom -&gt; getElementsByTagName(&apos;body&apos;);</span><br><span class="line">    foreach($nodes as $node)&#123;</span><br><span class="line">        $script = $dom -&gt; createElement(&apos;script&apos;,$jsContent);</span><br><span class="line">        $script -&gt; setAttribute( &quot;type&quot;,&quot;text/javascript&quot;);</span><br><span class="line">        $js = $node -&gt; appendChild($script);</span><br><span class="line">    &#125;</span><br><span class="line">    echo gzencode($dom -&gt; saveHTML());</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>JavaScript</code>的脚本<code>test.js</code>实现对<code>HTML</code>页面的<code>DOM树</code>修改。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">// test.js</span><br><span class="line">alert(&apos;0&apos;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-</li>
+<li>首先配置过滤器，配置文件如下：</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ExtFilterDefine testOutFilter mode=output cmd=&quot;/usr/bin/php /etc/httpd/filters/test.php&quot;</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName test.com</span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyRequests off</span><br><span class="line">    ProxyPass / http://test.com/</span><br><span class="line">    ProxyPassReverse / http://test.com/</span><br><span class="line">    SetOutputFilter testOutFilter</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>利用<code>PHP</code>脚本<code>JS注入</code></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment"># test.php</span></span><br><span class="line">    $stream = file_get_contents(<span class="string">"php://stdin"</span>);</span><br><span class="line">    $stream = gzdecode($stream);</span><br><span class="line">    $jsContent = file_get_contents(<span class="string">"/etc/httpd/filters/test.js"</span>);</span><br><span class="line">    $dom = <span class="keyword">new</span> DOMDocument();</span><br><span class="line">    $dom -&gt; loadHTML($stream);</span><br><span class="line">    $nodes = $dom -&gt; getElementsByTagName(<span class="string">'body'</span>);</span><br><span class="line">    <span class="keyword">foreach</span>($nodes <span class="keyword">as</span> $node)&#123;</span><br><span class="line">        $script = $dom -&gt; createElement(<span class="string">'script'</span>,$jsContent);</span><br><span class="line">        $script -&gt; setAttribute( <span class="string">"type"</span>,<span class="string">"text/javascript"</span>);</span><br><span class="line">        $js = $node -&gt; appendChild($script);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> gzencode($dom -&gt; saveHTML());</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>JavaScript</code>的脚本<code>test.js</code>实现对<code>HTML</code>页面的<code>DOM树</code>修改。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">// test.js</span><br><span class="line">alert(&apos;0&apos;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-脚本过滤"><a href="#3-2-脚本过滤" class="headerlink" title="3.2 脚本过滤"></a>3.2 脚本过滤</h3><ul>
+<li>也可以直接用<code>PHP</code>对拦截的数据流直接处理，首先是修改配置文件，示例如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ExtFilterDefine testOutFilter2 mode=output cmd=&quot;/usr/bin/php /etc/httpd/filters/test2.php&quot;</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName newkeeper-web.jd.com</span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyRequests off</span><br><span class="line">    ProxyPass / http://test.com/</span><br><span class="line">    ProxyPassReverse / http://test.com/</span><br><span class="line">    &lt;Location &quot;/static/js/test.js&quot;&gt;</span><br><span class="line">        SetOutputFilter testOutFilter2</span><br><span class="line">    &lt;/Location&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用<code>PHP</code>脚本替换拦截的<code>JS</code>文件内容：</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment"># test2.php</span></span><br><span class="line">    $stream = file_get_contents(<span class="string">"php://stdin"</span>);</span><br><span class="line">    $stream = gzdecode($stream);</span><br><span class="line">    $stream = preg_replace(<span class="string">'old_string'</span>, <span class="string">'new_string'</span>, $stream);</span><br><span class="line">    $stream = gzencode($stream);</span><br><span class="line">    <span class="keyword">echo</span> $stream;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <hr>
 <p><strong>参考链接</strong><br><a href="https://blog.51cto.com/itwish/2160492" target="_blank" rel="noopener">[HTTPD] Linux（Apache）Httpd服务器安装，启动及httpd.conf配置详解</a><br><a href="http://apache-http-server.18135.x6.nabble.com/Apache-HTTP-Server-Dev-f4771363.html" target="_blank" rel="noopener">Apache HTTP Server - Dev</a></p>
 
@@ -717,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-number">1.</span> <span class="nav-text">一、简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、设置重定向"><span class="nav-number">2.</span> <span class="nav-text">二、设置重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、过滤器"><span class="nav-number">3.</span> <span class="nav-text">三、过滤器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-number">1.</span> <span class="nav-text">一、简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、设置重定向"><span class="nav-number">2.</span> <span class="nav-text">二、设置重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、过滤器"><span class="nav-number">3.</span> <span class="nav-text">三、过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-JS注入"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 JS注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-脚本过滤"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 脚本过滤</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -751,7 +761,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">86.8k</span>
+    <span title="Site words total count">87.0k</span>
   
 </div>
 
