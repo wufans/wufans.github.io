@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://s2.ax1x.com/2019/06/02/VGpWy6.jpg">
 <meta property="og:image" content="http://static.git-star.com/api-gateway-1.png">
 <meta property="og:image" content="http://www.itmuch.com/images/8-5.png">
-<meta property="og:updated_time" content="2019-06-02T08:48:37.141Z">
+<meta property="og:updated_time" content="2019-06-02T08:49:19.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud - zuul网关">
 <meta name="twitter:description" content="本文介绍 Spring Cloud 微服务架构中的网关实现- zuul 。">
@@ -531,6 +531,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableZuulProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZuulApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ZuulApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">TestFilter <span class="title">testFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> TestFilter();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>其他关于<code>zuul</code>知识点包括熔断，负载均衡，后续再总结吧。</p>
+<hr>
 <p><strong>参考文献：</strong></p>
 <p><a href="http://blueskykong.com/2017/11/13/gateway/" target="_blank" rel="noopener">1. 微服务网关netflix-zuul</a><br><a href="https://sanyuesha.com/2018/03/24/microservices-api-gateway/" target="_blank" rel="noopener">2. 微服务 API Gateway 介绍</a><br><a href="https://mp.weixin.qq.com/s/BWhh2HD0VVqzypxkBFU7eg" target="_blank" rel="noopener">3. Spring Cloud中的API网关服务Zuul</a></p>
 
