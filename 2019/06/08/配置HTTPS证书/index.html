@@ -90,7 +90,7 @@
 <meta property="og:description" content="本文介绍如何利用Open-SSL工具和Java的keytool生成自签名证书。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560106771497&di=6e183e7a684896462f17c0e3c8d69cd1&imgtype=0&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fexp%2Fw%3D480%2Fsign%3D770533d2364e251fe2f7e5f09787c9c2%2Fd1160924ab18972be2369122e0cd7b899f510acd.jpg">
-<meta property="og:updated_time" content="2019-06-10T03:16:37.256Z">
+<meta property="og:updated_time" content="2019-06-10T05:30:40.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何自己签发Https证书">
 <meta name="twitter:description" content="本文介绍如何利用Open-SSL工具和Java的keytool生成自签名证书。">
@@ -456,7 +456,7 @@
 </ul>
 <h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><p>在配置过程中，<code>Common Name</code>应该是你需要配置的域名，例如下面是生成百度的证书：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Common Name (e.g. server FQDN or YOUR name) []:www.baidu.com</span><br></pre></td></tr></table></figure>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><p>在<code>keystore</code>/<code>JKS</code>文件里，事实上包含两种数据： </p>
+<h3 id="C"><a href="#C" class="headerlink" title="C"></a>C</h3><p>在<code>keystore</code>/<code>JKS</code>文件里，事实上包含两种数据： </p>
 <ol>
 <li>密钥实体（Key entity）——密钥（secret key）又或者是私钥和配对公钥（采用非对称加密）</li>
 <li>可信任的证书实体（trusted certificate entries）——只包含公钥</li>
@@ -717,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-SSL-工具"><span class="nav-number">1.</span> <span class="nav-text">Open-SSL 工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成秘钥和证书的过程"><span class="nav-number">2.</span> <span class="nav-text">生成秘钥和证书的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A"><span class="nav-number">3.1.</span> <span class="nav-text">A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B"><span class="nav-number">3.2.</span> <span class="nav-text">B</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.3.</span> <span class="nav-text">code</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-SSL-工具"><span class="nav-number">1.</span> <span class="nav-text">Open-SSL 工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成秘钥和证书的过程"><span class="nav-number">2.</span> <span class="nav-text">生成秘钥和证书的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A"><span class="nav-number">3.1.</span> <span class="nav-text">A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B"><span class="nav-number">3.2.</span> <span class="nav-text">B</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C"><span class="nav-number">3.3.</span> <span class="nav-text">C</span></a></li></ol></li></ol></div>
             
 
           </div>
