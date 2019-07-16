@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Fan Wu&#39;s Blog">
 <meta property="og:description" content="![此处输入图片的描述][1]本文介绍如何利用 Spring Cloud 微服务架构中的Zuul 的跨域配置实现反向代理服务功能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-16T15:58:54.890Z">
+<meta property="og:updated_time" content="2019-07-16T16:03:29.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud - 基于Zuul的http反向代理服务(2)">
 <meta name="twitter:description" content="![此处输入图片的描述][1]本文介绍如何利用 Spring Cloud 微服务架构中的Zuul 的跨域配置实现反向代理服务功能。">
@@ -473,7 +473,7 @@
 <li>生成客户端的公钥和私钥</li>
 <li>创建CSR请求文件，生成CA证书</li>
 </ul>
-<p>具体流程可以参考我前面的文章：<a href="https://wufan.site/2019/06/08/%E9%85%8D%E7%BD%AEHTTPS%E8%AF%81%E4%B9%A6/" target="_blank" rel="noopener">如何自己签发Https证书</a></p>
+<p>具体流程可以参考我前面的文章：<a href="https://wufan.site/2019/06/08/%E9%85%8D%E7%BD%AEHTTPS%E8%AF%81%E4%B9%A6/" target="_blank" rel="noopener">如何自己签发Https证书</a>。</p>
 <h3 id="Spring-Boot配置多端口监听"><a href="#Spring-Boot配置多端口监听" class="headerlink" title="Spring Boot配置多端口监听"></a><code>Spring Boot</code>配置多端口监听</h3><p>因为Http请求和Https请求不会通过同一个端口通信，因此，还需要在<code>Spring Boot</code>中增加一个Tomcat容器，实现对两个端口的监听。</p>
 <p>具体的实现有两种方法：</p>
 <h4 id="方法一：配置文件-配置类"><a href="#方法一：配置文件-配置类" class="headerlink" title="方法一：配置文件+配置类"></a>方法一：配置文件+配置类</h4><p>配置文件如下：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">80</span></span><br><span class="line"><span class="attr">https:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">443</span></span><br><span class="line"><span class="attr">  baidu:</span></span><br><span class="line"><span class="attr">    key-store:</span> <span class="attr">classpath:out.keystore</span></span><br><span class="line"><span class="attr">    key-store-password:</span> <span class="number">123123</span></span><br><span class="line"><span class="attr">    key-password:</span> <span class="number">123123</span></span><br></pre></td></tr></table></figure></p>
