@@ -90,7 +90,7 @@
 <meta property="og:description" content="本文介绍如何利用 Spring Cloud 微服务架构中的Zuul 的跨域配置实现反向代理服务功能。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s2.ax1x.com/2019/06/02/VGpWy6.jpg">
-<meta property="og:updated_time" content="2019-07-16T16:23:42.082Z">
+<meta property="og:updated_time" content="2019-07-16T16:36:22.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud - 基于Zuul的http反向代理服务(2)">
 <meta name="twitter:description" content="本文介绍如何利用 Spring Cloud 微服务架构中的Zuul 的跨域配置实现反向代理服务功能。">
@@ -438,7 +438,7 @@
         <p><img src="https://s2.ax1x.com/2019/06/02/VGpWy6.jpg" alt="此处输入图片的描述"><br>本文介绍如何利用 <code>Spring Cloud</code> 微服务架构中的<code>Zuul</code> 的跨域配置实现反向代理服务功能。</p>
 <a id="more"></a>
 <p><code>反向代理</code>是代理服务器的一种。服务器根据客户端的请求，从其关联的一组或多组后端服务器（如Web服务器）上获取资源，然后再将这些资源返回给客户端，客户端只会得知反向代理的IP地址，而不知道在代理服务器后面的服务器簇的存在。这篇文章，主要介绍如何利用Zuul实现反向代理服务器中常见的“流量透传”、“请求转发”、“重定向”、“修改/获取服务器的Response”、“代理Https安全访问”等。</p>
-<h2 id="一、流量透传"><a href="#一、流量透传" class="headerlink" title="一、流量透传"></a>一、流量透传</h2><p>用Zuul实现的反向代理功能，通过编辑 <code>Spring Boot</code> 配置文件<code>application.yml</code>就能很方便地实现流量透传。<br>可以通过在配置文件中配置url直接透传所有的代理流量:</p>
+<h2 id="一、流量透传"><a href="#一、流量透传" class="headerlink" title="一、流量透传"></a>一、流量透传</h2><p>用Zuul实现的反向代理功能，通过编辑 <code>Spring Boot</code> 配置文件<code>application.yml</code>就能很方便地实现流量透传。<br>可以通过在配置文件中配置<code>url</code>直接透传所有的代理流量:</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line"><span class="attr">  sensitiveHeaders:</span> <span class="string">Access-Control-Allow-Methods,Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Max-Age,P3P</span></span><br><span class="line"><span class="attr">  routes:</span></span><br><span class="line"><span class="attr">    auth:</span></span><br><span class="line"><span class="attr">      sensitiveHeaders:</span> <span class="string">Access-Control-Allow-Methods,Access-Control-Allow-Headers,Access-Control-Allow-Origin,Access-Control-Max-Age,P3P</span></span><br><span class="line"><span class="attr">    rootpath:</span></span><br><span class="line"><span class="attr">      path:</span> <span class="string">/**</span></span><br><span class="line"><span class="attr">      url:</span> <span class="attr">http://www.baidu.com</span></span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>:Zuul作为统一网关代理所有后台接口，对于代码发起的http请求自然无需在意跨域的问题，但是对于提供给前端访问的接口，由于浏览器的安全策略对于跨域的资源访问会被拦截，因此需要配置<code>sensitiveHeaders</code>来过滤掉相关<code>headers</code>。</p>
 <h2 id="二、请求转发与重定向，获取get与post请求参数"><a href="#二、请求转发与重定向，获取get与post请求参数" class="headerlink" title="二、请求转发与重定向，获取get与post请求参数"></a>二、请求转发与重定向，获取<code>get</code>与<code>post</code>请求参数</h2><p>对于需要转发的请求，除了在配置文件<code>properties.yml</code>中配置指定<code>url</code>之外，也可以配置过滤器来实现：</p>
